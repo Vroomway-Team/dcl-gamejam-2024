@@ -1,16 +1,18 @@
 {
+	"ecs7": true,
+	"runtimeVersion": "7",
 	"display": {
-		"title": "DCL GameJam 2024",
-		"description": "Decentraland GameJam 2024 Project",
+		"title": "SDK7 Scene Template",
+		"description": "template scene with SDK7",
 		"navmapThumbnail": "images/scene-thumbnail.png",
 		"favicon": "favicon_asset"
 	},
 	"owner": "",
 	"contact": {
-		"name": "author-name",
+		"name": "SDK",
 		"email": ""
 	},
-	"main": "bin/game.js",
+	"main": "bin/index.js",
 	"tags": [],
 	"scene": {
 		"parcels": [
@@ -26,9 +28,9 @@
 			"name": "spawn1",
 			"default": true,
 			"position": {
-				"x": 0,
-				"y": 0,
-				"z": 0
+				"x": [0, 3],
+				"y": [0, 0],
+				"z": [0, 3]
 			},
 			"cameraTarget": {
 				"x": 8,
@@ -37,6 +39,8 @@
 			}
 		}
 	],
-	"requiredPermissions": [],
-	"featureToggles": {}
+	"featureToggles": {
+		"voiceChat": "enabled",
+		"portableExperiences": "enabled"
+	}
 }
