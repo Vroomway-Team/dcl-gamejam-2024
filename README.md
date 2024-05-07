@@ -31,7 +31,7 @@ This repository is split in the following folders:
     -   `/assets/fonts` - any fonts used in the scene and accompanying media
     -   `/assets/tex` - asset agnostic textures used across the scene
 -   `/config` - useful info such as import/export settings, UVPackMaster Presets, shader templates
--   `/dcl-scene` - the DCL scene to be deployed. Exported glTF files are in `/dcl-scene/models` along with a `tex` folder of optimised textures
+-   `/dcl` - the DCL scene to be deployed. Exported glTF files are in `/dcl-scene/models` along with a `tex` folder of optimised textures
 -   `/reference` - screenshots, previs, reference pictures used during asset creation
 -   `/scripts` - various bash utility scripts
 
@@ -53,20 +53,20 @@ The Bash scripts in this repository have been tested on Ubuntu on WSL. See [DEPE
 
 1. Clone this repo in your favourite way: via GitHub Desktop, or by running the following in a terminal
     ```
-    git clone https://github.com/stom66/dcl-boilerplate-scene
+    git clone https://github.com/stom66/dcl-gamejam-2024
     ```
 1. Once complete, open the folder in a terminal or in VSCode and run the following:
     ```
-     cd dcl-scene && npm install
+     cd dcl && npm install
     ```
 
 ---
 
 ## Running the DCL scene
 
-1. In VSCode go to `File -> Open Folder` and open the repository folder
+1. Open the repository folder in VSCode
 1. Open a terminal with: `Ctrl + '`
-1. Type in the terminal: `cd dcl-scene && dcl start`, press `Enter`
+1. Type in the terminal: `cd dcl && npm run start`, press `Enter`
 
 ---
 
@@ -75,7 +75,7 @@ The Bash scripts in this repository have been tested on Ubuntu on WSL. See [DEPE
 Run the following in a terminal:
 
 ```
-cd dcl-scene
+cd dcl
 npm rm decentraland -g
 npm install -g decentraland
 npm i decentraland-ecs@latest
@@ -138,11 +138,6 @@ Shaders must follow the setup shown here, due to the way the glTF exporter works
 
 ![Blender export gltf settings](/config/gltf_shader.png)
 
----
-
-## Known Bugs
-
--   Lack of caffeine causes occassional I/O errors.
 
 ---
 
