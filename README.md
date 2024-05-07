@@ -9,6 +9,7 @@ This is the working repo for Vroomway's entry to the 2024 Decentraland GameJam!
 
 ## Contents
 
+-   [Resources](#resources)
 -   [Repository Overview](#repository-overview)
 -   [Getting Started](#getting-started)
 -   [Prerequisites](#prerequisites)
@@ -22,6 +23,18 @@ This is the working repo for Vroomway's entry to the 2024 Decentraland GameJam!
     -   [Shaders](#shaders)
 
 ---
+
+## Resources
+
+Some links to various non-Git resources:
+
+| Resource           |  URL |
+|--------------------|:----------------------------------------------------|
+| Jame details       | https://itch.io/jam/dclgx |
+| Kanban             | https://kanboard.stom66.co.uk/board/14 |
+| Miro board         | https://miro.com/app/board/uXjVKPVY2a0=/ |
+| Game Design Doc    | https://docs.google.com/document/d/121B1S32TNgfl0ZR_-b1Skm3fCHIiHiqV3wGUqbeIyrY/edit |
+
 
 ## Repository Overview
 
