@@ -1,8 +1,9 @@
-## `dcl-boilerplate-scene`
+## `dcl-gamejam-2024`
 
-# Decentraland Boilerplate | Scene
+# Decentraland GameJam 2024
 
-A basic Decentraland Scene, setup with a generic folder structure and various utility scripts.
+This is the working repo for Vroomway's entry to the 2024 Decentraland GameJam!
+
 
 ---
 
@@ -24,7 +25,7 @@ A basic Decentraland Scene, setup with a generic folder structure and various ut
 
 ## Repository Overview
 
-This repository is split in the following folders:
+Note that the actual DCL scene is in the subfolder `dcl` to avoid having extra junk in the deployed scene. This repository is split in the following folders:
 
 -   `/assets` - contains all assets and textures before being exported to `glTF`. This includes all `blend` and `FBX` files, as well as full-size source textures.
     -   `/assets/models` - source files for each model in the scene, including full res textures
