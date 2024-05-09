@@ -2,7 +2,7 @@ import { ColliderLayer } 		from '@dcl/sdk/ecs'
 import { Quaternion, Vector3 } 	from '@dcl/sdk/math'
 
 import { GltfObject } 			from './classes/class.GltfObject'
-import { setupUi } 				from './ui/ui'
+import { setupUi } 				from './ui/setupUI'
 
 export function main() {
 	

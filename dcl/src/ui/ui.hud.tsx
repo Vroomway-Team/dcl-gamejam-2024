@@ -4,17 +4,16 @@ import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/re
 
 import { movePlayerTo } from '~system/RestrictedActions'
 
-
-export function uiDebug() {
+export function uiHud() {
 	return (
 		<UiEntity
 			uiTransform = {{
 				width  : 400,
 				height : 230,
-				margin : '16px 0 8px 270px',
+				margin : { top: '0', left: '0',  },
 				padding: 4,
 			}}
-			uiBackground = {{ color: Color4.create(0.5, 0.8, 0.1, 0.6) }}
+			uiBackground = {{ color: Color4.create(0.5, 0.8, 0.1, 0) }}
 		>
 			<UiEntity
 				uiTransform = {{
@@ -23,6 +22,7 @@ export function uiDebug() {
 					flexDirection : 'column',
 					alignItems    : 'center',
 					justifyContent: 'space-between'
+					
 				}}
 				uiBackground = {{ color: Color4.fromHexString("#70ac76ff") }}
 			>
