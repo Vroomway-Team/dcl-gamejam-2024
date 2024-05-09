@@ -1,15 +1,18 @@
-// We define the empty imports so the auto-complete feature works as expected.
-import {} from '@dcl/sdk/math'
-import { engine } from '@dcl/sdk/ecs'
+import { ColliderLayer } 		from '@dcl/sdk/ecs'
+import { Quaternion, Vector3 } 	from '@dcl/sdk/math'
 
-import { changeColorSystem, circularSystem } from './systems'
-import { setupUi } from './ui'
+import { GltfObject } 			from './classes/class.GltfObject'
+import { setupUi } 				from './ui/ui'
 
 export function main() {
-  // Defining behavior. See `src/systems.ts` file.
-  engine.addSystem(circularSystem)
-  engine.addSystem(changeColorSystem)
-
-  // draw UI. Here is the logic to spawn cubes.
-  setupUi()
+	
+	// Spawn the arena
+	const arena = new GltfObject("assets/gltf/arena.gltf", {
+		position: Vector3.create(0, -36, 0),
+		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
+		scale   : Vector3.One()
+	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
+	
+	// Draw UI
+	setupUi()
 }

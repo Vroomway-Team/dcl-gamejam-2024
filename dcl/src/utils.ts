@@ -1,3 +1,4 @@
+
 export function getRandomHexColor(): string {
 	const letters = "0123456789ABCDEF";
 	let color = "#";
@@ -6,4 +7,3 @@ export function getRandomHexColor(): string {
 	}
 	return color;
 }
-
