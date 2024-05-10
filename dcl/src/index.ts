@@ -4,6 +4,8 @@ import { Quaternion, Vector3 } 	from '@dcl/sdk/math'
 import { GltfObject } 			from './classes/class.GltfObject'
 import { setupUi } 				from './ui/setupUI'
 
+import { setupCannon } 			from './cannonWorld'
+
 export function main() {
 	
 	// Spawn the arena
@@ -15,4 +17,7 @@ export function main() {
 	
 	// Draw UI
 	setupUi()
+	
+	// Setup Cannon
+	setupCannon()
 }
