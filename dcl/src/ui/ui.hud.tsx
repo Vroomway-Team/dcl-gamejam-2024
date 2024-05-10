@@ -7,6 +7,7 @@ import { movePlayerTo } from '~system/RestrictedActions'
 export function uiHud() {
 	return (
 		<UiEntity
+			key={"0"}
 			uiTransform = {{
 				width  : 400,
 				height : 230,
@@ -16,6 +17,7 @@ export function uiHud() {
 			uiBackground = {{ color: Color4.create(0.5, 0.8, 0.1, 0) }}
 		>
 			<UiEntity
+				key={"1"}
 				uiTransform = {{
 					width         : '100%',
 					height        : '100%',
@@ -27,6 +29,7 @@ export function uiHud() {
 				uiBackground = {{ color: Color4.fromHexString("#70ac76ff") }}
 			>
 				<Button
+					key={"2"}
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
 					value       = 'Teleport above arena'
 					variant     = 'primary'

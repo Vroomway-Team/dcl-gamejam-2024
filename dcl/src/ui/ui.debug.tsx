@@ -8,15 +8,17 @@ import { movePlayerTo } from '~system/RestrictedActions'
 export function uiDebug() {
 	return (
 		<UiEntity
+			key={"0"}
 			uiTransform = {{
 				width  : 400,
-				height : 230,
+				height : 60,
 				margin : '16px 0 8px 270px',
 				padding: 4,
 			}}
 			uiBackground = {{ color: Color4.create(0.5, 0.8, 0.1, 0.6) }}
 		>
 			<UiEntity
+				key={"1"}
 				uiTransform = {{
 					width         : '100%',
 					height        : '100%',
@@ -27,6 +29,7 @@ export function uiDebug() {
 				uiBackground = {{ color: Color4.fromHexString("#70ac76ff") }}
 			>
 				<Button
+					key={"2"}
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
 					value       = 'Teleport above arena'
 					variant     = 'primary'
