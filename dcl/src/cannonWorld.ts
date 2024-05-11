@@ -21,7 +21,7 @@ function CannonWorldStep(dt: number): void {
 
 // This gets called from index main to setup the world and add all the stuff
 export function setupCannonWorld() { 
-	world.gravity.set(0, -9.82, 0)
+	world.gravity.set(0, -20.2, 0)
 	
 	// Add the systems for monitoring player input/vehicle movement, and the world step
 	engine.addSystem(CannonVehicleInputSystem)	

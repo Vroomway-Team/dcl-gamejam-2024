@@ -1,10 +1,11 @@
 
 import * as CANNON from 'cannon'
 
-import { Entity, GltfContainer, InputAction, 
+import { EasingFunction, Entity, GltfContainer, InputAction, 
 		 PointerEventType, Transform, TransformType, 
+		 Tween, 
 		 engine, inputSystem }	from '@dcl/sdk/ecs'
-import { Quaternion } 			from '@dcl/sdk/math';
+import { Quaternion, Vector3 } 			from '@dcl/sdk/math';
 import { getCameraRotation } 	from '../utilities/func.playerData';
 
 
@@ -129,7 +130,26 @@ export function CannonVehicleInputSystem(dt: number): void {
 		// Apply the position and rotation to the vehicle
 		const transform = Transform.getMutable(cannonVehicle.entity);		
 		if (transform) {
-			transform.position = cannonBody.position
+
+ 			Tween.createOrReplace(cannonVehicle.entity, {
+				mode: Tween.Mode.Move({
+					start: Vector3.create(transform.position.x, transform.position.y, transform.position.z),
+					end  : cannonBody.position.clone()
+				}),
+				duration: 10,
+				easingFunction: EasingFunction.EF_LINEAR,
+			})
+			
+			/* Tween.createOrReplace(cannonVehicle.entity, {
+				mode: Tween.Mode.Rotate({
+					start: transform.rotation,
+					end  : rotation
+				}),
+				duration: 10,
+				easingFunction: EasingFunction.EF_LINEAR,
+			})
+ */
+			//transform.position = cannonBody.position
 			transform.rotation = rotation
 		}
 	});
