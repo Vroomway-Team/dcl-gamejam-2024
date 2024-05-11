@@ -19,18 +19,26 @@ const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMate
 	
 // Define the CannonVehicle class
 export class CannonVehicle {
+	/* 
+	The CannonVehicle is made up of a DCL engine entity and a CannonBody
+	It has some basic properties: max speed, acceleration
+	
+	The vehicles current velocity is dictated by the currentSpeed property and the camera rotation.
+	Current speed is lerped up to max speed while the user holds FORWARD, and down to zero otherwise.	
+	*/	
+	
 	entity        : Entity
 	cannonBody    : CANNON.Body
 	
 	currentSpeed  : number = 0  // This gets lerped between 0 and maxSpeed depending on if W is pressed
-	maxSpeed      : number = 20 
-	acceleration  : number = 4
 	isAccelerating: boolean = false // Toggled by user pressing/releasing W. Referenced by CannonVehicleInputSystem
 	
 	constructor(
-		world    : CANNON.World,
-		transform: TransformType,
-		modelSrc : string,
+		world              : CANNON.World,
+		transform          : TransformType,
+		modelSrc           : string,
+		public maxSpeed    : number = 20,
+		public acceleration: number = 12
 	) {
 		
 		// Set up gltf shape
@@ -55,12 +63,12 @@ export class CannonVehicle {
 		cannonVehicleEntityMap.set(this, this.cannonBody);
 	}
 	
-	accelerate(dt: number) {
+	accelerate() {
 		console.log("Accelerating")
 		this.isAccelerating = true
     }
 
-    decelerate(dt: number) {
+    decelerate() {
 		console.log("Decelerating")
 		this.isAccelerating = false
     }
@@ -104,11 +112,11 @@ export function CannonVehicleInputSystem(dt: number): void {
 		
 		// Handle acceleration/deceleration inputs
 		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_DOWN)) {
-			cannonVehicle.accelerate(dt)
+			cannonVehicle.accelerate()
 		} 
 		
 		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_UP)) {
-			cannonVehicle.decelerate(dt)
+			cannonVehicle.decelerate()
 		}
 		
 		// Update the vehicle speed
@@ -119,9 +127,8 @@ export function CannonVehicleInputSystem(dt: number): void {
 		const targetDirection = getForwardDirection(cameraEulerRot.y)
 		const targetVelocity  = targetDirection.scale(cannonVehicle.currentSpeed)
 		
-		cannonBody.velocity.lerp(targetVelocity, 0.1, cannonBody.velocity)
-		
-		
+		cannonBody.velocity.lerp(targetVelocity, 0.1, cannonBody.velocity)		
+
 		// Calculate the vehicle yaw (rotation around the y-axis) based on the velocity vector
 		const yaw      = Math.atan2(targetDirection.x, targetDirection.z);
 		const rotation = new CANNON.Quaternion();
