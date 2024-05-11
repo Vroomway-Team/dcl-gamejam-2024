@@ -4,13 +4,14 @@ import { Quaternion, Vector3 } 	from '@dcl/sdk/math'
 import { GltfObject } 			from './classes/class.GltfObject'
 import { setupUi } 				from './ui/setupUI'
 
-import { setupCannon } 			from './cannonWorld'
+import { setupCannonWorld, world } 			from './cannonWorld'
+import { CannonVehicle } from './classes/class.CannonVehicle'
 
 export function main() {
 	
 	// Spawn the arena
 	const arena = new GltfObject("assets/gltf/arena.gltf", {
-		position: Vector3.create(0, -36, 0),
+		position: Vector3.create(0, 0, 0),
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 		scale   : Vector3.One()
 	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
@@ -18,6 +19,8 @@ export function main() {
 	// Draw UI
 	setupUi()
 	
-	// Setup Cannon
-	setupCannon()
+	// Setup Cannon World - adds the world, ground, arena colliders
+	// spawns in a vehicle, adds input listener system and controls vehicle movement
+	setupCannonWorld()
 }
+ 
