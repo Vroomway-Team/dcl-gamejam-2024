@@ -138,10 +138,15 @@
 		{
 			"mesh":11,
 			"name":"speedster_collider",
+			"scale":[
+				0.47391262650489807,
+				2.1473798751831055,
+				0.47391262650489807
+			],
 			"translation":[
 				0,
-				0.5,
-				0.3149999976158142
+				1.0901366472244263,
+				0.14928248524665833
 			]
 		}
 	],
@@ -372,9 +377,10 @@
 					"attributes":{
 						"POSITION":64,
 						"NORMAL":65,
-						"TEXCOORD_0":66
+						"TEXCOORD_0":66,
+						"TANGENT":67
 					},
-					"indices":67,
+					"indices":68,
 					"material":2
 				}
 			]
@@ -919,35 +925,41 @@
 		{
 			"bufferView":64,
 			"componentType":5126,
-			"count":216,
+			"count":20,
 			"max":[
-				1,
-				0.5,
-				1
+				0.9841842651367188,
+				0.8864824771881104,
+				0.9696779251098633
 			],
 			"min":[
-				-1,
-				-0.5,
-				-1
+				-0.9841842651367188,
+				-0.46568381786346436,
+				-0.315000057220459
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":65,
 			"componentType":5126,
-			"count":216,
+			"count":20,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":66,
 			"componentType":5126,
-			"count":216,
+			"count":20,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":67,
+			"componentType":5126,
+			"count":20,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":68,
 			"componentType":5123,
-			"count":420,
+			"count":30,
 			"type":"SCALAR"
 		}
 	],
@@ -1338,26 +1350,32 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":2592,
+			"byteLength":240,
 			"byteOffset":127372,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2592,
-			"byteOffset":129964,
+			"byteLength":240,
+			"byteOffset":127612,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1728,
-			"byteOffset":132556,
+			"byteLength":160,
+			"byteOffset":127852,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":840,
-			"byteOffset":134284,
+			"byteLength":320,
+			"byteOffset":128012,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":60,
+			"byteOffset":128332,
 			"target":34963
 		}
 	],
@@ -1369,7 +1387,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":135124,
+			"byteLength":128392,
 			"uri":"speedster.bin"
 		}
 	]
