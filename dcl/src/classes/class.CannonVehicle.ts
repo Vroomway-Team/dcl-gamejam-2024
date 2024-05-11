@@ -133,7 +133,7 @@ export function CannonVehicleInputSystem(dt: number): void {
 
  			Tween.createOrReplace(cannonVehicle.entity, {
 				mode: Tween.Mode.Move({
-					start: Vector3.create(transform.position.x, transform.position.y, transform.position.z),
+					start: transform.position,
 					end  : cannonBody.position.clone()
 				}),
 				duration: 10,
@@ -148,9 +148,10 @@ export function CannonVehicleInputSystem(dt: number): void {
 				duration: 10,
 				easingFunction: EasingFunction.EF_LINEAR,
 			})
- */
+ 			*/
+			
 			//transform.position = cannonBody.position
-			transform.rotation = rotation
+			transform.rotation = rotation 
 		}
 	});
 }
