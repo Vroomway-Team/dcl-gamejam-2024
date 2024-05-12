@@ -4,6 +4,7 @@ import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/re
 
 import { movePlayerTo } from '~system/RestrictedActions'
 
+import { cannonVehicle } from '../cannonWorld'
 
 export function uiDebug() {
 	return (
@@ -21,7 +22,7 @@ export function uiDebug() {
 					width         : '100%',
 					height        : '100%',
 					flexDirection : 'column',
-					alignItems    : 'center',
+					alignItems    : 'flex-start',
 					justifyContent: 'space-between'
 				}}
 				uiBackground = {{ color: Color4.fromHexString("#70ac76ff") }}
@@ -36,6 +37,16 @@ export function uiDebug() {
 							newRelativePosition: Vector3.create(32, 16, 32),
 							cameraTarget       : Vector3.create(8, 1, 8),
 						})
+					}}
+				/>
+				
+				<Button
+					uiTransform = {{ width: 240, height: 40, margin: 8 }}
+					value       = 'Reset vehicle'
+					variant     = 'primary'
+					fontSize    = {14}
+					onMouseDown = {() => {
+						cannonVehicle.resetTransform()
 					}}
 				/>
 			</UiEntity>
