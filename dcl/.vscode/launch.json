@@ -3,15 +3,29 @@
   // in chrome from VSCode
   "version": "0.2.0",
   "configurations": [
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Debug Decentraland in Chrome",
-      "url": "${command:decentraland-sdk7.commands.getDebugURL}",
-      "webRoot": "${workspaceFolder}/bin",
-      "sourceMapPathOverrides": {
-        "dcl:///*": "${workspaceFolder}/*"
-      }
-    }
-  ]
+	{
+		"type": "firefox",
+		"request": "launch",
+		"reAttach": true,
+		"name": "Debug Decentraland in Firefox",
+		"url": "${command:decentraland-sdk7.commands.getDebugURL}",
+		"webRoot": "${workspaceFolder}/bin",
+		"pathMappings": [
+			{
+				"url": "http://localhost:8000/tmp/workspace/unity-renderer/browser-interface/node_modules/ajv/lib/compile/codegen/index.ts",
+				"path": "${workspaceFolder}/src/index.ts"
+			}
+		]
+	},
+	{
+		"type": "chrome",
+		"request": "launch",
+		"name": "Debug Decentraland in Chrome",
+		"url": "${command:decentraland-sdk7.commands.getDebugURL}",
+		"webRoot": "${workspaceFolder}/bin",
+		"sourceMapPathOverrides": {
+			"dcl:///*": "${workspaceFolder}/*"
+		}
+	}
+]
 }
