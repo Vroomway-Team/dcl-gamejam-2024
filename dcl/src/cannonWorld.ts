@@ -8,6 +8,7 @@ import colliderJSON from './arena-colliders.json'
 
 // Setup cannon world and define some settings for it
 export const world = new CANNON.World()
+export let cannonVehicle: CannonVehicle
 
 const fixedTimeStep: number  = 1.0 / 60 // seconds
 const maxSubSteps  : number  = 4 // 4 seems to be enough for smooth movement, might need more if we're dealing with high speed stuff
@@ -32,7 +33,7 @@ export function setupCannonWorld() {
 	collidersFromJSON(colliderJSON, world)
 	
 	// Add a single vehicle
-	const vehicle = new CannonVehicle(world, {
+	cannonVehicle = new CannonVehicle(world, {
 		position: Vector3.create(37, 12, 32),
 		rotation: Quaternion.create(),
 		scale   : Vector3.One()
