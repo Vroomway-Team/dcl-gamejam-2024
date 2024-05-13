@@ -34,7 +34,7 @@ export function setupCannonWorld() {
 	
 	// Add a single vehicle
 	cannonVehicle = new CannonVehicle(world, {
-		position: Vector3.create(37, 12, 32),
+		position: Vector3.create(37, 6, 32),
 		rotation: Quaternion.create(),
 		scale   : Vector3.One()
 	}, "assets/gltf/speedster.gltf")
