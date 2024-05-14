@@ -5,9 +5,11 @@ import * as utils from '@dcl-sdk/utils'
 import { EasingFunction, Entity, GltfContainer, InputAction, 
 		 PointerEventType, Transform, TransformType, 
 		 Tween, 
-		 engine, inputSystem }	from '@dcl/sdk/ecs'
+		 engine, inputSystem, 
+		 tweenSystem}	from '@dcl/sdk/ecs'
 import { Quaternion, Vector3 } 	from '@dcl/sdk/math';
 import { getCameraRotation } 	from '../utilities/func.playerData';
+import { cannonVehicle } from '../cannonWorld';
 
 
 // Define an empty map for cannon bodies and dcl entities
@@ -37,12 +39,13 @@ export class CannonVehicle {
 	entityPos            : Entity 			// Root Entity used to set object position
 	entityRot            : Entity 			// Child Entity used to set object rotation
 	cannonBody           : CANNON.Body 		// Cannon physics body
+	entityYOffset        : number   = -1.25
 	
 	isActive             : boolean  = false	// Is the vehicle currently being controlled by the player?
 	isAccelerating       : boolean  = false // Toggled by user pressing/releasing W. Referenced by CannonVehicleInputSystem
 	currentSpeed         : number   = 0  	// This gets lerped between 0 and maxSpeed depending on if W is pressed
 	
-	tweenPosDuration     : number   = 250 	// In ms, eg 1 second = 1000
+	tweenPosDuration     : number   = 200 	// In ms, eg 1 second = 1000
 	tweenRotDuration     : number   = 132 	// In ms, eg 1 second = 1000
 	timeSinceLastTweenPos: number   = 0		// Timer for last position tween
 	timeSinceLastTweenRot: number   = 0		// Timer for last rotation tween
@@ -57,7 +60,8 @@ export class CannonVehicle {
 		world              : CANNON.World,
 		transform          : TransformType,
 		modelSrc           : string,
-		public maxSpeed    : number = 20,
+		public maxSpeed    : number = 20,  // Maxmimum speed the vehicle can reach
+		public maxTurn     : number = 180,  // Maximum rate of turn in degrees per second
 		public acceleration: number = 12
 	) {
 		
@@ -101,7 +105,7 @@ export class CannonVehicle {
 			mass          : 1.0,
 			position      : new CANNON.Vec3(transform.position.x, transform.position.y, transform.position.z),
 			quaternion    : new CANNON.Quaternion(),
-			shape         : new CANNON.Sphere(0.5),
+			shape         : new CANNON.Sphere(1.25),
 			material      : vehiclePhysicsMaterial,
 			linearDamping : 0.2,
 			angularDamping: 0.4
@@ -174,6 +178,95 @@ export class CannonVehicle {
 		transformPos.position = this.originalTransform.position		
 	}
 	
+	// Trigger tween to a new position
+	tweenToCannonBodyPosition() {
+		// Start Tween on the entityPos (parent) to position it
+		const transformPos = Transform.getMutable(this.entityPos);
+		if (transformPos) {		
+			
+			// Reset timer
+			this.timeSinceLastTweenPos = 0
+						
+			// Define the target
+			const targetPos = Vector3.create(this.cannonBody.position.x, this.cannonBody.position.y + this.entityYOffset, this.cannonBody.position.z)
+			// Use the sdk-utils Tween					
+			
+			/* const startPos  = Vector3.create(transformPos.position.x, transformPos.position.y, transformPos.position.z)
+			const targetPos = Vector3.create(cannonBody.position.x, cannonBody.position.y, cannonBody.position.z)
+			utils.tweens.stopTranslation(this.entityPos)
+			console.log("Start TweenPos from, to:", startPos, targetPos)
+			utils.tweens.startTranslation(
+				this.entityPos, 
+				getEntityPosition(this.entityPos), 
+				targetPos, 
+				(this.tweenPosDuration / 1000) + (this.deltaTimeAverage),
+				utils.InterpolationType.LINEAR,
+				() => {
+					console.log("Finish TweenPos from, to, actual", startPos, targetPos, getEntityPosition(this.entityPos))
+				}
+			) */
+			
+			// Use the built in Tween component
+			Tween.createOrReplace(this.entityPos, {
+				mode: Tween.Mode.Move({
+					start: getEntityPosition(this.entityPos),
+					end  : targetPos
+				}),
+				duration: this.tweenPosDuration - (this.deltaTimeAverage * 2), // Tween component needs times in ms
+				easingFunction: EasingFunction.EF_LINEAR,
+				
+			})
+			
+			// No tween, just set the value straight to the transform
+			//transformPos.position = targetPos
+			
+			console.log("Started new TweenPos: ", getEntityPosition(this.entityPos), targetPos)
+		}
+	}
+	
+	
+	tweenToRotation(targetRotation: Quaternion) {
+		// Start Tween on the entityRot (child) to correctly rotate it
+		const transformRot = Transform.getMutable(cannonVehicle.entityRot);
+		if (transformRot) {
+			
+			// Reset timer
+			cannonVehicle.timeSinceLastTweenRot = 0	
+			
+			// Use the sdk-utils Tween
+			const startRot = transformRot.rotation
+			
+			// Use the built in Tween component
+			Tween.createOrReplace(cannonVehicle.entityRot, {
+				mode: Tween.Mode.Rotate({
+					start: startRot,
+					end  : targetRotation
+					
+					//end  : rotateTowards(startRot, targetRotation, this.maxTurn)
+				}),
+				duration: cannonVehicle.tweenRotDuration,  // Tween component needs times in ms
+				easingFunction: EasingFunction.EF_LINEAR,
+			})
+			
+			/* utils.tweens.stopRotation(cannonVehicle.entityRot)
+			utils.tweens.startRotation(
+				cannonVehicle.entityRot, 
+				startRot,
+				targetRotation, 
+				cannonVehicle.tweenRotDuration / 1000, //utils.tweens needs times in seconds
+				utils.InterpolationType.EASESINE,
+				() => {
+					// OnFinish
+				}
+			) */
+			
+			
+			// No tween, just set the value straight to the transform
+			//transformRot.rotation = rotation 
+		}
+	}
+	
+	
 	// Crude function to record a history of system delta times, used for debugging.
 	recordDeltaTimeHistory(dt: number) {
 		this.deltaTimeHistory.push(dt)
@@ -182,131 +275,88 @@ export class CannonVehicle {
 		}
 		this.deltaTimeAverage = this.deltaTimeHistory.reduce((total, dt) => total + dt, 0) / this.deltaTimeHistory.length;
 		
-		console.log("dt avergae: ", this.deltaTimeAverage * 1000 + "ms")
+		console.log("dt average: ", this.deltaTimeAverage * 1000 + "ms")
 	}
 }
+
 
 
 // Player input system to respond to forward input, and to move vehicle accordingly
 export function CannonVehicleInputSystem(dt: number): void {
 		
-	// Loop through each of the vehicles in the map and handle their inputs and movements
-	// This loop gives us:
-	// 		cannonBody: a reference to the CANNON.Body used by the Class instance,
-	// 		cannonVehicle: a reference to the Class instance itself (which contains .entityPos, .entityRot, and .cannonBody)
-	cannonVehicleEntityMap.forEach((cannonBody, cannonVehicle) => {
+	// Log the delta time
+	cannonVehicle.recordDeltaTimeHistory(dt)
+	
+	// Increase Tween TimeSince
+	cannonVehicle.timeSinceLastTweenPos += (dt * 1000)
+	cannonVehicle.timeSinceLastTweenRot += (dt * 1000)
+	
+	// Handle acceleration/deceleration inputs
+	// Checks the vehicle is active
+	if (cannonVehicle.isActive) {
+		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_DOWN)) {
+			cannonVehicle.accelerate()
+		} 
 		
-		// Log the delta time
-		cannonVehicle.recordDeltaTimeHistory(dt)
-		
-		// Handle acceleration/deceleration inputs
-		// Checks the vehicle is active
-		if (cannonVehicle.isActive) {
-			if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_DOWN)) {
-				cannonVehicle.accelerate()
-			} 
-			
-			if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_UP)) {
-				cannonVehicle.decelerate()
-			}
+		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_UP)) {
+			cannonVehicle.decelerate()
 		}
+	}
+	
+	// Update the vehicle speed
+	cannonVehicle.updateSpeed(dt)
+	
+	// Handle POS tweens
+	// Check if the position Tween has completed
+	// Or if the timesincelasttween is more than double the desired tween duration
+	const posTweenCompleted = tweenSystem.tweenCompleted(cannonVehicle.entityPos)
+	if (posTweenCompleted || (cannonVehicle.timeSinceLastTweenPos > cannonVehicle.tweenPosDuration * 2)) {
 		
-		// Update the vehicle speed
-		cannonVehicle.updateSpeed(dt)
-		
+		console.log("posTweenCompleted after", cannonVehicle.timeSinceLastTweenPos, "starting new tween")		  
+	
 		// Lerp the cannonVehicle.velocity toward the (camera direction * current speed)
 		// We lerp it rather than set it to avoid being able to change direction instantly
 		const cameraEulerRot  = Quaternion.toEulerAngles(getCameraRotation())
 		const targetDirection = getForwardDirection(cameraEulerRot.y)
 		const targetVelocity  = targetDirection.scale(cannonVehicle.currentSpeed)
 		
-		cannonBody.velocity.lerp(targetVelocity, 0.1, cannonBody.velocity)		
+		cannonVehicle.cannonBody.velocity.lerp(targetVelocity, 0.5, cannonVehicle.cannonBody.velocity)			
+		
+		cannonVehicle.tweenToCannonBodyPosition()
+	}	
+	
+	// Handle ROT tweens
+	// Check if the position Tween has completed
+	// Or if the timesincelasttween is more than double the desired tween duration
+	const rotTweenCompleted = tweenSystem.tweenCompleted(cannonVehicle.entityRot)
+	if (rotTweenCompleted || (cannonVehicle.timeSinceLastTweenRot > cannonVehicle.tweenRotDuration * 2)) {
+			
+		console.log("rotTweenCompleted after", cannonVehicle.timeSinceLastTweenRot, "starting new tween")		
 		
 		// Calculate the vehicle yaw (rotation around the y-axis) based on the velocity vector
 		// This is used to determine which way the vehicle should face
 		// Rather than just take the camera angle above, which would result in the vehicle "drifting" sideways
-		const yaw      = Math.atan2(targetDirection.x, targetDirection.z);
-		const targetRotation = new CANNON.Quaternion();
+		const cameraEulerRot  = Quaternion.toEulerAngles(getCameraRotation())
+		const targetDirection = getForwardDirection(cameraEulerRot.y)
+		
+		const yaw             = Math.atan2(targetDirection.x, targetDirection.z);
+		const targetRotation  = new CANNON.Quaternion();
 		targetRotation.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), yaw);
 		
-		// Handle POS tweens		
-		cannonVehicle.timeSinceLastTweenPos += (dt * 1000)
-		if (cannonVehicle.timeSinceLastTweenPos >= (cannonVehicle.tweenPosDuration)) {	
-						
-			// Start Tween on the entityPos (parent) to position it
-			const transformPos = Transform.getMutable(cannonVehicle.entityPos);
-			if (transformPos) {		
-				
-				// Reset timer
-				cannonVehicle.timeSinceLastTweenPos = 0
-				
-				// Use the sdk-utils Tween					
-				/* 
-				const startPos  = Vector3.create(transformPos.position.x, transformPos.position.y, transformPos.position.z)
-				const targetPos = Vector3.create(cannonBody.position.x, cannonBody.position.y, cannonBody.position.z)
-				utils.tweens.stopTranslation(cannonVehicle.entityPos)
-				utils.tweens.startTranslation(
-					cannonVehicle.entityPos, 
-					startPos, 
-					targetPos, 
-					cannonVehicle.tweenPosDuration / 1000,
-					cannonVehicle.isAccelerating ? utils.InterpolationType.EASEOUTQUAD : utils.InterpolationType.EASEINQUAD
-				) */
-				
-				// Use the built in Tween component
-				Tween.createOrReplace(cannonVehicle.entityPos, {
-					mode: Tween.Mode.Move({
-						start: transformPos.position,
-						end  : cannonBody.position
-					}),
-					duration: cannonVehicle.deltaTimeAverage * 1000 * 8, // Tween component needs times in ms
-					easingFunction: EasingFunction.EF_LINEAR,
-				})
-				
-				// No tween, just set the value straight to the transform
-				//transformPos.position = cannonBody.position
-			}
-			
-		}
-		
-		// Handle ROT tweens
-		cannonVehicle.timeSinceLastTweenRot += (dt * 1000)
-		if (cannonVehicle.timeSinceLastTweenRot >= (cannonVehicle.tweenRotDuration)) {
-			
-			// Start a separate tween on the entityRot (Child) to rotate it
-			const transformRot = Transform.getMutable(cannonVehicle.entityRot);
-			if (transformRot) {
-				
-				// Reset timer
-				cannonVehicle.timeSinceLastTweenRot = 0	
-				
-				
-				// Use the sdk-utils Tween
-				const startRot = Quaternion.create(transformRot.rotation.x, transformRot.rotation.y, transformRot.rotation.z, transformRot.rotation.w)
-				utils.tweens.stopRotation(cannonVehicle.entityRot)
-				utils.tweens.startRotation(
-					cannonVehicle.entityRot, 
-					startRot,
-					targetRotation, 
-					cannonVehicle.tweenRotDuration / 1000, //utils.tweens needs times in seconds
-					utils.InterpolationType.EASESINE
-				)
-				
-				// Use the built in Tween component
-				/* Tween.createOrReplace(cannonVehicle.entityRot, {
-					mode: Tween.Mode.Rotate({
-						start: transformRot.rotation,
-						end  : targetRotation
-					}),
-					duration: cannonVehicle.tweenRotDuration,  // Tween component needs times in ms
-					easingFunction: EasingFunction.EF_LINEAR,
-				}) */
-				
-				// No tween, just set the value straight to the transform
-				//transformRot.rotation = rotation 
-			}
-		}
-	});
+		// Start a separate tween on the entityRot (Child) to rotate it
+		cannonVehicle.tweenToRotation(targetRotation)
+	}
+}
+
+
+function logPosition(entity: Entity) {
+	console.log("Position for entity: ", getEntityPosition(entity))
+}
+
+function getEntityPosition(entity: Entity): Vector3 {
+	const t = Transform.get(entity)
+	const v = Vector3.create(t.position.x, t.position.y, t.position.z)
+	return v
 }
 
 // Simple function to return a forward vector based on the given yaw value in degrees
@@ -319,4 +369,29 @@ function getForwardDirection(yRot: number): CANNON.Vec3 {
     const forward = new CANNON.Vec3(Math.sin(yRot), 0, Math.cos(yRot));
     forward.normalize();
 	return forward
+}
+
+function rotateTowards(
+	current    : Quaternion, 
+	target     : Quaternion, 
+	maxRotation: number
+): Quaternion {
+
+	// Extract the euler angles from quaternions
+	const currentEuler = Quaternion.toEulerAngles(current);
+	const targetEuler  = Quaternion.toEulerAngles(target);
+	
+	let yDiff = targetEuler.y - currentEuler.y;
+	yDiff     = Math.max(-maxRotation, Math.min(maxRotation, yDiff));
+	
+	const result = Quaternion.fromEulerDegrees(currentEuler.x, currentEuler.y + yDiff, currentEuler.z);
+	return result
+}
+
+function Vec3ToVector3(v: CANNON.Vec3) {
+	return Vector3.create(v.x, v.y, v.z)
+}
+
+function Vector3ToVec3(v: Vector3) {
+	return new CANNON.Vec3(v.x, v.y, v.z)
 }
