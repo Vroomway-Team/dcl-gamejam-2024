@@ -29,6 +29,7 @@ export function collidersFromJSON(
 		// Passive RB's are done by setting mass to 0.
 		if (collider.type == "PASSIVE") {
 			cannonObj.mass = 0
+			cannonObj.type = CANNON.Body.STATIC
 		}
 
 		
