@@ -34,7 +34,7 @@ export function uiDebug() {
 					fontSize    = {14}
 					onMouseDown = {() => {
 						movePlayerTo({
-							newRelativePosition: Vector3.create(32, 16, 32),
+							newRelativePosition: Vector3.create(32, 7, 32),
 							cameraTarget       : Vector3.create(8, 1, 8),
 						})
 					}}
