@@ -182,7 +182,7 @@ export class CannonVehicle {
 		}
 		this.deltaTimeAverage = this.deltaTimeHistory.reduce((total, dt) => total + dt, 0) / this.deltaTimeHistory.length;
 		
-		console.log("dt avergae: ", this.deltaTimeAverage * 1000 + "ms")
+		//console.log("dt avergae: ", this.deltaTimeAverage * 1000 + "ms")
 	}
 }
 
