@@ -113,7 +113,17 @@ export class PlayerPositionSystem  {
 
     this.connected = GAME_STATE.gameConnected === "connected"
     
-    if (playerPos !== null && GAME_STATE.gameRoom !== null && GAME_STATE.gameRoom !== undefined) {
+    const room = GAME_STATE.gameRoom
+    if (playerPos !== null 
+        && room !== null && room !== undefined) {
+          
+      //undocumented not working
+      // if((room.connection.transport as any).isOpen 
+      //   //&& (room.connection.transport as any).isOpen()
+      // ){
+      //   log(CLASS_NAME, METHOD_NAME, "not open!",(room.connection.transport as any).isOpen)
+      //   return
+      // }
       const player = GAME_STATE.playerState
 
       racingData.worldPosition= playerPos.position
@@ -139,7 +149,7 @@ export class PlayerPositionSystem  {
       racingData.lastKnownServerTime = player.lastKnowServerTime;
       racingData.lastKnownClientTime = now; //snaphot for when sent
 
-      GAME_STATE.gameRoom.send("player.racingData.update", racingData);
+      room.send("player.racingData.update", racingData);
       //GAME_STATE.gameRoom.send("player.transform.update",dataToSend)
     }
     
