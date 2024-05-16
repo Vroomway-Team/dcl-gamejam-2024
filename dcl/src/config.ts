@@ -19,7 +19,7 @@ export enum WearableEnum {
 //PLAYER_NFT_DOGE_HELMET_BALANCE = 0;//starts off 0
 
 
-export const DEFAULT_ENV = "local" 
+export const DEFAULT_ENV = "dev" 
 
 //version 2 means compute based on worn werables
 //version 1 means compute on owned wearables
