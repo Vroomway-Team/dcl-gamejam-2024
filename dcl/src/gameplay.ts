@@ -47,7 +47,68 @@ function getEnemySpawnCount(room: Room, player: clientState.PlayerState) {
   return 1//levelConnectUtil.getEnemySpawnCount(room, player);
 }
 
+function updateRaceData(raceData: clientState.RaceState) {
+  log("updateRaceData", raceData);
 
+  GAME_STATE.setGameTimeFromServerClock(raceData);
+
+  //TODO - tag:GAMEJAM2024-TODO spawn the player!
+
+  switch (raceData.status) {
+    case "not-started":
+      //Game_2DUI.updateLapCounter(SceneData.player.lap, raceData.maxLaps);
+      log("updateRaceData.GAME_STATE.raceData", GAME_STATE.raceData);
+      break;
+    case "starting":
+      //GAME_STATE.raceData.maxLaps = raceData.maxLaps
+      //GAME_STATE.raceData.name = raceData.name
+      // Game_2DUI.updateLapCounter(SceneData.player.lap, raceData.maxLaps);
+      // Game_2DUI.showRaceStartMsg(true);
+
+      //SceneData.player.updateLatency( raceData.,raceData.serverTime )
+
+      const offset = 0.9; //add .9 seconds for server lag etc so countdown is clean and smooth
+      const timeTillStartSeconds = (raceData.startTime - raceData.serverTime) / 1000;
+      //Game_2DUI.updateRaceStarting(Math.floor(timeTillStartSeconds) + 1);
+      
+      GAME_STATE.raceData.startTime = Date.now() + (raceData.startTime - raceData.serverTime);
+      GAME_STATE.raceData.startTimeOnServer = raceData.startTime
+
+      //incase its open, close it
+      //Constants.Game_2DUI.raceToStartHidePrompts();
+
+      //Constants.SCENE_MGR.racingScene.startingRace();
+      //start at 3 seconds
+      /*if(timeTillStartSeconds == 3){
+                SOUND_POOL_MGR.raceCountdown.playOnce()
+            }else{
+                //need to figure out how to start it
+            }*/
+      break;
+    case "started":
+      //updateRaceStarting handles this ping, should be synced with server
+      //but just in case call it here. its cool down should allow for 1 second tolerance of lag
+      //SOUND_POOL_MGR.raceStart.playOnce(); //need better sound, or can stick with raceCountdown
+      //FIXME let timer also call start race, to allow for server msg lag to officially start?
+      //just like we are doing with 'SOUND_POOL_MGR.raceStart.playOnce()'??
+      //Constants.SCENE_MGR.racingScene.startRace();
+      //sync with server?? but then cannot use start time to compute diffs locally?
+      //GAME_STATE.raceData.startTime = raceData.startTime
+
+      break;
+    case "ended":
+      REGISTRY.ui.openEndGamePrompt();
+      if (GAME_STATE.getGameRoom()) {
+        //const pVal = GAME_STATE.getGameRoom().state.players.get(SceneData.player.sessionId);
+        //if (pVal) updatePlayerRacingData(pVal.racingData as clientState.PlayerRaceDataState);
+      }
+
+      //Constants.SCENE_MGR.racingScene.endRace();
+      //sync with server?? but then cannot use start time to compute diffs locally?
+      //GAME_STATE.raceData.endTime = raceData.endTime
+      break;
+  }
+}
 function updatePlayerRacingData(raceData: clientState.PlayerRaceDataState) {
   GAME_STATE.playerState.raceEndTime = raceData.endTime;
   //calculate it from lap + segment+percent?  easier if server calculates it
@@ -64,6 +125,7 @@ function updatePlayerRacingData(raceData: clientState.PlayerRaceDataState) {
     //GAME_STATE.playerState.markCompletedRace("server replied raceData.endTime " + raceData.endTime);
     //Game_2DUI.showRaceEnded
     //TODO - tag:GAMEJAM2024-TODO spawn the player!
+    //REGISTRY.ui.openEndGamePrompt()
     //Constants.SCENE_MGR.racingScene.playerFinishedRace();
   } else if (!GAME_STATE.raceData.started) {
     //find better spot for this, as is only called before race start
@@ -861,7 +923,16 @@ export const onJoinActions = (
     //displayAnnouncement(message, 8, Color4.White(), 60);
     //GAME_STATE.setGameEndResultMsg()
   });
-
+  room.state.listen("raceData", (raceData: clientState.RaceState) => {
+    log("room.state.listen.raceData", raceData);
+    //RaceStatus="unknown"|"not-started"|"started"|"ended"
+    updateRaceData(raceData);
+  });
+  room.state.raceData.onChange = (changes: any[]) => {
+    log("room.state.raceData.onChange", changes);
+    //RaceStatus="unknown"|"not-started"|"started"|"ended"
+    updateRaceData(room.state.raceData);
+  };
   room.onMessage("notify.levelUp", (message) => {
     log("room.msg.notify.levelUp", message);
     if (message !== undefined) {

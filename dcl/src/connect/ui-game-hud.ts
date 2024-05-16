@@ -379,3 +379,31 @@ gameStatsTopBar.addText("Coins",0,0)*/
 //errorPrompt20.show()
 //loadingGamePrompt20.show()
 }
+
+
+export function initUIEndGame() {
+  const endGamePrompt = new CustomOkPrompt(
+    "Game Over",
+    "Game Over.",
+    "OK",
+    () => {},
+    {height:400,width:500}
+  );
+
+  REGISTRY.ui.endGamePrompt = endGamePrompt;
+
+
+  function openEndGamePrompt(
+    
+  ) {
+    log("openEndGamePrompt ENTRY ");
+
+    
+      endGamePrompt.show();
+
+    //
+
+  }
+  REGISTRY.ui.openEndGamePrompt = openEndGamePrompt;
+}
+

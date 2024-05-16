@@ -15,6 +15,7 @@ import { Vector3 } from '@dcl/sdk/math'
 
 import * as serverStateSpec from './state/server-state-spec'
 import { RaceData } from './race'
+import { cannonVehicle } from '../cannonWorld'
 
 let currentRealm: string | null = null
 let currentRoom: string | null = null
@@ -47,7 +48,10 @@ const racingData: serverStateSpec.PlayerRaceDataState = {
   lap: -1,
   worldMoveDirection: { x: 0, y: 0, z: 0, w: 0 },
   lastKnownServerTime: -1,
-  lastKnownClientTime: -1
+  lastKnownClientTime: -1,
+  force: { x: 0, y: 0, z: 0 },
+  velocity: { x: 0, y: 0, z: 0,},
+  mass: 0
 };
 
 
@@ -114,7 +118,20 @@ export class PlayerPositionSystem  {
 
       racingData.worldPosition= playerPos.position
       racingData.cameraDirection= playerPos.rotation
-        
+      
+      //sync to game state
+      player.worldMoveDirection = cannonVehicle.cannonBody.quaternion
+      player.force = cannonVehicle.cannonBody.force
+      player.velocity = cannonVehicle.cannonBody.velocity
+      player.mass = cannonVehicle.cannonBody.mass
+
+      //send them to server
+      racingData.worldMoveDirection = player.worldMoveDirection
+      racingData.force = player.force
+      racingData.velocity = player.velocity
+      racingData.mass = player.mass
+      racingData.currentSpeed = cannonVehicle.currentSpeed
+
       const now = Date.now();
       //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
       //const delta = now - racingData.lastKnownClientTime;

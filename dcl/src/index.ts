@@ -16,6 +16,7 @@ import { initRegistry } from './registry'
 import { initGameState } from './state'
 import { getAndSetRealmDataIfNull, getAndSetUserDataIfNull } from './userData'
 import { initConfig } from './config'
+import { initUIGameHud } from "./connect/ui-game-hud";
 
 export function main() {
 	
@@ -51,7 +52,7 @@ export function main() {
 
 		// Draw UI
 		setupUi()
-
+		
 		// Setup Cannon World - adds the world, ground, arena colliders
 		// spawns in a vehicle, adds input listener system and controls vehicle movement
 		setupCannonWorld() 

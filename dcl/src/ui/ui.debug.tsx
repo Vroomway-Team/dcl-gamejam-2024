@@ -14,7 +14,7 @@ import { wordWrap } from '../utils'
 
 function getColyseusData(){
 	const _room = GAME_STATE.getGameRoom();
-	if(_room){
+	if(_room){ 
 		const roomState =  _room.state as clientState.RaceRoomState
 		//return wordWrap( JSON.stringify(roomState),100,100);
 
@@ -26,6 +26,10 @@ function getColyseusData(){
 			str += "player." + key +":[" + player.userData.name + "]:[" + player.connStatus +"]"
 				+ "\n----------"+":pos-" + JSON.stringify(player.racingData.worldPosition) 
 				+ "\n----------"+":cam-" + JSON.stringify(player.racingData.cameraDirection) 
+				+ "\n----------"+":physics-force" + JSON.stringify(player.racingData.force) 
+				+ "\n----------"+":physics-velocity" + JSON.stringify(player.racingData.velocity) 
+				+ "\n----------"+":physics-currentSpeed" + JSON.stringify(player.racingData.currentSpeed) 
+
 				+ ":buttons-" + JSON.stringify(player.buttons) 
 				+ "\n";
 		});

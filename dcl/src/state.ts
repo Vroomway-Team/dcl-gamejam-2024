@@ -23,6 +23,7 @@ import { EnvironmentRealm } from "~system/EnvironmentApi";
 import * as clientState from "./connect/state/client-state-spec";
 import * as serverStateSpec from "./connect/state/server-state-spec";
 import { Vector3Type } from "@dcl/sdk/ecs";
+import { Quaternion } from "cannon";
 
 
 export class PlayerState {
@@ -60,6 +61,12 @@ export class PlayerState {
   completedRace: boolean = false; //currently using raceEndTime !== undefined
   racePosition: number = -1;
   enrollmentSlotNumber: number = -1; //enrollment slot, should be (1-minToPlay)
+
+  //physics.quaternion == worldMoveDirection
+  worldMoveDirection!: Quaternion; //world moving direction
+  velocity!: Vector3Type
+  force!: Vector3Type
+  mass!: number  
 
   serverState: serverStateSpec.PlayerState | undefined = undefined;
 

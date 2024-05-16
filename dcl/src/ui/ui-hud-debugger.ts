@@ -203,9 +203,23 @@ export async function createDebugUIButtons() {
         },
         {
             style: ui.ButtonStyles.RED,
-            text: "ShoWaltLoginErr",
+            text: "ShowaltLoginErr",
             onMouseDown: () => {
                 REGISTRY.ui.web3ProviderRequiredPrompt.show(); //FIXME loginErrorPrompt.show() show wallet login error show metamask cancel error
+            },
+        },
+        {
+            style: ui.ButtonStyles.RED,
+            text: "ShowEndRace",
+            onMouseDown: () => {
+                REGISTRY.ui.openEndGamePrompt();  
+            },
+        },
+        {
+            style: ui.ButtonStyles.RED,
+            text: "ShowError",
+            onMouseDown: () => {
+                REGISTRY.ui.showErrorUI(true, 0, "Test Error", 5000);
             },
         },
         {
@@ -219,6 +233,7 @@ export async function createDebugUIButtons() {
                             //fetch leaderboards
                             //initGamePlay() 
                             GAME_STATE.gameRoomTarget = CONFIG.GAME_RACE_ROOM_NAME
+                            GAME_STATE.connectRetryCount = 0
                         }
                     }
                 )
@@ -230,8 +245,9 @@ export async function createDebugUIButtons() {
             onMouseDown: () => {
                 disconnect()
                 
+                
                 GAME_STATE.gameRoomTarget = CONFIG.GAME_LOBBY_ROOM_NAME
-                       
+                GAME_STATE.connectRetryCount = 0
             },
         }
         

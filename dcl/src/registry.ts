@@ -57,7 +57,7 @@ export class Registry2dUI {
     duration?: number
   ) => void;
   
-  endGamePrompt!: CustomPrompt;
+  endGamePrompt!: CustomOkPrompt;
   endGameConfirmPrompt!: CustomOptionsPrompt;
   hideEndGamePrompt!: () => void;
   openEndGameConfirmPrompt!: () => void;

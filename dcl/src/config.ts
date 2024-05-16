@@ -18,14 +18,8 @@ export enum WearableEnum {
 //PLAYER_AVATAR_SWAP_ENABLED = false //starts off disabled, only changes when has wearable on
 //PLAYER_NFT_DOGE_HELMET_BALANCE = 0;//starts off 0
 
-//DEV
-//METADOGE_ART_DOMAIN = 'https://dev.metadoge.art'
-//PROD
 
-const METADOGE_ART_DOMAIN = "https://www.metadoge.art";
-
-
-export const DEFAULT_ENV = "dev" 
+export const DEFAULT_ENV = "local" 
 
 //version 2 means compute based on worn werables
 //version 1 means compute on owned wearables

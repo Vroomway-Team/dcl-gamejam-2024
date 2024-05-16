@@ -34,6 +34,9 @@ export interface PlayerRaceDataState extends ClockState {
 
   currentSpeed: number;
   worldMoveDirection: Quaternion3State; //world moving direction
+  velocity: Vector3State
+  force: Vector3State
+  mass: number
   shootDirection: Quaternion3State; //car forward direction
   cameraDirection: Quaternion3State; //turn angle
   endTime: number; //move this as wont change till the end
