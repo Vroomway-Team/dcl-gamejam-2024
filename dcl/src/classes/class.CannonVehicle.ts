@@ -8,6 +8,7 @@ import { EasingFunction, Entity, GltfContainer, InputAction,
 		 engine, inputSystem }	from '@dcl/sdk/ecs'
 import { Quaternion, Vector3 } 	from '@dcl/sdk/math';
 import { getCameraRotation } 	from '../utilities/func.playerData';
+import { triggerSceneEmote } from '~system/RestrictedActions';
 
 
 // Define an empty map for cannon bodies and dcl entities
@@ -20,6 +21,7 @@ const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMate
 	
 // Define the CannonVehicle class
 export class CannonVehicle {
+	[x: string]: any;
 	/* 
 	The CannonVehicle is made up of two DCL engine entities and a CannonBody
 	The cannonBody is a cannonjs physics body used to dictate the vehicle transform.
