@@ -50,6 +50,7 @@ export class Vehicle {
 	entityPos            : Entity 			// Root Entity used to set object position
 	entityRot            : Entity 			// Child Entity used to set object rotation
 	entityPreview        : Entity 			// Preview Entity used in the selection area/podium
+	entityCrown          : Entity 			// Entity used to attach the current crown model to
 	cannonBody           : CANNON.Body 		// Cannon physics body
 	entityYOffset        : number  = -1.25  // Vertical offset for vehicle gltf component
 	
@@ -67,7 +68,7 @@ export class Vehicle {
 	targetHeading        : number  = 0
 	
 	score                : number  = 0
-	isLeading            : boolean = false
+	rank                 : number  = 0
 	
 	constructor(
 		manager            : VehicleManager,
@@ -109,9 +110,12 @@ export class Vehicle {
 		// Setup the preview entity
 		this.entityPreview  = engine.addEntity()
 		this.lobbyTransform = lobbyTransform
-		//Transform.create(this.entityPreview, this.previewTransform)
-		//GltfContainer.create(this.entityPreview, {src: modelSrc})
+		Transform.create(this.entityPreview, this.lobbyTransform)
+		GltfContainer.create(this.entityPreview, {src: modelSrc}) 
 		
+		// Add the crown entity
+		this.entityCrown  = engine.addEntity()
+		Transform.create(this.entityCrown, {})
 		
 		// Add the trigger to toggle player authority
 		utils.triggers.addTrigger(
@@ -134,7 +138,7 @@ export class Vehicle {
 		// This should be good enough for our purposes, as long as vehicle stay cylindrical
 		this.cannonBody = new CANNON.Body({ 
 			mass          : 1.0,
-			position      : Vector3ToVec3(arenaTransform.position),
+			position      : new CANNON.Vec3(arenaTransform.position.x, arenaTransform.position.y, arenaTransform.position.z),
 			quaternion    : new CANNON.Quaternion(),
 			shape         : new CANNON.Sphere(1.25),
 			material      : vehiclePhysicsMaterial,
@@ -202,16 +206,13 @@ export class Vehicle {
 			velocity       : this.cannonBody.velocity,
 			angularVelocity: this.cannonBody.angularVelocity,
 			score          : this.score,
-			isLeading      : this.isLeading
+			rank           : this.rank
 		}
 		
 		return data
 	}
 	
 	setVehicleState(state: VehicleState) {
-		// Update the current vehicle state to sync it with the colyseus server
-		this.score     = state.score
-		this.isLeading = state.isLeading
 		
 		// If the vehicle is being controlled by the local player then should likely use our own cannonBody
 		// as the source of truth properties
@@ -221,6 +222,15 @@ export class Vehicle {
 			this.cannonBody.velocity.copy(state.velocity)	
 		}
 	
+		// Update the current vehicle state to sync it with the colyseus server
+		this.score = state.score
+		this.rank  = state.rank
+		
+		if (this.rank < 4) {
+			this.addCrown(this.rank)
+		} else {
+			this.clearCrown()
+		}
 	}
 	
 	// Triggered when the user presses W to set flag used by this.updateSpeed
@@ -239,12 +249,21 @@ export class Vehicle {
 		this.targetHeading = heading
 	}
 	
-	/* setPreviewTransform(newTransform: TransformType) {
-		const transform    = Transform.getMutable(this.entityPreview)
-		transform.position = newTransform.position
-		transform.rotation = newTransform.rotation
-		transform.scale    = newTransform.scale
-	} */
+	// Adds a suitable crown
+	addCrown(rank: number) {
+		rank = Math.min(Math.max(1, rank), 3)
+		
+		const src = rank === 1 ? "crown.1.gold" 
+				  : rank === 2 ? "crown.2.silver" 
+				  : "crown.3.bronze" 
+		GltfContainer.createOrReplace(this.entityCrown, {
+			src: "assets/gltf/" + src
+		})
+	}
+	
+	clearCrown() {
+		GltfContainer.deleteFrom(this.entityCrown)
+	}
 	
 	// Update the currentSpeed, depending on this.isAccelerating flag
 	// currentSpeed is used to govern the cannonBody.velocity 
@@ -278,7 +297,7 @@ export class Vehicle {
 		// Reset desired speed, and cannonBody velocity and position
 		this.currentSpeed = 0
 		this.cannonBody.velocity = CANNON.Vec3.ZERO
-		this.cannonBody.position = Vector3ToVec3(transformPos.position)
+		this.cannonBody.position = new CANNON.Vec3(transformPos.position.x, transformPos.position.y, transformPos.position.z)
 		
 		// Set pos/rot for the gltf shape
 		transformRot.rotation = this.arenaTransform.rotation

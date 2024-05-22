@@ -8,5 +8,5 @@ export interface VehicleState {
 	velocity       : CANNON.Vec3,  // taken from cannonBody, applied to cannonBody
 	angularVelocity: CANNON.Vec3,  // taken from cannonBody, applied to cannonBody
 	score          : number,       // player score, num tickets/tokens, etc
-	isLeading      : boolean       // flag if the vehicle has the highest score
+	rank           : number        // current ranking for this vehicle. lower is better, starts at 1
 }
