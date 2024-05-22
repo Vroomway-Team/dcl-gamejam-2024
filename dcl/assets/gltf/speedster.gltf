@@ -138,15 +138,10 @@
 		{
 			"mesh":11,
 			"name":"speedster_collider",
-			"scale":[
-				0.47391262650489807,
-				2.1473798751831055,
-				0.47391262650489807
-			],
 			"translation":[
 				0,
-				1.0901366472244263,
-				0.14928248524665833
+				0.5,
+				0.3149999976158142
 			]
 		}
 	],
@@ -925,41 +920,41 @@
 		{
 			"bufferView":64,
 			"componentType":5126,
-			"count":20,
+			"count":22,
 			"max":[
-				0.9841842651367188,
-				0.8864824771881104,
-				0.9696779251098633
+				0.4438789188861847,
+				1.5,
+				0.6432020664215088
 			],
 			"min":[
-				-0.9841842651367188,
-				-0.46568381786346436,
-				-0.315000057220459
+				-0.4438789188861847,
+				-0.4915724992752075,
+				-0.5466386675834656
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":65,
 			"componentType":5126,
-			"count":20,
+			"count":22,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":66,
 			"componentType":5126,
-			"count":20,
+			"count":22,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":67,
 			"componentType":5126,
-			"count":20,
+			"count":22,
 			"type":"VEC4"
 		},
 		{
 			"bufferView":68,
 			"componentType":5123,
-			"count":30,
+			"count":36,
 			"type":"SCALAR"
 		}
 	],
@@ -1350,32 +1345,32 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":240,
+			"byteLength":264,
 			"byteOffset":127372,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":240,
-			"byteOffset":127612,
+			"byteLength":264,
+			"byteOffset":127636,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":160,
-			"byteOffset":127852,
+			"byteLength":176,
+			"byteOffset":127900,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":320,
-			"byteOffset":128012,
+			"byteLength":352,
+			"byteOffset":128076,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":60,
-			"byteOffset":128332,
+			"byteLength":72,
+			"byteOffset":128428,
 			"target":34963
 		}
 	],
@@ -1387,7 +1382,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":128392,
+			"byteLength":128500,
 			"uri":"speedster.bin"
 		}
 	]
