@@ -3,8 +3,8 @@ import { Color4, Vector3 } from '@dcl/sdk/math'
 import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/react-ecs'
 
 import { movePlayerTo } from '~system/RestrictedActions'
+import { VEHICLE_MANAGER } from '../vehicles/setupVehicleManager'
 
-import { cannonVehicle } from '../cannonWorld'
 
 export function uiDebug() {
 	return (
@@ -42,11 +42,11 @@ export function uiDebug() {
 				
 				<Button
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
-					value       = 'Reset vehicle'
+					value       = 'Debug vehicle'
 					variant     = 'primary'
 					fontSize    = {14}
 					onMouseDown = {() => {
-						cannonVehicle.resetTransform()
+						VEHICLE_MANAGER.status()
 					}}
 				/>
 			</UiEntity>
