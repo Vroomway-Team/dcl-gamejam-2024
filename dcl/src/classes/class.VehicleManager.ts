@@ -45,11 +45,11 @@ export class VehicleManager {
 	spawnVehicles(vehicles: VehicleProperties[]) {
 		vehicles.forEach((vehicleProps, index) => {
 			
-			const arenaTransform =  copyTransformWithVerticalOffset(vehicleProps.lobbyTransform, 5)
+			//const arenaTransform =  copyTransformWithVerticalOffset(vehicleProps.lobbyTransform, 5)
 			
 			const vehicle = new Vehicle(
 				this, index, this.world,
-				arenaTransform, 
+				vehicleProps.arenaTransform, 
 				vehicleProps.lobbyTransform,
 				vehicleProps.modelSrc,
 				vehicleProps.maxSpeed, 
