@@ -5,17 +5,11 @@ import { Quaternion, Vector3 } 	from '@dcl/sdk/math'
 import { GltfObject } 			from './classes/class.GltfObject'
 
 import { setupUi } 				from './ui/setupUI'
-import { setupCannonWorld } 	from './vehicles/setupCannonWorld'
-import { setupVehicleManager } 	from './vehicles/setupVehicleManager'
+import { setupCannonWorld } 	from './arena/setupCannonWorld'
+import { setupGltfShapes } 		from './arena/setupGltfShapes'
+import { setupVehicleManager } 	from './arena/setupVehicleManager'
 
 export function main() {
-	
-	// Spawn the arena
-	/* const arena = new GltfObject("assets/gltf/arena.002.gltf", {
-		position: Vector3.create(0, 0, 0),
-		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
-		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS) */
 	
 	// Draw UI
 	setupUi()
@@ -26,6 +20,9 @@ export function main() {
 	// Setup the vehicle manager, which in turn spawns all the vehicles
 	// Also add input listener system and controls vehicle movement
 	setupVehicleManager()
+	
+	// Setup the various gltf shapes
+	setupGltfShapes()
 	
 }
  
