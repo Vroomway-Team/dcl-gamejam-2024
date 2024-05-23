@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -21,7 +21,7 @@
 			"name":"cageCart2",
 			"rotation":[
 				0,
-				-0.15643447637557983,
+				-0.15643446147441864,
 				0,
 				0.987688422203064
 			],
@@ -108,16 +108,16 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.jpg"
+			"uri":"tex/AvatarWearables_TX.png"
 		}
 	],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":2157,
+			"count":2263,
 			"max":[
 				1.0540146827697754,
 				1.651043176651001,
@@ -133,13 +133,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":2157,
+			"count":2263,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":2157,
+			"count":2263,
 			"type":"VEC2"
 		},
 		{
@@ -151,7 +151,7 @@
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":894,
+			"count":911,
 			"max":[
 				1.0254344940185547,
 				1.623627781867981,
@@ -167,13 +167,13 @@
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":894,
+			"count":911,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":6,
 			"componentType":5126,
-			"count":894,
+			"count":911,
 			"type":"VEC2"
 		},
 		{
@@ -186,50 +186,50 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":25884,
+			"byteLength":27156,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":25884,
-			"byteOffset":25884,
+			"byteLength":27156,
+			"byteOffset":27156,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":17256,
-			"byteOffset":51768,
+			"byteLength":18104,
+			"byteOffset":54312,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":8436,
-			"byteOffset":69024,
+			"byteOffset":72416,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":10728,
-			"byteOffset":77460,
+			"byteLength":10932,
+			"byteOffset":80852,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":10728,
-			"byteOffset":88188,
+			"byteLength":10932,
+			"byteOffset":91784,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":7152,
-			"byteOffset":98916,
+			"byteLength":7288,
+			"byteOffset":102716,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":3312,
-			"byteOffset":106068,
+			"byteOffset":110004,
 			"target":34963
 		}
 	],
@@ -241,7 +241,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":109380,
+			"byteLength":113316,
 			"uri":"vehicle.cage.02.bin"
 		}
 	]
