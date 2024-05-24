@@ -26,8 +26,8 @@ export function VehicleMovementSystem(dt: number): void {
 	// Log the delta time
 	VEHICLE_MANAGER.recordDeltaTimeHistory(dt)
 	
-	// Loop thorugh all of the vehicles and check if their tweens have completed. If so, trigger a new tween
-	VEHICLE_MANAGER.getVehicles().forEach((vehicle, index) => {
+	// Loop thorugh all of the vehicles and check if their tweens have completed. If so, trigger a new tween		
+	for (const vehicle of VEHICLE_MANAGER.getVehicles()) {
 		
 		if (vehicle.isActive) {
 			
@@ -36,30 +36,26 @@ export function VehicleMovementSystem(dt: number): void {
 			vehicle.timeSinceLastTweenRot += (dt * 1000) 
 			
 			// Handle POS tweens
-			// Check if the position Tween has completed
-			// Or if the timesincelasttween is more than double the desired tween duration
+			// Check if PosTween has completed or if the timesincelasttween is excessive
 			const posTweenCompleted = tweenSystem.tweenCompleted(vehicle.entityPos)
 			if (posTweenCompleted || (vehicle.timeSinceLastTweenPos > vehicle.tweenPosDuration * 2)) {
 				
-				console.log("posTweenCompleted after", vehicle.timeSinceLastTweenPos, "starting new tween")	
+				//console.log(vehicle.modelName, vehicle.vehicleID, "posTw", vehicle.timeSinceLastTweenPos, "starting new tween")	
 				
 				vehicle.tweenToPosition()
 			}	
 			
 			// Handle ROT tweens
-			// Check if the rotation Tween has completed
-			// Or if the timesincelasttween is more than double the desired tween duration
+			// Check if RotTween has completed or if the timesincelasttween is excessive
 			const rotTweenCompleted = tweenSystem.tweenCompleted(vehicle.entityRot)
 			if (rotTweenCompleted || (vehicle.timeSinceLastTweenRot > vehicle.tweenRotDuration * 2)) {
 					
-				console.log("rotTweenCompleted after", vehicle.timeSinceLastTweenRot, "starting new tween")	
+				//console.log(vehicle.modelName, vehicle.vehicleID, "rotTw", vehicle.timeSinceLastTweenRot, "starting new tween")	
 				
 				// Start a separate tween on the entityRot (Child) to rotate it
 				vehicle.tweenToHeading()
 			}
 			
 		}
-	})
-		
-
+	}
 }

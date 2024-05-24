@@ -11,6 +11,7 @@ import { getCameraRotation, getForwardDirectionFromRotation
 const playerData = getPlayer()
 
 // Player input system to respond to forward input, and to update vehicle velocity accordingly
+// Note this is ONLY run for the one, locally controlled vehicle
 export function VehicleInputSystem(dt: number): void {
 	
 	// Ensure the round is in progress

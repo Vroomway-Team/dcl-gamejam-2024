@@ -50,7 +50,7 @@ export class Vehicle {
 	entityCrown          : Entity 			// Entity used to attach the current crown model to
 	lobbyLabel           : LobbyLabel       // LobbyLabel instance, used for claiming a vehicle
 	cannonBody           : CANNON.Body 		// Cannon physics body
-	entityOffset         : Vector3 = Vector3.create(0, -1.25, 0)  // Vector offset for vehicle gltf component
+	entityOffset         : Vector3 = Vector3.create(0, -1.250, 0)  // Vector offset for vehicle gltf component
 	
 	isActive             : boolean = false	// Is the vehicle currently being controlled by the player?
 	isAccelerating       : boolean = false  // Toggled by user pressing/releasing W. Referenced by VehicleInputSystem
@@ -67,6 +67,7 @@ export class Vehicle {
 	arenaTransform       : TransformType 	// Store the intitial arena spawn transform
 	lobbyTransform       : TransformType 	// Store the lobby transform
 	targetHeading        : number  = 0
+	currentHeading       : number  = 0
 	
 	score                : number  = 0
 	rank                 : number  = 0
@@ -146,14 +147,15 @@ export class Vehicle {
 		// Note we're not using a RigidVehicle or RaycastVehicle, just a regular Body with a Sphere shape
 		// This should be good enough for our purposes, as long as vehicle stay cylindrical
 		this.cannonBody = new CANNON.Body({ 
-			mass          : 1.0,
-			position      : new CANNON.Vec3(lobbyTransform.position.x, lobbyTransform.position.y, lobbyTransform.position.z),
+			mass          : 1,
+			position      : new CANNON.Vec3(arenaTransform.position.x, arenaTransform.position.y, arenaTransform.position.z),
 			quaternion    : new CANNON.Quaternion(),
 			shape         : new CANNON.Sphere(1.25),
 			material      : vehiclePhysicsMaterial,
 			linearDamping : 0.2,
 			angularDamping: 0.4
 		})
+		this.cannonBody.sleep()
 		
 		world.addBody(this.cannonBody)
 	}
@@ -177,12 +179,14 @@ export class Vehicle {
 	// Enable the vehicle - checked by CannonMovementSystem
 	enable(): void {
 		this.isActive = true
+		this.cannonBody.wakeUp()
 	}
 	
 	// Disable the vehicle
 	disable(): void {
 		this.isActive = false
 		this.decelerate()
+		this.cannonBody.sleep()
 	}
 	
 	// Probably not needed
@@ -224,14 +228,13 @@ export class Vehicle {
 	getVehicleState(): VehicleState {
 		
 		const currentPosition = Transform.getMutable(this.entityPos).position;
-		const currentRotation = Transform.getMutable(this.entityRot).rotation;
 		
 		const data: VehicleState = {
 			isClaimed      : this.isClaimed,
 			ownerID        : this.ownerID,
 			ownerName      : this.ownerName,
 			position       : currentPosition,
-			rotation       : currentRotation,
+			heading        : this.currentHeading,
 			velocity       : this.cannonBody.velocity,
 			angularVelocity: this.cannonBody.angularVelocity,
 			score          : this.score,
@@ -248,9 +251,11 @@ export class Vehicle {
 		// If the vehicle is being controlled by the local player then should likely use our own cannonBody
 		// as the source of truth properties
 		// TODO: add some kind of flag or check ot ignore this for locally controlled vehicles
-		this.cannonBody.position.copy(Vector3ToVec3(state.position))
-		this.cannonBody.quaternion.setFromEuler(state.rotation.x, state.rotation.y, state.rotation.z)
-		this.cannonBody.velocity.copy(state.velocity)	
+		if (!this.isLocalPlayer) {
+			this.cannonBody.position.copy(Vector3ToVec3(state.position))
+			this.cannonBody.velocity.copy(state.velocity)
+			this.targetHeading = state.heading
+		}
 	
 		// Update the current vehicle state to sync it with the colyseus server
 		this.score = state.score
@@ -341,6 +346,7 @@ export class Vehicle {
 			rotation: this.arenaTransform.rotation,
 			scale   : Vector3.One()
 		}, duration)
+		this.targetHeading = Quaternion.toEulerAngles(this.arenaTransform.rotation).y
 	}
 	
 	// Move the vehicle back to it's original lobby
@@ -354,10 +360,10 @@ export class Vehicle {
 			position: targetPosition,
 			rotation: this.lobbyTransform.rotation,
 			scale   : Vector3.One()
-		}, duration)
+		}, duration) 
 	}
 	
-	// Triggers 
+	// Tweens the vehicle to the new transform, also resets the cannonbody properties
 	resetToTransform(
 		transform: TransformType, 
 		duration : number = 1000
@@ -365,18 +371,43 @@ export class Vehicle {
 		// Get transforms
 		const transformPos = Transform.getMutable(this.entityPos);
 		const transformRot = Transform.getMutable(this.entityRot);
-		
+		const heading      = Quaternion.toEulerAngles(transform.rotation).y
 		// Set pos/rot for the gltf shape
 		this.tweenToPosition(transform.position, duration)
-		this.tweenToHeading(transform.rotation.y, duration)
+		this.tweenToHeading(heading, duration)
 		
 		// Reset desired speed, and cannonBody velocity and position
 		utils.timers.setTimeout(() => {
-			this.currentSpeed        = 0
-			this.cannonBody.velocity = CANNON.Vec3.ZERO
-			this.cannonBody.position = new CANNON.Vec3(transform.position.x, transform.position.y, transform.position.z)
-		}, duration + 1)
+			this.currentSpeed = 0
+			this.resetCannonBodyAtPosition(transform.position)
+		}, duration + 1)	
+	}
+	
+	resetCannonBodyAtPosition(position: Vector3) {		
+		// Reset positions
+		this.cannonBody.position.set(position.x, position.y, position.z)
+		this.cannonBody.previousPosition.set(position.x, position.y, position.z)
+		this.cannonBody.interpolatedPosition.set(position.x, position.y, position.z)
+		this.cannonBody.initPosition.set(position.x, position.y, position.z)
 		
+		// Reset rotations
+		this.cannonBody.quaternion.set(0,0,0,1);
+		this.cannonBody.initQuaternion.set(0,0,0,1);
+		this.cannonBody.interpolatedQuaternion.set(0,0,0,1);
+		
+		// Reset velocity stuff
+		this.cannonBody.velocity.setZero();
+		this.cannonBody.initVelocity.setZero();
+		this.cannonBody.angularVelocity.setZero();
+		this.cannonBody.initAngularVelocity.setZero();
+		
+		// Reset forces
+		this.cannonBody.force.setZero();
+		this.cannonBody.torque.setZero();
+		
+		// Sleep state reset
+		this.cannonBody.sleepState = 0;
+		this.cannonBody.timeLastSleepy = 0;
 	}
 	
 	// Trigger tween to a new position
@@ -385,24 +416,35 @@ export class Vehicle {
 		duration: number  = this.tweenPosDuration
 	): void {
 		
+		// Debugging checkpoint
+		if (this.vehicleID == 21) {
+			console.log()
+		}
+		
 		// Reset timer
 		this.timeSinceLastTweenPos = 0
 		
-		// Define the target
-		const targetPos = Vector3.add(position, this.entityOffset)
+		// Define the start and end Positions
+		const startPos = getEntityPosition(this.entityPos)
+		
+		const endPos = Vector3.create(
+			position.x + this.entityOffset.x, 
+			position.y + this.entityOffset.y, 
+			position.z + this.entityOffset.z
+		)
 		
 		// Use the built in Tween component
 		// Start Tween on the entityPos (parent) to position it
 		Tween.createOrReplace(this.entityPos, {
 			mode: Tween.Mode.Move({
-				start: getEntityPosition(this.entityPos),
-				end  : targetPos
+				start: startPos,
+				end  : endPos
 			}),
 			duration: duration, // Tween component needs times in ms
 			easingFunction: EasingFunction.EF_LINEAR,
 		})
 		
-		console.log("Started new TweenPos: ", getEntityPosition(this.entityPos), targetPos)
+		//console.log(this.vehicleID, this.modelName, "TweenPosY: ", getEntityPosition(this.entityPos), endPos)
 	}
 	
 	
@@ -420,17 +462,16 @@ export class Vehicle {
 			// Get the start and end rots (limited by turn rate)
 			const startRotation  = transformRot.rotation
 			const targetRotation = Quaternion.fromEulerDegrees(0, heading, 0)
-			
-			const maxTurn        = (this.maxTurn * (this.tweenRotDuration / 1000))			
-			//const targetRotation = rotateTowardsHeading(startRotation, heading, maxTurn)
+			const maxTurn        = (this.maxTurn * (this.tweenRotDuration / 1000))
+			const endRotation    = Quaternion.rotateTowards(startRotation, targetRotation, maxTurn)
 			
 			// Use the built in Tween component 
 			Tween.createOrReplace(this.entityRot, {
 				mode: Tween.Mode.Rotate({
 					start: startRotation,
-					end  : Quaternion.rotateTowards(startRotation, targetRotation, maxTurn)
+					end  : endRotation
 				}),
-				duration: duration,  // Tween component needs times in ms
+				duration      : duration,  // Tween component needs times in ms
 				easingFunction: EasingFunction.EF_LINEAR,
 			})
 		}
