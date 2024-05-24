@@ -1,4 +1,5 @@
-import { WORLD } from "../vehicles/setupCannonWorld"
+import { WORLD } 			from "../arena/setupCannonWorld"
+import { VEHICLE_MANAGER } 	from "../arena/setupVehicleManager"
 
 // World step settings
 const fixedTimeStep: number  = 1.0 / 60 // seconds
@@ -9,7 +10,7 @@ export function CannonWorldSystem(dt: number): void {
 	// Instruct the world to perform a single step of simulation.
 	// It is generally best to keep the time step and iterations fixed.
 	
-	if (WORLD) {
+	if (WORLD && VEHICLE_MANAGER.roundInProgress) {
 		WORLD.step(fixedTimeStep, dt, maxSubSteps) 
 	}
 }

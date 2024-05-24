@@ -1,8 +1,11 @@
-import { getPlayer } from "@dcl/sdk/src/players"
-import { VEHICLE_MANAGER } from "../vehicles/setupVehicleManager"
-import { InputAction, PointerEventType, inputSystem, tweenSystem } from "@dcl/sdk/ecs"
-import { Quaternion } from "@dcl/sdk/math"
-import { getCameraRotation, getForwardDirectionFromRotation } from "../utilities/func.entityData"
+import { InputAction, PointerEventType, 
+		 inputSystem, tweenSystem 
+} 								from "@dcl/sdk/ecs"
+import { getPlayer } 			from "@dcl/sdk/src/players"
+import { Quaternion } 			from "@dcl/sdk/math"
+import { VEHICLE_MANAGER } 		from "../arena/setupVehicleManager"
+import { getCameraRotation, getForwardDirectionFromRotation 
+} 								from "../utilities/func.entityData"
 
 
 const playerData = getPlayer()
@@ -10,16 +13,20 @@ const playerData = getPlayer()
 // Player input system to respond to forward input, and to update vehicle velocity accordingly
 export function VehicleInputSystem(dt: number): void {
 	
+	// Ensure the round is in progress
+	if (!VEHICLE_MANAGER.roundInProgress) { return }
+	
 	// Ensure we have access to the player data before we proceed
+	const playerData = getPlayer()
 	if (!playerData) { return }
 	
 	// Get a reference to the vehicle being controlled by the player
 	const vehicle = VEHICLE_MANAGER.getPlayerVehicle(playerData.userId)
-	if (!vehicle) {
+	if (!vehicle) { 
 		return
 	}
 	
-	// Checks the vehicle is active
+	// Checks the vehicle is active, and owned by this player
 	if (vehicle.isActive) {
 		
 		// Handle acceleration/deceleration inputs
@@ -45,8 +52,9 @@ export function VehicleInputSystem(dt: number): void {
 		// Calculate the target vehicle yaw (rotation around the y-axis) based on the velocity vector
 		// This is used to determine which way the vehicle should face
 		// Rather than just take the camera angle above, which would result in the vehicle "drifting" sideways		
-		const yaw = Math.atan2(targetDirection.x, targetDirection.z);
-		vehicle.setTargetHeading(yaw)
+		const yawRads = Math.atan2(targetDirection.x, targetDirection.z);
+		const yawDegrees = yawRads * (180 / Math.PI)
+		vehicle.setTargetHeading(yawDegrees)
 	}
 	
 	// Update the vehicle speed

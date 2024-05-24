@@ -1086,10 +1086,10 @@
 		{
 			"bufferView":52,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"max":[
 				0.4438789188861847,
-				1.5,
+				1.7486333847045898,
 				0.6432020664215088
 			],
 			"min":[
@@ -1102,25 +1102,25 @@
 		{
 			"bufferView":53,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":54,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":55,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"type":"VEC4"
 		},
 		{
 			"bufferView":56,
 			"componentType":5123,
-			"count":36,
+			"count":39,
 			"type":"SCALAR"
 		},
 		{
@@ -1553,113 +1553,113 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":264,
+			"byteLength":300,
 			"byteOffset":135520,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":264,
-			"byteOffset":135784,
+			"byteLength":300,
+			"byteOffset":135820,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":176,
-			"byteOffset":136048,
+			"byteLength":200,
+			"byteOffset":136120,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":352,
-			"byteOffset":136224,
+			"byteLength":400,
+			"byteOffset":136320,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":72,
-			"byteOffset":136576,
+			"byteLength":78,
+			"byteOffset":136720,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":136648
+			"byteOffset":136800
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":136656
+			"byteOffset":136808
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":136680
+			"byteOffset":136832
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":136712
+			"byteOffset":136864
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":136736
+			"byteOffset":136888
 		},
 		{
 			"buffer":0,
 			"byteLength":1200,
-			"byteOffset":136760
+			"byteOffset":136912
 		},
 		{
 			"buffer":0,
 			"byteLength":4800,
-			"byteOffset":137960
+			"byteOffset":138112
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":142760
+			"byteOffset":142912
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":142784
+			"byteOffset":142936
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":142792
+			"byteOffset":142944
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":142816
+			"byteOffset":142968
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":142848
+			"byteOffset":143000
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":142872
+			"byteOffset":143024
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":142896
+			"byteOffset":143048
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":142928
+			"byteOffset":143080
 		},
 		{
 			"buffer":0,
 			"byteLength":128,
-			"byteOffset":142952
+			"byteOffset":143104
 		}
 	],
 	"samplers":[
@@ -1670,7 +1670,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":143080,
+			"byteLength":143232,
 			"uri":"vehicle.hoverboat.01.bin"
 		}
 	]

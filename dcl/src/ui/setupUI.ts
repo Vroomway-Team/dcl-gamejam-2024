@@ -1,7 +1,6 @@
 import { ReactEcsRenderer } from "@dcl/sdk/react-ecs"
-import { uiHud } from "./ui.hud"
-import { uiDebug } from "./ui.debug"
-
+import { uiHud } 			from "./ui.hud"
+import { uiDebug } 			from "./ui.debug"
 
 const uiComponents = () => [
 	uiDebug()

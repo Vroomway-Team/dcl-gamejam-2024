@@ -21,7 +21,7 @@ MATCH_STRING = '_export.'
 # Define the output path here:
 # Note that blender uses "//" for relative paths
 # Relative paths start from the blend file directory not the location of the script
-OUTPUT_PATH = "//../../../dcl-scene/models/gltf"
+OUTPUT_PATH = "//../../../dcl/assets/gltf"
 
 # Set the name of the log file
 # This will create a text window with this name to get some output without having to open the

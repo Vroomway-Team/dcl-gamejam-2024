@@ -1,5 +1,6 @@
-import { engine, Entity, Transform } 	from "@dcl/sdk/ecs";
-import { Quaternion, Vector3 } 			from "@dcl/sdk/math";
+import { engine, Entity, Transform } 	from "@dcl/sdk/ecs"
+import { Quaternion, Vector3 } 			from "@dcl/sdk/math"
+import * as CANNON 						from 'cannon'
 
 
 

@@ -20,9 +20,8 @@ MATCH_STRING = '_export.'
 
 # Define the output path here:
 # Note that blender uses "//" for relative paths
-# Should NOT have a trailing slash, eg: `//../GLTF`
 # Relative paths start from the blend file directory not the location of the script
-OUTPUT_PATH = "//../GLTF"
+OUTPUT_PATH = "//../../../dcl/assets/gltf"
 
 # Set the name of the log file
 # This will create a text window with this name to get some output without having to open the
@@ -72,47 +71,29 @@ def export2gltf(path):
 
     # Loop through all collections in the current view layer
     for col in bpy.context.view_layer.layer_collection.children:
-        
-        # Check the current collection to see if it should be exported
-        if checkCollection(col):
-            exportCollectionExists = True
-        
-        # Check the children of the collection to see if any of them need exporting
-        for child_col in col.children:
-            if checkCollection(child_col):
-                exportCollectionExists = True
-                
 
-    # Throw an error if there's no export collection
+        # Check if the colelction name contains the MATCH_STRING
+        if col.name.count(MATCH_STRING) and not col.exclude:
+
+            # Log success: found a collection to export and flip found flag
+            log("Found collection to export: " + col.name)
+            exportCollectionExists = True
+
+            # Set the export file name to match the collection name (minus the MATCH_STRING)
+            file_name = col.name.replace(MATCH_STRING, '')
+            file_path = str((path + '/' + file_name + '.gltf'))
+
+            # Set the collection as the active collection
+            bpy.context.view_layer.active_layer_collection = col
+
+            # Run the export
+            log("Exporting as " + file_name + " to path: " + file_path)
+            doExport(col.name, file_path)
+
     if not exportCollectionExists:
         log("--------------------------------------------")
         log("ERROR: a collection with '_export.' in the name could not be found. Nothing to do...")
         log("--------------------------------------------")
-
-
-def checkCollection(col):
-
-    # Check if the colelction name contains the MATCH_STRING
-    if col.name.count(MATCH_STRING) and not col.exclude:
-
-        # Log success: found a collection to export and flip found flag
-        log("Found collection to export: " + col.name)
-
-        # Set the export file name to match the collection name (minus the MATCH_STRING)
-        file_name = col.name.replace(MATCH_STRING, '')
-        file_path = str((path + '/' + file_name + '.gltf'))
-
-        # Set the collection as the active collection
-        bpy.context.view_layer.active_layer_collection = col
-
-        # Run the export
-        log("Exporting as " + file_name + " to path: " + file_path)
-        doExport(col.name, file_path)
-        
-        # Return true to let the parent know a valid collection was found
-        return True
-    else:
-        return False
 
 
 # ███████╗██╗  ██╗██████╗  ██████╗ ██████╗ ████████╗███████╗██████╗
@@ -129,7 +110,7 @@ def doExport(name, path):
     bpy.ops.object.select_all(action='DESELECT')
 
     #Count all objects in the currently selected _export collection
-    count = 0
+    count=0
 
     for obj in bpy.data.collections[name].all_objects:
         count+=1

@@ -1,4 +1,6 @@
-import { ColliderLayer, Entity, GltfContainer, Transform, TransformType, engine } from '@dcl/sdk/ecs'
+import { ColliderLayer, Entity, GltfContainer, 
+	Transform, TransformType, engine 
+} 	from '@dcl/sdk/ecs'
 
 // glTF object class to simplify spawning 
 

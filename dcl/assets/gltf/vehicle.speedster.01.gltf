@@ -920,10 +920,10 @@
 		{
 			"bufferView":64,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"max":[
 				0.4438789188861847,
-				1.5,
+				1.7486332654953003,
 				0.6432020664215088
 			],
 			"min":[
@@ -936,25 +936,25 @@
 		{
 			"bufferView":65,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":66,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":67,
 			"componentType":5126,
-			"count":22,
+			"count":25,
 			"type":"VEC4"
 		},
 		{
 			"bufferView":68,
 			"componentType":5123,
-			"count":36,
+			"count":39,
 			"type":"SCALAR"
 		}
 	],
@@ -1345,32 +1345,32 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":264,
+			"byteLength":300,
 			"byteOffset":127372,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":264,
-			"byteOffset":127636,
+			"byteLength":300,
+			"byteOffset":127672,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":176,
-			"byteOffset":127900,
+			"byteLength":200,
+			"byteOffset":127972,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":352,
-			"byteOffset":128076,
+			"byteLength":400,
+			"byteOffset":128172,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":72,
-			"byteOffset":128428,
+			"byteLength":78,
+			"byteOffset":128572,
 			"target":34963
 		}
 	],
@@ -1382,7 +1382,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":128500,
+			"byteLength":128652,
 			"uri":"vehicle.speedster.01.bin"
 		}
 	]
