@@ -201,7 +201,7 @@ export class Vehicle {
 		this.ownerName     = name
 		
 		// BUG: if we enable this flag change, the pointerEvent system just fires in an infinite loop. what the...?
-		//this.isLocalPlayer = true
+		//this.isLocalPlayer = isLocalPlayer
 		
 		this.updateLobbyLabel() 
 	}
