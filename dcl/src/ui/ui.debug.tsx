@@ -84,7 +84,7 @@ export function uiDebug() {
 				<Button
 					key         = "bar4"
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
-					value       = 'Make6Gold'
+					value       = 'AddFakePlayer'
 					variant     = 'primary'
 					fontSize    = {14}
 					onMouseDown = {() => {

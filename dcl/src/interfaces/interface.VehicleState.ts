@@ -1,6 +1,7 @@
 import { Vector3 } from "@dcl/sdk/math";
 
 export interface VehicleState {
+	isClaimed      : boolean,      // taken from Vehicle instance
 	ownerID        : string,       // taken from PlayerData
 	ownerName      : string,       // taken from PlayerData
 	position       : Vector3,      // taken from DCL entity, applied to cannonBody

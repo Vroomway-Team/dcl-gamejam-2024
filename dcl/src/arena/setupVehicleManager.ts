@@ -8,7 +8,7 @@ import { VehicleManager } 			from "../classes/class.VehicleManager";
 import { VehicleProperties } 		from "../interfaces/interface.VehicleProperties"
 
 const vehicles: VehicleProperties[] = [
-	/* {
+	{
 		name            : "Bee",
 		modelSrc        : "assets/gltf/vehicle.bee.01.gltf", 
 		acceleration    : 8, 
@@ -398,7 +398,7 @@ const vehicles: VehicleProperties[] = [
 			rotation       : Quaternion.fromEulerDegrees(0, 427.5, 0),
 			scale          : Vector3.One()
 		}
-	}, */
+	},
 	{
 		name            : "speedster",
 		modelSrc        : "assets/gltf/vehicle.speedster.01.gltf", 
@@ -419,11 +419,12 @@ const vehicles: VehicleProperties[] = [
 ]
 
 export function setupVehicleManager() { 
+	console.log("setupVehicleManager")
+	
 	engine.addSystem(VehicleInputSystem)	
 	engine.addSystem(VehicleMovementSystem)	
 	
 	VEHICLE_MANAGER.status()
-	console.log("setupVehicleManager")
 }
 
 export const VEHICLE_MANAGER = new VehicleManager(WORLD, vehicles)

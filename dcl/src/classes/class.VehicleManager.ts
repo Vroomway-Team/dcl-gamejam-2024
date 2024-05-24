@@ -39,9 +39,20 @@ export class VehicleManager {
 		this.spawnVehicles(this.vehicleProps)
 	}
 	
+	// DEBUG: test func for triggering via debug UI. use for whatever.
+	debugTestFunc(): void {
+		/* const playerData = getPlayer()
+		if (playerData) {
+			const vehicle   = this.getPlayerVehicle(playerData.userId)
+			debugger			
+		} */
+	
+		this.userClaimVehicle(2, "1a2b3c4d5e", "FakeDave", false)
+	}
+	
 	// Print simple status
 	status(): void {
-		console.log("VehicleManager is active with", this.vehicles.length, "controlled vehicles")
+		console.log("VehicleManager is active with", this.vehicles.length, "controlled vehicles") 
 	}
 	
 	// Main func for spawning in all the vehicle instances, should only ever be triggered once
@@ -61,11 +72,6 @@ export class VehicleManager {
 			)
 			this.vehicles.push(vehicle)			
 		})
-	}
-	
-	// DEBUG: test func for triggering via debug UI. use for whatever.
-	debugTestFunc(): void {
-		this.userClaimVehicle(6, "1a2b3c4d5e", "Fake User", false)
 	}
 	
 	// COLYSEUS: trigger this on round start
@@ -110,6 +116,12 @@ export class VehicleManager {
 		for (const vehicle of this.vehicles) {
 			vehicle.disable()
 		}
+	}
+	
+	// Get a particular vehicle
+	// Mostly used by LobbyLabels when checking ownership
+	getVehicle(index: number): Vehicle {
+		return this.vehicles[index]
 	}
 	
 	// Get an array of all the vehicles in the scene
@@ -211,7 +223,7 @@ export class VehicleManager {
 		vehicleIndex : number,
 		userId       : string,
 		userName     : string,
-		isLocalPlayer: boolean = false
+		isLocalPlayer: boolean
 	): void | boolean {
 		
 		console.log("userClaimVehicle:", vehicleIndex, userId, userName, isLocalPlayer)
@@ -219,7 +231,7 @@ export class VehicleManager {
 		const vehicle = this.vehicles[vehicleIndex]
 		
 		// Check if the vehicle is elligible to be claimed
-		if (vehicle.ownerID !== "npc") {
+		if (vehicle.isClaimed) {
 			return false
 		}
 			

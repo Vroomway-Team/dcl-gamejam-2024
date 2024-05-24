@@ -42,6 +42,7 @@ export class Vehicle {
 	
 	ownerID              : string  = "npc"  // UUID of the owner. Left at "npc" if not owned.
 	ownerName            : string  = "npc"  // Name of the owner. Left at "npc" if not owned.
+	isClaimed            : boolean = false  //
 	isLocalPlayer        : boolean = false  // Denote if this vehicle is being controlled by a local player
 	
 	entityPos            : Entity 			// Root Entity used to set object position
@@ -123,7 +124,7 @@ export class Vehicle {
 		utils.perpetualMotions.smoothRotation(this.entityCrown, 3000)
 		
 		// Add the lobby Label
-		this.lobbyLabel = new LobbyLabel(vehicleID, this.lobbyTransform, "Claim \n" + this.modelName)
+		this.lobbyLabel = new LobbyLabel(vehicleID, this.lobbyTransform, this.modelName)
 		
 		// Add the trigger to toggle player authority
 		utils.triggers.addTrigger(
@@ -193,15 +194,14 @@ export class Vehicle {
 	// Set the owner info for this vehicle, is triggered by VehicleManager, which in turn is
 	// triggered locally by the LobbyLabel, or by the COLYSEUS server
 	setOwner(
-		uuid: string,
-		name: string,
-		isLocalPlayer: boolean
+		uuid         : string,
+		name         : string,
+		isLocalPlayer: boolean,
 	): void {
 		this.ownerID       = uuid
 		this.ownerName     = name
-		
-		// BUG: if we enable this flag change, the pointerEvent system just fires in an infinite loop. what the...?
-		//this.isLocalPlayer = isLocalPlayer
+		this.isClaimed     = true
+		this.isLocalPlayer = isLocalPlayer
 		
 		this.updateLobbyLabel() 
 	}
@@ -211,29 +211,14 @@ export class Vehicle {
 	clearOwner(): void {
 		this.ownerID       = "npc"
 		this.ownerName     = "npc"
-		//this.isLocalPlayer = false
+		this.isClaimed     = false
+		this.isLocalPlayer = false
 		
 		this.updateLobbyLabel()
 	}
 	
 	updateLobbyLabel(): void {
-		this.lobbyLabel.removeClaimButton()
-		
-		// Add the claim button if unclaimed
-		if (this.ownerID == "npc") {
-			this.lobbyLabel.addClaimButton("Claim \n" + this.modelName)
-			this.lobbyLabel.setText("Claim \n" + this.modelName)
-		} else {
-			// The vehicle is claimed. Add the unclaim option if it's locally owned
-			if (this.isLocalPlayer == true) {
-				// It's owned by a local player
-				this.lobbyLabel.setText("Remove claim")
-				this.lobbyLabel.addUnclaimButton("Remove claim")
-			} else {
-				// It's owned by a remote player
-				this.lobbyLabel.setText(this.ownerName)
-			}
-		}
+		this.lobbyLabel.updateState(this.isClaimed, this.ownerID, this.ownerName, this.isLocalPlayer, this.modelName)
 	}
 	
 	getVehicleState(): VehicleState {
@@ -242,6 +227,7 @@ export class Vehicle {
 		const currentRotation = Transform.getMutable(this.entityRot).rotation;
 		
 		const data: VehicleState = {
+			isClaimed      : this.isClaimed,
 			ownerID        : this.ownerID,
 			ownerName      : this.ownerName,
 			position       : currentPosition,
