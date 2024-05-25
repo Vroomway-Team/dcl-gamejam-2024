@@ -186,7 +186,7 @@ export class VehicleManager {
 	// Teleport the player back to the lobby
 	// Might want to do something more fancy here to stop everyone landing on top of one another?
 	movePlayerToLobby() {
-		const targetPosition = Vector3.create(32, 1, 42)		
+		const targetPosition = Vector3.create(38, 2.5, 25)		
 		movePlayerTo({
 			newRelativePosition: targetPosition,
 			cameraTarget       : Vector3.create(32, 1, 32),
