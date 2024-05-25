@@ -7,6 +7,7 @@ import { GltfObject } 			from './classes/class.GltfObject'
 import { setupUi } 				from './ui/setupUI'
 import { setupCannonWorld } 	from './arena/setupCannonWorld'
 import { setupGltfShapes } 		from './arena/setupGltfShapes'
+import { setupScoreboards } 	from './arena/setupScoreboards'
 import { setupVehicleManager } 	from './arena/setupVehicleManager'
 
 export function main() {
@@ -20,6 +21,9 @@ export function main() {
 	// Setup the vehicle manager, which in turn spawns all the vehicles
 	// Also add input listener system and controls vehicle movement
 	setupVehicleManager()
+	
+	// Setup the scoreboards
+	setupScoreboards()
 	
 	// Setup the various gltf shapes
 	setupGltfShapes()
