@@ -3,8 +3,8 @@ import { uiHud } 			from "./ui.hud"
 import { uiDebug } 			from "./ui.debug"
 
 const uiComponents = () => [
-	uiDebug()
-	//uiHud(),
+	uiDebug(),
+	uiHud(),
 ]
   
 export function setupUi() {
