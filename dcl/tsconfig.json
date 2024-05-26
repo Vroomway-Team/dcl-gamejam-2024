@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
 	"compilerOptions": {
 		"allowJs": true,
 		"strict": true
@@ -9,3 +10,16 @@
 	],
 	"extends": "@dcl/sdk/types/tsconfig.ecs7.json"
 }
+=======
+  "compilerOptions": {
+    "allowJs": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "extends": "@dcl/sdk/types/tsconfig.ecs7.json"
+}
+>>>>>>> Stashed changes
