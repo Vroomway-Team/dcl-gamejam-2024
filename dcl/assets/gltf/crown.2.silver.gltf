@@ -48,9 +48,10 @@
 					"attributes":{
 						"POSITION":0,
 						"NORMAL":1,
-						"TEXCOORD_0":2
+						"TEXCOORD_0":2,
+						"TANGENT":3
 					},
-					"indices":3,
+					"indices":4,
 					"material":0
 				}
 			]
@@ -100,6 +101,12 @@
 		},
 		{
 			"bufferView":3,
+			"componentType":5126,
+			"count":170,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":4,
 			"componentType":5123,
 			"count":720,
 			"type":"SCALAR"
@@ -126,8 +133,14 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":1440,
+			"byteLength":2720,
 			"byteOffset":5440,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":1440,
+			"byteOffset":8160,
 			"target":34963
 		}
 	],
@@ -139,7 +152,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":6880,
+			"byteLength":9600,
 			"uri":"crown.2.silver.bin"
 		}
 	]

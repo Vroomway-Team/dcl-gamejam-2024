@@ -1,8 +1,9 @@
-import { engine, Transform,} from '@dcl/sdk/ecs'
-import { Color4, Vector3 } from '@dcl/sdk/math'
-import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/react-ecs'
-
-import { movePlayerTo } from '~system/RestrictedActions'
+import ReactEcs, { Button, Label, 
+	ReactEcsRenderer, UiEntity 
+} 								from '@dcl/sdk/react-ecs'
+import { engine, Transform,} 	from '@dcl/sdk/ecs'
+import { Color4, Vector3 } 		from '@dcl/sdk/math'
+import { movePlayerTo } 		from '~system/RestrictedActions'
 
 export function uiHud() {
 	return (
