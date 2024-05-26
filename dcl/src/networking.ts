@@ -28,7 +28,7 @@ export module Networking {
         REMOTE = 1
     }
     /** current connection type/profile */
-    var curConnectionType = 0;
+    var curConnectionType = 1;
 
     /** listing of connection profiles */
     const CONNECTION_PROFILES = [
@@ -36,7 +36,7 @@ export module Networking {
             url:"http://127.0.0.1:2567"
         },
         {   //remote connection
-            url:"http://127.0.0.1:2567"//TODO: change to server profile
+            url:"https://bumperz-game-jam-0492ec6466aa.herokuapp.com/"//TODO: change to server profile
         }
     ];
 

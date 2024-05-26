@@ -16,6 +16,7 @@ import { GameManager } from './arena/game-manager'
 import { TicketSpawnManager } from './arena/ticket-spawner'
 import { LobbyPlayer } from './classes/class.LobbyPlayer'
 import { Room } from 'colyseus.js'
+import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -43,6 +44,8 @@ export function main() {
 
 	//set up player (server connection)
 	PlayerSetup();
+
+	initSendPlayerInputToServerSystem()
 }
 
 /** handles the the initial player setup, getting their DCL details and connecting to the colyseus server */
@@ -56,7 +59,7 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.LOCAL);
+	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.REMOTE);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
@@ -84,7 +87,7 @@ async function PlayerSetup() {
 		for(var i:number=0; i<data.tickets.length; i++) {
 		  TicketSpawnManager.Spawn(data.id, data.position);
 		}
-	  });   
+	  });    
 	  //  syncing for lobby state 
 	  room.onMessage("game-state-sync", (data:any) => {
 		console.log("server call: game-state-sync")
