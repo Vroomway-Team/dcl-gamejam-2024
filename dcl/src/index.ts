@@ -17,6 +17,8 @@ import { TicketSpawnManager } from './arena/ticket-spawner'
 import { LobbyPlayer } from './classes/class.LobbyPlayer'
 import { Room } from 'colyseus.js'
 import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
+import * as serverStateSpec from './rooms/spec/server-state-spec'
+import * as clientStateSpec from './rooms/spec/client-state-spec'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -68,7 +70,7 @@ async function PlayerSetup() {
 	}).then((room: Room) => {
 
 	  //set room instance
-	  console.log("player joined room: ", room);
+	  console.log("player joined room: ", room,room.state);
 	  Networking.ClientRoom = room;
 
 	  //hook up message callbacks 
@@ -99,10 +101,10 @@ async function PlayerSetup() {
 		console.log("server call: game-countdown-sync")
 		//set new game state 
 		GameManager.StartLobbyCountdown(data.length);    
-	  });
+	  });  
 	  //  player join
-	  room.onMessage("player-join", (data:any) => {
-		console.log("server call: player-join")
+	  room.onMessage("player-join", (data:any) => { 
+		console.log("server call: player-join",data)
 		//add player to game
 		const player = LobbyPlayer.Create({ID:data.id, DisplayName:data.name, Vehicle:data.vehicle, Score:0});
 		//claim vehicle
@@ -141,7 +143,22 @@ async function PlayerSetup() {
 		//update scores display
 		ScoreDisplay.UpdateDisplays();
 	  }); 
-   
+
+	  room.onStateChange((state) => {
+		console.log("server call:",room.name, "has new state:", state);
+	  });
+
+
+	  room.state.players.onAdd(
+		function (player: clientStateSpec.PlayerState, sessionId: string){
+			console.log("server call:","room.state.players.onAdd", player);
+
+			player.listen("racingData", (raceData: clientStateSpec.PlayerRaceDataState) => {
+				console.log("server call: player.racingData.update",raceData)
+			});
+		}
+	  );	
+
 	}).catch((e) => {
 	  console.log("error entering room: ", e);
 	});
