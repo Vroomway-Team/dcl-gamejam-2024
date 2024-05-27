@@ -4,7 +4,10 @@
 		"version":"2.0"
 	},
 	"extensionsUsed":[
-		"KHR_materials_emissive_strength"
+		"KHR_draco_mesh_compression"
+	],
+	"extensionsRequired":[
+		"KHR_draco_mesh_compression"
 	],
 	"scene":0,
 	"scenes":[
@@ -41,11 +44,6 @@
 			"emissiveTexture":{
 				"index":1
 			},
-			"extensions":{
-				"KHR_materials_emissive_strength":{
-					"emissiveStrength":5
-				}
-			},
 			"name":"DCL.AvatarWearables_Emissive",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
@@ -64,19 +62,45 @@
 					"attributes":{
 						"POSITION":0,
 						"NORMAL":1,
-						"TEXCOORD_0":2
+						"TEXCOORD_0":2,
+						"TANGENT":3
 					},
-					"indices":3,
-					"material":0
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":0,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":4,
+					"material":0,
+					"mode":4
 				},
 				{
 					"attributes":{
-						"POSITION":4,
-						"NORMAL":5,
-						"TEXCOORD_0":6
+						"POSITION":5,
+						"NORMAL":6,
+						"TEXCOORD_0":7,
+						"TANGENT":8
 					},
-					"indices":7,
-					"material":1
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":1,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":9,
+					"material":1,
+					"mode":4
 				}
 			]
 		}
@@ -97,14 +121,13 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.jpg"
+			"uri":"tex/AvatarWearables_TX.png"
 		}
 	],
 	"accessors":[
 		{
-			"bufferView":0,
 			"componentType":5126,
 			"count":185,
 			"max":[
@@ -120,27 +143,28 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":1,
 			"componentType":5126,
 			"count":185,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":2,
 			"componentType":5126,
 			"count":185,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":3,
+			"componentType":5126,
+			"count":185,
+			"type":"VEC4"
+		},
+		{
 			"componentType":5123,
 			"count":780,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":4,
 			"componentType":5126,
-			"count":100,
+			"count":102,
 			"max":[
 				0.2955310046672821,
 				2.277052879333496,
@@ -154,19 +178,21 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":5,
 			"componentType":5126,
-			"count":100,
+			"count":102,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":6,
 			"componentType":5126,
-			"count":100,
+			"count":102,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":7,
+			"componentType":5126,
+			"count":102,
+			"type":"VEC4"
+		},
+		{
 			"componentType":5123,
 			"count":150,
 			"type":"SCALAR"
@@ -175,51 +201,13 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2220,
-			"byteOffset":0,
-			"target":34962
+			"byteLength":1624,
+			"byteOffset":0
 		},
 		{
 			"buffer":0,
-			"byteLength":2220,
-			"byteOffset":2220,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":1480,
-			"byteOffset":4440,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":1560,
-			"byteOffset":5920,
-			"target":34963
-		},
-		{
-			"buffer":0,
-			"byteLength":1200,
-			"byteOffset":7480,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":1200,
-			"byteOffset":8680,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":800,
-			"byteOffset":9880,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":300,
-			"byteOffset":10680,
-			"target":34963
+			"byteLength":827,
+			"byteOffset":1624
 		}
 	],
 	"samplers":[
@@ -230,7 +218,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":10980,
+			"byteLength":2452,
 			"uri":"crown.1.gold.bin"
 		}
 	]
