@@ -145,13 +145,13 @@ export module TicketSpawnManager {
 
     /**  */ 
     export function Spawn(index:number, position:Vector3) {
-        console.log("spawning ticket: {index="+index+", position="+JSON.stringify(position)+"}");
+        //console.log("spawning ticket: {index="+index+", position="+JSON.stringify(position)+"}");
         spawners[index].Spawn(position);
     }
 
     /**  */
     export function Clear(index:number) {
-        console.log("clearing ticket: {index="+index+"}");
+        //console.log("clearing ticket: {index="+index+"}");
         spawners[index].Clear();
     }
 

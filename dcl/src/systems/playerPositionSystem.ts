@@ -26,13 +26,11 @@ let currentRoom: string | null = null
 
 const CLASS_NAME = "PlayerTransformSystem"
 
-
 /*const dataToSend: serverStateSpec.PlayerTransformState = {
   position: {x:0,y:0,z:0},
   serverTime: -1,
   rotation: { x:0,y:0,z:0,w:0 }
 }*/
-
 
 const racingDataToSend: serverStateSpec.PlayerRaceDataState = {
   //carScenePosition: { x: 0, y: 0, z: 0 },
@@ -108,64 +106,58 @@ export class PlayerPositionSystem  {
   isPreview: boolean = false
   
   async update(dt: number) {
-    const METHOD_NAME = "update"
-
-    const playerPos = Transform.getOrNull(engine.PlayerEntity)
-    
+    //halt if past interval update
     if(!this.checkInterval.update(dt)){
       return;
     }
+    
+    //get player position
+    const playerPos = Transform.getOrNull(engine.PlayerEntity)
+    if(playerPos == null) return;
 
     //this.connected = GAME_STATE.gameConnected === "connected"
     
+    //halt if the player is not in a room
+    if(Networking.ClientRoom == null || Networking.ClientRoom == undefined) return;
 
-    const room = Networking.ClientRoom// GAME_STATE.gameRoom
-    if (playerPos !== null 
-        && room !== null && room !== undefined) {
-
-      const vehicle = VEHICLE_MANAGER.getPlayerVehicle(Networking.GetUserID())
-      //send them to server
-      if(!vehicle){
-        console.log("no vehicle found for player")
-        return;
-      }
-      
-          
-      //undocumented not working
-      // if((room.connection.transport as any).isOpen 
-      //   //&& (room.connection.transport as any).isOpen()
-      // ){
-      //   log(CLASS_NAME, METHOD_NAME, "not open!",(room.connection.transport as any).isOpen)
-      //   return
-      // }
-      //const player = anGAME_STATE.playerState
-
-      racingDataToSend.worldPosition= playerPos.position
-      racingDataToSend.cameraDirection= playerPos.rotation
-      
-      //send them to server
-      racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
-      racingDataToSend.force = vehicle.cannonBody.force
-      racingDataToSend.velocity = vehicle.cannonBody.velocity
-      racingDataToSend.mass = vehicle.cannonBody.mass
-      racingDataToSend.currentSpeed = vehicle.currentSpeed
-    
-
-      const now = Date.now();
-      //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
-      //const delta = now - racingData.lastKnownClientTime;
-
-      //TODO bring this back!!!
-      //racingDataToSend.lastKnownServerTime = player.lastKnowServerTime;
-      racingDataToSend.lastKnownClientTime = now; //snaphot for when sent
-
-      room.send("player.racingData.update", racingDataToSend);
-      //GAME_STATE.gameRoom.send("player.transform.update",dataToSend)
+    const vehicle = VEHICLE_MANAGER.getPlayerVehicle(Networking.GetUserID())
+    //send them to server
+    if(!vehicle){
+      //console.log("no vehicle found for player")
+      return;
     }
     
-  }
-  constructor() {
+    //undocumented not working
+    //const METHOD_NAME = "update"
+    // if((room.connection.transport as any).isOpen 
+    //   //&& (room.connection.transport as any).isOpen()
+    // ){
+    //   log(CLASS_NAME, METHOD_NAME, "not open!",(room.connection.transport as any).isOpen)
+    //   return
+    // }
+    //const player = anGAME_STATE.playerState
+
+    racingDataToSend.worldPosition= playerPos.position
+    racingDataToSend.cameraDirection= playerPos.rotation
     
+    //send them to server
+    racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
+    racingDataToSend.force = vehicle.cannonBody.force
+    racingDataToSend.velocity = vehicle.cannonBody.velocity
+    racingDataToSend.mass = vehicle.cannonBody.mass
+    racingDataToSend.currentSpeed = vehicle.currentSpeed
+  
+
+    const now = Date.now();
+    //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
+    //const delta = now - racingData.lastKnownClientTime;
+
+    //TODO bring this back!!!
+    //racingDataToSend.lastKnownServerTime = player.lastKnowServerTime;
+    racingDataToSend.lastKnownClientTime = now; //snaphot for when sent
+
+    //Networking.ClientRoom.send("player.racingData.update", racingDataToSend);
+    //GAME_STATE.gameRoom.send("player.transform.update",dataToSend)
   }
 }
  

@@ -1,14 +1,9 @@
-import { ColliderLayer, engine, 
-		 GltfContainer, Transform 
-} 								from '@dcl/sdk/ecs'
-import { Quaternion, Vector3 } 	from '@dcl/sdk/math'
-import { GltfObject } 			from './classes/class.GltfObject'
-
-import { setupUi } 				from './ui/setupUI'
-import { setupCannonWorld } 	from './arena/setupCannonWorld'
-import { setupGltfShapes } 		from './arena/setupGltfShapes'
-import { setupScoreboards } 	from './arena/setupScoreboards'
-import { setupVehicleManager, VEHICLE_MANAGER } 	from './arena/setupVehicleManager'
+import { Transform } from '@dcl/sdk/ecs'
+import { setupUi } from './ui/setupUI'
+import { setupCannonWorld } from './arena/setupCannonWorld'
+import { setupGltfShapes } from './arena/setupGltfShapes'
+import { setupScoreboards } from './arena/setupScoreboards'
+import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import * as utils from '@dcl-sdk/utils'
 import { ScoreDisplay } from './classes/class.ScoreDisplay'
 import { Networking } from './networking'
@@ -61,7 +56,7 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.REMOTE);
+	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.LOCAL);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
