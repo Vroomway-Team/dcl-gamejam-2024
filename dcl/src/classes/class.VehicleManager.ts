@@ -3,13 +3,12 @@ import { engine, Entity, Font,
 	Transform, TransformType
 }								from "@dcl/sdk/ecs";
 import { Vector3, Quaternion } 	from "@dcl/sdk/math";
-import { getPlayer } 			from "@dcl/sdk/src/players";
-import * as utils 				from '@dcl-sdk/utils'
-
 import { Vehicle } 				from "./class.Vehicle";
 import { VehicleProperties } 	from "../interfaces/interface.VehicleProperties";
 import { movePlayerTo } 		from "~system/RestrictedActions";
 import { VehicleState } 		from "../interfaces/interface.VehicleState";
+import { getPlayer } 			from "@dcl/sdk/src/players";
+import * as utils 				from '@dcl-sdk/utils'
 import { Networking } from "../networking";
 
 const playerData = getPlayer()
@@ -155,12 +154,18 @@ export class VehicleManager {
 	
 	// Tell vehicles to move to their arena start positions (at start of round)
 	moveVehiclesToArena(
-		duration: number
+		duration: number,
+		includeEmpty: boolean=false
 	): void {
 		console.log("moveVehiclesToArena")
 		
 		this.vehicles.forEach((vehicle, index) => {
-			vehicle.moveToArena(duration)
+			//if vehicle has an owner, move to arena
+			if(!includeEmpty && vehicle.ownerID == "npc") {
+				//maybe add some stuff for idle vehicles here
+			} else {
+				vehicle.moveToArena(3);
+			}
 		})		
 	}
 	

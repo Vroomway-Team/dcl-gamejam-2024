@@ -19,11 +19,11 @@ export module TicketSpawnManager {
     /** time between spawning each ticket batch */
     const TICKET_SPAWN_LENGTH:number = 1.5;
     /** current amount of time remaining befor next batch is spawned */
-    var ticketSpawnCountdown:number = 0;
-
+    var ticketSpawnCountdown:number = 0; 
+ 
     /** all spawner objects */
     var spawners:TicketSpawnerObject[] = [];
-
+  
     //place spawners in scene
     const GRID_SIZE_X:number = 4;
     const GRID_SIZE_Z:number = 4;
@@ -33,7 +33,7 @@ export module TicketSpawnManager {
         for(var z:number=0; z<GRID_SIZE_Z; z++) {
             const position = { 
                 x:32+(10.5*(x-(GRID_SIZE_X/2)+0.5)),
-                y:7.35,
+                y:7.85,
                 z:32+(10.5*(z-(GRID_SIZE_Z/2)+0.5))
             };
             SPAWNER_POSITIONS.push(position);
@@ -145,13 +145,13 @@ export module TicketSpawnManager {
 
     /**  */ 
     export function Spawn(index:number, position:Vector3) {
-        console.log("spawning ticket: {index="+index+", position="+JSON.stringify(position)+"}");
+        //console.log("spawning ticket: {index="+index+", position="+JSON.stringify(position)+"}");
         spawners[index].Spawn(position);
     }
 
     /**  */
     export function Clear(index:number) {
-        console.log("clearing ticket: {index="+index+"}");
+        //console.log("clearing ticket: {index="+index+"}");
         spawners[index].Clear();
     }
 

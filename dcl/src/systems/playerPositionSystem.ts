@@ -20,19 +20,17 @@ import { IntervalUtil } from '../utilities/interval-util'
 import { Transform, engine } from '@dcl/sdk/ecs'
 import { Networking } from '../networking'
 import { VEHICLE_MANAGER } from '../arena/setupVehicleManager'
-
-let currentRealm: string | null = null
-let currentRoom: string | null = null
+import { GameState } from '../game-state'
+import { PlayerVehicleControllerData } from '../utilities/escentials'
+import { Vector3 } from '@dcl/sdk/math'
 
 const CLASS_NAME = "PlayerTransformSystem"
-
 
 /*const dataToSend: serverStateSpec.PlayerTransformState = {
   position: {x:0,y:0,z:0},
   serverTime: -1,
   rotation: { x:0,y:0,z:0,w:0 }
 }*/
-
 
 const racingDataToSend: serverStateSpec.PlayerRaceDataState = {
   //carScenePosition: { x: 0, y: 0, z: 0 },
@@ -108,68 +106,62 @@ export class PlayerPositionSystem  {
   isPreview: boolean = false
   
   async update(dt: number) {
-    const METHOD_NAME = "update"
+    //halt if past interval update
+    if(!this.checkInterval.update(dt)) return;
+    //halt if the player is not in a room
+    if(Networking.ClientRoom == null || Networking.ClientRoom == undefined) return;
+    //halt if game is not in session
+    if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
 
+    //get player position
     const playerPos = Transform.getOrNull(engine.PlayerEntity)
+    if(playerPos == null) return;
     
-    if(!this.checkInterval.update(dt)){
-      return;
-    }
-
-    //this.connected = GAME_STATE.gameConnected === "connected"
+    //get player vehicle
+    const vehicle = VEHICLE_MANAGER.getPlayerVehicle(Networking.GetUserID())
+    if(!vehicle) return;
     
+    //undocumented not working
+    //const METHOD_NAME = "update" 
+    // if((room.connection.transport as any).isOpen 
+    //   //&& (room.connection.transport as any).isOpen()
+    // ){
+    //   log(CLASS_NAME, METHOD_NAME, "not open!",(room.connection.transport as any).isOpen)
+    //   return
+    // }
+    //const player = anGAME_STATE.playerState
 
-    const room = Networking.ClientRoom// GAME_STATE.gameRoom
-    if (playerPos !== null 
-        && room !== null && room !== undefined) {
-
-      const vehicle = VEHICLE_MANAGER.getPlayerVehicle(Networking.GetUserID())
-      //send them to server
-      if(!vehicle){
-        console.log("no vehicle found for player")
-        return;
-      }
+    racingDataToSend.worldPosition = playerPos.position 
+    racingDataToSend.cameraDirection = playerPos.rotation
       
-          
-      //undocumented not working
-      // if((room.connection.transport as any).isOpen 
-      //   //&& (room.connection.transport as any).isOpen()
-      // ){
-      //   log(CLASS_NAME, METHOD_NAME, "not open!",(room.connection.transport as any).isOpen)
-      //   return
-      // }
-      //const player = anGAME_STATE.playerState
+    //send them to server
+    racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
+    racingDataToSend.force = vehicle.cannonBody.force
+    racingDataToSend.velocity = vehicle.cannonBody.velocity
+    racingDataToSend.mass = vehicle.cannonBody.mass
+    racingDataToSend.currentSpeed = vehicle.currentSpeed
 
-      racingDataToSend.worldPosition= playerPos.position
-      racingDataToSend.cameraDirection= playerPos.rotation
-      
-      //send them to server
-      racingDataToSend.carModelId = vehicle.vehicleID
-      racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
-      racingDataToSend.force = vehicle.cannonBody.force
-      racingDataToSend.velocity = vehicle.cannonBody.velocity
-      racingDataToSend.mass = vehicle.cannonBody.mass
-      racingDataToSend.currentSpeed = vehicle.currentSpeed
-      racingDataToSend.angularVelocity = vehicle.cannonBody.angularVelocity
+    const now = Date.now();
+    //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
+    //const delta = now - racingData.lastKnownClientTime;
+ 
+    //TODO bring this back!!!
+    //racingDataToSend.lastKnownServerTime = player.lastKnowServerTime;
+    racingDataToSend.lastKnownClientTime = now; //snaphot for when sent
 
-      const now = Date.now();
-      //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
-      //const delta = now - racingData.lastKnownClientTime;
-
-      //TODO bring this back!!!
-      //racingDataToSend.lastKnownServerTime = player.lastKnowServerTime;
-      racingDataToSend.lastKnownClientTime = now; //snaphot for when sent
-
-      room.send("player.racingData.update", racingDataToSend);
-      //GAME_STATE.gameRoom.send("player.transform.update",dataToSend)
-    }
-    
-  }
-  constructor() {
-    
+    //Networking.ClientRoom.send("player.racingData.update", racingDataToSend);
+    Networking.ClientRoom.send("player-vehicle-controller-record", {
+      vehicleID:vehicle.vehicleID,
+      worldPosition:playerPos.position,
+      moveSpeed:vehicle.currentSpeed,
+      moveDirection:vehicle.cannonBody.quaternion,
+      moveVelocity:vehicle.cannonBody.velocity,
+      moveForce:vehicle.cannonBody.force,
+      mass:vehicle.cannonBody.mass
+    } as PlayerVehicleControllerData);
   }
 }
- 
+  
 
 //if(CONFIG.GAME_COIN_AUTO_START &&  myConnectSystem) engine.addSystem(myConnectSystem)
 

@@ -13,12 +13,14 @@ import { VehicleManager } 				from './class.VehicleManager'
 import { VehicleState } 				from '../interfaces/interface.VehicleState'
 import { getEntityPosition } 			from '../utilities/func.entityData'
 import { Vec3ToVector3, Vector3ToVec3 } from '../utilities/func.Vectors'
+import { FunctionCallbackIndex, PlayerVehicleControllerData } from '../utilities/escentials'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
 	vehiclePhysicsMaterial.friction    = 0.01
 	vehiclePhysicsMaterial.restitution = 0.5
-	
+
+
 // Define the Vehicle class
 export class Vehicle {
 	/* 
@@ -71,7 +73,10 @@ export class Vehicle {
 	
 	score                : number  = 0
 	rank                 : number  = 0
-	
+		
+	/** callback to be made when a transition is completed */
+	public static CallbackVehicleTransitionCompleted:FunctionCallbackIndex;  
+
 	constructor(
 		manager       : VehicleManager,
 		vehicleID     : number,
@@ -378,8 +383,11 @@ export class Vehicle {
 		
 		// Reset desired speed, and cannonBody velocity and position
 		utils.timers.setTimeout(() => {
+			//reset cannon object
 			this.currentSpeed = 0
 			this.resetCannonBodyAtPosition(transform.position)
+			//attempt callback
+			if(Vehicle.CallbackVehicleTransitionCompleted) Vehicle.CallbackVehicleTransitionCompleted(this.vehicleID);
 		}, duration + 1)	
 	}
 	
@@ -456,7 +464,7 @@ export class Vehicle {
 		const transformRot = Transform.getMutable(this.entityRot);
 		if (transformRot) {
 			
-			// Reset timer
+			// Reset timer 
 			this.timeSinceLastTweenRot = 0	
 			
 			// Get the start and end rots (limited by turn rate)
@@ -474,7 +482,24 @@ export class Vehicle {
 				duration      : duration,  // Tween component needs times in ms
 				easingFunction: EasingFunction.EF_LINEAR,
 			})
-		}
+		} 
 	}
-	
+
+	/** updates the player's controller data based on the provided controller data */
+	public UpdateVehicleController(data:PlayerVehicleControllerData) {
+		console.log("syncing position for vehicle: ID="+data.vehicleID+", pos="+JSON.stringify(data.worldPosition))
+		
+		//world details
+		if(data.worldPosition) this.cannonBody.position.set(data.worldPosition.x, data.worldPosition.y, data.worldPosition.z);
+		//if(data.worldMoveDirection) this.cannonBody.quaternion.set(data.worldMoveDirection.x, data.worldMoveDirection.y, data.worldMoveDirection.z, data.worldMoveDirection.w);
+		//input details
+		//if(data.forceDirection) this.forceDirection = data.forceDirection;
+		//if(data.cameraDirection) this.cameraDirection = data.cameraDirection;
+		//action details
+		if(data.moveSpeed) this.currentSpeed = data.moveSpeed;
+		if(data.moveDirection) this.cannonBody.quaternion.set(data.moveDirection.x, data.moveDirection.y, data.moveDirection.z, data.moveDirection.w);
+		if(data.moveVelocity) this.cannonBody.velocity.set(data.moveVelocity.x, data.moveVelocity.y, data.moveVelocity.z);
+		if(data.moveForce) this.cannonBody.force.set(data.moveForce.x, data.moveForce.y, data.moveForce.z);
+		if(data.mass) this.cannonBody.mass = data.mass;
+	}
 }

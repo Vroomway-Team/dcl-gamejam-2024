@@ -3,6 +3,12 @@
 		"generator":"Khronos glTF Blender I/O v4.0.44",
 		"version":"2.0"
 	},
+	"extensionsUsed":[
+		"KHR_draco_mesh_compression"
+	],
+	"extensionsRequired":[
+		"KHR_draco_mesh_compression"
+	],
 	"scene":0,
 	"scenes":[
 		{
@@ -51,8 +57,20 @@
 						"TEXCOORD_0":2,
 						"TANGENT":3
 					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":0,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
 					"indices":4,
-					"material":0
+					"material":0,
+					"mode":4
 				}
 			]
 		}
@@ -65,14 +83,13 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.jpg"
+			"uri":"tex/AvatarWearables_TX.png"
 		}
 	],
 	"accessors":[
 		{
-			"bufferView":0,
 			"componentType":5126,
 			"count":130,
 			"max":[
@@ -88,25 +105,21 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":1,
 			"componentType":5126,
 			"count":130,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":2,
 			"componentType":5126,
 			"count":130,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":3,
 			"componentType":5126,
 			"count":130,
 			"type":"VEC4"
 		},
 		{
-			"bufferView":4,
 			"componentType":5123,
 			"count":480,
 			"type":"SCALAR"
@@ -115,33 +128,8 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":1560,
-			"byteOffset":0,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":1560,
-			"byteOffset":1560,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":1040,
-			"byteOffset":3120,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":2080,
-			"byteOffset":4160,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":960,
-			"byteOffset":6240,
-			"target":34963
+			"byteLength":1193,
+			"byteOffset":0
 		}
 	],
 	"samplers":[
@@ -152,7 +140,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":7200,
+			"byteLength":1196,
 			"uri":"crown.3.bronze.bin"
 		}
 	]

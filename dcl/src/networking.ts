@@ -36,7 +36,7 @@ export module Networking {
             url:"http://127.0.0.1:2567"
         },
         {   //remote connection
-            url:"https://bumperz-game-jam-0492ec6466aa.herokuapp.com/"//TODO: change to server profile
+            url:"https://bumperz-game-jam-0492ec6466aa.herokuapp.com/"
         }
     ];
 
