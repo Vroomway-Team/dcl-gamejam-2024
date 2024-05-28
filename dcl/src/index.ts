@@ -17,6 +17,7 @@ import * as serverStateSpec from './rooms/spec/server-state-spec'
 import * as clientStateSpec from './rooms/spec/client-state-spec'
 import  *  as  ui  from  'dcl-ui-toolkit'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
+import { Quaternion } from '@dcl/sdk/math'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -131,7 +132,7 @@ async function PlayerSetup() {
 	  });
 	  //	updates for vehicle controller
 	  room.onMessage("player-vehicle-controller-update", (data:any) => {
-		console.log("server call: player-vehicle-controller-update");
+		//console.log("server call: player-vehicle-controller-update");
 		//get vehicle
 		const vehicle = VEHICLE_MANAGER.getVehicle(data.vehicleID);
 		if(vehicle == undefined) return;
@@ -174,7 +175,7 @@ async function PlayerSetup() {
 	  }); 
 
 	  room.onStateChange((state) => {
-		console.log("server call:",room.name, "has new state:", state);
+		//console.log("server call:",room.name, "has new state:", state);
 	  });
 
 	  room.state.players.onAdd(
