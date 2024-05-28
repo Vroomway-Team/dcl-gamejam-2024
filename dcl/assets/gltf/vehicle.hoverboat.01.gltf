@@ -40,23 +40,28 @@
 				0.7071067690849304
 			],
 			"translation":[
-				0,
+				-1.728767529129982e-07,
 				0.002769976854324341,
-				-0.005437135696411133
+				-0.005437254905700684
 			]
 		},
 		{
 			"name":"hoverboat.fan.blades.pivot",
 			"rotation":[
-				0.5720613598823547,
-				0.4156269431114197,
-				-0.4156269431114197,
-				0.5720614194869995
+				0.57206130027771,
+				0.4156270921230316,
+				-0.4156270921230316,
+				0.57206130027771
+			],
+			"scale":[
+				0.9999999403953552,
+				0.9999999403953552,
+				1
 			],
 			"translation":[
-				0,
+				-1.728767529129982e-07,
 				0.002769976854324341,
-				-0.005437135696411133
+				-0.005437254905700684
 			]
 		},
 		{
@@ -215,10 +220,10 @@
 			"mesh":9,
 			"name":"hoverboat.steering.wheels",
 			"rotation":[
-				-0.42156368494033813,
+				-0.4215637743473053,
 				0,
 				0,
-				0.9067988395690918
+				0.906798779964447
 			],
 			"translation":[
 				0,
@@ -328,164 +333,6 @@
 					"input":57,
 					"interpolation":"STEP",
 					"output":64
-				}
-			]
-		},
-		{
-			"channels":[
-				{
-					"sampler":0,
-					"target":{
-						"node":3,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":1,
-					"target":{
-						"node":3,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":2,
-					"target":{
-						"node":3,
-						"path":"scale"
-					}
-				},
-				{
-					"sampler":3,
-					"target":{
-						"node":2,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":4,
-					"target":{
-						"node":2,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":5,
-					"target":{
-						"node":2,
-						"path":"scale"
-					}
-				}
-			],
-			"name":"Armature.001Action.002",
-			"samplers":[
-				{
-					"input":57,
-					"interpolation":"STEP",
-					"output":65
-				},
-				{
-					"input":57,
-					"interpolation":"STEP",
-					"output":66
-				},
-				{
-					"input":57,
-					"interpolation":"STEP",
-					"output":67
-				},
-				{
-					"input":57,
-					"interpolation":"STEP",
-					"output":68
-				},
-				{
-					"input":62,
-					"interpolation":"LINEAR",
-					"output":69
-				},
-				{
-					"input":57,
-					"interpolation":"STEP",
-					"output":70
-				}
-			]
-		},
-		{
-			"channels":[
-				{
-					"sampler":0,
-					"target":{
-						"node":3,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":1,
-					"target":{
-						"node":3,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":2,
-					"target":{
-						"node":3,
-						"path":"scale"
-					}
-				},
-				{
-					"sampler":3,
-					"target":{
-						"node":2,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":4,
-					"target":{
-						"node":2,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":5,
-					"target":{
-						"node":2,
-						"path":"scale"
-					}
-				}
-			],
-			"name":"Bumper_Hit_React_Armature.001",
-			"samplers":[
-				{
-					"input":71,
-					"interpolation":"STEP",
-					"output":72
-				},
-				{
-					"input":71,
-					"interpolation":"STEP",
-					"output":73
-				},
-				{
-					"input":71,
-					"interpolation":"STEP",
-					"output":74
-				},
-				{
-					"input":71,
-					"interpolation":"STEP",
-					"output":75
-				},
-				{
-					"input":71,
-					"interpolation":"STEP",
-					"output":76
-				},
-				{
-					"input":71,
-					"interpolation":"STEP",
-					"output":77
 				}
 			]
 		}
@@ -873,7 +720,7 @@
 	],
 	"skins":[
 		{
-			"inverseBindMatrices":78,
+			"inverseBindMatrices":65,
 			"joints":[
 				3,
 				2
@@ -886,13 +733,13 @@
 			"componentType":5126,
 			"count":402,
 			"max":[
-				0.4153519868850708,
-				0.4436924159526825,
+				0.4153520166873932,
+				0.4436923563480377,
 				0.020329618826508522
 			],
 			"min":[
-				-0.4396499693393707,
-				-0.42570456862449646,
+				-0.439649760723114,
+				-0.4257044196128845,
 				-0.11052742600440979
 			],
 			"type":"VEC3"
@@ -1292,10 +1139,10 @@
 			"componentType":5126,
 			"count":2,
 			"max":[
-				5
+				4.983333333333333
 			],
 			"min":[
-				0.016666666666666666
+				0
 			],
 			"type":"SCALAR"
 		},
@@ -1328,10 +1175,10 @@
 			"componentType":5126,
 			"count":300,
 			"max":[
-				5
+				4.983333333333333
 			],
 			"min":[
-				0.016666666666666666
+				0
 			],
 			"type":"SCALAR"
 		},
@@ -1349,90 +1196,6 @@
 		},
 		{
 			"bufferView":20,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":21,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":22,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":23,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":24,
-			"componentType":5126,
-			"count":300,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":25,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":26,
-			"componentType":5126,
-			"count":2,
-			"max":[
-				1
-			],
-			"min":[
-				0.016666666666666666
-			],
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":27,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":28,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":29,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":30,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":31,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":32,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":33,
 			"componentType":5126,
 			"count":2,
 			"type":"MAT4"
@@ -1541,73 +1304,8 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":24,
-			"byteOffset":40464
-		},
-		{
-			"buffer":0,
-			"byteLength":32,
-			"byteOffset":40488
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":40520
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":40544
-		},
-		{
-			"buffer":0,
-			"byteLength":4800,
-			"byteOffset":40568
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":45368
-		},
-		{
-			"buffer":0,
-			"byteLength":8,
-			"byteOffset":45392
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":45400
-		},
-		{
-			"buffer":0,
-			"byteLength":32,
-			"byteOffset":45424
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":45456
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":45480
-		},
-		{
-			"buffer":0,
-			"byteLength":32,
-			"byteOffset":45504
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":45536
-		},
-		{
-			"buffer":0,
 			"byteLength":128,
-			"byteOffset":45560
+			"byteOffset":40464
 		}
 	],
 	"samplers":[
@@ -1618,7 +1316,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":45688,
+			"byteLength":40592,
 			"uri":"vehicle.hoverboat.01.bin"
 		}
 	]

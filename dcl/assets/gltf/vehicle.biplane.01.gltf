@@ -62,8 +62,8 @@
 			"mesh":3,
 			"name":"Cube.001",
 			"rotation":[
-				0.12653696537017822,
-				0.005524724721908569,
+				0.12653695046901703,
+				0.005524725653231144,
 				-0.0432681143283844,
 				0.9910025000572205
 			],
@@ -89,7 +89,7 @@
 			],
 			"scale":[
 				0.27686530351638794,
-				0.0311119444668293,
+				0.031111938878893852,
 				0.27686527371406555
 			],
 			"translation":[
@@ -108,9 +108,9 @@
 				0.7071067690849304
 			],
 			"translation":[
-				0,
+				-3.576153417839123e-08,
 				1.186836838722229,
-				0
+				5.960464477539063e-08
 			]
 		},
 		{
@@ -122,9 +122,9 @@
 				0.3535533845424652
 			],
 			"translation":[
-				0,
+				-3.576153417839123e-08,
 				1.186836838722229,
-				0
+				5.960464477539063e-08
 			]
 		},
 		{
@@ -155,7 +155,7 @@
 			"children":[
 				8
 			],
-			"name":"Armature.001"
+			"name":"biplane.armature"
 		},
 		{
 			"mesh":6,
@@ -188,7 +188,7 @@
 			],
 			"scale":[
 				0.27686530351638794,
-				0.0311119444668293,
+				0.031111938878893852,
 				0.27686527371406555
 			],
 			"translation":[
@@ -322,7 +322,7 @@
 					}
 				}
 			],
-			"name":"Armature.001Action.001",
+			"name":"Armature.001Action.002",
 			"samplers":[
 				{
 					"input":62,
@@ -353,164 +353,6 @@
 					"input":62,
 					"interpolation":"STEP",
 					"output":69
-				}
-			]
-		},
-		{
-			"channels":[
-				{
-					"sampler":0,
-					"target":{
-						"node":8,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":1,
-					"target":{
-						"node":8,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":2,
-					"target":{
-						"node":8,
-						"path":"scale"
-					}
-				},
-				{
-					"sampler":3,
-					"target":{
-						"node":7,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":4,
-					"target":{
-						"node":7,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":5,
-					"target":{
-						"node":7,
-						"path":"scale"
-					}
-				}
-			],
-			"name":"Armature.001Action.002",
-			"samplers":[
-				{
-					"input":62,
-					"interpolation":"STEP",
-					"output":70
-				},
-				{
-					"input":62,
-					"interpolation":"STEP",
-					"output":71
-				},
-				{
-					"input":62,
-					"interpolation":"STEP",
-					"output":72
-				},
-				{
-					"input":62,
-					"interpolation":"STEP",
-					"output":73
-				},
-				{
-					"input":67,
-					"interpolation":"LINEAR",
-					"output":74
-				},
-				{
-					"input":62,
-					"interpolation":"STEP",
-					"output":75
-				}
-			]
-		},
-		{
-			"channels":[
-				{
-					"sampler":0,
-					"target":{
-						"node":8,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":1,
-					"target":{
-						"node":8,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":2,
-					"target":{
-						"node":8,
-						"path":"scale"
-					}
-				},
-				{
-					"sampler":3,
-					"target":{
-						"node":7,
-						"path":"translation"
-					}
-				},
-				{
-					"sampler":4,
-					"target":{
-						"node":7,
-						"path":"rotation"
-					}
-				},
-				{
-					"sampler":5,
-					"target":{
-						"node":7,
-						"path":"scale"
-					}
-				}
-			],
-			"name":"Bumper_Hit_React_Armature.001",
-			"samplers":[
-				{
-					"input":76,
-					"interpolation":"STEP",
-					"output":77
-				},
-				{
-					"input":76,
-					"interpolation":"STEP",
-					"output":78
-				},
-				{
-					"input":76,
-					"interpolation":"STEP",
-					"output":79
-				},
-				{
-					"input":76,
-					"interpolation":"STEP",
-					"output":80
-				},
-				{
-					"input":76,
-					"interpolation":"STEP",
-					"output":81
-				},
-				{
-					"input":76,
-					"interpolation":"STEP",
-					"output":82
 				}
 			]
 		}
@@ -920,12 +762,12 @@
 	],
 	"skins":[
 		{
-			"inverseBindMatrices":83,
+			"inverseBindMatrices":70,
 			"joints":[
 				8,
 				7
 			],
-			"name":"Armature.001"
+			"name":"biplane.armature"
 		}
 	],
 	"accessors":[
@@ -1040,12 +882,12 @@
 			"max":[
 				1.3992269039154053,
 				0.9999999403953552,
-				1.3919639587402344
+				1.3919655084609985
 			],
 			"min":[
 				-87.76153564453125,
-				-1.5745824575424194,
-				-1.4447489976882935
+				-1.5745822191238403,
+				-1.444745421409607
 			],
 			"type":"VEC3"
 		},
@@ -1078,9 +920,9 @@
 				0.5
 			],
 			"min":[
-				-1.5315437316894531,
-				-30.1424503326416,
-				-0.5000000596046448
+				-1.5315439701080322,
+				-30.142457962036133,
+				-0.5000003576278687
 			],
 			"type":"VEC3"
 		},
@@ -1173,9 +1015,9 @@
 				0.3541520833969116
 			],
 			"min":[
-				-1.419243574142456,
-				-29.31430435180664,
-				-0.3541521430015564
+				-1.4192438125610352,
+				-29.31431007385254,
+				-0.35415247082710266
 			],
 			"type":"VEC3"
 		},
@@ -1270,11 +1112,11 @@
 			"max":[
 				0.09836338460445404,
 				0.15754835307598114,
-				0.00853237509727478
+				0.008532379753887653
 			],
 			"min":[
 				-0.9758704304695129,
-				0.075319804251194,
+				0.0753197968006134,
 				-0.21021930873394012
 			],
 			"type":"VEC3"
@@ -1374,10 +1216,10 @@
 			"componentType":5126,
 			"count":2,
 			"max":[
-				5
+				4.983333333333333
 			],
 			"min":[
-				0.016666666666666666
+				0
 			],
 			"type":"SCALAR"
 		},
@@ -1410,10 +1252,10 @@
 			"componentType":5126,
 			"count":300,
 			"max":[
-				5
+				4.983333333333333
 			],
 			"min":[
-				0.016666666666666666
+				0
 			],
 			"type":"SCALAR"
 		},
@@ -1431,90 +1273,6 @@
 		},
 		{
 			"bufferView":21,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":22,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":23,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":24,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":25,
-			"componentType":5126,
-			"count":300,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":26,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":27,
-			"componentType":5126,
-			"count":2,
-			"max":[
-				1
-			],
-			"min":[
-				0.016666666666666666
-			],
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":28,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":29,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":30,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":31,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":32,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":33,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":34,
 			"componentType":5126,
 			"count":2,
 			"type":"MAT4"
@@ -1543,7 +1301,7 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":3196,
+			"byteLength":3195,
 			"byteOffset":7396
 		},
 		{
@@ -1573,7 +1331,7 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":1919,
+			"byteLength":1918,
 			"byteOffset":31844
 		},
 		{
@@ -1628,73 +1386,8 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":24,
-			"byteOffset":43304
-		},
-		{
-			"buffer":0,
-			"byteLength":32,
-			"byteOffset":43328
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":43360
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":43384
-		},
-		{
-			"buffer":0,
-			"byteLength":4800,
-			"byteOffset":43408
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":48208
-		},
-		{
-			"buffer":0,
-			"byteLength":8,
-			"byteOffset":48232
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":48240
-		},
-		{
-			"buffer":0,
-			"byteLength":32,
-			"byteOffset":48264
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":48296
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":48320
-		},
-		{
-			"buffer":0,
-			"byteLength":32,
-			"byteOffset":48344
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":48376
-		},
-		{
-			"buffer":0,
 			"byteLength":128,
-			"byteOffset":48400
+			"byteOffset":43304
 		}
 	],
 	"samplers":[
@@ -1705,7 +1398,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":48528,
+			"byteLength":43432,
 			"uri":"vehicle.biplane.01.bin"
 		}
 	]
