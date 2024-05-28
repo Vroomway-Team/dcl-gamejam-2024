@@ -14,6 +14,8 @@ import { Room } from 'colyseus.js'
 import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
 import * as serverStateSpec from './rooms/spec/server-state-spec'
 import * as clientStateSpec from './rooms/spec/client-state-spec'
+import  *  as  ui  from  'dcl-ui-toolkit'
+import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -21,6 +23,7 @@ export function main() {
 
 	// Draw UI
 	setupUi()
+	//ReactEcsRenderer.setUiRenderer(ui.render)
 	
 	// Setup Cannon World - adds the world, ground, arena colliders
 	setupCannonWorld()

@@ -10,7 +10,7 @@
     "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
   },
   "devDependencies": {
-    "@dcl/js-runtime": "7.5.0",
+    "@dcl/js-runtime": "7.4.21",
     "@dcl/sdk": "^7.4.21"
   },
   "engines": {
@@ -29,6 +29,7 @@
     "@types/cannon": "^0.1.12",
     "cannon": "^0.6.2",
     "colyseus.js": "^0.15.20",
+    "dcl-ui-toolkit": "^0.10.0",
     "whatwg-url-without-unicode": "^8.0.0-3",
     "xmlhttprequest-polyfill": "^0.1.2"
   }
