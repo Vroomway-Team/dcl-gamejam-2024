@@ -249,9 +249,9 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.jpg"
+			"uri":"tex/AvatarWearables_TX.png"
 		}
 	],
 	"skins":[
