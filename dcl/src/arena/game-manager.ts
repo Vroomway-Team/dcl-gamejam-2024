@@ -41,7 +41,7 @@ export module GameManager {
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
         } 
         //  call when vehicle has transitioned
-        Vehicle.CallbackVehicleTransitionCompleted = function(index:number) {
+        /* Vehicle.CallbackVehicleTransitionCompleted = function(index:number) {
             //halt if game is not in session
             if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
             const vehicle = VEHICLE_MANAGER.getVehicle(index);
@@ -49,9 +49,8 @@ export module GameManager {
             //halt if player is not owner
             if(!vehicle.isLocalPlayer) return;
             //move player to vehicle
-            vehicle.enable();
-            VEHICLE_MANAGER.movePlayerToVehicle();
-        } 
+            VEHICLE_MANAGER.onRoundStart();
+        } */
         //  ticket collides with ticket (pickup logic)
         TicketEntity.CallbackTicketCollision = function(index:number) {
             //halt if player is not part of a room
@@ -66,14 +65,14 @@ export module GameManager {
     /** sets the current game state (called by server, so client has no right to refusal) */
     export function SetGameState(state:GameState.GAME_STATE_TYPES) {
         addLog("setting game state: "+state);
-        //if previous state was playing, move player back to lobby (TODO: gonna extend the server sync to deal with this, just lazy atm)
-        if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
-            //move player to lobby
-            movePlayerTo({ 
-                newRelativePosition: {x:32, y:1.5, z:24},
-                cameraTarget: {x:32, y:1.5, z:40},
-            });
+        //if game is avtively starting
+        if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
+            VEHICLE_MANAGER.onRoundStart();
         }
+        //if game is actively ending
+        if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
+            VEHICLE_MANAGER.onRoundEnd();
+        } 
  
         //set new game state
         GameState.CurGameState.SetValue(state);

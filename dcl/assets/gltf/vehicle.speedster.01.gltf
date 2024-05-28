@@ -68,10 +68,6 @@
 		},
 		{
 			"mesh":4,
-			"name":"speedster.display"
-		},
-		{
-			"mesh":5,
 			"name":"speedster.hood",
 			"translation":[
 				0.4197472929954529,
@@ -80,7 +76,7 @@
 			]
 		},
 		{
-			"mesh":6,
+			"mesh":5,
 			"name":"speedster.seat",
 			"scale":[
 				0.23763178288936615,
@@ -94,7 +90,7 @@
 			]
 		},
 		{
-			"mesh":7,
+			"mesh":6,
 			"name":"speedster.steering",
 			"rotation":[
 				-0.4215637743473053,
@@ -109,7 +105,7 @@
 			]
 		},
 		{
-			"mesh":8,
+			"mesh":7,
 			"name":"speedster.wings",
 			"rotation":[
 				-0.9807853102684021,
@@ -121,6 +117,20 @@
 				0.6045219302177429,
 				0.43470537662506104,
 				0.18404556810855865
+			]
+		},
+		{
+			"mesh":8,
+			"name":"speedster.display.003",
+			"scale":[
+				1.0339072942733765,
+				1.0350253582000732,
+				1.0350253582000732
+			],
+			"translation":[
+				0,
+				0.5633732676506042,
+				0.8714160919189453
 			]
 		},
 		{
@@ -180,6 +190,28 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"name":"DCL.AvatarWearables",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":3
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"alphaCutoff":0.5,
+			"alphaMode":"MASK",
+			"name":"texture.atlas.02",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":4
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -318,7 +350,7 @@
 			]
 		},
 		{
-			"name":"Cube.005",
+			"name":"Cube.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -339,13 +371,13 @@
 						}
 					},
 					"indices":29,
-					"material":2,
+					"material":1,
 					"mode":4
 				}
 			]
 		},
 		{
-			"name":"Cube.003",
+			"name":"Cube.006",
 			"primitives":[
 				{
 					"attributes":{
@@ -372,14 +404,13 @@
 			]
 		},
 		{
-			"name":"Cube.006",
+			"name":"Cylinder.003",
 			"primitives":[
 				{
 					"attributes":{
 						"POSITION":35,
 						"NORMAL":36,
-						"TEXCOORD_0":37,
-						"TANGENT":38
+						"TEXCOORD_0":37
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
@@ -387,37 +418,11 @@
 							"attributes":{
 								"POSITION":0,
 								"NORMAL":1,
-								"TEXCOORD_0":2,
-								"TANGENT":3
-							}
-						}
-					},
-					"indices":39,
-					"material":1,
-					"mode":4
-				}
-			]
-		},
-		{
-			"name":"Cylinder.003",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":40,
-						"NORMAL":41,
-						"TEXCOORD_0":42
-					},
-					"extensions":{
-						"KHR_draco_mesh_compression":{
-							"bufferView":8,
-							"attributes":{
-								"POSITION":0,
-								"NORMAL":1,
 								"TEXCOORD_0":2
 							}
 						}
 					},
-					"indices":43,
+					"indices":38,
 					"material":1,
 					"mode":4
 				}
@@ -426,6 +431,28 @@
 		{
 			"name":"Cylinder.008",
 			"primitives":[
+				{
+					"attributes":{
+						"POSITION":39,
+						"NORMAL":40,
+						"TEXCOORD_0":41,
+						"TANGENT":42
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":8,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":43,
+					"material":1,
+					"mode":4
+				},
 				{
 					"attributes":{
 						"POSITION":44,
@@ -445,9 +472,14 @@
 						}
 					},
 					"indices":48,
-					"material":1,
+					"material":2,
 					"mode":4
-				},
+				}
+			]
+		},
+		{
+			"name":"Cube.022",
+			"primitives":[
 				{
 					"attributes":{
 						"POSITION":49,
@@ -467,14 +499,9 @@
 						}
 					},
 					"indices":53,
-					"material":2,
+					"material":3,
 					"mode":4
-				}
-			]
-		},
-		{
-			"name":"Cube.007",
-			"primitives":[
+				},
 				{
 					"attributes":{
 						"POSITION":54,
@@ -494,13 +521,13 @@
 						}
 					},
 					"indices":58,
-					"material":2,
+					"material":4,
 					"mode":4
 				}
 			]
 		},
 		{
-			"name":"Cylinder.002",
+			"name":"Cube.007",
 			"primitives":[
 				{
 					"attributes":{
@@ -527,7 +554,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.001",
+			"name":"Cylinder.002",
 			"primitives":[
 				{
 					"attributes":{
@@ -552,6 +579,33 @@
 					"mode":4
 				}
 			]
+		},
+		{
+			"name":"Cylinder.001",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":69,
+						"NORMAL":70,
+						"TEXCOORD_0":71,
+						"TANGENT":72
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":14,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":73,
+					"material":2,
+					"mode":4
+				}
+			]
 		}
 	],
 	"textures":[
@@ -566,6 +620,14 @@
 		{
 			"sampler":0,
 			"source":0
+		},
+		{
+			"sampler":0,
+			"source":1
+		},
+		{
+			"sampler":0,
+			"source":2
 		}
 	],
 	"images":[
@@ -573,6 +635,16 @@
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
 			"uri":"tex/AvatarWearables_TX.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"AvatarWearables_TX",
+			"uri":"tex/AvatarWearables_TX.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"texture-atlas-icons",
+			"uri":"tex/texture-atlas-icons.png"
 		}
 	],
 	"accessors":[
@@ -753,41 +825,6 @@
 		},
 		{
 			"componentType":5126,
-			"count":92,
-			"max":[
-				0.2616315484046936,
-				0.669396698474884,
-				0.9129104614257812
-			],
-			"min":[
-				-0.2616315484046936,
-				0.5449914336204529,
-				0.7239412069320679
-			],
-			"type":"VEC3"
-		},
-		{
-			"componentType":5126,
-			"count":92,
-			"type":"VEC3"
-		},
-		{
-			"componentType":5126,
-			"count":92,
-			"type":"VEC2"
-		},
-		{
-			"componentType":5126,
-			"count":92,
-			"type":"VEC4"
-		},
-		{
-			"componentType":5123,
-			"count":192,
-			"type":"SCALAR"
-		},
-		{
-			"componentType":5126,
 			"count":174,
 			"max":[
 				-0.08230972290039062,
@@ -958,6 +995,76 @@
 		},
 		{
 			"componentType":5126,
+			"count":80,
+			"max":[
+				0.261631578207016,
+				0.12439584732055664,
+				0.06953549385070801
+			],
+			"min":[
+				-0.2616315484046936,
+				-8.046627044677734e-06,
+				-0.11943376064300537
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":80,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":80,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":80,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":120,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"max":[
+				0.23657843470573425,
+				0.11764711141586304,
+				0.048503577709198
+			],
+			"min":[
+				-0.23657843470573425,
+				0.018210172653198242,
+				-0.10015219449996948
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":24,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
 			"count":64,
 			"max":[
 				0.18957825005054474,
@@ -1090,48 +1197,53 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":1572,
+			"byteLength":1562,
 			"byteOffset":18380
 		},
 		{
 			"buffer":0,
-			"byteLength":1562,
-			"byteOffset":19952
-		},
-		{
-			"buffer":0,
 			"byteLength":1595,
-			"byteOffset":21516
+			"byteOffset":19944
 		},
 		{
 			"buffer":0,
 			"byteLength":1601,
-			"byteOffset":23112
+			"byteOffset":21540
 		},
 		{
 			"buffer":0,
 			"byteLength":1768,
-			"byteOffset":24716
+			"byteOffset":23144
 		},
 		{
 			"buffer":0,
 			"byteLength":713,
-			"byteOffset":26484
+			"byteOffset":24912
+		},
+		{
+			"buffer":0,
+			"byteLength":1203,
+			"byteOffset":25628
+		},
+		{
+			"buffer":0,
+			"byteLength":451,
+			"byteOffset":26832
 		},
 		{
 			"buffer":0,
 			"byteLength":871,
-			"byteOffset":27200
+			"byteOffset":27284
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":28072
+			"byteOffset":28156
 		},
 		{
 			"buffer":0,
 			"byteLength":1128,
-			"byteOffset":29252
+			"byteOffset":29336
 		}
 	],
 	"samplers":[
@@ -1142,7 +1254,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":30380,
+			"byteLength":30464,
 			"uri":"vehicle.speedster.01.bin"
 		}
 	]

@@ -112,7 +112,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hotwheels",
-		modelSrc        : "assets/gltf/vehicle.hotwheels.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.biplane.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -129,7 +129,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "speedster",
-		modelSrc        : "assets/gltf/vehicle.speedster.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.cat.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -146,7 +146,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hoverboat",
-		modelSrc        : "assets/gltf/vehicle.hoverboat.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.donut.blue.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -163,7 +163,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "speedster",
-		modelSrc        : "assets/gltf/vehicle.biplane.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.hotwheels.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -180,7 +180,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hotwheels",
-		modelSrc        : "assets/gltf/vehicle.cat.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.hoverboat.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -197,7 +197,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hoverboat",
-		modelSrc        : "assets/gltf/vehicle.hoverboat.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.speedster.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -316,7 +316,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hotwheels",
-		modelSrc        : "assets/gltf/vehicle.hotwheels.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.biplane.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -333,7 +333,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hoverboat",
-		modelSrc        : "assets/gltf/vehicle.hoverboat.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.cat.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -350,7 +350,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "speedster",
-		modelSrc        : "assets/gltf/vehicle.speedster.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.donut.hotpink.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -367,7 +367,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hotwheels",
-		modelSrc        : "assets/gltf/vehicle.biplane.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.hotwheels.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -384,7 +384,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "hoverboat",
-		modelSrc        : "assets/gltf/vehicle.cat.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.hoverboat.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,
@@ -401,7 +401,7 @@ const vehicles: VehicleProperties[] = [
 	},
 	{
 		name            : "speedster",
-		modelSrc        : "assets/gltf/vehicle.speedster.01.gltf", 
+		modelSrc        : "assets/gltf/vehicle.speedster.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
 		maxTurn         : 200,

@@ -21,7 +21,8 @@
 				4,
 				5,
 				6,
-				7
+				7,
+				8
 			]
 		}
 	],
@@ -72,15 +73,15 @@
 			"mesh":4,
 			"name":"hotwheels.wheels.front",
 			"rotation":[
-				0.059862878173589706,
-				-0.09577704221010208,
+				0.05986287444829941,
+				-0.09577703475952148,
 				-0.5768978595733643,
 				0.8089699149131775
 			],
 			"scale":[
 				0.2349848747253418,
 				0.08885996043682098,
-				0.23498491942882538
+				0.23498493432998657
 			],
 			"translation":[
 				0.4104245603084564,
@@ -119,6 +120,21 @@
 		},
 		{
 			"mesh":7,
+			"name":"speedster.steering.003",
+			"rotation":[
+				-0.4215637743473053,
+				0,
+				0,
+				0.906798779964447
+			],
+			"translation":[
+				0,
+				0.9818377494812012,
+				0.2159014195203781
+			]
+		},
+		{
+			"mesh":8,
 			"name":"hotwheels.neons.005",
 			"translation":[
 				0,
@@ -139,11 +155,6 @@
 			}
 		},
 		{
-			"doubleSided":true,
-			"name":"Hidden",
-			"pbrMetallicRoughness":{}
-		},
-		{
 			"emissiveFactor":[
 				1,
 				1,
@@ -156,6 +167,29 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Hidden",
+			"pbrMetallicRoughness":{}
+		},
+		{
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"emissiveTexture":{
+				"index":3
+			},
+			"name":"DCL.AvatarWearables_Emissive",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":4
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -239,7 +273,7 @@
 						}
 					},
 					"indices":14,
-					"material":0,
+					"material":1,
 					"mode":4
 				}
 			]
@@ -343,7 +377,32 @@
 						}
 					},
 					"indices":32,
-					"material":1,
+					"material":2,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Cylinder.063",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":33,
+						"NORMAL":34,
+						"TEXCOORD_0":35
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":7,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2
+							}
+						}
+					},
+					"indices":36,
+					"material":0,
 					"mode":4
 				}
 			]
@@ -353,14 +412,14 @@
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":33,
-						"NORMAL":34,
-						"TEXCOORD_0":35,
-						"TANGENT":36
+						"POSITION":37,
+						"NORMAL":38,
+						"TEXCOORD_0":39,
+						"TANGENT":40
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
-							"bufferView":7,
+							"bufferView":8,
 							"attributes":{
 								"POSITION":0,
 								"NORMAL":1,
@@ -369,8 +428,8 @@
 							}
 						}
 					},
-					"indices":37,
-					"material":2,
+					"indices":41,
+					"material":3,
 					"mode":4
 				}
 			]
@@ -383,6 +442,14 @@
 		},
 		{
 			"sampler":0,
+			"source":1
+		},
+		{
+			"sampler":0,
+			"source":1
+		},
+		{
+			"sampler":0,
 			"source":0
 		},
 		{
@@ -391,6 +458,11 @@
 		}
 	],
 	"images":[
+		{
+			"mimeType":"image/png",
+			"name":"AvatarWearables_TX",
+			"uri":"tex/AvatarWearables_TX.png"
+		},
 		{
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
@@ -543,7 +615,7 @@
 			],
 			"min":[
 				-2.1180825233459473,
-				-10.99715805053711,
+				-10.997157096862793,
 				-1.0889166593551636
 			],
 			"type":"VEC3"
@@ -635,6 +707,36 @@
 		},
 		{
 			"componentType":5126,
+			"count":162,
+			"max":[
+				0.10000000149011612,
+				0.008572390303015709,
+				0.10000000149011612
+			],
+			"min":[
+				-0.10000000149011612,
+				-0.16478076577186584,
+				-0.10000000149011612
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":162,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":162,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5123,
+			"count":456,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
 			"count":92,
 			"max":[
 				1.0049999952316284,
@@ -677,38 +779,43 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":6946,
+			"byteLength":6963,
 			"byteOffset":6048
 		},
 		{
 			"buffer":0,
-			"byteLength":975,
-			"byteOffset":12996
+			"byteLength":972,
+			"byteOffset":13012
 		},
 		{
 			"buffer":0,
 			"byteLength":1518,
-			"byteOffset":13972
+			"byteOffset":13984
 		},
 		{
 			"buffer":0,
 			"byteLength":10510,
-			"byteOffset":15492
+			"byteOffset":15504
 		},
 		{
 			"buffer":0,
 			"byteLength":6770,
-			"byteOffset":26004
+			"byteOffset":26016
 		},
 		{
 			"buffer":0,
 			"byteLength":441,
-			"byteOffset":32776
+			"byteOffset":32788
+		},
+		{
+			"buffer":0,
+			"byteLength":1656,
+			"byteOffset":33232
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":33220
+			"byteOffset":34888
 		}
 	],
 	"samplers":[
@@ -719,7 +826,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":34400,
+			"byteLength":36068,
 			"uri":"vehicle.hotwheels.01.bin"
 		}
 	]
