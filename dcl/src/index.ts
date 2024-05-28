@@ -14,6 +14,7 @@ import { Room } from 'colyseus.js'
 import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
 import * as serverStateSpec from './rooms/spec/server-state-spec'
 import * as clientStateSpec from './rooms/spec/client-state-spec'
+import { Quaternion } from '@dcl/sdk/math'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -135,6 +136,20 @@ async function PlayerSetup() {
 		if(vehicle.ownerID == Networking.GetUserID()) return;
 		//update vehicle position
 		vehicle.UpdateVehicleController(data);
+
+		const player = LobbyPlayer.GetPlayer(parseInt(vehicle.ownerID))
+		//replace with?
+		vehicle.setVehicleState({
+			isClaimed   : true,//   : boolean,      // taken from Vehicle instance
+			ownerID        : vehicle.ownerID,       // taken from PlayerData
+			ownerName      : player.DisplayName,       // taken from PlayerData
+			position       : data.worldPosition,      // taken from DCL entity, applied to cannonBody
+			heading   : Quaternion.toEulerAngles(quaternionCreate(data.moveDirection)).y,//     : number,      // taken from DCL entity, applied to DCL entity
+			velocity       : data.moveVelocity ? new CANNON.Vec3(data.moveVelocity.x,data.moveVelocity.y,data.moveVelocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
+			angularVelocity: data.angularVelocity ? new CANNON.Vec3(data.angularVelocity.x,data.angularVelocity.y,data.angularVelocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
+			score  : player.Score,//         : number,       // player score, num tickets/tokens, etc
+			rank   : undefined as any,//        : number        // current ranking for this vehicle. lower is better, starts at 1
+		});
 	  }); 
 	  //  syncing for ticket placement (when server spawns a ticket) 
 	  room.onMessage("ticket-spawn", (data:any) => { 
@@ -158,6 +173,8 @@ async function PlayerSetup() {
 		function (player: clientStateSpec.PlayerState, sessionId: string){
 			console.log("server call:","room.state.players.onAdd", player);
 
+			const playerLocal = LobbyPlayer.GetPlayer(parseInt(player.id))
+
 			player.listen("racingData", (raceData: clientStateSpec.PlayerRaceDataState) => {
 				console.log("server call: player.racingData.update",raceData)
 				VEHICLE_MANAGER.getVehicle(raceData.carModelId).setVehicleState({
@@ -168,7 +185,7 @@ async function PlayerSetup() {
 					heading   : Quaternion.toEulerAngles(quaternionCreate(raceData.worldMoveDirection)).y,//     : number,      // taken from DCL entity, applied to DCL entity
 					velocity       : raceData.velocity ? new CANNON.Vec3(raceData.velocity.x,raceData.velocity.y,raceData.velocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
 					angularVelocity: raceData.angularVelocity ? new CANNON.Vec3(raceData.angularVelocity.x,raceData.angularVelocity.y,raceData.angularVelocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
-					score  : undefined as any,//         : number,       // player score, num tickets/tokens, etc
+					score  : playerLocal.Score,//         : number,       // player score, num tickets/tokens, etc
 					rank   : undefined as any,//        : number        // current ranking for this vehicle. lower is better, starts at 1
 				});
 			});
