@@ -27,14 +27,16 @@ export interface Vector3State {
     currentSpeed: number;
     worldMoveDirection: Quaternion3State; //world moving direction
     velocity: Vector3State
+    angularVelocity: Vector3State
     force: Vector3State
     mass: number
     shootDirection: Quaternion3State; //car forward direction
     cameraDirection: Quaternion3State; //turn angle
     endTime: number; //move this as wont change till the end
-    carModelId: string; //move this as wont change much if at all?
+    carModelId: number; //move this as wont change much if at all?
     
     racePosition: number;
+    score: number
   
     lastKnownServerTime: number;
     lastKnownClientTime: number;
