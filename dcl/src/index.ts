@@ -1,5 +1,6 @@
 import { Transform } from '@dcl/sdk/ecs'
 import { setupUi } from './ui/setupUI'
+import * as CANNON 					from 'cannon'
 import { setupCannonWorld } from './arena/setupCannonWorld'
 import { setupGltfShapes } from './arena/setupGltfShapes'
 import { setupScoreboards } from './arena/setupScoreboards'
@@ -181,8 +182,13 @@ async function PlayerSetup() {
 			//const playerLocal = LobbyPlayer.GetPlayerDataByID(player.id)
 
 			player.listen("racingData", (raceData: clientStateSpec.PlayerRaceDataState) => {
-				console.log("server call: player.racingData.update",raceData)
-				VEHICLE_MANAGER.getVehicle(raceData.carModelId).setVehicleState({
+				//console.log("server call: player.racingData.update",raceData)
+				const vehicle = VEHICLE_MANAGER.getVehicle(raceData.carModelId)
+				if(!vehicle) {
+					console.log("server call: player.racingData.update","could not find vehicle!!!",raceData.carModelId,raceData)
+					return;
+				} 
+				vehicle.setVehicleState({
 					isClaimed   : true,//   : boolean,      // taken from Vehicle instance
 					ownerID        : player.id,       // taken from PlayerData
 					ownerName      : player.name,       // taken from PlayerData
