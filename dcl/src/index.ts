@@ -66,7 +66,7 @@ async function PlayerSetup() {
 
 	  //set room instance
 	  console.log("player joined room: ", room,room.state);
-	  Networking.ClientRoom = room;
+	  Networking.ClientRoom = room; 
 
 	  //hook up message callbacks 
 	  //  syncing for entire lobby (for when a new player joins to make sure everything is in-session)
@@ -125,6 +125,17 @@ async function PlayerSetup() {
 		//update vehilce states
 		//VEHICLE_MANAGER.UpdateVehicleStates(data.states); 
 	  });
+	  //	updates for vehicle controller
+	  room.onMessage("player-vehicle-controller-update", (data:any) => {
+		console.log("server call: player-vehicle-controller-update");
+		//get vehicle
+		const vehicle = VEHICLE_MANAGER.getVehicle(data.vehicleID);
+		if(vehicle == undefined) return;
+		//halt if call is targeting vehicle owned by this player (we use local authority so dont care about echo-corrections)
+		if(vehicle.ownerID == Networking.GetUserID()) return;
+		//update vehicle position
+		vehicle.UpdateVehicleController(data);
+	  }); 
 	  //  syncing for ticket placement (when server spawns a ticket) 
 	  room.onMessage("ticket-spawn", (data:any) => { 
 		TicketSpawnManager.Spawn(data.id, data.position)
@@ -142,7 +153,6 @@ async function PlayerSetup() {
 	  room.onStateChange((state) => {
 		console.log("server call:",room.name, "has new state:", state);
 	  });
-
 
 	  room.state.players.onAdd(
 		function (player: clientStateSpec.PlayerState, sessionId: string){

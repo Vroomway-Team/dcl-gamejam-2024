@@ -154,12 +154,18 @@ export class VehicleManager {
 	
 	// Tell vehicles to move to their arena start positions (at start of round)
 	moveVehiclesToArena(
-		duration: number
+		duration: number,
+		includeEmpty: boolean=false
 	): void {
 		console.log("moveVehiclesToArena")
 		
 		this.vehicles.forEach((vehicle, index) => {
-			vehicle.moveToArena(duration)
+			//if vehicle has an owner, move to arena
+			if(!includeEmpty && vehicle.ownerID == "npc") {
+				//maybe add some stuff for idle vehicles here
+			} else {
+				vehicle.moveToArena(3);
+			}
 		})		
 	}
 	
