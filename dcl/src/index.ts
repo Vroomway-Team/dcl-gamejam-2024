@@ -155,6 +155,17 @@ async function PlayerSetup() {
 
 			player.listen("racingData", (raceData: clientStateSpec.PlayerRaceDataState) => {
 				console.log("server call: player.racingData.update",raceData)
+				VEHICLE_MANAGER.getVehicle(raceData.carModelId).setVehicleState({
+					isClaimed   : true,//   : boolean,      // taken from Vehicle instance
+					ownerID        : player.id,       // taken from PlayerData
+					ownerName      : player.name,       // taken from PlayerData
+					position       : raceData.worldPosition,      // taken from DCL entity, applied to cannonBody
+					heading   : Quaternion.toEulerAngles(quaternionCreate(raceData.worldMoveDirection)).y,//     : number,      // taken from DCL entity, applied to DCL entity
+					velocity       : raceData.velocity ? new CANNON.Vec3(raceData.velocity.x,raceData.velocity.y,raceData.velocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
+					angularVelocity: raceData.angularVelocity ? new CANNON.Vec3(raceData.angularVelocity.x,raceData.angularVelocity.y,raceData.angularVelocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
+					score  : undefined as any,//         : number,       // player score, num tickets/tokens, etc
+					rank   : undefined as any,//        : number        // current ranking for this vehicle. lower is better, starts at 1
+				});
 			});
 		}
 	  );	
@@ -163,3 +174,7 @@ async function PlayerSetup() {
 	  console.log("error entering room: ", e);
 	});
   } 
+
+function quaternionCreate(worldMoveDirection: serverStateSpec.Quaternion3State): Quaternion.MutableQuaternion {
+	return worldMoveDirection ? Quaternion.create(worldMoveDirection.x, worldMoveDirection.y, worldMoveDirection.z, worldMoveDirection.w) : Quaternion.Zero()
+}

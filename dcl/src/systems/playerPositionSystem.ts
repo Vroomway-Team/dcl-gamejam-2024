@@ -144,12 +144,13 @@ export class PlayerPositionSystem  {
       racingDataToSend.cameraDirection= playerPos.rotation
       
       //send them to server
+      racingDataToSend.carModelId = vehicle.vehicleID
       racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
       racingDataToSend.force = vehicle.cannonBody.force
       racingDataToSend.velocity = vehicle.cannonBody.velocity
       racingDataToSend.mass = vehicle.cannonBody.mass
       racingDataToSend.currentSpeed = vehicle.currentSpeed
-    
+      racingDataToSend.angularVelocity = vehicle.cannonBody.angularVelocity
 
       const now = Date.now();
       //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
