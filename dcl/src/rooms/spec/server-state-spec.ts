@@ -36,6 +36,7 @@ export interface Vector3State {
     carModelId: number; //move this as wont change much if at all?
     
     racePosition: number;
+    score: number
   
     lastKnownServerTime: number;
     lastKnownClientTime: number;

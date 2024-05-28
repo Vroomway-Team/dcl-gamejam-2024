@@ -48,6 +48,7 @@ const racingDataToSend: serverStateSpec.PlayerRaceDataState = {
   carModelId: 0,
   serverTime: -1,
   racePosition: -1,
+  score: -1,
   //lap: -1,
   worldMoveDirection: { x: 0, y: 0, z: 0, w: 0 },
   lastKnownServerTime: -1,
@@ -150,13 +151,16 @@ export class PlayerPositionSystem  {
     //racingDataToSend.lastKnownServerTime = player.lastKnowServerTime;
     racingDataToSend.lastKnownClientTime = now; //snaphot for when sent
 
+    //sending both for now, would be good to sync them though
     //Networking.ClientRoom.send("player.racingData.update", racingDataToSend);
+
     Networking.ClientRoom.send("player-vehicle-controller-record", {
       vehicleID:vehicle.vehicleID,
       worldPosition:playerPos.position,
       moveSpeed:vehicle.currentSpeed,
       moveDirection:vehicle.cannonBody.quaternion,
       moveVelocity:vehicle.cannonBody.velocity,
+      moveAngularVelocity:vehicle.cannonBody.angularVelocity,
       moveForce:vehicle.cannonBody.force,
       mass:vehicle.cannonBody.mass
     } as PlayerVehicleControllerData);
