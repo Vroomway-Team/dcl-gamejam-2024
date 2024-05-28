@@ -17,16 +17,19 @@ export class ScoreboardManager {
 	}
 	
 	updateState(state?: ScoreboardState) {
+		
+		console.log("ScoreboardManager: updateState()")
+		
 		// If a new state was provided, store it
 		if (state) { 
 			// Check if the roundInProgress property has changed since the last state update and react accoringly
-			if (this.state && this.state.roundInProgress !== state.roundInProgress) {
+/* 			if (this.state && this.state.roundInProgress !== state.roundInProgress) {
 				if (state.roundInProgress) {
-					this.onRoundStart()
+					//this.onRoundStart()
 				} else {
-					this.onRoundEnd()
+					//this.onRoundEnd()
 				}
-			}
+			} */
 			
 			// Store the new state
 			this.state = state 
@@ -50,18 +53,64 @@ export class ScoreboardManager {
 		}
 	}
 	
-	onRoundStart() {
-		// Round has started
-		
+	incrementRoundTimer(dt: number) {
+		if (this.state) {
+			if (this.state.roundInProgress) {
+				this.state.roundTimer += dt
+				
+				for (const scoreboard of this.scoreboards) {
+					scoreboard.setTimer(this.state.roundTimer)
+				}	
+			}
+		}
 	}
-	onRoundEnd() {
-		// Round has finished
+	
+	
+	debugTestFunc() {
+		const state: ScoreboardState = {
+			"roundInProgress": true,
+			"roundTimer":      120,
+			"scores":          [
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+			]
+		}
+		
+		this.updateState(state)
 	}
 	
 }
 
 export function ScoreboardSystem(dt: number) {
 	if (SCOREBOARD_MANAGER) {
-		//SCOREBOARD_MANAGER.incrementRoundTimer(dt)
+		SCOREBOARD_MANAGER.incrementRoundTimer(dt)
 	}	
+}
+
+function generateRandomString(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
