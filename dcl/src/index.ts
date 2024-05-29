@@ -19,6 +19,7 @@ import  *  as  ui  from  'dcl-ui-toolkit'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { Quaternion } from '@dcl/sdk/math'
 import { setupNPCAvatars } from './arena/setupNPCAvatars'
+import { setupImagePosters } from './arena/setupImagePosters'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -43,6 +44,9 @@ export function main() {
 
 	// Setup NPC Avatars
 	setupNPCAvatars()
+
+	// Setup Image Posters
+	setupImagePosters()
 
 	//position scoreboard
 	Transform.getMutable(ScoreDisplay.ScoreBoardParent).position = {x:35, y:2, z:32},

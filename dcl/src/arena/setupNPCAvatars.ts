@@ -63,7 +63,7 @@ export function setupNPCAvatars(){
 	})
     
     Transform.create(myAvatar3, {
-        position: Vector3.create(41, 1.5, 44),
+        position: Vector3.create(40, 1.5, 43 ),
         rotation: Quaternion.fromEulerDegrees(0,-140,0),
         scale: Vector3.create(1,1,1),
     })
