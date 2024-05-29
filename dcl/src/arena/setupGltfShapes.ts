@@ -33,5 +33,16 @@ export function setupGltfShapes() {
 		rotation: Quaternion.fromEulerDegrees(0, 120, 0),
 		scale   : Vector3.create(1.25,1,1)
 	},)
+
+	const howtoFrame1 = new GltfObject("assets/gltf/howto.frame.gltf", {
+		position: Vector3.create(31.07, 3, 32),
+		rotation: Quaternion.fromEulerDegrees(0, -90, 0),
+		scale   : Vector3.create(1.25,1.25,1.25)
+	},)
+	const howtoFrame2 = new GltfObject("assets/gltf/howto.frame.gltf", {
+		position: Vector3.create(32.93, 3, 32),
+		rotation: Quaternion.fromEulerDegrees(0, 90, 0),
+		scale   : Vector3.create(1.25,1.25,1.25)
+	},)
 	
 }
