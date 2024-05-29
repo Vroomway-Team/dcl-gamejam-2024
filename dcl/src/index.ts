@@ -18,6 +18,7 @@ import * as clientStateSpec from './rooms/spec/client-state-spec'
 import  *  as  ui  from  'dcl-ui-toolkit'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { Quaternion } from '@dcl/sdk/math'
+import { setupNPCAvatars } from './arena/setupNPCAvatars'
 
 export function main() {
 	//turn on trigger debug mode (draws )
@@ -39,6 +40,9 @@ export function main() {
 	 
 	// Setup the various gltf shapes
 	setupGltfShapes()
+
+	// Setup NPC Avatars
+	setupNPCAvatars()
 
 	//position scoreboard
 	Transform.getMutable(ScoreDisplay.ScoreBoardParent).position = {x:35, y:2, z:32},
