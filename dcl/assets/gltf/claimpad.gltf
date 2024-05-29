@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -14,20 +14,67 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				1
+				2,
+				3
 			]
 		}
 	],
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"claimpad"
+			"name":"claimpad",
+			"rotation":[
+				0,
+				0,
+				-0.7071068286895752,
+				0.7071068286895752
+			],
+			"scale":[
+				0.6278340220451355,
+				0.6278340220451355,
+				0.6278340220451355
+			],
+			"translation":[
+				0.742954432964325,
+				-0.0008138761622831225,
+				0.0209327582269907
+			]
+		},
+		{
+			"mesh":1,
+			"name":"claimpad.001",
+			"translation":[
+				-0.23869866132736206,
+				0,
+				0
+			]
 		},
 		{
 			"children":[
-				0
+				0,
+				1
 			],
 			"name":"origin.claimpad"
+		},
+		{
+			"mesh":2,
+			"name":"Sphere",
+			"rotation":[
+				0.5,
+				-0.5,
+				-0.5,
+				0.5000000596046448
+			],
+			"scale":[
+				0.15613709390163422,
+				0.15613709390163422,
+				0.1694687157869339
+			],
+			"translation":[
+				0.742954432964325,
+				0.0008139357669278979,
+				0.0291132815182209
+			]
 		}
 	],
 	"materials":[
@@ -42,6 +89,8 @@
 			}
 		},
 		{
+			"alphaCutoff":0.5,
+			"alphaMode":"MASK",
 			"emissiveFactor":[
 				1,
 				1,
@@ -105,6 +154,100 @@
 					"mode":4
 				}
 			]
+		},
+		{
+			"name":"Cube.004",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":8,
+						"NORMAL":9,
+						"TEXCOORD_0":10
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":2,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2
+							}
+						}
+					},
+					"indices":11,
+					"material":0,
+					"mode":4
+				},
+				{
+					"attributes":{
+						"POSITION":12,
+						"NORMAL":13,
+						"TEXCOORD_0":14
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":3,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2
+							}
+						}
+					},
+					"indices":15,
+					"material":1,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Sphere",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":16,
+						"NORMAL":17,
+						"TEXCOORD_0":18,
+						"TANGENT":19
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":4,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":20,
+					"material":0,
+					"mode":4
+				},
+				{
+					"attributes":{
+						"POSITION":21,
+						"NORMAL":22,
+						"TEXCOORD_0":23,
+						"TANGENT":24
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":5,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":25,
+					"material":1,
+					"mode":4
+				}
+			]
 		}
 	],
 	"textures":[
@@ -131,7 +274,7 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":250,
+			"count":254,
 			"max":[
 				0.7710362672805786,
 				0.3957459032535553,
@@ -146,12 +289,12 @@
 		},
 		{
 			"componentType":5126,
-			"count":250,
+			"count":254,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":250,
+			"count":254,
 			"type":"VEC2"
 		},
 		{
@@ -188,18 +331,168 @@
 			"componentType":5123,
 			"count":168,
 			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":162,
+			"max":[
+				0.7460269927978516,
+				0.46853235363960266,
+				0.05824200436472893
+			],
+			"min":[
+				-0.7460269927978516,
+				-0.46853235363960266,
+				-0.05824224650859833
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":162,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":162,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5123,
+			"count":408,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":80,
+			"max":[
+				0.7168894410133362,
+				0.43939486145973206,
+				0.05824200436472893
+			],
+			"min":[
+				-0.7168894410133362,
+				-0.43939486145973206,
+				0.024037236347794533
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":80,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":80,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5123,
+			"count":144,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":172,
+			"max":[
+				1.6079117059707642,
+				0.9659258127212524,
+				1.0859500169754028
+			],
+			"min":[
+				-1.6079117059707642,
+				-2.4875783655176065e-09,
+				-1.0859500169754028
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":172,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":172,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":172,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":480,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":83,
+			"max":[
+				1.4878876209259033,
+				1,
+				0.9659257531166077
+			],
+			"min":[
+				-1.4878876209259033,
+				0.258819043636322,
+				-0.9659258127212524
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":83,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":83,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":83,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":252,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":1484,
+			"byteLength":1564,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":785,
-			"byteOffset":1484
+			"byteOffset":1564
+		},
+		{
+			"buffer":0,
+			"byteLength":1197,
+			"byteOffset":2352
+		},
+		{
+			"buffer":0,
+			"byteLength":640,
+			"byteOffset":3552
+		},
+		{
+			"buffer":0,
+			"byteLength":1420,
+			"byteOffset":4192
+		},
+		{
+			"buffer":0,
+			"byteLength":809,
+			"byteOffset":5612
 		}
 	],
 	"samplers":[
@@ -210,7 +503,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":2272,
+			"byteLength":6424,
 			"uri":"claimpad.bin"
 		}
 	]
