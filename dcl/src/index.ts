@@ -65,13 +65,25 @@ async function PlayerSetup() {
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
+
+	Networking.connectedState = {status:"connecting",msg:"connecting to " + "my_room"};
+
 	await Networking.GetClientConnection().joinOrCreate("my_room", { 
 	  userData: { id:Networking.GetUserID(), displayName:Networking.GetUserName() } 
 	}).then((room: Room) => {
 
+		
 	  //set room instance
 	  console.log("player joined room: ", room,room.state);
 	  Networking.ClientRoom = room; 
+	  Networking.connectedState = {status:"connected",msg:"connected to " + room.name + ";" + room.sessionId};
+
+	  room.onError((code, message) => {
+		Networking.connectedState = {status:"error",msg:code + ":"+ message};
+	  })
+	  room.onLeave((code) => {
+		Networking.connectedState = {status:"disconnected",msg:code + ":"};
+	  })
 
 	  //hook up message callbacks 
 	  //  syncing for entire lobby (for when a new player joins to make sure everything is in-session)
@@ -190,7 +202,7 @@ async function PlayerSetup() {
 				if(!vehicle) {
 					console.log("server call: player.racingData.update","could not find vehicle!!!",raceData.carModelId,raceData)
 					return;
-				} 
+				}  
 				vehicle.setVehicleState({
 					isClaimed   : true,//   : boolean,      // taken from Vehicle instance
 					ownerID        : player.id,       // taken from PlayerData
@@ -202,7 +214,7 @@ async function PlayerSetup() {
 					score  : raceData ? raceData.score : -1,//         : number,       // player score, num tickets/tokens, etc
 					rank   : raceData.racePosition,//        : number        // current ranking for this vehicle. lower is better, starts at 1
 				});
-			});
+			}); 
 		}
 	  );	
 
