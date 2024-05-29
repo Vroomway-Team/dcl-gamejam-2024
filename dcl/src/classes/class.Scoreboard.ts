@@ -81,7 +81,7 @@ export class Scoreboard {
 		if (this.state) {
 			this.state.roundTimer = amount
 			const text = TextShape.getMutable(this.entityTimer)
-			text.text  = this.parseTime(this.state.roundTimer)
+			text.text  = parseTime(this.state.roundTimer)
 		}
 	}
 	
@@ -100,7 +100,7 @@ export class Scoreboard {
 		
 		// Update the timer
 		const timer = TextShape.getMutable(this.entityTimer)
-		timer.text = this.parseTime(this.state.roundTimer)
+		timer.text = parseTime(this.state.roundTimer)
 		
 		// Update the status
 		const status = TextShape.getMutable(this.entityStatus)
@@ -128,12 +128,7 @@ export class Scoreboard {
 			
 	}
 	
-	// Takes a timestamp ins econds and converts it to m:ss format
-	parseTime(time: number) {
-		const minutes = Math.floor(time / 60).toString();
-		const seconds = Math.floor(time % 60).toString().padStart(2, '0');
-		return `${minutes}:${seconds}`;
-	}
+
 	
 	// Sort the current state.scores array
 	sortScores() {
@@ -217,4 +212,11 @@ class ScoreboardRow {
 		engine.removeEntity(this.scoreEntity)
 		engine.removeEntity(this.rankEntity)
 	}
+}
+
+// Takes a timestamp ins econds and converts it to m:ss format
+export function parseTime(time: number) {
+	const minutes = Math.floor(time / 60).toString();
+	const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+	return `${minutes}:${seconds}`;
 }

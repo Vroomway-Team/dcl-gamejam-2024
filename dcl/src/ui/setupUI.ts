@@ -1,12 +1,10 @@
 import { ReactEcsRenderer } from "@dcl/sdk/react-ecs"
-import { uiHud, uiSpeedometerHud, uiYouGotHitHud } 			from "./ui.hud"
+import { uiHud } 			from "./ui.hud"
 import { uiDebug } 			from "./ui.debug"
 
 const uiComponents = () => [
-	uiDebug(),
 	uiHud(),
-	uiSpeedometerHud(),
-	uiYouGotHitHud(),
+	uiDebug()
 ]
   
 export function setupUi() {
