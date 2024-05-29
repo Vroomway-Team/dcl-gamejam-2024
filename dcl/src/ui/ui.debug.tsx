@@ -6,6 +6,7 @@ import { Color4, Vector3 } 		from '@dcl/sdk/math'
 
 import { movePlayerTo } 		from '~system/RestrictedActions'
 import { VEHICLE_MANAGER } 		from '../arena/setupVehicleManager'
+import { Networking } from '../networking'
 
 
 export function uiDebug() {
@@ -90,6 +91,13 @@ export function uiDebug() {
 					onMouseDown = {() => {
 						VEHICLE_MANAGER.debugTestFunc()
 					}}
+				/>
+
+				<Label
+					key         = "bar44"
+					uiTransform = {{ width: 240, height: 40, margin: 8 }}
+					value       = {`${JSON.stringify(Networking.connectedState)}`}
+					fontSize    = {14}
 				/>
 			</UiEntity>
 		</UiEntity>
