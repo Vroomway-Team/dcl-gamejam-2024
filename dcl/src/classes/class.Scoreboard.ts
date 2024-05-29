@@ -18,16 +18,27 @@ export class Scoreboard {
 	rowYHeight    : number          = 0.2 // Space between score rows
 	
 	constructor(
-		transform: TransformType,
-		maxScores: number = 10,
-		modelSrc?: string
+		rootTransform: TransformType,
+		maxScores    : number = 10,
+		modelSrc?    : string,
+		
+		timerTransform: TransformType = {
+			position: Vector3.create(0, -0.05, 0),
+			rotation: Quaternion.Zero(),
+			scale   : Vector3.create(0.2, 0.2, 0.2)
+		},
+		statusTransform: TransformType = {
+			position: Vector3.create(0, -1.5, 0),
+			rotation: Quaternion.Zero(),
+			scale   : Vector3.create(0.2, 0.2, 0.2)
+		}
 	) {
 		
 		this.maxScores = maxScores
 		
 		// Add the root entity and attach the gltf object
 		this.entityRoot = engine.addEntity()
-		Transform.create(this.entityRoot, transform)
+		Transform.create(this.entityRoot, rootTransform)
 		
 		// Attach the (optional) gltf object
 		if (modelSrc) {	
@@ -39,29 +50,27 @@ export class Scoreboard {
 		// Add the timer
 		this.entityTimer  = engine.addEntity()
 		TextShape.create(this.entityTimer, {
-			text: "foo"
+			text: "00:00"
 		})
 		Transform.create(this.entityTimer, {
+			...timerTransform,
 			parent: this.entityRoot,
-			position: Vector3.create(0, 0, -0.01),
-			rotation: Quaternion.Zero(),
-			scale   : Vector3.create(0.2, 0.2, 0.2)
 		})
 		
+		// Add the match status
 		this.entityStatus = engine.addEntity()
 		TextShape.create(this.entityStatus, {
-			text: "bar"
+			text: "Loading scoreboard..."
 		})
 		Transform.create(this.entityStatus, {
-			parent: this.entityRoot,
-			position: Vector3.create(0, -1.5, -0.01),
-			rotation: Quaternion.Zero(),
-			scale   : Vector3.create(0.2, 0.2, 0.2)
+			...statusTransform,
+			parent: this.entityRoot
 		})
 		
 		
 	}	
 	
+	// Clears all current scoreboard rows
 	clearRows() {
 		for (const row of this.elements) {
 			row.destroy()
@@ -119,12 +128,14 @@ export class Scoreboard {
 			
 	}
 	
+	// Takes a timestamp ins econds and converts it to m:ss format
 	parseTime(time: number) {
 		const minutes = Math.floor(time / 60).toString();
 		const seconds = Math.floor(time % 60).toString().padStart(2, '0');
 		return `${minutes}:${seconds}`;
 	}
 	
+	// Sort the current state.scores array
 	sortScores() {
         if (!this.state) return
 
@@ -163,7 +174,7 @@ class ScoreboardRow {
 		//  Rank
 		Transform.create(this.rankEntity, {
 			parent  : this.rootEntity,
-			position: {x: -1.2, y: 0, z: -0.01},
+			position: {x: -1.2, y: 0, z: 0},
 			scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
 		});
 		TextShape.create(this.rankEntity,{
@@ -176,7 +187,7 @@ class ScoreboardRow {
 		//  Player's name
 		Transform.create(this.nameEntity, {
 			parent  : this.rootEntity,
-			position: {x: 0, y: 0, z: -0.01},
+			position: {x: 0, y: 0, z: 0},
 			scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
 		});
 		TextShape.create(this.nameEntity,{
@@ -189,7 +200,7 @@ class ScoreboardRow {
 		//  Score
 		Transform.create(this.scoreEntity, {
 			parent  : this.rootEntity,
-			position: {x: 1.2, y: 0, z: -0.01},
+			position: {x: 1.2, y: 0, z: 0},
 			scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
 		});
 		TextShape.create(this.scoreEntity,{

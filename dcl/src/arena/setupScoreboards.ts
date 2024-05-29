@@ -9,21 +9,21 @@ export function setupScoreboards() {
 	
 	// First Scoreboard, in lobby	
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(30.05, 5, 32),
+		position: Vector3.create(30.05, 7, 32),
 		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
 		scale   : Vector3.One()
 	}, 3, "assets/gltf/scoreboard.01.gltf"))
 	
 	// First Scoreboard, in lobby	
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(30.05, 5, 28),
+		position: Vector3.create(30.05, 7, 28),
 		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
 		scale   : Vector3.One()
-	}, 10, "assets/gltf/scoreboard.01.gltf"))
+	}, 10, "assets/gltf/scoreboard.01.gltf")) 
 	
 	// First Scoreboard, in lobby	
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(30.05, 5, 36),
+		position: Vector3.create(30.05, 7, 36),
 		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
 		scale   : Vector3.One()
 	}, 10, "assets/gltf/scoreboard.01.gltf"))
