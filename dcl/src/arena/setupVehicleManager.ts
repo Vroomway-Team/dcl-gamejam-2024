@@ -11,7 +11,7 @@ console.log("setupVehicleManager.ts","loaded")
 
 const vehicles: VehicleProperties[] = [
 	{
-		name            : "Bee",
+		name            : "Yellow Bee",
 		modelSrc        : "assets/gltf/vehicle.bee.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -28,7 +28,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Cage",
+		name            : "Red Cage",
 		modelSrc        : "assets/gltf/vehicle.cage.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -45,7 +45,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Dino",
+		name            : "Dino Doris",
 		modelSrc        : "assets/gltf/vehicle.dino.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -62,7 +62,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Heart",
+		name            : "Pink Heart",
 		modelSrc        : "assets/gltf/vehicle.heart.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -79,7 +79,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Ladybug",
+		name            : "Red Ladybug",
 		modelSrc        : "assets/gltf/vehicle.ladybug.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -96,7 +96,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Turtle",
+		name            : "Green Turtle",
 		modelSrc        : "assets/gltf/vehicle.turtle.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -113,7 +113,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hotwheels",
+		name            : "Red BiPlane",
 		modelSrc        : "assets/gltf/vehicle.biplane.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -130,7 +130,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "speedster",
+		name            : "Brown Cat",
 		modelSrc        : "assets/gltf/vehicle.cat.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -147,7 +147,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hoverboat",
+		name            : "Blue Donut",
 		modelSrc        : "assets/gltf/vehicle.donut.blue.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -164,7 +164,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "speedster",
+		name            : "Orange Hotwheels",
 		modelSrc        : "assets/gltf/vehicle.hotwheels.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -181,7 +181,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hotwheels",
+		name            : "Purple Hoverboat",
 		modelSrc        : "assets/gltf/vehicle.hoverboat.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -198,7 +198,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hoverboat",
+		name            : "Speedster",
 		modelSrc        : "assets/gltf/vehicle.speedster.01.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -215,7 +215,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Bee",
+		name            : "Orange Bee",
 		modelSrc        : "assets/gltf/vehicle.bee.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -232,7 +232,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Cage",
+		name            : "Green Cage",
 		modelSrc        : "assets/gltf/vehicle.cage.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -249,7 +249,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Dino",
+		name            : "Dino Dave",
 		modelSrc        : "assets/gltf/vehicle.dino.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -266,7 +266,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Heart",
+		name            : "Blue Heart",
 		modelSrc        : "assets/gltf/vehicle.heart.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -283,7 +283,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Ladybug",
+		name            : "Yellow Ladybug",
 		modelSrc        : "assets/gltf/vehicle.ladybug.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -300,7 +300,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "Turtle",
+		name            : "Purple Turtle",
 		modelSrc        : "assets/gltf/vehicle.turtle.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -317,7 +317,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hotwheels",
+		name            : "Blue BiPlane",
 		modelSrc        : "assets/gltf/vehicle.biplane.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -334,7 +334,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hoverboat",
+		name            : "White Cat",
 		modelSrc        : "assets/gltf/vehicle.cat.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -351,7 +351,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "speedster",
+		name            : "Hot Pink Donut",
 		modelSrc        : "assets/gltf/vehicle.donut.hotpink.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -368,7 +368,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hotwheels",
+		name            : "Hotwheels Blue",
 		modelSrc        : "assets/gltf/vehicle.hotwheels.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -385,7 +385,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "hoverboat",
+		name            : "Orange Hoverboat",
 		modelSrc        : "assets/gltf/vehicle.hoverboat.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
@@ -402,7 +402,7 @@ const vehicles: VehicleProperties[] = [
 		}
 	},
 	{
-		name            : "speedster",
+		name            : "Green Speedster",
 		modelSrc        : "assets/gltf/vehicle.speedster.02.gltf", 
 		acceleration    : 8, 
 		maxSpeed        : 16, 
