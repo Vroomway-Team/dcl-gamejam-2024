@@ -203,6 +203,7 @@ async function PlayerSetup() {
 					console.log("server call: player.racingData.update","could not find vehicle!!!",raceData.carModelId,raceData)
 					return;
 				}  
+				Networking.lastKnownServerTime = raceData.serverTime
 				vehicle.setVehicleState({
 					isClaimed   : true,//   : boolean,      // taken from Vehicle instance
 					ownerID        : player.id,       // taken from PlayerData
