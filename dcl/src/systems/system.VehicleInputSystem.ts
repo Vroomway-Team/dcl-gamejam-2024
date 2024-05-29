@@ -8,6 +8,7 @@ import { getCameraRotation, getForwardDirectionFromRotation
 import { getPlayer } 			from "@dcl/sdk/src/players"
 import { Quaternion, Vector3 } 			from "@dcl/sdk/math"
 import { VEHICLE_MANAGER } 		from "../arena/setupVehicleManager"
+import { UI_MANAGER } from "../classes/class.UIManager"
 
 
 const playerData = getPlayer()
@@ -40,6 +41,9 @@ export function VehicleInputSystem(dt: number): void {
 		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_UP)) {
 			vehicle.decelerate()
 		}
+		
+		// Update the UI with the speed
+		UI_MANAGER.setSpeedValue(vehicle.currentSpeed)
 			
 		// Velocity direction
 		// Lerp the vehicle.velocity toward the (camera direction * current speed)
