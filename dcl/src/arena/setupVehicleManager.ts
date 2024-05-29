@@ -1,11 +1,13 @@
 import { engine } 					from "@dcl/sdk/ecs"
 import { Quaternion, Vector3 } 		from "@dcl/sdk/math"
 
-import { WORLD } 					from "./setupCannonWorld";
 import { VehicleInputSystem } 		from '../systems/system.VehicleInputSystem'
 import { VehicleMovementSystem } 	from '../systems/system.VehicleMovementSystem'
 import { VehicleManager } 			from "../classes/class.VehicleManager";
 import { VehicleProperties } 		from "../interfaces/interface.VehicleProperties"
+import { getWorld } from "./setupCannonWorld";
+
+console.log("setupVehicleManager.ts","loaded")
 
 const vehicles: VehicleProperties[] = [
 	{
@@ -427,4 +429,4 @@ export function setupVehicleManager() {
 	VEHICLE_MANAGER.status()
 }
 
-export const VEHICLE_MANAGER = new VehicleManager(WORLD, vehicles)
+export const VEHICLE_MANAGER = new VehicleManager(getWorld(), vehicles)
