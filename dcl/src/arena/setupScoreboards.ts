@@ -10,12 +10,24 @@ export function setupScoreboards() {
 	// First Scoreboard, in lobby	
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
 		position: Vector3.create(30.05, 5, 32),
-		rotation: Quaternion.fromEulerDegrees(0, 116.5, 0),
+		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
+		scale   : Vector3.One()
+	}, 3, "assets/gltf/scoreboard.01.gltf"))
+	
+	// First Scoreboard, in lobby	
+	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
+		position: Vector3.create(30.05, 5, 28),
+		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
 		scale   : Vector3.One()
 	}, 10, "assets/gltf/scoreboard.01.gltf"))
 	
-	
+	// First Scoreboard, in lobby	
+	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
+		position: Vector3.create(30.05, 5, 36),
+		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
+		scale   : Vector3.One()
+	}, 10, "assets/gltf/scoreboard.01.gltf"))
 	
 	// Add the scoreboard system, repsonsible for adjusting round timers
-	//engine.addSystem(ScoreboardSystem)
+	engine.addSystem(ScoreboardSystem)
 }
