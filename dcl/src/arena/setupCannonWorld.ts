@@ -1,18 +1,27 @@
 import { engine } 					from '@dcl/sdk/ecs'
 import * as CANNON 					from 'cannon'
 import { collidersFromJSON } 		from '../utilities/func.collidersFromJSON'
-import { CannonWorldSystem } 		from '../systems/system.CannonWorld'
+import { createCannonWorldSystem } 		from '../systems/system.CannonWorld'
 import arenaBaseCollidersJSON 		from './arena.base.colliders.json'
 
+console.log("setupCannonWorld.ts","loaded")
 // Setup cannon world and define some settings for it
-export const WORLD = new CANNON.World()
+let _WORLD:CANNON.World;
+
+export function getWorld(){
+	if(!_WORLD){
+		_WORLD = new CANNON.World()
+	}
+	return _WORLD
+}
 
 // This gets called from index main to setup the world and add all the stuff
 export function setupCannonWorld() { 
+	const WORLD = getWorld()
 	WORLD.gravity.set(0, -20.2, 0)
 	
 	// Add the systems for Cannon world step
-	engine.addSystem(CannonWorldSystem)
+	engine.addSystem(createCannonWorldSystem())
 	
 	// Add a ground plane, and the colliders for the arena
 	addGround(WORLD)
@@ -21,6 +30,8 @@ export function setupCannonWorld() {
 
 // Add a ground to the world and give it a suitable material
 function addGround(world: CANNON.World) {
+	const WORLD = getWorld()
+
 	// Define a physics material: Ground
 	const groundPhysicsMaterial = new CANNON.Material('groundMaterial')
 	const groundPhysicsContactMaterial = new CANNON.ContactMaterial(groundPhysicsMaterial, groundPhysicsMaterial, {

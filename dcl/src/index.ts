@@ -3,7 +3,8 @@ import { setupUi } from './ui/setupUI'
 import * as CANNON 					from 'cannon'
 import { setupCannonWorld } from './arena/setupCannonWorld'
 import { setupGltfShapes } from './arena/setupGltfShapes'
-import { setupScoreboards } from './arena/setupScoreboards'
+import { getWorld } 					from "./arena/setupCannonWorld"; 
+import { setupScoreboards } 	from './arena/setupScoreboards'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import * as utils from '@dcl-sdk/utils'
 import { ScoreDisplay } from './classes/class.ScoreDisplay'
@@ -207,6 +208,7 @@ async function PlayerSetup() {
 					console.log("server call: player.racingData.update","could not find vehicle!!!",raceData.carModelId,raceData)
 					return;
 				}  
+				Networking.lastKnownServerTime = raceData.serverTime
 				vehicle.setVehicleState({
 					isClaimed   : true,//   : boolean,      // taken from Vehicle instance
 					ownerID        : player.id,       // taken from PlayerData
