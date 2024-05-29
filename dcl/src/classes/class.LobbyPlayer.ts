@@ -1,5 +1,7 @@
 import { VEHICLE_MANAGER } from "../arena/setupVehicleManager";
+import { Networking } from "../networking";
 import { Dictionary, List } from "../utilities/escentials";
+import { UI_MANAGER } from "./class.UIManager";
 
 /*      LOBBY PLAYER DATA
     management system for all registered players (in this context, that means any players that are in the lobby)
@@ -55,17 +57,18 @@ export module LobbyPlayer {
     }
     /** */
     export function PlayerScoreAdd(key:string) {
+        const player = playerDict.getItem(key);
         //return undefined if player data does not exist
-        if(!playerDict.containsKey(key)) return;
+        if(!player) return;
         //add score
-        playerDict.getItem(key).Score += 1;
-        //update score board
-
-    }
+        player.Score += 1;
+        //if local, update ui manager
+        if(Networking.GetUserID() == key) UI_MANAGER.setScoreValue(player.Score);
+    } 
 
     /** object used to define a player's data */
     export interface PlayerDataDefinition {
-        //player's id
+        //player's id 
         ID:string;
         //display name
         DisplayName:string;

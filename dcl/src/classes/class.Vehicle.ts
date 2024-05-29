@@ -300,7 +300,7 @@ export class Vehicle {
 	updateCrown(
 		rank: number
 	): void {
-		console.log("addCrown:", rank)
+		//console.log("addCrown:", rank)
 		
 		// Ignore ranks other than 1, 2 3
 		if (rank > 3 || rank < 1) { 

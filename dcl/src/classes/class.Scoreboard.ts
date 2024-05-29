@@ -23,17 +23,17 @@ export class Scoreboard {
 		modelSrc?    : string,
 		
 		timerTransform: TransformType = {
-			position: Vector3.create(0, -0.05, 0),
+			position: Vector3.create(0, -0.05, -0.05),
 			rotation: Quaternion.Zero(),
 			scale   : Vector3.create(0.2, 0.2, 0.2)
 		},
 		statusTransform: TransformType = {
-			position: Vector3.create(0, -1.5, 0),
+			position: Vector3.create(0, -1.5, 0-0.05),
 			rotation: Quaternion.Zero(),
 			scale   : Vector3.create(0.2, 0.2, 0.2)
 		}
 	) {
-		
+		 
 		this.maxScores = maxScores
 		
 		// Add the root entity and attach the gltf object
