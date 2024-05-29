@@ -3,7 +3,8 @@ import { setupUi } from './ui/setupUI'
 import * as CANNON 					from 'cannon'
 import { setupCannonWorld } from './arena/setupCannonWorld'
 import { setupGltfShapes } from './arena/setupGltfShapes'
-import { getWorld } 					from "./arena/setupCannonWorld"; 
+//importing even if not used to ensure gets loaded early
+import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
 import { setupScoreboards } 	from './arena/setupScoreboards'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import * as utils from '@dcl-sdk/utils'
@@ -25,6 +26,7 @@ export function main() {
 	//turn on trigger debug mode (draws )
 	utils.triggers.enableDebugDraw(true);
 
+	setupUiManager()
 	// Draw UI
 	setupUi()
 	//ReactEcsRenderer.setUiRenderer(ui.render)
