@@ -123,6 +123,14 @@ export function uiDebug() {
 							UI_MANAGER.showHitNotify()
 						}}
 					/>
+					
+					<Label
+						key         = "bar44"
+						uiTransform = {{ width: 240, height: 40, margin: 8 }}
+						value       = {`${JSON.stringify(Networking.connectedState)}`}
+						fontSize    = {14}
+						textAlign   = "middle-left"
+					/>
 				</UiEntity>
 			</UiEntity>
 		)
