@@ -6,6 +6,7 @@ import { Color4, Vector3 } 		from '@dcl/sdk/math'
 
 import { movePlayerTo } 		from '~system/RestrictedActions'
 import { VEHICLE_MANAGER } 		from '../arena/setupVehicleManager'
+import { Networking } from '../networking'
 import { SCOREBOARD_MANAGER } 	from '../arena/setupScoreboards'
 import { UI_MANAGER } from '../classes/class.UIManager'
 

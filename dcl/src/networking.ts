@@ -7,6 +7,16 @@ import { Client, Room } from 'colyseus.js';
     PrimaryAuthors: TheCryptoTrader69 (Alex Pazder)
     TeamContact: thecryptotrader69@gmail.com
 */
+
+export type GameConnectedStateType =
+  | "undefined"
+  | "disconnected"
+  | "disconnecting"
+  | "error"
+  | "connecting"
+  | "reconnecting"
+  | "connected";
+
 export module Networking {
     /** when true debug logs are generated (toggle off when you deploy) */
     const isDebugging:boolean = true;
@@ -18,6 +28,10 @@ export module Networking {
     export function GetClientConnection():Client {
         return ClientConnection;
     }
+
+    export var lastKnownServerTime:number = 0;
+    
+    export var connectedState:{status:GameConnectedStateType,msg:string} = {status:"undefined","msg":""};
 
     /** instanced room client exists in on server */
     export var ClientRoom:void|Room<unknown>;

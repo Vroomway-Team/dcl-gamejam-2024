@@ -132,10 +132,12 @@ export class PlayerPositionSystem  {
     //   return
     // }
     //const player = anGAME_STATE.playerState
-
+ 
+    racingDataToSend.lastKnownServerTime = Networking.lastKnownServerTime
+     
     racingDataToSend.worldPosition = playerPos.position 
     racingDataToSend.cameraDirection = playerPos.rotation
-      
+       
     //send them to server
     racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
     racingDataToSend.force = vehicle.cannonBody.force
@@ -162,7 +164,9 @@ export class PlayerPositionSystem  {
       moveVelocity:vehicle.cannonBody.velocity,
       moveAngularVelocity:vehicle.cannonBody.angularVelocity,
       moveForce:vehicle.cannonBody.force,
-      mass:vehicle.cannonBody.mass
+      mass:vehicle.cannonBody.mass,
+      lastKnownClientTime:now,
+      lastKnownServerTime:Networking.lastKnownServerTime,
     } as PlayerVehicleControllerData);
   }
 }
