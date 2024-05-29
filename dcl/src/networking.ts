@@ -29,6 +29,8 @@ export module Networking {
         return ClientConnection;
     }
 
+    export var lastKnownServerTime:number = 0;
+    
     export var connectedState:{status:GameConnectedStateType,msg:string} = {status:"undefined","msg":""};
 
     /** instanced room client exists in on server */
