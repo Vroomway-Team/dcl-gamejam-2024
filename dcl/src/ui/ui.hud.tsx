@@ -73,7 +73,7 @@ export function uiHud() {
 				}}
 			>
 			<UiEntity
-				key         = 'uiHud_score'
+				key         = 'uiHud_score_text'
 				uiTransform = {{
 					width         : 300,
 					height        : 172,

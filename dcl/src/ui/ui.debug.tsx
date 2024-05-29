@@ -114,7 +114,7 @@ export function uiDebug() {
 					/>
 					
 					<Button
-						key         = "bar5"
+						key         = "bar6"
 						uiTransform = {{ width: 240, height: 40, margin: 8 }}
 						value       = 'Show Hit Notify'
 						variant     = 'primary'
@@ -125,7 +125,7 @@ export function uiDebug() {
 					/>
 					
 					<Label
-						key         = "bar44"
+						key         = "bar7"
 						uiTransform = {{ width: 240, height: 40, margin: 8 }}
 						value       = {`${JSON.stringify(Networking.connectedState)}`}
 						fontSize    = {14}
