@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -58,6 +58,8 @@
 			}
 		},
 		{
+			"alphaCutoff":0.5,
+			"alphaMode":"MASK",
 			"emissiveFactor":[
 				1,
 				1,
