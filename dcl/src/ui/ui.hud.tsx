@@ -53,7 +53,6 @@ export function uiHud() {
 				}}
 			/>
 			
-			
 			// Score: Ticket count
 			<UiEntity
 				key         = 'uiHud_score'
@@ -86,7 +85,6 @@ export function uiHud() {
 					
 				}}
 			/>
-				
 			</UiEntity>
 			
 			// Speedometer
@@ -110,7 +108,7 @@ export function uiHud() {
 					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
 				}}
 				uiText = {{
-					value    : UI_MANAGER.getSpeedValue().toString(),
+					value    : (Math.round(UI_MANAGER.getSpeedValue()*10)/10).toString(),
 					fontSize : 48,
 					textAlign: "middle-center"
 				}}

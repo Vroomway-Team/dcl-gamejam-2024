@@ -81,3 +81,7 @@ function UIIncrementTimerSystem(dt: number) {
 }
 
 export const UI_MANAGER = new UIManager()
+
+export function setupUiManager(){
+	return UI_MANAGER
+}

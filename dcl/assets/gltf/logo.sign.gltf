@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -115,6 +115,8 @@
 			}
 		},
 		{
+			"alphaCutoff":0.5,
+			"alphaMode":"MASK",
 			"emissiveFactor":[
 				1,
 				1,
@@ -127,34 +129,6 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		},
-		{
-			"name":"texture.atlas.01",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":3
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		},
-		{
-			"emissiveFactor":[
-				1,
-				1,
-				1
-			],
-			"emissiveTexture":{
-				"index":4
-			},
-			"name":"texture.atlas.01_emissive",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":5
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -229,7 +203,7 @@
 						}
 					},
 					"indices":12,
-					"material":2,
+					"material":0,
 					"mode":4
 				},
 				{
@@ -251,7 +225,7 @@
 						}
 					},
 					"indices":17,
-					"material":3,
+					"material":1,
 					"mode":4
 				}
 			]
@@ -278,7 +252,7 @@
 						}
 					},
 					"indices":22,
-					"material":3,
+					"material":1,
 					"mode":4
 				}
 			]
@@ -305,7 +279,7 @@
 						}
 					},
 					"indices":27,
-					"material":3,
+					"material":1,
 					"mode":4
 				}
 			]
@@ -339,18 +313,6 @@
 		}
 	],
 	"textures":[
-		{
-			"sampler":0,
-			"source":0
-		},
-		{
-			"sampler":0,
-			"source":0
-		},
-		{
-			"sampler":0,
-			"source":0
-		},
 		{
 			"sampler":0,
 			"source":0

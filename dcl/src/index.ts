@@ -3,7 +3,8 @@ import { setupUi } from './ui/setupUI'
 import * as CANNON 					from 'cannon'
 import { setupCannonWorld } from './arena/setupCannonWorld'
 import { setupGltfShapes } from './arena/setupGltfShapes'
-import { getWorld } 					from "./arena/setupCannonWorld"; 
+//importing even if not used to ensure gets loaded early
+import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
 import { setupScoreboards } 	from './arena/setupScoreboards'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import * as utils from '@dcl-sdk/utils'
@@ -16,7 +17,6 @@ import { Room } from 'colyseus.js'
 import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
 import * as serverStateSpec from './rooms/spec/server-state-spec'
 import * as clientStateSpec from './rooms/spec/client-state-spec'
-import  *  as  ui  from  'dcl-ui-toolkit'
 import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { Quaternion } from '@dcl/sdk/math'
 import { setupNPCAvatars } from './arena/setupNPCAvatars'
@@ -26,6 +26,7 @@ export function main() {
 	//turn on trigger debug mode (draws )
 	utils.triggers.enableDebugDraw(true);
 
+	setupUiManager()
 	// Draw UI
 	setupUi()
 	//ReactEcsRenderer.setUiRenderer(ui.render)

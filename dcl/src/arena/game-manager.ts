@@ -5,11 +5,8 @@ import { DynamicButton_Simple } from "../utilities/escentials";
 import { GameState } from "../game-state";
 import { LobbyLabel } from "../classes/class.LobbyLabel";
 import { AudioManager } from "./audio-manager";
-import { movePlayerTo } from "~system/RestrictedActions";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
-import { Vehicle } from "../classes/class.Vehicle";
-import { LobbyPlayer } from "../classes/class.LobbyPlayer";
-
+import { UI_MANAGER } from "../classes/class.UIManager";
 
 /*      BUMPER CARS - GAME MANAGER
     acts as the main controller for the game of bumper cars
@@ -85,8 +82,6 @@ export module GameManager {
                 TicketEntity.DisableAll();
                 //set music to idle
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
-                //move vehicles to lobby
-                VEHICLE_MANAGER.moveVehiclesToLobby(1);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
                     
@@ -98,17 +93,12 @@ export module GameManager {
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_PLAYING);
                 //move player to stadium
                 //movePlayerTo({ newRelativePosition: {x:32, y:10, z:28}, cameraTarget: {x:32, y:10, z:40} });
-                //move vehicle to arena
-                VEHICLE_MANAGER.moveVehiclesToArena(1);
-                //move player to vehicle
-                //VEHICLE_MANAGER.movePlayerToVehicle();
             break; 
             case GameState.GAME_STATE_TYPES.GAME_OVER: 
 
             break;
         }
     }
-
 
     //gamestate display
     //  create display for displaying gamestate
@@ -148,7 +138,7 @@ export module GameManager {
             value = 0;
             engine.removeSystem(LobbyCountdown);
         }
-
+        
         //reduce lobby countdown
         GameState.LobbyStartCountdown.SetValue(value);
     } 
