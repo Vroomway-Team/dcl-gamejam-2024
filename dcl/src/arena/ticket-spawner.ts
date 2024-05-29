@@ -82,7 +82,11 @@ export module TicketSpawnManager {
                 z: ((Math.random()-0.5)*RANDOM_OFFSET)
             };
             //create ticket object
-            spawners[indexCur].Spawn(posRand);
+            if(spawners[indexCur]){
+                spawners[indexCur].Spawn(posRand);
+            }else{
+                console.log("WARNING - processingTicketSpawning() - no spawner found for index: ",indexCur);
+            }
         }
     }
 
@@ -146,6 +150,10 @@ export module TicketSpawnManager {
     /**  */ 
     export function Spawn(index:number, position:Vector3) {
         //console.log("spawning ticket: {index="+index+", position="+JSON.stringify(position)+"}");
+        if(!spawners[index]){
+            console.log("WARNING Spawn() - spawning ticket does not exist!!!: {index="+index+", position="+JSON.stringify(position)+"}");
+            return;
+        }
         spawners[index].Spawn(position);
     }
 
