@@ -1,11 +1,13 @@
 import { InputAction, PointerEventType, 
+		 Transform, 
+		 engine, 
 		 inputSystem, tweenSystem 
 } 								from "@dcl/sdk/ecs"
-import { getPlayer } 			from "@dcl/sdk/src/players"
-import { Quaternion } 			from "@dcl/sdk/math"
-import { VEHICLE_MANAGER } 		from "../arena/setupVehicleManager"
 import { getCameraRotation, getForwardDirectionFromRotation 
 } 								from "../utilities/func.entityData"
+import { getPlayer } 			from "@dcl/sdk/src/players"
+import { Quaternion, Vector3 } 			from "@dcl/sdk/math"
+import { VEHICLE_MANAGER } 		from "../arena/setupVehicleManager"
 
 
 const playerData = getPlayer()
@@ -56,6 +58,13 @@ export function VehicleInputSystem(dt: number): void {
 		const yawRads = Math.atan2(targetDirection.x, targetDirection.z);
 		const yawDegrees = yawRads * (180 / Math.PI)
 		vehicle.setTargetHeading(yawDegrees)
+		
+		// Check player distance - if they're too far from the vehicle, move them back to it
+		const playerPos = Transform.get(engine.PlayerEntity).position
+		const distance = Vector3.distanceSquared(playerPos, vehicle.cannonBody.position)
+		if (distance > (vehicle.playerMaxDistance ^ 2)) {
+			VEHICLE_MANAGER.movePlayerToVehicle()
+		}
 	}
 	
 	// Update the vehicle speed

@@ -53,6 +53,7 @@ export class Vehicle {
 	lobbyLabel           : LobbyLabel       // LobbyLabel instance, used for claiming a vehicle
 	cannonBody           : CANNON.Body 		// Cannon physics body
 	entityOffset         : Vector3 = Vector3.create(0, -1.250, 0)  // Vector offset for vehicle gltf component
+	playerMaxDistance    : number = 10      // Max distance away a player should be before we tp them back to their vehicle
 	
 	isActive             : boolean = false	// Is the vehicle currently being controlled by the player?
 	isAccelerating       : boolean = false  // Toggled by user pressing/releasing W. Referenced by VehicleInputSystem
