@@ -1,6 +1,3 @@
-import { engine, Entity, GltfContainer, 
-	Transform, TransformType 	
-} 							from "@dcl/sdk/ecs";
 import { Scoreboard } 		from "./class.Scoreboard";
 import { ScoreboardState } 	from "../interfaces/interface.Scoreboard";
 import { SCOREBOARD_MANAGER } from "../arena/setupScoreboards";
@@ -17,20 +14,10 @@ export class ScoreboardManager {
 	}
 	
 	updateState(state?: ScoreboardState) {
-		
 		console.log("ScoreboardManager: updateState()")
 		
 		// If a new state was provided, store it
-		if (state) { 
-			// Check if the roundInProgress property has changed since the last state update and react accoringly
-/* 			if (this.state && this.state.roundInProgress !== state.roundInProgress) {
-				if (state.roundInProgress) {
-					//this.onRoundStart()
-				} else {
-					//this.onRoundEnd()
-				}
-			} */
-			
+		if (state) {
 			// Store the new state
 			this.state = state 
 		}
@@ -53,11 +40,17 @@ export class ScoreboardManager {
 		}
 	}
 	
+	setRoundTimer(val: number) {
+		for (const scoreboard of this.scoreboards) {
+			scoreboard.setTimer(val)
+		}
+	}
+
 	incrementRoundTimer(dt: number) {
 		if (this.state) {
-			if (this.state.roundInProgress) {
+			if (this.state.roundInProgress != undefined && this.state.roundInProgress == true && this.state.roundTimer != undefined) {
 				this.state.roundTimer += dt
-				
+
 				for (const scoreboard of this.scoreboards) {
 					scoreboard.setTimer(this.state.roundTimer)
 				}	
@@ -65,7 +58,7 @@ export class ScoreboardManager {
 		}
 	}
 	
-	
+	 
 	debugTestFunc() {
 		const state: ScoreboardState = {
 			"roundInProgress": true,

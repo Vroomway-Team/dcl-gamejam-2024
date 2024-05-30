@@ -1,7 +1,7 @@
-import { Entity, engine, Transform, GltfContainer, ColliderLayer, Animator } from "@dcl/sdk/ecs";
+import { Entity, engine, Transform, GltfContainer, ColliderLayer, Animator, MeshCollider, MeshRenderer } from "@dcl/sdk/ecs";
 import { Vector3 } from "@dcl/sdk/math";
 import * as utils from '@dcl-sdk/utils'
-import { Dictionary, FunctionCallbackIndex, List, TRANSFORM_SCALE_OFF, TRANSFORM_SCALE_ON, TransformDataObject } from "../utilities/escentials";
+import { Dictionary, FunctionCallbackIndex, List, TRANSFORM_POSITION_OFF, TRANSFORM_SCALE_OFF, TRANSFORM_SCALE_ON, TransformDataObject } from "../utilities/escentials";
 import { AudioManager } from "./audio-manager";
 
 /*      BUMPER CAR - TICKET ENTITY
@@ -18,8 +18,6 @@ export module TicketEntity {
     /** ticket display model */
     const DISPLAY_MODEL_SRC:string = "models/bumper-cars/ticket-entity.glb";
 
-    /** display model positional offset */
-    const MODEL_OFFSET:Vector3 = { x:0, y:1.25, z:0 };
     /** display model scale */
     const MODEL_SCALE:Vector3 = { x:0.5, y:0.5, z:0.5 };
 
@@ -34,7 +32,7 @@ export module TicketEntity {
     var pooledObjectsInactive:List<TicketEntityObject> = new List<TicketEntityObject>();
     /** registry of all objects in-use, access key is entity's uid */
     var pooledObjectsRegistry:Dictionary<TicketEntityObject> = new Dictionary<TicketEntityObject>();
-
+  
     /** attmepts to find an object of the given key. if no object is registered under the given key then 'undefined' is returned. */
     export function GetByKey(key:string):undefined|TicketEntityObject {
         //check for object's existance
@@ -48,15 +46,13 @@ export module TicketEntity {
     
 	/** object interface used to define all data required to create a new object */
 	export interface TicketEntityObjectCreationData {
-        index:number,
+        id:number,
         transform:TransformDataObject;
 	}
 
     /** represents a single managed object */
     export class TicketEntityObject {
-        /** access key for object */
-        public get Key():string { return this.EntityParent.toString(); };
-
+        public get Key():string { return this.index.toString(); };
         /** index of the spawner this ticket is owned by */
         private index:number = -1;
         public get Index():number { return this.index; };
@@ -65,22 +61,19 @@ export module TicketEntity {
         public get IsActive():boolean { return this.isActive; };
 
         /** parental object */
-        public EntityParent:Entity;
         public EntityModel:Entity;
 
         /** called when the object is first created (setup all core entities & components here) */
         public constructor() {
             //create entities
-            //  parental entity
-            this.EntityParent = engine.addEntity();
-            Transform.create(this.EntityParent);
             //  display model
             this.EntityModel = engine.addEntity();
             Transform.create(this.EntityModel,{
-                parent: this.EntityParent,
-                position: MODEL_OFFSET,
-                scale: MODEL_SCALE
+                parent: undefined,
+                position: TRANSFORM_POSITION_OFF,
+                scale: TRANSFORM_SCALE_OFF
             });
+            /*MeshRenderer.setBox(this.EntityModel);*/
             GltfContainer.createOrReplace(this.EntityModel, {
                 src: DISPLAY_MODEL_SRC,
                 visibleMeshesCollisionMask: ColliderLayer.CL_POINTER,
@@ -95,30 +88,29 @@ export module TicketEntity {
 
         /** called when the object is activated/def is first set (load in all specifics to defs here) */
         public Initialize(data:TicketEntityObjectCreationData) {
-            addLog("initializing collection ticket...");
+            addLog("initializing ticket {id="+data.id+", pos="+JSON.stringify(data.transform.position)+"}...");
             //set owner
-            this.index = data.index;
+            this.index = data.id;
             //update object's active state (now in use)
             this.isActive = true;
 
             //update entities
-            //  parent
-            var transform = Transform.getMutable(this.EntityParent);
-            transform.parent = data.transform.parent;
-            transform.scale = TRANSFORM_SCALE_ON;
             //  display model
-            transform = Transform.getMutable(this.EntityModel);
+            const transform = Transform.getMutable(this.EntityModel);
             if(data.transform.position) {
-                transform.position.x = MODEL_OFFSET.x + data.transform.position.x;
-                transform.position.y = MODEL_OFFSET.y + data.transform.position.y;
-                transform.position.z = MODEL_OFFSET.z + data.transform.position.z;
+                const pos = {
+                    x: data.transform.position.x,
+                    y: data.transform.position.y,
+                    z: data.transform.position.z
+                }
+                transform.position = pos;
             }
             transform.scale = MODEL_SCALE;
             //  toggle animations
             Animator.getClip(this.EntityModel, "Action").playing = false;
-            Animator.getClip(this.EntityModel, "Action").playing = true;
+            Animator.getClip(this.EntityModel, "Action").playing = true; /**/
             //  collection trigger
-            const ticketID = data.index;
+            const ticketID = data.id;
             utils.triggers.addTrigger(
                 //parental object
                 this.EntityModel,
@@ -127,7 +119,7 @@ export module TicketEntity {
                 //triggered by mask
                 utils.ALL_LAYERS,
                 //area size
-                [{ type:'sphere', position:{x:0,y:0.25,z:0}, radius:1 }],
+                [{ type:'sphere', position:{x:0,y:0,z:0}, radius:1 }],
                 //collision callback (send demand to server)
                 function() {
                     //play sound effect
@@ -137,9 +129,9 @@ export module TicketEntity {
                 },
                 //exit callback
                 undefined 
-            );
+            ); 
 
-            addLog("initialized collection ticket!");
+            addLog("initialized ticket {id="+data.id+", pos="+JSON.stringify(transform.position)+"}!");
         }
 
         /** disables this object */
@@ -148,7 +140,7 @@ export module TicketEntity {
             this.isActive = false;
 
             //hide object's main entity
-            Transform.getMutable(this.EntityParent).scale = TRANSFORM_SCALE_OFF;
+            Transform.getMutable(this.EntityModel).scale = TRANSFORM_SCALE_OFF;
             //remove trigger
             utils.triggers.removeTrigger(this.EntityModel);
         }
@@ -156,10 +148,11 @@ export module TicketEntity {
 
     /** creates a new object (possibily reusing an inactive object) and initializes it with the provided creation data */
     export function Create(data:TicketEntityObjectCreationData):TicketEntityObject {
-        addLog("creating new object...");
+        addLog("creating new object {id="+data.id+"} ...");
         
         //attempt to get an existing inactive object
-        var object:undefined|TicketEntityObject = undefined;
+        var object = undefined;
+        //
         if(pooledObjectsInactive.size() > 0) {
             //get object from listing of inactive objects
             object = pooledObjectsInactive.getItem(pooledObjectsInactive.size()-1);
@@ -179,21 +172,10 @@ export module TicketEntity {
         //add object to key-access registry
         pooledObjectsRegistry.addItem(object.Key, object);
         
-        addLog("created new object {key="+object.Key+", \n\tpooling stats: count="
+        addLog("created new object {id="+object.Key+", \n\tpooling stats: count="
             +pooledObjectsAll.size()+", active="+pooledObjectsActive.size()+", inactive="+pooledObjectsInactive.size());
         //provide object reference
         return object;
-    }
-
-    /** disables all objects, hiding them from the scene but retaining them in data & pooling */
-    export function DisableAll() {
-        addLog("disabling all objects...");
-        //ensure all objects are parsed
-        while(pooledObjectsActive.size() > 0) { 
-            //small opt by starting at the back b.c of how list is implemented (list keeps order by swapping next item up)
-            Disable(pooledObjectsActive.getItem(0));
-        }
-        addLog("disabled all objects!");
     }
 
     /** disables the given object, hiding it from the scene but retaining it in data & pooling */
@@ -212,5 +194,16 @@ export module TicketEntity {
         object.Disable();
         
         addLog("disabled object {key="+object.Key+"}!");
+    }
+
+    /** disables all objects, hiding them from the scene but retaining them in data & pooling */
+    export function DisableAll() {
+        addLog("disabling all objects...");
+        //ensure all objects are parsed
+        while(pooledObjectsActive.size() > 0) { 
+            //small opt by starting at the back b.c of how list is implemented (list keeps order by swapping next item up)
+            Disable(pooledObjectsActive.getItem(0));
+        }
+        addLog("disabled all objects!");
     }
 }

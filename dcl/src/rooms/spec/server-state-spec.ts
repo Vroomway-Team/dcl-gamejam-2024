@@ -61,30 +61,46 @@ export interface Vector3State {
     sceneId:SceneId
   }
 
+  /** represents a player in the lobby */
   export interface PlayerState {
-    id: string;
-    sessionId: string;
-    name: string
-  
+    sessionID: string;
+    playerID: string;
+    playerName: string;
+    score: number;
+    vehicleID: number;
+
     connStatus: PlayerConnectionStatus;
-    //type: string;
   
-    //userData: PlayerUserDataState;
     racingData: PlayerRaceDataState;
-    //healthData: PlayerHealthDataState;
-    buttons: PlayerButtonState;
-    //statsData: PlayerStatsDataState;
+  }
+
+  /** represents a vehicle in the game */
+  export interface VehicleState {
+    vehicleID: number;
+    ownerID: string;
+  }
+
+  /** represents a ticket in the game */
+  export interface TicketState {
+    ticketID:number;
+    PositionCurrent:Vector3State;
   }
   
-  export interface PlayerUserDataState {
-    name: string;
-    userId: string;
-    ///snapshotFace128:string snapshots deprecated use AvatarTexture
-  }
-  
+  /** represents a game lobby room */
   export interface RacingRoomState {
-    players: Map<any, PlayerState>;
-    //raceData: RaceState;
-    //enrollment: EnrollmentState;
-    //levelData: LevelDataState;
+    /** current game state of this room */
+    GameState:number;
+
+    /** countdown between players joining a lobby and the match starting */
+    GameStartTimer:number;
+    /** countdown from the game's start to end */
+    GameRoundTimer:number;
+
+    /** all player in the lobby (playing the game) */
+    lobbyPlayersByID:Map<any, PlayerState>;
+    /** all player in the lobby (playing the game) */
+    lobbyVehicles:Map<any, VehicleState>;
+
+    /** state of all active tickets in the game */
+    gameTickets:Map<any, TicketState>;
   }

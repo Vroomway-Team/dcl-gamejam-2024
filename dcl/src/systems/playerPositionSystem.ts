@@ -156,7 +156,7 @@ export class PlayerPositionSystem  {
     //sending both for now, would be good to sync them though
     //Networking.ClientRoom.send("player.racingData.update", racingDataToSend);
 
-    Networking.ClientRoom.send("player-vehicle-controller-record", {
+    /*Networking.ClientRoom.send("player-vehicle-controller-record", {
       vehicleID:vehicle.vehicleID,
       worldPosition:playerPos.position,
       moveSpeed:vehicle.currentSpeed,
@@ -167,7 +167,7 @@ export class PlayerPositionSystem  {
       mass:vehicle.cannonBody.mass,
       lastKnownClientTime:now,
       lastKnownServerTime:Networking.lastKnownServerTime,
-    } as PlayerVehicleControllerData);
+    } as PlayerVehicleControllerData);*/
   }
 }
   

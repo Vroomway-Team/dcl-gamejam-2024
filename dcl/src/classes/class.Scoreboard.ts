@@ -131,7 +131,7 @@ export class Scoreboard {
 		
 		// Update the timer
 		
-		if (this.entityTimer) {
+		if (this.entityTimer && this.state.roundTimer != undefined) {
 			const timer = TextShape.getMutable(this.entityTimer)
 			timer.text = parseTime(this.state.roundTimer)		
 		}

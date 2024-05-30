@@ -2,6 +2,7 @@ import { Rotate, engine } from "@dcl/sdk/ecs";
 import { Scoreboard } from "../classes/class.Scoreboard";
 import { ScoreboardManager, ScoreboardSystem } from "../classes/class.ScoreboardManager";
 import { Quaternion, Vector3 } from "@dcl/sdk/math";
+import { GameState } from "../game-state";
 
 export const SCOREBOARD_MANAGER = new ScoreboardManager()
 
@@ -90,5 +91,7 @@ export function setupScoreboards() {
 	
 	
 	// Add the scoreboard system, repsonsible for adjusting round timers
-	engine.addSystem(ScoreboardSystem)
+	//engine.addSystem(ScoreboardSystem)
+	//server now handles timing, we can just reg a listen on the game end timer
+	//GameState.GameEndCountdown.RegisterCallback(SCOREBOARD_MANAGER.setRoundTimer);
 }

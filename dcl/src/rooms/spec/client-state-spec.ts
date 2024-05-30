@@ -34,10 +34,25 @@ export type PlayerMapState = ColyseusCallbacksMap<any, serverStateSpec.PlayerSta
 
 export type PlayerState = ColyseusCallbacksReferences<serverStateSpec.PlayerState> &
     serverStateSpec.PlayerState & {
-        //userData: PlayerUserDataState;
+        sessionID: string;
+        playerID: string;
+        playerName: string;
+        score: number;
+        vehicleID: number;
+      
         racingData: PlayerRaceDataState;
-        //healthData: PlayerHealthDataState;
-        buttons: PlayerButtonState;
+    };
+
+export type VehicleState = ColyseusCallbacksReferences<serverStateSpec.VehicleState> &
+    serverStateSpec.PlayerState & {
+        vehicleID: number;
+        ownerID: string;
+    };
+
+export type TicketState = ColyseusCallbacksReferences<serverStateSpec.TicketState> &
+    serverStateSpec.PlayerState & {
+        ticketID:number;
+        PositionCurrent:Vector3State;
     };
 
 export type PlayerRaceDataState = ColyseusCallbacksReferences<serverStateSpec.PlayerRaceDataState> &

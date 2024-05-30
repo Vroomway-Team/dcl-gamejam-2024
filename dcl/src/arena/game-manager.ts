@@ -6,13 +6,12 @@ import { GameState } from "../game-state";
 import { LobbyLabel } from "../classes/class.LobbyLabel";
 import { AudioManager } from "./audio-manager";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
-import { UI_MANAGER } from "../classes/class.UIManager";
 
 /*      BUMPER CARS - GAME MANAGER
     acts as the main controller for the game of bumper cars
 
     this is has been gutted to fit the server and needs to be redone >_>
-*/
+*/  
 export module GameManager {
     const isDebugging:boolean = true;
     /** wrapper for debugging logs */
@@ -29,39 +28,29 @@ export module GameManager {
             if(Networking.ClientRoom == undefined) return;
             //send claim request  
             Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), vehicle:vehicle});
-        }
+        } 
         //  player attempts to unclaim a vehicle
         LobbyLabel.PlayerUnclaimCallback = function() {
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send claim request
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
-        } 
-        //  call when vehicle has transitioned
-        /* Vehicle.CallbackVehicleTransitionCompleted = function(index:number) {
-            //halt if game is not in session
-            if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
-            const vehicle = VEHICLE_MANAGER.getVehicle(index);
-            if(!vehicle) return;
-            //halt if player is not owner
-            if(!vehicle.isLocalPlayer) return;
-            //move player to vehicle
-            VEHICLE_MANAGER.onRoundStart();
-        } */
+        }
         //  ticket collides with ticket (pickup logic)
         TicketEntity.CallbackTicketCollision = function(index:number) {
+            console.log("player collided with ticket id="+index);
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send interaction request
             Networking.ClientRoom.send("ticket-interact", { playerID:Networking.GetUserID(), ticketID:index });
         };
-
+ 
         addLog("initialized!");
     }
 
     /** sets the current game state (called by server, so client has no right to refusal) */
     export function SetGameState(state:GameState.GAME_STATE_TYPES) {
-        addLog("setting game state: "+state);
+        addLog("setting game state: old="+GameState.CurGameState.GetValue()+", new="+state);
         //if game is avtively starting
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
             VEHICLE_MANAGER.onRoundStart();
@@ -73,29 +62,21 @@ export module GameManager {
  
         //set new game state
         GameState.CurGameState.SetValue(state);
-        //halt lobby countdown
-        StopLobbyCountdown();
+        
         //process change 
         switch(GameState.CurGameState.GetValue()) {
             case GameState.GAME_STATE_TYPES.LOBBY_IDLE:
-                //clean up tickets
-                TicketEntity.DisableAll();
                 //set music to idle
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
                     
             break;
-            case GameState.GAME_STATE_TYPES.PLAYING_COUNTDOWN:
-            break; 
             case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
                 //set music to playing
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_PLAYING);
                 //move player to stadium
                 //movePlayerTo({ newRelativePosition: {x:32, y:10, z:28}, cameraTarget: {x:32, y:10, z:40} });
-            break; 
-            case GameState.GAME_STATE_TYPES.GAME_OVER: 
-
             break;
         }
     }
@@ -113,45 +94,18 @@ export module GameManager {
         }
     );
 
-    //lobby countdown (countdown before game starts)
-    /** whether lobby countdown is on-going */
-    var isCountingDown:boolean;
-    /** starts lobby countdown, using given value */
-    export function StartLobbyCountdown(value:number) {
-        GameState.LobbyStartCountdown.SetValue(value);
-        if(!isCountingDown) engine.addSystem(LobbyCountdown);
-        isCountingDown = true;
-    }
-    /** halts lobby countdown */
-    export function StopLobbyCountdown() {
-        if(isCountingDown) engine.removeSystem(LobbyCountdown);
-        isCountingDown = false;
-        TextShape.getMutable(entityCountdown).text = "";
-    }
-    /** counts down the lobby start timer (server has authority to start game, player does not so this is an echo-counter) */
-    function LobbyCountdown(dt:number) {
-        //reduce counter
-        var value = GameState.LobbyStartCountdown.GetValue() - dt;
-
-        //halt system if finished counting
-        if(value <= 0) {
-            value = 0;
-            engine.removeSystem(LobbyCountdown);
-        }
-        
-        //reduce lobby countdown
-        GameState.LobbyStartCountdown.SetValue(value);
-    } 
+    //lobby start countdown
     //  create display for countdown
     const entityCountdown:Entity = engine.addEntity();
     Transform.create(entityCountdown, {position:{x:32,y:2.8,z:32}});
     TextShape.create(entityCountdown, {text:"<88>",fontSize:4});
     Billboard.create(entityCountdown);
     //  add demo log to lobby countdown value
-    GameState.LobbyStartCountdown.RegisterCallback( 
+    GameState.GameStartCountdown.RegisterCallback( 
         function(value:number) {
             //console.log("lobby countdown changed: "+value);
-            TextShape.getMutable(entityCountdown).text = Math.floor(value+1).toString();
+            if(value >= 0) TextShape.getMutable(entityCountdown).text = Math.floor(value+1).toString();
+            else TextShape.getMutable(entityCountdown).text = "";
         }
     );
 
