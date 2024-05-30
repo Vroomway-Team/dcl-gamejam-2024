@@ -8,85 +8,86 @@ export const SCOREBOARD_MANAGER = new ScoreboardManager()
 
 export function setupScoreboards() {
 	
-	// First Scoreboard, in lobby	
+	// Small wide Scoreboards, in lobby	
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(30.05, 7, 32),
+		position: Vector3.create(30, 7, 33.4), // offset by 1.4 to match wide model offset
 		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
 		scale   : Vector3.One()
-	}, 3, "assets/gltf/scoreboard.01.gltf"))
+	}, "assets/gltf/scoreboard.01.gltf", 10, 0, 16, 1.15, 0.2, true, false, false, false, {
+			position: Vector3.create(1.4, 0.565, 0),
+			rotation: Quaternion.Zero(),
+			scale   : Vector3.create(0.2, 0.2, 0.2)
+		}))
+		// Second column for above board
+		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
+			position: Vector3.create(30, 7, 30.6), // offset by 1.4 to match wide model offset
+			rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
+			scale   : Vector3.One()
+		}, undefined, 10, 10, 16, 1.15, 0.2, false, true, false, false))
 	
-	// First Scoreboard, in lobby	
+	// Small wide Scoreboards, in lobby	
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(30.05, 7, 28),
-		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
+		position: Vector3.create(34, 7, 30.6), // offset by 1.4 to match wide model offset
+		rotation: Quaternion.fromEulerDegrees(-25, 270, 0),
 		scale   : Vector3.One()
-	}, 10, "assets/gltf/scoreboard.01.gltf")) 
-	
-	// First Scoreboard, in lobby	
-	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(30.05, 7, 36),
-		rotation: Quaternion.fromEulerDegrees(-25, 90, 0),
-		scale   : Vector3.One()
-	}, 10, "assets/gltf/scoreboard.01.gltf"))
+	}, "assets/gltf/scoreboard.01.gltf", 10, 0, 16, 1.15, 0.2, true, false, false, false, {
+			position: Vector3.create(1.4, 0.565, 0),
+			rotation: Quaternion.Zero(),
+			scale   : Vector3.create(0.2, 0.2, 0.2)
+		}))
+		// Second column for above board
+		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
+			position: Vector3.create(34, 7, 33.4), // offset by 1.4 to match wide model offset
+			rotation: Quaternion.fromEulerDegrees(-25, 270, 0),
+			scale   : Vector3.One()
+		}, undefined, 10, 10, 16, 1.15, 0.2, false, true, false, false))
+
 	
 	
 	// Big scoreboards:
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(32, 15.934, 61.6723),
+		position: Vector3.create(32, 17, 61.6723),
 		rotation: Quaternion.fromEulerDegrees(0, 0, 0),
 		scale   : Vector3.One()
-	}, 10, "assets/gltf/scoreboard.big.gltf", 42, 2.4, 0, true, true))  
+	}, "assets/gltf/scoreboard.big.gltf", 10, 0, 42, 2.6, undefined, true, true))  
 		
 		// Gold
 		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-			position: Vector3.create(25.5, 13.9, 61.6723),
+			position: Vector3.create(25.6, 14.6, 61.6723),
 			rotation: Quaternion.fromEulerDegrees(0, 0, 0),
 			scale   : Vector3.One()
-		}, 1, undefined, 48, 0, 0, true, true, true, true))
+		}, undefined, 1, 0, 48, undefined, undefined, true, true, true, true))
 		
-		// Silver
+		// Silver & Bronze
 		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-			position: Vector3.create(38.5, 14.3, 61.6723),
+			position: Vector3.create(38.4, 15.60, 61.6723),
 			rotation: Quaternion.fromEulerDegrees(0, 0, 0),
 			scale   : Vector3.One()
-		}, 1, undefined, 48, 0, 1, true, true, true, true))
-		
-		// Bronze
-		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-			position: Vector3.create(38.5, 12.5, 61.6723),
-			rotation: Quaternion.fromEulerDegrees(0, 0, 0),
-			scale   : Vector3.One()
-		}, 1, undefined, 48, 0, 2, true, true, true, true))
+		}, undefined, 2, 1, 48, undefined, 1.5, true, true, true, true))
 		
 	
 	
 	// Big scoreboards:
 	SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-		position: Vector3.create(32, 15.934, 2.32766),
+		position: Vector3.create(32, 17, 2.32766),
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 		scale   : Vector3.One()
-	}, 10, "assets/gltf/scoreboard.big.gltf", 42, 2.4, 0, true, true))
+	}, "assets/gltf/scoreboard.big.gltf", 10, 0, 42, 2.6, undefined, true, true))  
 		
 		// Gold
 		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-			position: Vector3.create(38.5, 13.9, 2.32766),
+			position: Vector3.create(38.4, 14.60, 2.32766),
 			rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 			scale   : Vector3.One()
-		}, 1, undefined, 48, 0, 0, true, true, true, true))
+		}, undefined, 1, 0, 48, undefined, undefined, true, true, true, true))
 		
-		// Silver
+		// Silver & Bronze
 		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-			position: Vector3.create(25.5, 14.3, 2.32766),
+			position: Vector3.create(25.6, 15.6, 2.32766),
 			rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 			scale   : Vector3.One()
-		}, 1, undefined, 48, 0, 1, true, true, true, true))
+		}, undefined, 2, 1, 48, undefined, 1.5, true, true, true, true))
 		
-		// Bronze
-		SCOREBOARD_MANAGER.addScoreboard(new Scoreboard({
-			position: Vector3.create(25.5, 12.5, 2.32766),
-			rotation: Quaternion.fromEulerDegrees(0, 180, 0),
-			scale   : Vector3.One()
-		}, 1, undefined, 48, 0, 2, true, true, true, true))
 	
 	
 	
