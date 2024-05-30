@@ -44,7 +44,7 @@ export function setupGltfShapes() {
 		scale   : Vector3.create(1.25,1,1)
 	})
 
-	
+
 	// How to play frames
 	const howtoFrame1 = new GltfObject("assets/gltf/howto.frame.gltf", {
 		position: Vector3.create(31.07, 3, 32),
@@ -56,5 +56,11 @@ export function setupGltfShapes() {
 		position: Vector3.create(32.93, 3, 32),
 		rotation: Quaternion.fromEulerDegrees(0, 90, 0),
 		scale   : Vector3.create(1.25,1.25,1.25)
+	})
+
+	const spotlightBlue = new GltfObject("assets/gltf/spotlight.blue.gltf", {
+		position: Vector3.create(25, 7, 32),
+		rotation: Quaternion.fromEulerDegrees(-175, 90, 0),
+		scale   : Vector3.create(1,1,1)
 	})
 }
