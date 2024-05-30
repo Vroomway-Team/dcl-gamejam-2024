@@ -17,33 +17,34 @@ const speedValue = 0
 const scoreValue = 0
 const roundTime = 0
 
-export function uiHud() {
+export function hudYouGotIt() {
 	return (
-		// Root element
-		<UiEntity
-			key         = 'uiHud_root'
-			uiTransform = {{
-				// width    : '100vw',
-				// height   : '100vh',
-				// minHeight: '100vh',
-				// position : { top: 0, left: 0, bottom: 0 },
-				width  : '100%',
-				height : '100vh',
-				minHeight: '100%', 
-				positionType  : 'absolute',
-				margin : 0,
-				padding: 0,
-				//padding: 4,
-				//position: { top: '0%'},
-				//justifyContent: 'center',
-				
-			}}	
-			//debug size of entity
-			// uiBackground = {{ 
-			// 	color: Color4.fromHexString("#FFFFFF"),
-			// }}	
-			>
-				
+		
+			// Yougothit!
+			<UiEntity
+				key         = 'uiHud_hitNotify'
+				uiTransform = {{
+					width       : '50vw',
+					minWidth	: '300',
+					height      : '200',
+					alignSelf   : 'center',
+					alignContent: 'center',
+					positionType: 'absolute',
+					margin       : { left: '50%' },
+					position    : { left: '-15%', top: '35vh'},
+				}}
+				uiBackground = {{ 
+					textureMode  : 'nine-slices',
+					texture      : { src: uiYouGothit },
+					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
+					color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
+				}}
+			/>
+			
+	)
+}
+export function hudTimer() {
+	return (	
 			// Round Timer
 			<UiEntity
 				key         = 'uiHud_timer'
@@ -68,6 +69,12 @@ export function uiHud() {
 					textAlign: "middle-center"
 				}}
 			/>
+			
+	)
+}
+export function hudTicketScore() {
+	return (
+		
 			
 			// Score: Ticket count
 			<UiEntity
@@ -106,82 +113,42 @@ export function uiHud() {
 			/>
 			</UiEntity>
 
-			// logo
-			{/* <UiEntity
-				key         = 'uiHud_logo'
-				uiTransform = {{
-					width         : 175,
-					height        : 175,
-					maxHeight     : 175,
-					maxWidth      : 175,
-					padding       : { right: 10, bottom: 2 },
-					position      : { top: 0, left: '50%' },
-					alignSelf     : 'flex-start',
-					positionType  : 'absolute',
-					justifyContent: 'center',
-					alignItems    : 'center',
-				}}
-				uiBackground = {{ 
-					textureMode  : 'nine-slices',
-					texture      : { src: uiBumperzLogo },
-					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-				}}
-			/> */}
-			
-			// Speedometer
-			<UiEntity
-				key         = 'uiHud_speedometer'
-				uiTransform = {{
-					width         : 175,
-					height        : 175,
-					maxHeight     : 175,
-					maxWidth      : 175,
-					//ensures centered but can get in players way
-					 margin       : { right: 0, top: '-10%' },
-					 position      : { top: '100%', left: '50%' },
-					//will float but will stay out of way - better of 2 evils for now :(
-					//padding       : { right: 10, top: 2 },
-					//position      : { bottom: 0, right: '42vw' },
-
-					alignSelf     : 'flex-start',
-					positionType  : 'absolute',
-					justifyContent: 'center',
-					alignItems    : 'center',
-				}}
-				uiBackground = {{ 
-					textureMode  : 'nine-slices',
-					texture      : { src: uiSpeedometer },
-					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-				}}
-				uiText = {{
-					value    : (Math.round(UI_MANAGER.getSpeedValue()*10)/10).toString(),
-					fontSize : 48,
-					textAlign: "middle-center"
-				}}
-			/>
-			
-			
-			// Yougothit!
-			<UiEntity
-				key         = 'uiHud_hitNotify'
-				uiTransform = {{
-					width       : '50vw',
-					minWidth	: '300',
-					height      : '200',
-					alignSelf   : 'center',
-					alignContent: 'center',
-					positionType: 'absolute',
-					margin       : { left: '50%' },
-					position    : { left: '-15%', top: '35vh'},
-				}}
-				uiBackground = {{ 
-					textureMode  : 'nine-slices',
-					texture      : { src: uiYouGothit },
-					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-					color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
-				}}
-			/>
-			
-		</UiEntity>
 	)
 }
+
+
+//had to make it seperate to make it position center bottom
+export function hudSpeedometer(){
+	
+	return <UiEntity //parent / modal decoration
+			uiTransform={{
+			width: 175,
+			height: 175,
+			//display: 'flex',
+			positionType: 'absolute',
+			position: { bottom: '50px', left: '50%' } ,
+			//flexDirection:'column',
+			//flexWrap:'wrap',
+			//alignSelf:'flex-end'
+			}}
+			//uiBackground={{ texture: {src: "images/leaderboardbg.png"}, textureMode: 'stretch'}}
+			uiBackground = {{ 
+				textureMode  : 'nine-slices',
+				texture      : { src: uiSpeedometer },
+				textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
+			}}
+			uiText = {{
+				value    : (Math.round(UI_MANAGER.getSpeedValue()*10)/10).toString(),
+				fontSize : 48,
+				textAlign: "middle-center"
+			}}
+		>
+			
+		</UiEntity>
+	
+	
+  }
+  
+
+
+  

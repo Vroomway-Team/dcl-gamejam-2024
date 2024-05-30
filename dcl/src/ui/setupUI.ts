@@ -1,9 +1,13 @@
 import { ReactEcsRenderer } from "@dcl/sdk/react-ecs"
-import { uiHud } 			from "./ui.hud"
+import { hudSpeedometer, hudTicketScore, hudTimer, hudYouGotIt } 			from "./ui.hud"
 import { uiDebug } 			from "./ui.debug"
 
 const uiComponents = () => [
-	uiHud(),
+	//had to break them up to make it work right
+	hudSpeedometer(),
+	hudTimer(),	
+	hudTicketScore(),
+	hudYouGotIt(),
 	uiDebug()
 ]
   
