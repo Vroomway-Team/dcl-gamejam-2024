@@ -19,7 +19,7 @@ export function uiDebug() {
 				key         = "foo1"
 				uiTransform = {{
 					width       : 260,
-					height      : 230,
+					height      : 320,
 					margin      : '16px 20px 0 0',
 					padding     : 4,
 					position    : {left: 0, top: 300},

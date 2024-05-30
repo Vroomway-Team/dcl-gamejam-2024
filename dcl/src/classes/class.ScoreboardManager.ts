@@ -91,6 +91,50 @@ export class ScoreboardManager {
 					"userName": generateRandomString(10),
 					"score"   : Math.floor(Math.random() * 50),
 				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
+				{
+					"userName": generateRandomString(10),
+					"score"   : Math.floor(Math.random() * 50),
+				},
 			]
 		}
 		
