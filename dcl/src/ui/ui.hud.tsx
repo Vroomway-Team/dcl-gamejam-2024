@@ -23,10 +23,17 @@ export function uiHud() {
 		<UiEntity
 			key         = 'uiHud_root'
 			uiTransform = {{
-				width    : '100vw',
-				height   : '100vh',
-				minHeight: '100vh',
-				position : { top: 0, left: 0, bottom: 0 },
+				// width    : '100vw',
+				// height   : '100vh',
+				// minHeight: '100vh',
+				// position : { top: 0, left: 0, bottom: 0 },
+				width  : '100%',
+				height : '100%',
+				minHeight: '100vh', 
+				//margin : { top: '0', left: '0', right: '0' },
+				//padding: 4,
+				//position: { top: '0%', right: '0', bottom:'0', left: '0'},
+				//justifyContent: 'center',
 			}}		
 			>
 				
@@ -34,12 +41,13 @@ export function uiHud() {
 			<UiEntity
 				key         = 'uiHud_timer'
 				uiTransform = {{
-					width         : 300,
-					height        : 172,
-					position      : { top: 0, left  : "15vw" },
+					width  : 300,
+					height : 172,
+					margin : { top: '0', left: '0', right: 0 },
+					padding: 4,
+					position: { top: '0%', right: '0%', bottom:'0%', left: '250'},
 					justifyContent: 'center',
-					padding       : { top: 12, right: 64 },
-					positionType  :  'absolute',
+					positionType: 'absolute'
 				}}
 				uiBackground = {{ 
 					textureMode  : 'nine-slices',
@@ -57,12 +65,13 @@ export function uiHud() {
 			<UiEntity
 				key         = 'uiHud_score'
 				uiTransform = {{
-					width         : 300,
-					height        : 172,
+					width  : 300,
+					height : 172,
+					margin : { top: '0', left: -350 },
+					padding: 4,
+					position: { top: '0%', bottom:'0%', left: '100%'},
 					justifyContent: 'center',
-					position      : { top: 0, right: "5vw"},
-					positionType  : 'absolute',
-					padding       : { right: 72, bottom: 4 },
+					positionType: 'absolute',//,
 					alignItems: "flex-end"
 				}}
 				uiBackground = {{ 
@@ -76,6 +85,7 @@ export function uiHud() {
 				uiTransform = {{
 					width         : 300,
 					height        : 172,
+					margin : { top: '0', left: -150 },
 					justifyContent: 'flex-end',
 				}}
 				uiText = {{
@@ -86,6 +96,28 @@ export function uiHud() {
 				}}
 			/>
 			</UiEntity>
+
+			// logo
+			<UiEntity
+				key         = 'uiHud_logo'
+				uiTransform = {{
+					width         : 175,
+					height        : 175,
+					maxHeight     : 175,
+					maxWidth      : 175,
+					padding       : { right: 10, bottom: 2 },
+					position      : { top: 0, left: '50%' },
+					alignSelf     : 'flex-start',
+					positionType  : 'absolute',
+					justifyContent: 'center',
+					alignItems    : 'center',
+				}}
+				uiBackground = {{ 
+					textureMode  : 'nine-slices',
+					texture      : { src: uiBumperzLogo },
+					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
+				}}
+			/>
 			
 			// Speedometer
 			<UiEntity
@@ -95,8 +127,8 @@ export function uiHud() {
 					height        : 175,
 					maxHeight     : 175,
 					maxWidth      : 175,
-					padding       : { right: 10, bottom: 2 },
-					position      : { bottom: 0, left: '42vw' },
+					margin       : { right: 0, top: '-10%' },
+					position      : { top: '100%', left: '50%' },
 					alignSelf     : 'flex-start',
 					positionType  : 'absolute',
 					justifyContent: 'center',
@@ -120,17 +152,19 @@ export function uiHud() {
 				key         = 'uiHud_hitNotify'
 				uiTransform = {{
 					width       : '50vw',
+					minWidth	: '300',
 					height      : '200',
 					alignSelf   : 'center',
 					alignContent: 'center',
 					positionType: 'absolute',
-					position    : { left: '25vw' },
+					margin       : { left: '50%' },
+					position    : { left: '-15%', top: '50vh'},
 				}}
 				uiBackground = {{ 
 					textureMode  : 'nine-slices',
 					texture      : { src: uiYouGothit },
 					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-					color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
+					//color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
 				}}
 			/>
 			
