@@ -28,13 +28,20 @@ export function uiHud() {
 				// minHeight: '100vh',
 				// position : { top: 0, left: 0, bottom: 0 },
 				width  : '100%',
-				height : '100%',
-				minHeight: '100vh', 
-				//margin : { top: '0', left: '0', right: '0' },
+				height : '100vh',
+				minHeight: '100%', 
+				positionType  : 'absolute',
+				margin : 0,
+				padding: 0,
 				//padding: 4,
-				//position: { top: '0%', right: '0', bottom:'0', left: '0'},
+				//position: { top: '0%'},
 				//justifyContent: 'center',
-			}}		
+				
+			}}	
+			//debug size of entity
+			// uiBackground = {{ 
+			// 	color: Color4.fromHexString("#FFFFFF"),
+			// }}	
 			>
 				
 			// Round Timer
