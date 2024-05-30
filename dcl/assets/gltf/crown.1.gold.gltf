@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -14,14 +14,25 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				1
 			]
 		}
 	],
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"crown1"
+			"name":"crown1",
+			"translation":[
+				0,
+				1.9910579919815063,
+				0.08492209762334824
+			]
+		},
+		{
+			"children":[
+				0
+			],
+			"name":"origin.crown1"
 		}
 	],
 	"materials":[
@@ -129,67 +140,67 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":185,
+			"count":209,
 			"max":[
-				0.27966809272766113,
-				2.436967372894287,
-				0.3630140721797943
+				0.2939072847366333,
+				0.44590938091278076,
+				0.29233214259147644
 			],
 			"min":[
-				-0.27966809272766113,
-				1.9910577535629272,
-				-0.19487112760543823
+				-0.2939072847366333,
+				-2.384185791015625e-07,
+				-0.2940305769443512
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":185,
+			"count":209,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":185,
+			"count":209,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":185,
+			"count":209,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":780,
+			"count":840,
 			"type":"SCALAR"
 		},
 		{
 			"componentType":5126,
-			"count":102,
+			"count":100,
 			"max":[
 				0.2955310046672821,
-				2.277052879333496,
-				0.3851802349090576
+				0.28599488735198975,
+				0.3002581298351288
 			],
 			"min":[
 				-0.2955310046672821,
-				2.1583635807037354,
-				-0.18375264108181
+				0.167305588722229,
+				-0.26867473125457764
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":102,
+			"count":100,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":102,
+			"count":100,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":102,
+			"count":100,
 			"type":"VEC4"
 		},
 		{
@@ -201,13 +212,13 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":1624,
+			"byteLength":1702,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
-			"byteLength":827,
-			"byteOffset":1624
+			"byteLength":807,
+			"byteOffset":1704
 		}
 	],
 	"samplers":[
@@ -218,7 +229,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":2452,
+			"byteLength":2512,
 			"uri":"crown.1.gold.bin"
 		}
 	]
