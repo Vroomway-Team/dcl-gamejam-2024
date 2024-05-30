@@ -1,18 +1,20 @@
 import { 
+	ColliderLayer,
 	engine, Entity, Font, 
+	GltfContainer, 
 	InputAction, 
 	MeshCollider, 
 	MeshRenderer, 
 	PointerEvents, 
 	pointerEventsSystem, 
 	PointerEventType, 
+	TextAlignMode, 
 	TextShape, Transform, TransformType
 } 									from '@dcl/sdk/ecs'
 import { Quaternion, Vector3 } 		from '@dcl/sdk/math'
 import { getPlayer } 				from '@dcl/sdk/src/players'
 import { VEHICLE_MANAGER } 			from '../arena/setupVehicleManager'
-import { Vehicle } from './class.Vehicle'
-import { AudioManager } from '../arena/audio-manager'
+import { AudioManager } 			from '../arena/audio-manager'
 
 
 //interfaces for colyseus
@@ -23,16 +25,16 @@ export type PlayerUnclaimCallbackType = () => void;
 
 /** object placed in scene, players interact to claim ownership of a vehicle */
 export class LobbyLabel {
-	entityOrigin: Entity
-	entityText  : Entity
-	entityMesh  : Entity
-	labelIndex  : number
+	entityOrigin : Entity
+	entityOffset : Entity
+	entityGltf   : Entity
+	entityText   : Entity
 	
+	labelIndex   : number
 	ownerID      : string = "npc"
 	ownerName    : string = "npc"
 	isLocalPlayer: boolean = false
 	
-
     /** server call to claim a vehicle */
     public static PlayerClaimCallback:undefined|PlayerClaimCallbackType;
     /** server to unclaim a vehicle */
@@ -45,44 +47,56 @@ export class LobbyLabel {
 	) {
 		this.labelIndex = labelIndex
 		
-		// Add the origin entity
+		// Add the origin entity (this is the same as the LobbyTransform for each vehicle)
 		this.entityOrigin = engine.addEntity()
 		Transform.create(this.entityOrigin, origin)
 		
-		// Add the entity used for the text
-		this.entityText     = engine.addEntity()
-		Transform.create(this.entityText, {
+		// Add another entity for the offset (brings it forward into the lobby area)
+		this.entityOffset = engine.addEntity()
+		Transform.create(this.entityOffset, {
 			position: Vector3.create(0, 0, 2.25),
 			rotation: Quaternion.fromEulerDegrees(45, 180, 0),
 			parent  : this.entityOrigin,
 		})
 		
+		// Add the entity used for the text
+		
+		this.entityText     = engine.addEntity()
+		Transform.create(this.entityText, {
+			position: Vector3.create(-1.0, 0, 0),
+			parent  : this.entityOffset,
+		})
+		
 		// Add the TextShape
 		TextShape.create(this.entityText, {
-			text        : "Claim \n" + modelName,
-			textColor   : { r: 1, g: 0, b: 0, a: 1 },
-			fontSize    : 3,
+			text        : "Claim      \n" + modelName,
+			textColor   : { r: 1, g: 1, b: 1, a: 1 },
+			textAlign   : TextAlignMode.TAM_MIDDLE_CENTER,
+			fontSize    : 2,
 			font        : Font.F_MONOSPACE,
+			lineSpacing : 100,
+			paddingLeft: 1,
 			shadowBlur  : 4,
-			shadowColor : { r: 1, g: 1, b: 0 },
+			shadowColor : { r: 55/255, g: 173/255, b: 175/255 },
 			outlineWidth: 0.1,
-			outlineColor: { r: 1, g: 1, b: 1 },
+			outlineColor: { r: 55/255, g: 173/255, b: 175/255 },
+		})		
+		
+		// Add the glTF shape
+		this.entityGltf = engine.addEntity()
+		Transform.create(this.entityGltf, {
+			position: Vector3.create(0, 0, 0),
+			parent  : this.entityOffset,
 		})
-	
-		// Add the box entity used as a panel/collider for the input trigger
-		this.entityMesh = engine.addEntity()
-		Transform.create(this.entityMesh, {
-			position: Vector3.create(0, 0, 0.051),
-			rotation: Quaternion.create(),
-			scale   : Vector3.create(2, 0.8, 0.1),
-			parent  : this.entityText,
+		GltfContainer.create(this.entityGltf, {
+			src: "assets/gltf/claimpad.03.gltf",
+			visibleMeshesCollisionMask: ColliderLayer.CL_POINTER,
+			invisibleMeshesCollisionMask: ColliderLayer.CL_POINTER
 		})
-		MeshRenderer.setBox(this.entityMesh)
-		MeshCollider.setBox(this.entityMesh)
 		
 		// Add the onPointerDown 
 		pointerEventsSystem.onPointerDown({
-			entity: this.entityMesh,
+			entity: this.entityGltf,
 			opts  : {
 				button   : InputAction.IA_POINTER,
 				hoverText: "Claim " + modelName
@@ -124,7 +138,7 @@ export class LobbyLabel {
 		if (!isClaimed) {
 			// UNclaimed vehicle
 			this.setPointerHoverText("Claim " + modelName)
-			this.setText("Claim \n" + modelName)
+			this.setText("Claim      \n" + modelName)
 		} else {
 			if (isLocalPlayer) {
 				// Claimed by local player
@@ -133,7 +147,7 @@ export class LobbyLabel {
 			} else {
 				// Claimed by remote player
 				this.setPointerHoverText(" ")
-				this.setText(ownerName + "\n" + modelName)
+				this.setText(ownerName + "     \n" + modelName)
 			}
 		}
 	}
@@ -141,7 +155,7 @@ export class LobbyLabel {
 	setPointerHoverText(
 		text: string
 	): void {
-		PointerEvents.createOrReplace(this.entityMesh, { pointerEvents: [
+		PointerEvents.createOrReplace(this.entityGltf, { pointerEvents: [
 			{
 			  eventType: PointerEventType.PET_DOWN,
 			  eventInfo: {
@@ -154,7 +168,7 @@ export class LobbyLabel {
 	}
 	
 	setText(
-		text: string = "Claim"
+		text: string = "Claim     "
 	): void {
 		const textShape = TextShape.getMutable(this.entityText)
 		textShape.text  = text

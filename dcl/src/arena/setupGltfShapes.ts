@@ -16,12 +16,6 @@ export function setupGltfShapes() {
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 		scale   : Vector3.One()
 	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
-
-	const arena2 = new GltfObject("assets/gltf/arena.roof.gltf", {
-		position: Vector3.create(0, 0, 0),
-		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
-		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
 	
 	
 	// Animated arrows
@@ -35,7 +29,7 @@ export function setupGltfShapes() {
 		position: Vector3.create(64, 0, 64),
 		rotation: Quaternion.fromEulerDegrees(0, 0, 0),
 		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
+	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS) 
 	
 
 	// Light bars
