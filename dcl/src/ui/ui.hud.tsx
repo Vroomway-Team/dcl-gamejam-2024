@@ -164,7 +164,7 @@ export function uiHud() {
 					textureMode  : 'nine-slices',
 					texture      : { src: uiYouGothit },
 					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-					//color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
+					color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
 				}}
 			/>
 			
