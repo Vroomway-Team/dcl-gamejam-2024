@@ -4,11 +4,11 @@ import * as CANNON 					from 'cannon'
 import { setupCannonWorld } from './arena/setupCannonWorld'
 import { setupGltfShapes } from './arena/setupGltfShapes'
 //importing even if not used to ensure gets loaded early
-import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
-import { setupScoreboards } 	from './arena/setupScoreboards'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
+import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
+import { setupScoreboards } 					from './arena/setupScoreboards'
 import * as utils from '@dcl-sdk/utils'
-import { ScoreDisplay } from './classes/class.ScoreDisplay'
+//import { ScoreDisplay } from './classes/class.ScoreDisplay'
 import { Networking } from './networking'
 import { GameManager } from './arena/game-manager'
 import { TicketSpawnManager } from './arena/ticket-spawner'
@@ -17,14 +17,19 @@ import { Room } from 'colyseus.js'
 import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
 import * as serverStateSpec from './rooms/spec/server-state-spec'
 import * as clientStateSpec from './rooms/spec/client-state-spec'
-import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
+//import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
 import { Quaternion } from '@dcl/sdk/math'
 import { setupNPCAvatars } from './arena/setupNPCAvatars'
 import { setupImagePosters } from './arena/setupImagePosters'
 
+
+// CONFIG
+const COLYSEUS_SERVER     = Networking.CONNECTION_TYPE.LOCAL
+const SHOW_DEBUG_TRIGGERS = false
+
 export function main() {
 	//turn on trigger debug mode (draws )
-	utils.triggers.enableDebugDraw(true);
+	utils.triggers.enableDebugDraw(SHOW_DEBUG_TRIGGERS);
 
 	setupUiManager()
 	// Draw UI
@@ -51,8 +56,8 @@ export function main() {
 	setupImagePosters()
 
 	//position scoreboard
-	Transform.getMutable(ScoreDisplay.ScoreBoardParent).position = {x:35, y:2, z:32},
-	ScoreDisplay.UpdateDisplays();
+	//Transform.getMutable(ScoreDisplay.ScoreBoardParent).position = {x:35, y:2, z:32},
+	//ScoreDisplay.UpdateDisplays();
 
 	//set up player (server connection)
 	PlayerSetup();
@@ -71,7 +76,7 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.LOCAL);
+	Networking.InitializeClientConnection(COLYSEUS_SERVER);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
@@ -132,7 +137,7 @@ async function PlayerSetup() {
 		//claim vehicle
 		VEHICLE_MANAGER.userClaimVehicle(player.Vehicle, player.ID, player.DisplayName);
 		//update scores
-		ScoreDisplay.UpdateDisplays();
+		//ScoreDisplay.UpdateDisplays();
 	  });    
 	  //  player leave  
 	  room.onMessage("player-leave", (data:any) => {
@@ -144,7 +149,7 @@ async function PlayerSetup() {
 		//remove player 
 		LobbyPlayer.Destroy(player.ID);
 		//update scores
-		ScoreDisplay.UpdateDisplays(); 
+		//ScoreDisplay.UpdateDisplays(); 
 	  });  
 	  //  syncing for vehicle states
 	  room.onMessage("vehicle-state-sync", (data:any) => {
@@ -193,7 +198,7 @@ async function PlayerSetup() {
 		//remove ticket
 		TicketSpawnManager.Clear(data.ticketID); 
 		//update scores display
-		ScoreDisplay.UpdateDisplays();
+		//ScoreDisplay.UpdateDisplays();
 	  }); 
 
 	  room.onStateChange((state) => {
