@@ -98,7 +98,7 @@ export function uiHud() {
 			</UiEntity>
 
 			// logo
-			<UiEntity
+			{/* <UiEntity
 				key         = 'uiHud_logo'
 				uiTransform = {{
 					width         : 175,
@@ -117,7 +117,7 @@ export function uiHud() {
 					texture      : { src: uiBumperzLogo },
 					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
 				}}
-			/>
+			/> */}
 			
 			// Speedometer
 			<UiEntity
@@ -158,7 +158,7 @@ export function uiHud() {
 					alignContent: 'center',
 					positionType: 'absolute',
 					margin       : { left: '50%' },
-					position    : { left: '-15%', top: '50vh'},
+					position    : { left: '-15%', top: '35vh'},
 				}}
 				uiBackground = {{ 
 					textureMode  : 'nine-slices',
