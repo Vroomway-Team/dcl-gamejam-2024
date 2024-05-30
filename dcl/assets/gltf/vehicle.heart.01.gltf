@@ -14,7 +14,8 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -34,7 +35,7 @@
 				0.2851411700248718
 			],
 			"translation":[
-				2.1468182185300014e-14,
+				-6.953528092136941e-15,
 				-1.693088173866272,
 				0.3740249276161194
 			]
@@ -122,6 +123,15 @@
 				0.7493755221366882,
 				0.7493755221366882
 			]
+		},
+		{
+			"mesh":3,
+			"name":"heart2_collider",
+			"translation":[
+				0,
+				0.402952641248703,
+				-0.055950187146663666
+			]
 		}
 	],
 	"animations":[
@@ -194,49 +204,49 @@
 			"name":"heartArmAction",
 			"samplers":[
 				{
-					"input":20,
-					"interpolation":"STEP",
-					"output":21
-				},
-				{
-					"input":20,
-					"interpolation":"STEP",
-					"output":22
-				},
-				{
-					"input":20,
-					"interpolation":"STEP",
-					"output":23
-				},
-				{
-					"input":20,
-					"interpolation":"STEP",
-					"output":24
-				},
-				{
 					"input":25,
-					"interpolation":"LINEAR",
+					"interpolation":"STEP",
 					"output":26
 				},
 				{
-					"input":20,
+					"input":25,
 					"interpolation":"STEP",
 					"output":27
 				},
 				{
-					"input":20,
+					"input":25,
 					"interpolation":"STEP",
 					"output":28
 				},
 				{
-					"input":20,
+					"input":25,
 					"interpolation":"STEP",
 					"output":29
 				},
 				{
-					"input":25,
+					"input":30,
 					"interpolation":"LINEAR",
-					"output":30
+					"output":31
+				},
+				{
+					"input":25,
+					"interpolation":"STEP",
+					"output":32
+				},
+				{
+					"input":25,
+					"interpolation":"STEP",
+					"output":33
+				},
+				{
+					"input":25,
+					"interpolation":"STEP",
+					"output":34
+				},
+				{
+					"input":30,
+					"interpolation":"LINEAR",
+					"output":35
 				}
 			]
 		}
@@ -270,6 +280,11 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Hidden.008",
+			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -372,6 +387,33 @@
 					},
 					"indices":19,
 					"material":1,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Cylinder.027",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":20,
+						"NORMAL":21,
+						"TEXCOORD_0":22,
+						"TANGENT":23
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":4,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":24,
+					"material":2,
 					"mode":4
 				}
 			]
@@ -545,7 +587,42 @@
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":4,
+			"componentType":5126,
+			"count":26,
+			"max":[
+				0.5965178608894348,
+				1.2510534524917603,
+				0.9761571884155273
+			],
+			"min":[
+				-0.5970367789268494,
+				-0.4915724992752075,
+				-0.28579196333885193
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":36,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":5,
 			"componentType":5126,
 			"count":2,
 			"max":[
@@ -557,22 +634,16 @@
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":5,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
-		},
-		{
 			"bufferView":6,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC4"
+			"type":"VEC3"
 		},
 		{
 			"bufferView":7,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC3"
+			"type":"VEC4"
 		},
 		{
 			"bufferView":8,
@@ -583,6 +654,12 @@
 		{
 			"bufferView":9,
 			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":10,
+			"componentType":5126,
 			"count":121,
 			"max":[
 				2
@@ -593,16 +670,10 @@
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":10,
+			"bufferView":11,
 			"componentType":5126,
 			"count":121,
 			"type":"VEC4"
-		},
-		{
-			"bufferView":11,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC3"
 		},
 		{
 			"bufferView":12,
@@ -614,10 +685,16 @@
 			"bufferView":13,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC4"
+			"type":"VEC3"
 		},
 		{
 			"bufferView":14,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":15,
 			"componentType":5126,
 			"count":121,
 			"type":"VEC3"
@@ -646,58 +723,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":8,
+			"byteLength":467,
 			"byteOffset":32360
 		},
 		{
 			"buffer":0,
+			"byteLength":8,
+			"byteOffset":32828
+		},
+		{
+			"buffer":0,
 			"byteLength":24,
-			"byteOffset":32368
+			"byteOffset":32836
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":32392
+			"byteOffset":32860
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":32424
+			"byteOffset":32892
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":32448
+			"byteOffset":32916
 		},
 		{
 			"buffer":0,
 			"byteLength":484,
-			"byteOffset":32472
+			"byteOffset":32940
 		},
 		{
 			"buffer":0,
 			"byteLength":1936,
-			"byteOffset":32956
+			"byteOffset":33424
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":34892
+			"byteOffset":35360
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":34916
+			"byteOffset":35384
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":34940
+			"byteOffset":35408
 		},
 		{
 			"buffer":0,
 			"byteLength":1452,
-			"byteOffset":34972
+			"byteOffset":35440
 		}
 	],
 	"samplers":[
@@ -708,7 +790,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":36424,
+			"byteLength":36892,
 			"uri":"vehicle.heart.01.bin"
 		}
 	]
