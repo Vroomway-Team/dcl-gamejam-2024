@@ -52,7 +52,8 @@ export function uiHud() {
 					height : 172,
 					margin : { top: '0', left: '0', right: 0 },
 					padding: 4,
-					position: { top: '0%', right: '0%', bottom:'0%', left: '250'},
+					//position: { top: '0%', right: '0%', bottom:'0%', left: '250'},//non 4k
+					position: { top: '0%', right: '0%', bottom:'0%', left: '25%'},//4k
 					justifyContent: 'center',
 					positionType: 'absolute'
 				}}
@@ -76,7 +77,8 @@ export function uiHud() {
 					height : 172,
 					margin : { top: '0', left: -350 },
 					padding: 4,
-					position: { top: '0%', bottom:'0%', left: '100%'},
+					//position: { top: '0%', bottom:'0%', left: '90%'}, //non 2k
+					position: { top: '0%', bottom:'0%', left: '90%'}, //4k
 					justifyContent: 'center',
 					positionType: 'absolute',//,
 					alignItems: "flex-end"
@@ -134,8 +136,13 @@ export function uiHud() {
 					height        : 175,
 					maxHeight     : 175,
 					maxWidth      : 175,
-					margin       : { right: 0, top: '-10%' },
-					position      : { top: '100%', left: '50%' },
+					//ensures centered but can get in players way
+					 margin       : { right: 0, top: '-10%' },
+					 position      : { top: '100%', left: '50%' },
+					//will float but will stay out of way - better of 2 evils for now :(
+					//padding       : { right: 10, top: 2 },
+					//position      : { bottom: 0, right: '42vw' },
+
 					alignSelf     : 'flex-start',
 					positionType  : 'absolute',
 					justifyContent: 'center',
