@@ -2,8 +2,8 @@
 	"ecs7": true,
 	"runtimeVersion": "7",
 	"display": {
-		"title": "SDK7 Scene Template",
-		"description": "template scene with SDK7",
+		"title": "Bumperz Car Game",
+		"description": "Bumperz Car Game",
 		"navmapThumbnail": "images/scene-thumbnail.png",
 		"favicon": "favicon_asset"
 	},
@@ -28,20 +28,20 @@
 			"name": "spawn1",
 			"default": true,
 			"position": {
-				"x": [4, 6],
-				"y": [32, 32],
-				"z": [4, 6]
+				"x": [26, 38],
+				"y": [3, 3],
+				"z": [24, 40]
 			},
 			"cameraTarget": {
-				"x": 8,
+				"x": 32,
 				"y": 1,
-				"z": 8
+				"z": 32
 			}
 		}
 	],
 	"featureToggles": {
 		"voiceChat": "enabled",
-		"portableExperiences": "enabled"
+		"portableExperiences": "false"
 	},
 	"requiredPermissions": [
 		"ALLOW_MEDIA_HOSTNAMES"

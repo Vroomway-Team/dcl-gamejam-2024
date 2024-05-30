@@ -14,51 +14,33 @@ export class Scoreboard {
 	state         : ScoreboardState | undefined	
 	elements      : ScoreboardRow[] = [] // Array of scoreboard row elements
 	
-	maxScores     : number          = 10 // Max number of scores to show on the board	
-	rowWidth      : number          = 2.4 // Widht of row, used when offsetting rank and score
-	rowStartOffset: number          = -0.3   // Offset start of rows
-	rowYHeight    : number          = 3 // Space between score rows
-	rankOffset    : number          = 0  // Offset the first rank shown - used b big boards to show position 2, 3, etc
-	textSize      : number          = 15
-	
-	hideStatus: boolean = false
-	hideTimer : boolean = false
-	hideRanks : boolean = false
-	hideScores: boolean = false
-	
 	constructor(
-		rootTransform: TransformType,
-		maxScores    : number = 10,
-		modelSrc?    : string,
-		textSize     : number = 15,
-		rowWidth     : number = 2.4,
-		rankOffset   : number = 0,
+		rootTransform    : TransformType,
+		modelSrc?        : string,
 		
-		hideStatus: boolean = false,
-		hideTimer : boolean = false,
-		hideRanks : boolean = false,
-		hideScores: boolean = false,
+		public maxScores : number  = 10,
+		public rankOffset: number  = 0, // Offset the first rank shown - used b big boards to show position 2, 3, etc
+		
+		public textSize  : number  = 15,
+		public rowWidth  : number  = 2.4,
+		public rowHeight : number  = 0.5,
+		
+		public hideStatus: boolean = false,
+		public hideTimer : boolean = false,
+		public hideRanks : boolean = false,
+		public hideScores: boolean = false,
 		
 		timerTransform: TransformType = {
-			position: Vector3.create(0, -0.05, -0.05),
+			position: Vector3.create(0, 0, 0),
 			rotation: Quaternion.Zero(),
 			scale   : Vector3.create(0.2, 0.2, 0.2)
 		},
 		statusTransform: TransformType = {
-			position: Vector3.create(0, -1.5, 0-0.05),
+			position: Vector3.create(0, -1.9, 0),
 			rotation: Quaternion.Zero(),
 			scale   : Vector3.create(0.2, 0.2, 0.2)
 		}
 	) {
-		 
-		this.maxScores  = maxScores
-		this.rankOffset = rankOffset
-		this.hideTimer  = hideTimer
-		this.hideStatus = hideStatus
-		this.hideRanks  = hideRanks
-		this.hideScores = hideScores
-		this.textSize   = textSize
-		this.rowWidth   = rowWidth
 		
 		// Add the root entity and attach the gltf object
 		this.entityRoot = engine.addEntity()
@@ -75,7 +57,8 @@ export class Scoreboard {
 			// Add the timer
 			this.entityTimer  = engine.addEntity()
 			TextShape.create(this.entityTimer, {
-				text: "00:00"
+				text: "00:00",
+				fontSize: 20,
 			})
 			Transform.create(this.entityTimer, {
 				...timerTransform,
@@ -158,7 +141,7 @@ export class Scoreboard {
 			
 			// Create the row transform
 			const transform: TransformType = {
-				position: Vector3.create(0, ((this.textSize / -75) * rowCount) + this.rowStartOffset, 0),
+				position: Vector3.create(0, (-this.rowHeight * rowCount), 0),
 				rotation: Quaternion.create(),
 				scale   : Vector3.One()
 			}

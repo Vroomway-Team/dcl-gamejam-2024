@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -14,7 +14,7 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				1
 			]
 		}
 	],
@@ -32,6 +32,12 @@
 				1.9900189638137817,
 				0.08492210507392883
 			]
+		},
+		{
+			"children":[
+				0
+			],
+			"name":"origin.crown3"
 		}
 	],
 	"materials":[
@@ -48,7 +54,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Circle.002",
+			"name":"Circle.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -91,44 +97,44 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":130,
+			"count":164,
 			"max":[
-				0.9308508038520813,
+				0.959583580493927,
 				0.8788504004478455,
-				0.9160516262054443
+				0.9599732756614685
 			],
 			"min":[
-				-0.9308508038520813,
+				-0.959583580493927,
 				0.003605365753173828,
-				-0.931267261505127
+				-0.9603415131568909
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":130,
+			"count":164,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":130,
+			"count":164,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":130,
+			"count":164,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":480,
+			"count":600,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":1193,
+			"byteLength":1365,
 			"byteOffset":0
 		}
 	],
@@ -140,7 +146,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":1196,
+			"byteLength":1368,
 			"uri":"crown.3.bronze.bin"
 		}
 	]

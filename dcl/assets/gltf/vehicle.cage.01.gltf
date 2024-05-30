@@ -14,7 +14,8 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -24,7 +25,7 @@
 			"name":"cageCart",
 			"rotation":[
 				0,
-				-0.15643446147441864,
+				-0.15643443167209625,
 				0,
 				0.987688422203064
 			],
@@ -32,6 +33,15 @@
 				1.0912452936172485,
 				1.0912450551986694,
 				1.0912452936172485
+			]
+		},
+		{
+			"mesh":1,
+			"name":"cage1_collider",
+			"translation":[
+				0,
+				0.402952641248703,
+				-0.055950187146663666
 			]
 		}
 	],
@@ -63,6 +73,11 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Hidden.004",
+			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -107,6 +122,33 @@
 					},
 					"indices":7,
 					"material":1,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Cylinder.022",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":8,
+						"NORMAL":9,
+						"TEXCOORD_0":10,
+						"TANGENT":11
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":2,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":12,
+					"material":2,
 					"mode":4
 				}
 			]
@@ -193,6 +235,41 @@
 			"componentType":5123,
 			"count":1656,
 			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"max":[
+				0.5965178608894348,
+				1.2510534524917603,
+				0.9761571884155273
+			],
+			"min":[
+				-0.5970367789268494,
+				-0.4915724992752075,
+				-0.28579196333885193
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":36,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -205,6 +282,11 @@
 			"buffer":0,
 			"byteLength":5701,
 			"byteOffset":16072
+		},
+		{
+			"buffer":0,
+			"byteLength":467,
+			"byteOffset":21776
 		}
 	],
 	"samplers":[
@@ -215,7 +297,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":21776,
+			"byteLength":22244,
 			"uri":"vehicle.cage.01.bin"
 		}
 	]

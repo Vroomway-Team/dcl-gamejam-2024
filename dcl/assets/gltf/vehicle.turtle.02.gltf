@@ -14,7 +14,8 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -34,9 +35,9 @@
 				1.9415886402130127
 			],
 			"translation":[
-				-9.947598300641403e-14,
-				0.13805198669433594,
-				-1.1920917586394353e-07
+				-2.4158453015843406e-13,
+				0.13805174827575684,
+				-2.3841846541472478e-07
 			]
 		},
 		{
@@ -61,19 +62,19 @@
 			"name":"turtCart2.001",
 			"rotation":[
 				0.7071067690849304,
-				0,
-				0,
+				-1.0853701937207916e-08,
+				-1.0853701937207916e-08,
 				0.7071067690849304
 			],
 			"scale":[
-				1.9415885210037231,
-				1.9415881633758545,
-				1.9415885210037231
+				1.9415886402130127,
+				1.9415879249572754,
+				1.9415886402130127
 			],
 			"translation":[
-				-2.9802322387695312e-08,
-				0,
-				-2.384185791015625e-07
+				1.0311414655461704e-07,
+				-1.1920928955078125e-07,
+				-4.172325134277344e-07
 			]
 		},
 		{
@@ -103,7 +104,7 @@
 			],
 			"translation":[
 				0,
-				0.19415894150733948,
+				0.19415897130966187,
 				0.5980178117752075
 			]
 		},
@@ -124,6 +125,15 @@
 				0.5150421261787415,
 				0.5150421261787415,
 				0.5150421261787415
+			]
+		},
+		{
+			"mesh":3,
+			"name":"turtle2_collider",
+			"translation":[
+				0,
+				0.402952641248703,
+				-0.055950187146663666
 			]
 		}
 	],
@@ -197,49 +207,49 @@
 			"name":"turtleArmAction",
 			"samplers":[
 				{
-					"input":25,
-					"interpolation":"STEP",
-					"output":26
-				},
-				{
-					"input":25,
-					"interpolation":"STEP",
-					"output":27
-				},
-				{
-					"input":25,
-					"interpolation":"STEP",
-					"output":28
-				},
-				{
-					"input":29,
-					"interpolation":"LINEAR",
-					"output":30
-				},
-				{
-					"input":25,
+					"input":30,
 					"interpolation":"STEP",
 					"output":31
 				},
 				{
-					"input":25,
+					"input":30,
 					"interpolation":"STEP",
 					"output":32
 				},
 				{
-					"input":25,
+					"input":30,
 					"interpolation":"STEP",
 					"output":33
 				},
 				{
-					"input":29,
+					"input":34,
 					"interpolation":"LINEAR",
-					"output":34
+					"output":35
 				},
 				{
-					"input":25,
+					"input":30,
 					"interpolation":"STEP",
-					"output":35
+					"output":36
+				},
+				{
+					"input":30,
+					"interpolation":"STEP",
+					"output":37
+				},
+				{
+					"input":30,
+					"interpolation":"STEP",
+					"output":38
+				},
+				{
+					"input":34,
+					"interpolation":"LINEAR",
+					"output":39
+				},
+				{
+					"input":30,
+					"interpolation":"STEP",
+					"output":40
 				}
 			]
 		}
@@ -272,6 +282,11 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Hidden.002",
+			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -396,6 +411,33 @@
 					},
 					"indices":24,
 					"material":1,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Cylinder.019",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":25,
+						"NORMAL":26,
+						"TEXCOORD_0":27,
+						"TANGENT":28
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":5,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":29,
+					"material":2,
 					"mode":4
 				}
 			]
@@ -599,37 +641,72 @@
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":5,
 			"componentType":5126,
-			"count":2,
+			"count":26,
 			"max":[
-				2
+				0.5965178608894348,
+				1.2510534524917603,
+				0.9761571884155273
 			],
 			"min":[
-				0
+				-0.5970367789268494,
+				-0.4915724992752075,
+				-0.28579196333885193
 			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":26,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":36,
 			"type":"SCALAR"
 		},
 		{
 			"bufferView":6,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC3"
+			"max":[
+				2
+			],
+			"min":[
+				0
+			],
+			"type":"SCALAR"
 		},
 		{
 			"bufferView":7,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC4"
+			"type":"VEC3"
 		},
 		{
 			"bufferView":8,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC3"
+			"type":"VEC4"
 		},
 		{
 			"bufferView":9,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":10,
 			"componentType":5126,
 			"count":121,
 			"max":[
@@ -641,22 +718,16 @@
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":10,
+			"bufferView":11,
 			"componentType":5126,
 			"count":121,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":11,
-			"componentType":5126,
-			"count":2,
-			"type":"VEC4"
-		},
-		{
 			"bufferView":12,
 			"componentType":5126,
 			"count":2,
-			"type":"VEC3"
+			"type":"VEC4"
 		},
 		{
 			"bufferView":13,
@@ -667,11 +738,17 @@
 		{
 			"bufferView":14,
 			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":15,
+			"componentType":5126,
 			"count":121,
 			"type":"VEC4"
 		},
 		{
-			"bufferView":15,
+			"bufferView":16,
 			"componentType":5126,
 			"count":2,
 			"type":"VEC3"
@@ -705,58 +782,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":8,
+			"byteLength":467,
 			"byteOffset":29348
 		},
 		{
 			"buffer":0,
+			"byteLength":8,
+			"byteOffset":29816
+		},
+		{
+			"buffer":0,
 			"byteLength":24,
-			"byteOffset":29356
+			"byteOffset":29824
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":29380
+			"byteOffset":29848
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":29412
+			"byteOffset":29880
 		},
 		{
 			"buffer":0,
 			"byteLength":484,
-			"byteOffset":29436
+			"byteOffset":29904
 		},
 		{
 			"buffer":0,
 			"byteLength":1452,
-			"byteOffset":29920
+			"byteOffset":30388
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":31372
+			"byteOffset":31840
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":31404
+			"byteOffset":31872
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":31428
+			"byteOffset":31896
 		},
 		{
 			"buffer":0,
 			"byteLength":1936,
-			"byteOffset":31452
+			"byteOffset":31920
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":33388
+			"byteOffset":33856
 		}
 	],
 	"samplers":[
@@ -767,7 +849,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":33412,
+			"byteLength":33880,
 			"uri":"vehicle.turtle.02.bin"
 		}
 	]

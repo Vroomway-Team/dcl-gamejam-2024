@@ -65,67 +65,67 @@ export class ScoreboardManager {
 			"roundTimer":      120,
 			"scores":          [
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 				{
-					"userName": generateRandomString(10),
+					"userName": generateRandomString(14),
 					"score"   : Math.floor(Math.random() * 50),
 				},
 			]
