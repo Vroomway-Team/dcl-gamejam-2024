@@ -24,8 +24,8 @@ import * as serverStateSpec 					from '../rooms/spec/server-state-spec'
 import * as clientStateSpec 					from '../rooms/spec/client-state-spec'
 import { VehicleState } from '../interfaces/interface.VehicleState'
 import * as CANNON from 'cannon'
-
-
+ 
+ 
 export function updateScores(room:Room){
 	//get all scores
 	var scores:ScoreboardEntry[] = [];
@@ -33,8 +33,9 @@ export function updateScores(room:Room){
 		scores.push({userName:value.playerName, score:value.score});
 	});
 	//sort scores
-	scores.sort((a:ScoreboardEntry, b:ScoreboardEntry) =>  a.score - b.score );
+	//scoreboard manager internally sorts the scores
+	//scores.sort((a:ScoreboardEntry, b:ScoreboardEntry) =>  a.score - b.score );
 	//update scores
-	SCOREBOARD_MANAGER.updateState({ scores:scores });
+	SCOREBOARD_MANAGER.updateState({ scores:scores,storesSorted:false });
 	console.log("updated scoreboard: ",JSON.stringify(scores));
 }

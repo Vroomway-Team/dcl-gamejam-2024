@@ -4,6 +4,7 @@ import { engine, Entity, GltfContainer, Rotate, TextAlignMode, TextShape, Transf
 import { ScoreboardEntry, ScoreboardState } from "../interfaces/interface.Scoreboard";
 import { Color4, Vector3, Quaternion } from "@dcl/sdk/math";
 import { Vector3ToVec3 } from "../utilities/func.Vectors";
+import { Networking } from "../networking";
 
 export class Scoreboard {
 	
@@ -126,6 +127,7 @@ export class Scoreboard {
 		}
 			
 		let rowCount = 0
+		const player = Networking.GetUserName()
 		// Create the replacement scoreboard rows
 		for (const [index, score] of this.state.scores.entries()) {
 			
@@ -152,7 +154,7 @@ export class Scoreboard {
 				transform, 
 				this.textSize,
 				this.rowWidth,
-				score.userName, 
+				score.userName == player ? score.userName+"(You)": score.userName, 
 				this.hideScores ? undefined:score.score, 
 				this.hideRanks ? undefined:index + 1
 			)
@@ -170,8 +172,15 @@ export class Scoreboard {
 	sortScores() {
         if (!this.state) return
 
+		//FIXME doing it N times for N boards
         // Sort the scores array by score value in descending order
-        this.state.scores.sort((a: ScoreboardEntry, b: ScoreboardEntry) => b.score - a.score)
+		if(!this.state.storesSorted){
+			//console.log("scores not sorted, sorting now")
+			this.state.scores.sort((a: ScoreboardEntry, b: ScoreboardEntry) => b.score - a.score)
+			this.state.storesSorted = true
+		}else{
+			//console.log("scores already sorted")
+		}
     }
 	
 }
