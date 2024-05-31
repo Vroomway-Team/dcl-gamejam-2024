@@ -9,13 +9,13 @@ export function setupGltfShapes() {
 		position: Vector3.create(0, 0, 0),
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
+	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_POINTER)
 
 	const arena1 = new GltfObject("assets/gltf/arena.top.gltf", {
 		position: Vector3.create(0, 0, 0),
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
+	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_POINTER)
 	
 	
 	// Animated arrows
@@ -23,13 +23,13 @@ export function setupGltfShapes() {
 		position: Vector3.create(0, 0, 0),
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0),
 		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS)
+	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_POINTER)
 	
 	const arrows2 = new GltfObject("assets/gltf/arena.entrance.arrows.gltf", {
 		position: Vector3.create(64, 0, 64),
 		rotation: Quaternion.fromEulerDegrees(0, 0, 0),
 		scale   : Vector3.One()
-	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_PHYSICS) 
+	}, ColliderLayer.CL_PHYSICS, ColliderLayer.CL_POINTER) 
 	
 
 	// Light bars

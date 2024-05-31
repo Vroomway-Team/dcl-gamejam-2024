@@ -1,8 +1,8 @@
 import { engine } 					from '@dcl/sdk/ecs'
 import * as CANNON 					from 'cannon'
 import { collidersFromJSON } 		from '../utilities/func.collidersFromJSON'
-import { createCannonWorldSystem } 		from '../systems/system.CannonWorld'
-import arenaBaseCollidersJSON 		from './arena.base.colliders.json'
+import { createCannonWorldSystem } 	from '../systems/system.CannonWorld'
+import arenaBaseCollidersJSON 		from './arena.colliders.json'
 
 console.log("setupCannonWorld.ts","loaded")
 // Setup cannon world and define some settings for it

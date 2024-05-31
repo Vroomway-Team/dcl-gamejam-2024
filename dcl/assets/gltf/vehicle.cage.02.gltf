@@ -25,7 +25,7 @@
 			"name":"cageCart2",
 			"rotation":[
 				0,
-				-0.15643443167209625,
+				-0.15643441677093506,
 				0,
 				0.987688422203064
 			],
@@ -40,8 +40,8 @@
 			"name":"cage2_collider",
 			"translation":[
 				0,
-				0.402952641248703,
-				-0.055950187146663666
+				0,
+				-0.30000001192092896
 			]
 		}
 	],
@@ -73,11 +73,6 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Hidden.005",
-			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -127,7 +122,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.024",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -148,7 +143,6 @@
 						}
 					},
 					"indices":12,
-					"material":2,
 					"mode":4
 				}
 			]
@@ -238,32 +232,32 @@
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"max":[
-				0.5965178608894348,
-				1.2510534524917603,
-				0.9761571884155273
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC4"
 		},
 		{
@@ -285,7 +279,7 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":467,
+			"byteLength":438,
 			"byteOffset":21712
 		}
 	],
@@ -297,7 +291,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":22180,
+			"byteLength":22152,
 			"uri":"vehicle.cage.02.bin"
 		}
 	]

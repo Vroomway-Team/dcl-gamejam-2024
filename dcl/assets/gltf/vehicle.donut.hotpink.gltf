@@ -22,7 +22,8 @@
 				5,
 				6,
 				7,
-				8
+				8,
+				9
 			]
 		}
 	],
@@ -32,8 +33,8 @@
 			"name":"donut.pink.._collider",
 			"translation":[
 				0,
-				0.5,
-				-0.10002145171165466
+				0,
+				-0.20000000298023224
 			]
 		},
 		{
@@ -108,13 +109,13 @@
 			"rotation":[
 				0.5383031964302063,
 				-0.8187140822410583,
-				0.00852584931999445,
-				0.19966037571430206
+				0.008525949902832508,
+				0.1996603012084961
 			],
 			"scale":[
 				0.304321825504303,
 				1.150534749031067,
-				0.304321825504303
+				0.3043217957019806
 			],
 			"translation":[
 				0.11480558663606644,
@@ -135,6 +136,9 @@
 				0.5566847920417786,
 				0.8379673957824707
 			]
+		},
+		{
+			"name":"pivot.donut.hotpink"
 		},
 		{
 			"mesh":8,
@@ -223,7 +227,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.046",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -523,7 +527,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.png"
+			"uri":"tex/AvatarWearables_TX-1.png"
 		},
 		{
 			"mimeType":"image/png",
@@ -536,14 +540,14 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.5965614318847656,
-				1.2510534524917603,
-				0.976115882396698
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
@@ -876,53 +880,53 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":441,
+			"byteLength":438,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":2239,
-			"byteOffset":444
+			"byteOffset":440
 		},
 		{
 			"buffer":0,
 			"byteLength":1595,
-			"byteOffset":2684
+			"byteOffset":2680
 		},
 		{
 			"buffer":0,
 			"byteLength":1601,
-			"byteOffset":4280
+			"byteOffset":4276
 		},
 		{
 			"buffer":0,
 			"byteLength":2545,
-			"byteOffset":5884
+			"byteOffset":5880
 		},
 		{
 			"buffer":0,
 			"byteLength":5669,
-			"byteOffset":8432
+			"byteOffset":8428
 		},
 		{
 			"buffer":0,
 			"byteLength":34168,
-			"byteOffset":14104
+			"byteOffset":14100
 		},
 		{
 			"buffer":0,
 			"byteLength":1410,
-			"byteOffset":48272
+			"byteOffset":48268
 		},
 		{
 			"buffer":0,
 			"byteLength":448,
-			"byteOffset":49684
+			"byteOffset":49680
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":50132
+			"byteOffset":50128
 		}
 	],
 	"samplers":[
@@ -933,7 +937,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":51312,
+			"byteLength":51308,
 			"uri":"vehicle.donut.hotpink.bin"
 		}
 	]

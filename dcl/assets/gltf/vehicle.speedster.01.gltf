@@ -25,7 +25,8 @@
 				8,
 				9,
 				10,
-				11
+				11,
+				12
 			]
 		}
 	],
@@ -35,8 +36,8 @@
 			"name":"speedster._collider",
 			"translation":[
 				0,
-				0.5,
-				-0.10002145171165466
+				0,
+				-0.20000000298023224
 			]
 		},
 		{
@@ -134,6 +135,9 @@
 			]
 		},
 		{
+			"name":"pivot.speedster.01"
+		},
+		{
 			"mesh":9,
 			"name":"speedster.neons.001",
 			"translation":[
@@ -220,7 +224,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.027",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -639,7 +643,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.png"
+			"uri":"tex/AvatarWearables_TX-1.png"
 		},
 		{
 			"mimeType":"image/png",
@@ -652,14 +656,14 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.5965614318847656,
-				1.2510534524917603,
-				0.976115882396698
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
@@ -1172,78 +1176,78 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":441,
+			"byteLength":438,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":2022,
-			"byteOffset":444
+			"byteOffset":440
 		},
 		{
 			"buffer":0,
 			"byteLength":670,
-			"byteOffset":2468
+			"byteOffset":2464
 		},
 		{
 			"buffer":0,
 			"byteLength":6763,
-			"byteOffset":3140
+			"byteOffset":3136
 		},
 		{
 			"buffer":0,
 			"byteLength":8473,
-			"byteOffset":9904
+			"byteOffset":9900
 		},
 		{
 			"buffer":0,
 			"byteLength":1562,
-			"byteOffset":18380
+			"byteOffset":18376
 		},
 		{
 			"buffer":0,
 			"byteLength":1595,
-			"byteOffset":19944
+			"byteOffset":19940
 		},
 		{
 			"buffer":0,
 			"byteLength":1601,
-			"byteOffset":21540
+			"byteOffset":21536
 		},
 		{
 			"buffer":0,
 			"byteLength":1768,
-			"byteOffset":23144
+			"byteOffset":23140
 		},
 		{
 			"buffer":0,
 			"byteLength":713,
-			"byteOffset":24912
+			"byteOffset":24908
 		},
 		{
 			"buffer":0,
 			"byteLength":1203,
-			"byteOffset":25628
+			"byteOffset":25624
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":26832
+			"byteOffset":26828
 		},
 		{
 			"buffer":0,
 			"byteLength":871,
-			"byteOffset":27284
+			"byteOffset":27280
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":28156
+			"byteOffset":28152
 		},
 		{
 			"buffer":0,
 			"byteLength":1128,
-			"byteOffset":29336
+			"byteOffset":29332
 		}
 	],
 	"samplers":[
@@ -1254,7 +1258,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":30464,
+			"byteLength":30460,
 			"uri":"vehicle.speedster.01.bin"
 		}
 	]

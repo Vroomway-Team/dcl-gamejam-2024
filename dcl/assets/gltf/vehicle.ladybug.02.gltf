@@ -26,13 +26,13 @@
 			"rotation":[
 				-0.7071067690849304,
 				2.2197239957222337e-07,
-				2.2197239957222337e-07,
+				2.2197235693965922e-07,
 				0.7071067690849304
 			],
 			"scale":[
 				0.9661568403244019,
-				0.9661568403244019,
-				0.9661568403244019
+				0.9661567807197571,
+				0.9661567807197571
 			],
 			"translation":[
 				3.395403496142535e-07,
@@ -94,8 +94,8 @@
 			"name":"ladybug2_collider",
 			"translation":[
 				0,
-				0.402952641248703,
-				-0.055950187146663666
+				0,
+				-0.30000001192092896
 			]
 		}
 	],
@@ -209,11 +209,6 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Hidden.010",
-			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -316,7 +311,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.032",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -337,7 +332,6 @@
 						}
 					},
 					"indices":24,
-					"material":2,
 					"mode":4
 				}
 			]
@@ -512,32 +506,32 @@
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"max":[
-				0.5965178608894348,
-				1.2510534524917603,
-				0.9761571884155273
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC4"
 		},
 		{
@@ -629,48 +623,48 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":467,
+			"byteLength":438,
 			"byteOffset":20700
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":21168
+			"byteOffset":21140
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":21176
+			"byteOffset":21148
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":21200
+			"byteOffset":21172
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":21232
+			"byteOffset":21204
 		},
 		{
 			"buffer":0,
 			"byteLength":484,
-			"byteOffset":21256
+			"byteOffset":21228
 		},
 		{
 			"buffer":0,
 			"byteLength":1452,
-			"byteOffset":21740
+			"byteOffset":21712
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":23192
+			"byteOffset":23164
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":23224
+			"byteOffset":23196
 		}
 	],
 	"samplers":[
@@ -681,7 +675,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":23248,
+			"byteLength":23220,
 			"uri":"vehicle.ladybug.02.bin"
 		}
 	]

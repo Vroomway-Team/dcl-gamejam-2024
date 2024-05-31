@@ -24,7 +24,8 @@
 				7,
 				8,
 				9,
-				10
+				10,
+				11
 			]
 		}
 	],
@@ -43,8 +44,8 @@
 			"name":"cat.02._collider",
 			"translation":[
 				0,
-				0.5,
-				0.057991355657577515
+				0,
+				-0.20000000298023224
 			]
 		},
 		{
@@ -180,6 +181,9 @@
 				0.19999976456165314,
 				0.3080044686794281
 			]
+		},
+		{
+			"name":"pivot.cat.02"
 		}
 	],
 	"materials":[
@@ -268,7 +272,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.060",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -495,6 +499,28 @@
 					"indices":46,
 					"material":2,
 					"mode":4
+				},
+				{
+					"attributes":{
+						"POSITION":47,
+						"NORMAL":48,
+						"TEXCOORD_0":49,
+						"TANGENT":50
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":10,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":51,
+					"material":4,
+					"mode":4
 				}
 			]
 		},
@@ -503,13 +529,13 @@
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":47,
-						"NORMAL":48,
-						"TEXCOORD_0":49
+						"POSITION":52,
+						"NORMAL":53,
+						"TEXCOORD_0":54
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
-							"bufferView":10,
+							"bufferView":11,
 							"attributes":{
 								"POSITION":0,
 								"NORMAL":1,
@@ -517,7 +543,7 @@
 							}
 						}
 					},
-					"indices":50,
+					"indices":55,
 					"material":0,
 					"mode":4
 				}
@@ -528,14 +554,14 @@
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":51,
-						"NORMAL":52,
-						"TEXCOORD_0":53,
-						"TANGENT":54
+						"POSITION":56,
+						"NORMAL":57,
+						"TEXCOORD_0":58,
+						"TANGENT":59
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
-							"bufferView":11,
+							"bufferView":12,
 							"attributes":{
 								"POSITION":0,
 								"NORMAL":1,
@@ -544,7 +570,7 @@
 							}
 						}
 					},
-					"indices":55,
+					"indices":60,
 					"material":0,
 					"mode":4
 				}
@@ -582,7 +608,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.png"
+			"uri":"tex/AvatarWearables_TX-1.png"
 		},
 		{
 			"mimeType":"image/png",
@@ -630,14 +656,14 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.5965614318847656,
-				1.2510534524917603,
-				0.8181029558181763
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.4438047707080841
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
@@ -893,7 +919,7 @@
 		},
 		{
 			"componentType":5126,
-			"count":486,
+			"count":374,
 			"max":[
 				0.4976358413696289,
 				0.6391472220420837,
@@ -908,22 +934,57 @@
 		},
 		{
 			"componentType":5126,
-			"count":486,
+			"count":374,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":486,
+			"count":374,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":486,
+			"count":374,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":1134,
+			"count":918,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":112,
+			"max":[
+				0.37227052450180054,
+				0.5602116584777832,
+				0.9220037460327148
+			],
+			"min":[
+				-0.37227052450180054,
+				0.43197429180145264,
+				0.792506217956543
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":112,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":112,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":112,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":216,
 			"type":"SCALAR"
 		},
 		{
@@ -1000,7 +1061,7 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":440,
+			"byteLength":438,
 			"byteOffset":5940
 		},
 		{
@@ -1040,18 +1101,23 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":5529,
+			"byteLength":4410,
 			"byteOffset":20512
 		},
 		{
 			"buffer":0,
+			"byteLength":1635,
+			"byteOffset":24924
+		},
+		{
+			"buffer":0,
 			"byteLength":1082,
-			"byteOffset":26044
+			"byteOffset":26560
 		},
 		{
 			"buffer":0,
 			"byteLength":2505,
-			"byteOffset":27128
+			"byteOffset":27644
 		}
 	],
 	"samplers":[
@@ -1062,7 +1128,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":29636,
+			"byteLength":30152,
 			"uri":"vehicle.cat.02.bin"
 		}
 	]
