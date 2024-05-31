@@ -41,17 +41,17 @@ export module GameManager {
             //send claim request
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
         } 
-        //  player's vehicle getting hit by another  
+        //  player's vehicle getting hit by another (can be called by a delegated NPC)
         PlayerVehicleCollisionCallback = function(playerID:string) {
             console.log("dropping tickets");
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
-            //notify player of hit
-            UI_MANAGER.hitNotify.show();
+            //if local player notify player of hit
+            if(playerID == Networking.GetUserID()) UI_MANAGER.hitNotify.show();
             //send claim request 
             Networking.ClientRoom.send("ticket-drop", { playerID:playerID });
         } 
-        //  ticket collides with ticket (pickup logic)
+        //  ticket collides with ticket (pickup logic) (can be called by a delegated NPC)
         TicketEntity.CallbackTicketCollision = function(ticketID:number, playerID:string) {
             console.log("player=",playerID," collided with ticket id="+ticketID);
             //halt if player is not part of a room
