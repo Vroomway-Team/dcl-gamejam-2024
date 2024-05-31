@@ -11,7 +11,7 @@ import {
 	TextAlignMode, 
 	TextShape, Transform, TransformType
 } 									from '@dcl/sdk/ecs'
-import { Quaternion, Vector3 } 		from '@dcl/sdk/math'
+import { Color3, Color4, Quaternion, Vector3 } 		from '@dcl/sdk/math'
 import { getPlayer } 				from '@dcl/sdk/src/players'
 import { VEHICLE_MANAGER } 			from '../arena/setupVehicleManager'
 import { AudioManager } 			from '../arena/audio-manager'
@@ -36,6 +36,10 @@ export class LobbyLabel {
 	ownerID      : string = "npc"
 	ownerName    : string = "npc"
 	isLocalPlayer: boolean = false
+	
+	colorDefault     : Color4 = Color4.White()
+	colorOwnedByMe   : Color4 = Color4.fromHexString("#FFCC00")
+	colorOwnedByOther: Color4 = Color4.Red()
 	
     /** server call to claim a vehicle */
     public static PlayerClaimCallback:undefined|PlayerClaimCallbackType;
@@ -148,16 +152,16 @@ export class LobbyLabel {
 		if (!isClaimed) {
 			// UNclaimed vehicle
 			this.setPointerHoverText("Claim " + modelName)
-			this.setText("Claim      \n" + modelName)
+			this.setText("Claim \n" + modelName, this.colorDefault)
 		} else {
 			if (isLocalPlayer) {
 				// Claimed by local player
 				this.setPointerHoverText("Remove Claim")
-				this.setText("Remove Claim\n" + modelName)
+				this.setText("Remove Claim \n" + modelName, this.colorOwnedByMe)
 			} else {
 				// Claimed by remote player
 				this.setPointerHoverText(" ")
-				this.setText(ownerName + "     \n" + modelName)
+				this.setText(ownerName + " \n" + modelName, this.colorOwnedByOther)
 			}
 		}
 	}
@@ -178,10 +182,12 @@ export class LobbyLabel {
 	}
 	
 	setText(
-		text: string = "Claim     "
+		text : string = "Claim",
+		color: Color4 = Color4.White()
 	): void {
 		console.log("LOBBYLABEL","setText","isClaimed",text)
-		const textShape = TextShape.getMutable(this.entityText)
-		textShape.text  = text
+		const textShape     = TextShape.getMutable(this.entityText)
+		textShape.text      = text
+		textShape.textColor = color
 	}
 }
