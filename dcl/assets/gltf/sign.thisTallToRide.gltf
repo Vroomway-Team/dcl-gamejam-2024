@@ -48,7 +48,7 @@
 			"translation":[
 				0,
 				1,
-				-0.006318351253867149
+				0.14368166029453278
 			]
 		},
 		{
@@ -441,7 +441,7 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":40,
+			"count":58,
 			"max":[
 				1,
 				0.036150455474853516,
@@ -456,22 +456,22 @@
 		},
 		{
 			"componentType":5126,
-			"count":40,
+			"count":58,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":40,
+			"count":58,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":40,
+			"count":58,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":72,
+			"count":96,
 			"type":"SCALAR"
 		},
 		{
@@ -513,13 +513,13 @@
 			"componentType":5126,
 			"count":8,
 			"max":[
-				0.5,
+				0.6000000238418579,
 				0,
 				1
 			],
 			"min":[
-				-0.5,
-				-0.23752574622631073,
+				-0.6000000238418579,
+				-0.28503093123435974,
 				-1
 			],
 			"type":"VEC3"
@@ -697,88 +697,88 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":622,
+			"byteLength":845,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":231,
-			"byteOffset":624
+			"byteOffset":848
 		},
 		{
 			"buffer":0,
-			"byteLength":267,
-			"byteOffset":856
-		},
-		{
-			"buffer":0,
-			"byteLength":253,
-			"byteOffset":1124
+			"byteLength":256,
+			"byteOffset":1080
 		},
 		{
 			"buffer":0,
 			"byteLength":253,
-			"byteOffset":1380
+			"byteOffset":1336
+		},
+		{
+			"buffer":0,
+			"byteLength":253,
+			"byteOffset":1592
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":1636
+			"byteOffset":1848
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":1644
+			"byteOffset":1856
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":1668
+			"byteOffset":1880
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":1700
+			"byteOffset":1912
 		},
 		{
 			"buffer":0,
 			"byteLength":164,
-			"byteOffset":1724
+			"byteOffset":1936
 		},
 		{
 			"buffer":0,
 			"byteLength":492,
-			"byteOffset":1888
+			"byteOffset":2100
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":2380
+			"byteOffset":2592
 		},
 		{
 			"buffer":0,
 			"byteLength":492,
-			"byteOffset":2412
+			"byteOffset":2624
 		},
 		{
 			"buffer":0,
 			"byteLength":492,
-			"byteOffset":2904
+			"byteOffset":3116
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":3396
+			"byteOffset":3608
 		},
 		{
 			"buffer":0,
 			"byteLength":492,
-			"byteOffset":3428
+			"byteOffset":3640
 		},
 		{
 			"buffer":0,
 			"byteLength":192,
-			"byteOffset":3920
+			"byteOffset":4132
 		}
 	],
 	"samplers":[
@@ -789,7 +789,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":4112,
+			"byteLength":4324,
 			"uri":"sign.thisTallToRide.bin"
 		}
 	]

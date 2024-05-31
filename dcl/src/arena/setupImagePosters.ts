@@ -1,16 +1,16 @@
-import { Material, MaterialTransparencyMode, MeshRenderer, TextureFilterMode, TextureWrapMode, Transform, engine } from "@dcl/sdk/ecs";
+import { Material, MaterialTransparencyMode, MeshRenderer, TextureFilterMode, TextureWrapMode, Transform, VideoPlayer, engine } from "@dcl/sdk/ecs";
 import { Vector3, Quaternion, Color4, Color3 }	from "@dcl/sdk/math";
 
 export function setupImagePosters(){
 
-    const tallPoster = engine.addEntity()
-    Transform.create(tallPoster, {
+    const tallPoster1 = engine.addEntity()
+    Transform.create(tallPoster1, {
         position: Vector3.create(61, 1.15, 36),
         scale: Vector3.create(2.25,2.25,2.25),
         rotation: Quaternion.fromEulerDegrees(0,-60,0)
     })
-    MeshRenderer.setPlane(tallPoster)
-    Material.setPbrMaterial(tallPoster, {
+    MeshRenderer.setPlane(tallPoster1)
+    Material.setPbrMaterial(tallPoster1, {
         texture: Material.Texture.Common({
           src: 'images/talSign.png',
         }),
@@ -21,6 +21,25 @@ export function setupImagePosters(){
         emissiveColor: Color3.White(),
         emissiveIntensity: 1
     })
+    const tallPoster1b = engine.addEntity()
+    Transform.create(tallPoster1b, {
+        position: Vector3.create(61.1, 1.73, 35.5),
+        scale: Vector3.create(2.25,2.25,2.25),
+        rotation: Quaternion.fromEulerDegrees(0,-60,0)
+    })
+    MeshRenderer.setPlane(tallPoster1b)
+    Material.setPbrMaterial(tallPoster1b, {
+        texture: Material.Texture.Common({
+          src: 'images/talSign2.png',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'images/talSign2.png',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+
     const tallPoster2 = engine.addEntity()
     Transform.create(tallPoster2, {
         position: Vector3.create(3, 1.15, 28),
@@ -34,6 +53,24 @@ export function setupImagePosters(){
         }),
         emissiveTexture: Material.Texture.Common({
             src: 'images/talSign.png',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    const tallPoster2b = engine.addEntity()
+    Transform.create(tallPoster2b, {
+        position: Vector3.create(3.1, 1.73, 28.5),
+        scale: Vector3.create(2.25,2.25,2.25),
+        rotation: Quaternion.fromEulerDegrees(0,120,0)
+    })
+    MeshRenderer.setPlane(tallPoster2b)
+    Material.setPbrMaterial(tallPoster2b, {
+        texture: Material.Texture.Common({
+          src: 'images/talSign2.png',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'images/talSign2.png',
         }),
         transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
         emissiveColor: Color3.White(),
@@ -74,5 +111,99 @@ export function setupImagePosters(){
         transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
         emissiveColor: Color3.White(),
         emissiveIntensity: 1
+    })
+    const disclaimer1 = engine.addEntity()
+    Transform.create(disclaimer1, {
+        position: Vector3.create(7.46, 3.5, 35),
+        scale: Vector3.create(3,3,3),
+        rotation: Quaternion.fromEulerDegrees(0,0,0)
+    })
+    MeshRenderer.setPlane(disclaimer1)
+    Material.setPbrMaterial(disclaimer1, {
+        texture: Material.Texture.Common({
+          src: 'images/disclaimer1.png',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'images/disclaimer1.png',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    const disclaimer2 = engine.addEntity()
+    Transform.create(disclaimer2, {
+        position: Vector3.create(57, 3.5, 29),
+        scale: Vector3.create(3,3,3),
+        rotation: Quaternion.fromEulerDegrees(0,180,0)
+    })
+    MeshRenderer.setPlane(disclaimer2)
+    Material.setPbrMaterial(disclaimer2, {
+        texture: Material.Texture.Common({
+          src: 'images/disclaimer1.png',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'images/disclaimer1.png',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    //Promos
+    const promo1 = engine.addEntity()
+    Transform.create(promo1, {
+        position: Vector3.create(59.5, 4.25, 23),
+        scale: Vector3.create(7,4,4),
+        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+    })
+    MeshRenderer.setPlane(promo1)
+    Material.setPbrMaterial(promo1, {
+        texture: Material.Texture.Common({
+          src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    const promo2 = engine.addEntity()
+    Transform.create(promo2, {
+        position: Vector3.create(4.5, 4.25, 41),
+        scale: Vector3.create(7,4,4),
+        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+    })
+    MeshRenderer.setPlane(promo2)
+    Material.setPbrMaterial(promo2, {
+        texture: Material.Texture.Common({
+          src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    
+    const screen = engine.addEntity()
+        MeshRenderer.setPlane(screen)
+        Transform.create(screen, { 
+            position: { x: 4.5, y: 4.25, z: 23 },
+            scale: {x: 6.5, y: 4, z:4},
+            rotation: Quaternion.fromEulerDegrees(0,90,0)
+        }
+    )
+    VideoPlayer.create(screen, {
+      src: 'videos/promo1.mp4',
+      playing: true,
+      loop: true
+    })
+    const videoTexture = Material.Texture.Video({ videoPlayerEntity: screen })
+    Material.setPbrMaterial(screen, {
+      texture: videoTexture,
+      roughness: 1.0,
+      specularIntensity: 0,
+      metallic: 0,
     })
 }
