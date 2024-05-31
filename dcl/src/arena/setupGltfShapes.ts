@@ -126,7 +126,6 @@ export function setupGltfShapes() {
 		scale   : Vector3.create(2,2,2)
 	})
 	//Spectator Pods
-
 	const spectatorPod1 = engine.addEntity()
   	Transform.create(spectatorPod1, {
     	position: {x:34.5, y:0.1, z:39},
@@ -149,6 +148,32 @@ export function setupGltfShapes() {
     	() => { movePlayerTo({
     	    newRelativePosition: Vector3.create(4,25,32),
     	    cameraTarget: Vector3.create(32, 20, 50),
+    	  })
+    	  
+    	}
+  	)
+	const spectatorPod2 = engine.addEntity()
+  	Transform.create(spectatorPod2, {
+    	position: {x:32, y:22, z:5},
+    	scale: {x:1, y:1, z:1},
+    	rotation: Quaternion.fromEulerDegrees(0,-165,0)
+  	})
+ 	GltfContainer.create(spectatorPod2, {
+    	src: 'assets/gltf/spectate.pod2.gltf'
+  	})
+  	utils.triggers.addTrigger(
+    	spectatorPod2,
+    	utils.NO_LAYERS,
+    	utils.PLAYER_LAYER_ID,
+    	[
+      	{
+      	  type: 'sphere',
+      	  radius:1
+      	}
+    	],
+    	() => { movePlayerTo({
+    	    newRelativePosition: Vector3.create(38,5,32),
+    	    cameraTarget: Vector3.create(32, 5, 32),
     	  })
     	  
     	}
