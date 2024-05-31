@@ -12,7 +12,7 @@ interface Particle {
 
 export class ParticleManager {
 	
-	private particleCount : number     = 10
+	private particleCount : number     = 4
 	private particles     : Particle[] = []
 
 	private ticketSrc     : string = "assets/gltf/particles.ticket-drop.gltf"
@@ -32,6 +32,15 @@ export class ParticleManager {
 	} = {
 		ticket: 0,
 		bump  : 0
+	}
+	
+	private cooldownDuration = 600 // ms
+	
+	private cooldownActive: { 
+		[key in ParticleType]: boolean 
+	} = {
+		ticket: false,
+		bump  : false
 	}
 
 	constructor() {
@@ -59,19 +68,28 @@ export class ParticleManager {
 	triggerParticleAtPosition(
 		type    : ParticleType, 
 		position: Vector3
-	) {
+	) {		
 		const index = this.currentIndex[type]
 		const particlesOfType = this.particles.filter(p => p.type === type)
 		
 		if (particlesOfType.length > 0) {
 			const particle = particlesOfType[index]
 
-			if (particle) { 
+			if (particle && !this.cooldownActive[type]) { 
+				this.cooldownActive[type] = true
+				
 				const trans = Transform.getMutable(particle.gltf.entity)
 				trans.position = position
 				
 				particle.gltf.animateOnce()
+				
+				this.currentIndex[type] = (index + 1) % this.particleCount 
+				
 				console.log("ParticleManager() playing animation")
+				
+				utils.timers.setTimeout(() => {
+					this.cooldownActive[type] = false
+				}, this.cooldownDuration)
 				
 				utils.timers.setTimeout(() => {
 					trans.position = this.idleTransform.position
@@ -79,8 +97,6 @@ export class ParticleManager {
 					Animator.stopAllAnimations(particle.gltf.entity)
 
 				}, 1000)
-				
-				this.currentIndex[type] = (index + 1) % 10
 				
 			} else {
 				console.error(`No particle of type ${type} found at index ${index}`)

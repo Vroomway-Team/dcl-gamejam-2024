@@ -18,6 +18,7 @@ import { FunctionCallbackIndex } from '../utilities/escentials'
 import { GameManager } from '../arena/game-manager'
 import { Networking } from '../networking'
 import { UI_MANAGER } from './class.UIManager'
+import { PARTICLE_MANAGER } from '../arena/setupParticleManager'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
@@ -220,13 +221,16 @@ export class Vehicle {
 			const dot1 = Vector3.dot(dirYoureFacing, Vector3.normalize(dirToThem))
 			const dot2 = Vector3.dot(dirYoureFacing, dirTheyreFacing)
 			
+			const midPoint = Vector3.lerp(yourPos, theirPos, 0.5)
+			
 			// Check if the dot products meet the required criteria, see here for logic: https://i.imgur.com/CtrEKVR.png
 			if (dot1 > 0.707 && dot2 > 0.707) { 
 				// We hit them in the rear
 				// TRIGGER: they should drop tickets
 				console.log("vehicle.class: onCollideWithBody(): We HIT someone!", event.body.id)
-			}
-			if (dot1 < -0.707 && dot2 > 0.707) {
+				PARTICLE_MANAGER.triggerParticleAtPosition("ticket", midPoint)
+				
+			} else if (dot1 < -0.707 && dot2 > 0.707) {
 				// They hit us in the rear
 				// TRIGGER: we should drop tickets
 				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
@@ -235,6 +239,10 @@ export class Vehicle {
 					UI_MANAGER.hitNotify.show()
 					GameManager.PlayerVehicleCollisionCallback();
 				}
+				PARTICLE_MANAGER.triggerParticleAtPosition("ticket", midPoint)
+				
+			} else {
+				PARTICLE_MANAGER.triggerParticleAtPosition("bump", midPoint)
 			}
 		}
 	}
