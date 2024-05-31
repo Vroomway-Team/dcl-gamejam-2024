@@ -62,31 +62,24 @@ Some links to various non-Git resources:
 
 ---
 
-## Cloning this repository
-
-1. Clone this repo in your favourite way: via GitHub Desktop, or by running the following in a terminal
-    ```
-    git clone https://github.com/stom66/dcl-gamejam-2024
-    ```
-1. Once complete, open the folder in a terminal or in VSCode and run the following:
-    ```
-     cd dcl && npm install
-    ```
-
----
-
 ## Running the DCL scene
 
 > Note: the dcl scene is in the `/dcl` folder
 
-1. Open the repository folder in VSCode
-1. Open a terminal with: `Ctrl + '`
-1. Type in the terminal: 
-```
-cd dcl
-npm install
-npm run start
-```
+1. Clone this repo in your favourite way: via GitHub Desktop, or by running the following in a terminal
+    ```
+    git clone https://github.com/Vroomway-Team/dcl-gamejam-2024
+    ```
+	
+1. Open the project in a terminal or in VSCode and run the following:
+    ```
+     cd dcl && npm install
+    ```
+	
+1. Run the scene:
+    ```
+     npm run start
+    ```
 
 ---
 
