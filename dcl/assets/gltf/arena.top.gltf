@@ -208,9 +208,9 @@
 			"name":"decentralandText.003",
 			"rotation":[
 				0.6532814502716064,
-				-0.27059799432754517,
-				0.2705979645252228,
-				0.6532816886901855
+				-0.2705979645252228,
+				0.2705979347229004,
+				0.6532816290855408
 			],
 			"scale":[
 				0.5606948137283325,
@@ -1063,7 +1063,7 @@
 		},
 		{
 			"componentType":5126,
-			"count":5624,
+			"count":5120,
 			"max":[
 				0.9975923299789429,
 				19.966415405273438,
@@ -1071,64 +1071,64 @@
 			],
 			"min":[
 				-0.9975923299789429,
-				10.261730194091797,
+				14.16329574584961,
 				-0.9975923299789429
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":5624,
+			"count":5120,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":5624,
+			"count":5120,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":5624,
+			"count":5120,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":8448,
+			"count":7680,
 			"type":"SCALAR"
 		},
 		{
 			"componentType":5126,
-			"count":504,
+			"count":1008,
 			"max":[
 				0.9257117509841919,
-				11.529438018798828,
+				15.43100357055664,
 				0.9257117509841919
 			],
 			"min":[
 				-0.9257117509841919,
-				10.895584106445312,
+				14.797149658203125,
 				-0.9257117509841919
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":504,
+			"count":1008,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":504,
+			"count":1008,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":504,
+			"count":1008,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":768,
+			"count":1536,
 			"type":"SCALAR"
 		},
 		{
@@ -1473,7 +1473,7 @@
 		},
 		{
 			"componentType":5126,
-			"count":1696,
+			"count":1694,
 			"max":[
 				30.948463439941406,
 				2.0080130100250244,
@@ -1488,17 +1488,17 @@
 		},
 		{
 			"componentType":5126,
-			"count":1696,
+			"count":1694,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":1696,
+			"count":1694,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":1696,
+			"count":1694,
 			"type":"VEC4"
 		},
 		{
@@ -1703,118 +1703,118 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":35345,
+			"byteLength":33392,
 			"byteOffset":20556
 		},
 		{
 			"buffer":0,
-			"byteLength":2448,
-			"byteOffset":55904
+			"byteLength":4600,
+			"byteOffset":53948
 		},
 		{
 			"buffer":0,
 			"byteLength":18650,
-			"byteOffset":58352
+			"byteOffset":58548
 		},
 		{
 			"buffer":0,
 			"byteLength":5201,
-			"byteOffset":77004
+			"byteOffset":77200
 		},
 		{
 			"buffer":0,
 			"byteLength":7151,
-			"byteOffset":82208
+			"byteOffset":82404
 		},
 		{
 			"buffer":0,
 			"byteLength":2056,
-			"byteOffset":89360
+			"byteOffset":89556
 		},
 		{
 			"buffer":0,
 			"byteLength":4680,
-			"byteOffset":91416
+			"byteOffset":91612
 		},
 		{
 			"buffer":0,
 			"byteLength":10300,
-			"byteOffset":96096
+			"byteOffset":96292
 		},
 		{
 			"buffer":0,
 			"byteLength":3765,
-			"byteOffset":106396
+			"byteOffset":106592
 		},
 		{
 			"buffer":0,
 			"byteLength":5100,
-			"byteOffset":110164
+			"byteOffset":110360
 		},
 		{
 			"buffer":0,
 			"byteLength":390,
-			"byteOffset":115264
+			"byteOffset":115460
 		},
 		{
 			"buffer":0,
-			"byteLength":9666,
-			"byteOffset":115656
+			"byteLength":9665,
+			"byteOffset":115852
 		},
 		{
 			"buffer":0,
-			"byteLength":8505,
-			"byteOffset":125324
+			"byteLength":8499,
+			"byteOffset":125520
 		},
 		{
 			"buffer":0,
 			"byteLength":702,
-			"byteOffset":133832
+			"byteOffset":134020
 		},
 		{
 			"buffer":0,
 			"byteLength":6356,
-			"byteOffset":134536
+			"byteOffset":134724
 		},
 		{
 			"buffer":0,
 			"byteLength":1455,
-			"byteOffset":140892
+			"byteOffset":141080
 		},
 		{
 			"buffer":0,
 			"byteLength":986,
-			"byteOffset":142348
+			"byteOffset":142536
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":143336
+			"byteOffset":143524
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":143344
+			"byteOffset":143532
 		},
 		{
 			"buffer":0,
 			"byteLength":1196,
-			"byteOffset":143368
+			"byteOffset":143556
 		},
 		{
 			"buffer":0,
 			"byteLength":4784,
-			"byteOffset":144564
+			"byteOffset":144752
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":149348
+			"byteOffset":149536
 		},
 		{
 			"buffer":0,
 			"byteLength":64,
-			"byteOffset":149372
+			"byteOffset":149560
 		}
 	],
 	"samplers":[
@@ -1825,7 +1825,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":149436,
+			"byteLength":149624,
 			"uri":"arena.top.bin"
 		}
 	]
