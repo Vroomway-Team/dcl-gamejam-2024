@@ -20,6 +20,7 @@ import { Networking } from '../networking'
 import { NPCManager } from '../arena/npc-manager'
 import { UI_MANAGER } from './class.UIManager'
 import { PARTICLE_MANAGER } from '../arena/setupParticleManager'
+import { AudioManager } from '../arena/audio-manager'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
@@ -216,6 +217,8 @@ export class Vehicle {
 		/* this.manager.userUnclaimVehicle(this.vehicleID) */
 	}
 	
+	private bumpTimeStamp:number = 0;
+	private dropTimeStamp:number = 0;
 	onCollideWithBody(event: CANNON.ICollisionEvent) {
 		if (event.body.collisionFilterGroup == 2) {
 			// Work out the dot products of the ways the vehicles are facing, and how they are positioned
@@ -248,8 +251,12 @@ export class Vehicle {
 				// They hit us in the rear
 				// TRIGGER: we should drop tickets
 				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
-				//trigger particles
+				//drop cooldown
+				if(this.dropTimeStamp >= Date.now()) return;
+				this.dropTimeStamp = Date.now()+500;
+				//play back-bump fx
 				PARTICLE_MANAGER.triggerParticleAtPosition("ticket", midPoint)
+				AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_TICKET_DROP)
 				//halt if vehicle is not owned by local player or a delegated ai controller
 				if(this.ownerID != Networking.GetUserID() && !NPCManager.NPC_DELEGATE_REG.containsKey(this.ownerID)) {
 					console.log("vehicle collision ignored");
@@ -258,7 +265,12 @@ export class Vehicle {
 				//if vehicle is owned by the local player, drop tickets
 				GameManager.PlayerVehicleCollisionCallback(this.ownerID);
 			} else {
+				//bump cooldown
+				if(this.bumpTimeStamp >= Date.now()) return;
+				this.bumpTimeStamp = Date.now()+100;
+				//play bump fx
 				PARTICLE_MANAGER.triggerParticleAtPosition("bump", midPoint)
+				AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_CART_BUMP)
 			}
 		}
 	}
