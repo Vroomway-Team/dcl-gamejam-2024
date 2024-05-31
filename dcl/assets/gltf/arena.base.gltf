@@ -20,7 +20,10 @@
 				32,
 				33,
 				34,
-				35
+				35,
+				36,
+				37,
+				38
 			]
 		}
 	],
@@ -425,6 +428,20 @@
 		},
 		{
 			"mesh":29,
+			"name":"Circle.001",
+			"scale":[
+				11.254268646240234,
+				12.512131690979004,
+				14.151524543762207
+			],
+			"translation":[
+				32,
+				7.257572650909424,
+				-32
+			]
+		},
+		{
+			"mesh":30,
 			"name":"floor.lobby",
 			"scale":[
 				32,
@@ -438,7 +455,7 @@
 			]
 		},
 		{
-			"mesh":30,
+			"mesh":31,
 			"name":"lobby.jumbotron",
 			"translation":[
 				32,
@@ -447,7 +464,41 @@
 			]
 		},
 		{
-			"mesh":31,
+			"mesh":32,
+			"name":"Plane.003",
+			"scale":[
+				7.043678283691406,
+				7.043677806854248,
+				7.043677806854248
+			],
+			"translation":[
+				32,
+				4.1732330322265625,
+				-32.000003814697266
+			]
+		},
+		{
+			"mesh":33,
+			"name":"Plane.002",
+			"rotation":[
+				0.5,
+				0.5,
+				0.5,
+				0.5
+			],
+			"scale":[
+				8.805830955505371,
+				8.805830955505371,
+				8.805830955505371
+			],
+			"translation":[
+				32,
+				4.157749176025391,
+				-32
+			]
+		},
+		{
+			"mesh":34,
 			"name":"arena.base.cannon._collider",
 			"scale":[
 				1,
@@ -549,6 +600,18 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":10
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"alphaCutoff":0.5,
+			"alphaMode":"MASK",
+			"name":"texture.atlas.03",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":11
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -1476,7 +1539,7 @@
 			]
 		},
 		{
-			"name":"Plane.010",
+			"name":"Circle.001",
 			"primitives":[
 				{
 					"attributes":{
@@ -1496,21 +1559,21 @@
 							}
 						}
 					},
-					"indices":169,
-					"material":5,
+					"indices":174,
+					"material":4,
 					"mode":4
 				}
 			]
 		},
 		{
-			"name":"Cube.010",
+			"name":"Plane.010",
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":174,
-						"NORMAL":175,
-						"TEXCOORD_0":176,
-						"TANGENT":177
+						"POSITION":175,
+						"NORMAL":176,
+						"TEXCOORD_0":177,
+						"TANGENT":178
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
@@ -1523,14 +1586,14 @@
 							}
 						}
 					},
-					"indices":178,
+					"indices":169,
 					"material":5,
 					"mode":4
 				}
 			]
 		},
 		{
-			"name":"Cube.005",
+			"name":"Cube.010",
 			"primitives":[
 				{
 					"attributes":{
@@ -1551,6 +1614,87 @@
 						}
 					},
 					"indices":183,
+					"material":5,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Plane.024",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":184,
+						"NORMAL":185,
+						"TEXCOORD_0":186,
+						"TANGENT":187
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":39,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":188,
+					"material":6,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Plane.005",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":189,
+						"NORMAL":190,
+						"TEXCOORD_0":191,
+						"TANGENT":192
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":40,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":188,
+					"material":6,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Cube.005",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":193,
+						"NORMAL":194,
+						"TEXCOORD_0":195,
+						"TANGENT":196
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":41,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":197,
 					"mode":4
 				}
 			]
@@ -1600,6 +1744,10 @@
 		{
 			"sampler":0,
 			"source":4
+		},
+		{
+			"sampler":0,
+			"source":5
 		}
 	],
 	"images":[
@@ -1627,6 +1775,11 @@
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
 			"uri":"tex/AvatarWearables_TX-1.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"texture-atlas-icons-02",
+			"uri":"tex/texture-atlas-icons-02.png"
 		}
 	],
 	"accessors":[
@@ -2842,6 +2995,41 @@
 		},
 		{
 			"componentType":5126,
+			"count":320,
+			"max":[
+				1,
+				0,
+				1
+			],
+			"min":[
+				-1,
+				0,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":320,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":320,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":320,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":960,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
 			"count":4,
 			"max":[
 				1,
@@ -2904,6 +3092,71 @@
 			"componentType":5123,
 			"count":126,
 			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"max":[
+				4.4746785163879395,
+				0.2676379680633545,
+				4.320832252502441
+			],
+			"min":[
+				-4.4746785163879395,
+				-0.2676379978656769,
+				-4.320832252502441
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":48,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"max":[
+				0.26896563172340393,
+				3.592789649963379,
+				2.8511855602264404
+			],
+			"min":[
+				-0.26896563172340393,
+				-3.592789649963379,
+				-2.8511853218078613
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":32,
+			"type":"VEC4"
 		},
 		{
 			"componentType":5126,
@@ -3124,18 +3377,33 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":218,
+			"byteLength":1547,
 			"byteOffset":110148
 		},
 		{
 			"buffer":0,
+			"byteLength":218,
+			"byteOffset":111696
+		},
+		{
+			"buffer":0,
 			"byteLength":923,
-			"byteOffset":110368
+			"byteOffset":111916
+		},
+		{
+			"buffer":0,
+			"byteLength":410,
+			"byteOffset":112840
+		},
+		{
+			"buffer":0,
+			"byteLength":435,
+			"byteOffset":113252
 		},
 		{
 			"buffer":0,
 			"byteLength":2247,
-			"byteOffset":111292
+			"byteOffset":113688
 		}
 	],
 	"samplers":[
@@ -3146,7 +3414,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":113540,
+			"byteLength":115936,
 			"uri":"arena.base.bin"
 		}
 	]
