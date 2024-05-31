@@ -44,13 +44,19 @@ export type PlayerState = ColyseusCallbacksReferences<serverStateSpec.PlayerStat
     };
 
 export type VehicleState = ColyseusCallbacksReferences<serverStateSpec.VehicleState> &
-    serverStateSpec.PlayerState & {
+    serverStateSpec.VehicleState & {
         vehicleID: number;
         ownerID: string;
     };
 
+export type NPCControllerState = ColyseusCallbacksReferences<serverStateSpec.NPCControllerState> &
+    serverStateSpec.NPCControllerState & {
+        ownerID: string;
+        npcID: string;
+    };
+
 export type TicketState = ColyseusCallbacksReferences<serverStateSpec.TicketState> &
-    serverStateSpec.PlayerState & {
+    serverStateSpec.TicketState & {
         ticketID:number;
         PositionCurrent:Vector3State;
     };

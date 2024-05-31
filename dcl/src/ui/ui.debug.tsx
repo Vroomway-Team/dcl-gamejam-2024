@@ -75,7 +75,7 @@ export function uiDebug() {
 						variant     = 'primary'
 						fontSize    = {14}
 						onMouseDown = {() => {
-							VEHICLE_MANAGER.onRoundStart()
+							VEHICLE_MANAGER.onRoundStart(false)
 							UI_MANAGER.startTimer()
 						}}
 					/>

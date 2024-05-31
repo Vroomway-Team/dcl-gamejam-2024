@@ -91,6 +91,14 @@ export interface Vector3State {
     angularVelocity: Vector3State;
   }
 
+  /** represents an pilot in the game */
+  export interface NPCControllerState {
+    /** player calculating npc factors */
+    ownerID: string;
+    /** npc's player ID */
+    npcID: string;
+  }
+
   /** represents a ticket in the game */
   export interface TicketState {
     ticketID:number;

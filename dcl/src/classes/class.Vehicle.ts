@@ -14,15 +14,15 @@ import { VehicleManager } 				from './class.VehicleManager'
 import { VehicleState } 				from '../interfaces/interface.VehicleState'
 import { getEntityPosition, getForwardDirectionFromRotation } 			from '../utilities/func.entityData'
 import { Vec3ToVector3, Vector3ToVec3 } from '../utilities/func.Vectors'
-import { FunctionCallbackIndex } from '../utilities/escentials'
+import { CustomIndexComponent, FunctionCallbackIndex } from '../utilities/escentials'
 import { GameManager } from '../arena/game-manager'
 import { Networking } from '../networking'
+import { NPCManager } from '../arena/npc-manager'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
-	vehiclePhysicsMaterial.friction    = 0.5
-	vehiclePhysicsMaterial.restitution = 0.9
-
+vehiclePhysicsMaterial.friction    = 0.5
+vehiclePhysicsMaterial.restitution = 0.9
 
 // Define the Vehicle class
 export class Vehicle {
@@ -45,8 +45,9 @@ export class Vehicle {
 	vehicleID            : number			// ID of the instance in the vehicle manager 
 	modelName            : string  = "car"  // Name of the vehicle.
 	
-	ownerID              : string  = "npc"  // UUID of the owner. Left at "npc" if not owned.
-	ownerName            : string  = "npc"  // Name of the owner. Left at "npc" if not owned.
+	//NOTE: server will assert npc fill now (vehicles are no longer just auto-filled with npcs)
+	ownerID              : string  = ""  // UUID of the owner. Left at "" if not owned.
+	ownerName            : string  = ""  // Name of the owner. Left at "" if not owned.
 	isClaimed            : boolean = false  //
 	isLocalPlayer        : boolean = false  // Denote if this vehicle is being controlled by a local player
 	
@@ -78,9 +79,6 @@ export class Vehicle {
 	score                : number  = 0
 	rank                 : number  = 0
 		
-	/** callback to be made when a transition is completed */
-	public static CallbackVehicleTransitionCompleted:FunctionCallbackIndex;  
-
 	constructor(
 		manager       : VehicleManager,
 		vehicleID     : number,
@@ -139,7 +137,7 @@ export class Vehicle {
 		// Add the lobby Label
 		this.lobbyLabel = new LobbyLabel(vehicleID, this.lobbyTransform, this.modelName)
 		
-		// Add the trigger to toggle player authority
+		/* / Add the trigger to toggle player authority
 		utils.triggers.addTrigger(
 			this.entityPos,
 			utils.NO_LAYERS,
@@ -152,8 +150,25 @@ export class Vehicle {
 			}],
 			(otherEntity) => { this.onEnterTrigger()  }, //OnEnterTrigger
 			(otherEntity) => { this.onExitTrigger() }, //OnExitTrigger
-		)
+		)*/
 		//utils.triggers.enableDebugDraw(true)
+
+		//trigger for ticket collection
+		utils.triggers.addTrigger(
+			this.entityPos,
+			utils.LAYER_7,
+			utils.LAYER_8,
+			[{  
+				type: 'sphere',	
+				position: { x:0, y:0.5, z:0 },
+				radius: 2
+			}],
+			//function(otherEntity) { console.log("vehicle hit entity="+(otherEntity as Entity).toString()) }
+		);
+		CustomIndexComponent.create(this.entityPos, {Index:vehicleID});
+		const comp = CustomIndexComponent.get(this.entityPos);
+		console.log("entity id=",this.entityPos.toString(),", comp=",comp.Index);
+
 		
 		// Set up the cannon body used for physics sims to represent the vehicle
 		// Note we're not using a RigidVehicle or RaycastVehicle, just a regular Body with a Sphere shape
@@ -183,7 +198,6 @@ export class Vehicle {
 		// Add it to the world
 		world.addBody(this.cannonBody)
 	}
-	
 	
 	// Triggered when an entity enters the vehicle trigger box, enables control
 	// These are disabled in favour of the VehicleManager controlling ownership.
@@ -229,10 +243,13 @@ export class Vehicle {
 				// They hit us in the rear
 				// TRIGGER: we should drop tickets
 				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
+				//halt if vehicle is not owned by local player or a delegated ai controller
+				if(this.ownerID != Networking.GetUserID() && !NPCManager.NPC_DELEGATE_REG.containsKey(this.ownerID)) {
+					console.log("vehicle collision ignored");
+					return;
+				} 
 				//if vehicle is owned by the local player, drop tickets
-				if(this.ownerID == Networking.GetUserID()) {
-					GameManager.PlayerVehicleCollisionCallback();
-				}
+				GameManager.PlayerVehicleCollisionCallback(this.ownerID);
 			}
 		}
 	}
@@ -270,12 +287,18 @@ export class Vehicle {
 		
 		this.updateLobbyLabel() 
 	}
+
+	/** returns true if vehicle is occupied (has a user or npc registered) */
+	hasOwner(): boolean {
+		if(this.ownerID == "") return false;
+		return true;
+	}
 	
 	// Remove the owner for this vehicle, is triggered by VehicleManager, which in turn is
 	// triggered locally by the LobbyLabel, or by the COLYSEUS server
 	clearOwner(): void {
-		this.ownerID       = "npc"
-		this.ownerName     = "npc"
+		this.ownerID       = ""
+		this.ownerName     = ""
 		this.isClaimed     = false
 		this.isLocalPlayer = false
 		
@@ -308,17 +331,13 @@ export class Vehicle {
 	setVehicleState(
 		state: VehicleState
 	): void {
-		
 		// If the vehicle is being controlled by the local player then should likely use our own cannonBody
 		// as the source of truth properties
-		// TODO: add some kind of flag or check ot ignore this for locally controlled vehicles
-		if (!this.isLocalPlayer) {
-			const pos = new CANNON.Vec3(state.position.x,state.position.y,state.position.z);
-			this.cannonBody.position.copy(pos)
-			this.cannonBody.velocity.copy(state.velocity)
-			this.targetHeading = state.heading
-			this.cannonBody.quaternion.setFromEuler(0, state.heading, 0)
-		}
+		const pos = new CANNON.Vec3(state.position.x,state.position.y,state.position.z);
+		this.cannonBody.position.copy(pos)
+		this.cannonBody.velocity.copy(state.velocity)
+		this.targetHeading = state.heading
+		this.cannonBody.quaternion.setFromEuler(0, state.heading, 0)
 	
 		// Update the current vehicle state to sync it with the colyseus server
 		this.score = state.score
@@ -465,9 +484,7 @@ export class Vehicle {
 			//reset cannon object
 			this.currentSpeed = 0
 			this.resetCannonBodyAtPosition(transform.position)
-			//attempt callback
-			if(Vehicle.CallbackVehicleTransitionCompleted) Vehicle.CallbackVehicleTransitionCompleted(this.vehicleID);
-		}, duration + 1)	
+		}, duration + 1);
 	}
 	
 	resetCannonBodyAtPosition(position: Vector3) {		
@@ -566,5 +583,28 @@ export class Vehicle {
 				easingFunction: EasingFunction.EF_LINEAR,
 			})
 		} 
+	}
+
+	PushToWaypoint(target:Vector3, speed:number) {
+		//target direction
+        const direction = {
+			x: target.x -this.getPosition().x,
+			y: target.x -this.getPosition().y,
+			z: target.x -this.getPosition().z
+		}
+		//distance to target
+		const length = Math.sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+		//ormalize the direction vector
+		direction.x /= length;
+		direction.y /= length;
+		direction.z /= length;
+		//
+		const vel = new CANNON.Vec3(
+			direction.x*speed,
+			direction.y*speed,
+			direction.z*speed,
+		);
+        //apply force to cannon body
+		this.cannonBody.applyForce(vel, this.cannonBody.position)
 	}
 }

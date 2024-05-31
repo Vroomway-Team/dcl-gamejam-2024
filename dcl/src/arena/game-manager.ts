@@ -18,7 +18,8 @@ export module GameManager {
     /** wrapper for debugging logs */
     function addLog(log:string) { if(isDebugging) console.log("GAME MANAGER: "+log); }
     
-    export var PlayerVehicleCollisionCallback:PlayerUnclaimCallbackType;
+    export type PlayerVehicleCollisionCallbackType = (playerID:string) => void;
+    export var PlayerVehicleCollisionCallback:PlayerVehicleCollisionCallbackType;
 
     /** initializes the game manager, setting the default entry state */
     export function Initialize() {
@@ -38,22 +39,22 @@ export module GameManager {
             if(Networking.ClientRoom == undefined) return;
             //send claim request
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
-        }
-        //  player attempts to claim a vehicle  
-        PlayerVehicleCollisionCallback = function() {
+        } 
+        //  player's vehicle getting hit by another  
+        PlayerVehicleCollisionCallback = function(playerID:string) {
             console.log("dropping tickets");
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
-            //send claim request
-            Networking.ClientRoom.send("ticket-drop", {});
-        }
+            //send claim request 
+            Networking.ClientRoom.send("ticket-drop", { playerID:playerID });
+        } 
         //  ticket collides with ticket (pickup logic)
-        TicketEntity.CallbackTicketCollision = function(index:number) {
-            console.log("player collided with ticket id="+index);
+        TicketEntity.CallbackTicketCollision = function(ticketID:number, playerID:string) {
+            console.log("player=",playerID," collided with ticket id="+ticketID);
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send interaction request
-            Networking.ClientRoom.send("ticket-interact", { playerID:Networking.GetUserID(), ticketID:index });
+            Networking.ClientRoom.send("ticket-interact", { playerID:playerID, ticketID:ticketID });
         };
  
         addLog("initialized!");
@@ -79,8 +80,8 @@ export module GameManager {
         //if game is avtively starting
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
             UI_MANAGER.matchStarted.show();
-            VEHICLE_MANAGER.onRoundStart();
-        }
+            VEHICLE_MANAGER.onRoundStart(false);
+        } 
         //if game is actively ending
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
             //NOT THE RIGHT PLACE FOR THIS ANNOUNCMENT, NEED TO GET PLAYER SCORE somewhere

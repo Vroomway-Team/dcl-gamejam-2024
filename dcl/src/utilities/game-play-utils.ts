@@ -36,5 +36,5 @@ export function updateScores(room:Room){
 	scores.sort((a:ScoreboardEntry, b:ScoreboardEntry) =>  a.score - b.score );
 	//update scores
 	SCOREBOARD_MANAGER.updateState({ scores:scores });
-	console.log("updated scoreboard: ",JSON.stringify(scores));
+	//console.log("updated scoreboard: ",JSON.stringify(scores));
 }
