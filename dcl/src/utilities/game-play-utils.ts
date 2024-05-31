@@ -1,4 +1,4 @@
-import { CONFIG } 								from './_config'
+import { CONFIG } 								from '../_config'
 
 import * as utils 								from '@dcl-sdk/utils'
 import { Transform } 							from '@dcl/sdk/ecs'
