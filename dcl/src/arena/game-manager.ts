@@ -6,6 +6,7 @@ import { GameState } from "../game-state";
 import { LobbyLabel, PlayerUnclaimCallbackType } from "../classes/class.LobbyLabel";
 import { AudioManager } from "./audio-manager";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
+import { UI_MANAGER } from "../classes/class.UIManager";
 
 /*      BUMPER CARS - GAME MANAGER
     acts as the main controller for the game of bumper cars
@@ -57,16 +58,57 @@ export module GameManager {
  
         addLog("initialized!");
     }
+    export function isPlayerInAreana(playerId:string) {
+        
+        //race condition so fall back to player pos
+        let inAreana = VEHICLE_MANAGER.getPlayerVehicle(playerId) != undefined;
 
+        //fall back to 
+        const playerPos = Transform.getOrNull(engine.PlayerEntity)
+        //hoping lower level of areana is higher than any point of the lobby
+        if(playerPos && playerPos.position.y > 4){
+            inAreana = true;
+        }
+
+        return inAreana
+    }
     /** sets the current game state (called by server, so client has no right to refusal) */
     export function SetGameState(state:GameState.GAME_STATE_TYPES) {
         addLog("setting game state: old="+GameState.CurGameState.GetValue()+", new="+state);
+        console.log('SetGameState',"setting game state: old="+GameState.CurGameState.GetValue()+", new="+state);
         //if game is avtively starting
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
+            UI_MANAGER.matchStarted.show();
             VEHICLE_MANAGER.onRoundStart();
         }
         //if game is actively ending
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
+            //NOT THE RIGHT PLACE FOR THIS ANNOUNCMENT, NEED TO GET PLAYER SCORE somewhere
+            const vehicle = VEHICLE_MANAGER.getPlayerVehicle(Networking.GetUserID())
+
+            console.log('SetGameState',"setting game state: old="+GameState.CurGameState.GetValue()+", new="+state);
+
+            if( !GameManager.isPlayerInAreana(Networking.GetUserID()) ){
+                UI_MANAGER.matchFinished.show();
+            }else if(vehicle){
+                //determine players score and show display
+                const rank = vehicle.rank
+                switch(rank){
+                    case 1:
+                        UI_MANAGER.winner.show();
+                        break;
+                    case 2:
+                        UI_MANAGER.sooClose.show();
+                    default:
+                        //TODO show looser somehow
+                        UI_MANAGER.sooClose.show();
+                        //UI_MANAGER.winner.show();
+                }
+            }else{
+                console.log("GAMME OVER, NOT SURE WHAT TO SHOW?")
+                UI_MANAGER.matchFinished.show();
+            }
+            
             VEHICLE_MANAGER.onRoundEnd();
         } 
  
@@ -80,7 +122,7 @@ export module GameManager {
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
-                    
+                UI_MANAGER.matchAboutToStart.show();
             break;
             case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
                 //set music to playing

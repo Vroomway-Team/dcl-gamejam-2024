@@ -4,15 +4,18 @@ import ReactEcs, { Button, Label,
 import { parseTime } 			from '../classes/class.Scoreboard'
 import { Color4 } from '@dcl/sdk/math'
 
+import { AnnouncemntUI, UI_MANAGER } 			from '../classes/class.UIManager'
+import { Announcement } from 'dcl-ui-toolkit'
+import { CONFIG } from '../_config'
+
+
 const uiRoundTime   = 'images/ui.RoundTime.png'
 const uiSpeedometer = 'images/ui.Speedometer.png'
 const uiTicketCount = 'images/ui.TicketCount.png'
-const spriteSheet  = 'images/ui-spritesheet.2048.png'//'https://i.imgur.com/80twxbD.png'
+const spriteSheet  = CONFIG.USE_IMGUR_ASSETS ? 'https://i.imgur.com/80twxbD.png' : 'images/ui-spritesheet.2048.png'//''
 const uiYouGothit   = 'images/ui.YouGotHit.png'
 const uiBumperzLogo = 'images/ui.BumperzLogo.png'
 
-import { AnnouncemntUI, UI_MANAGER } 			from '../classes/class.UIManager'
-import { Announcement } from 'dcl-ui-toolkit'
 
 const showHitNotify = false
 const speedValue = 0
@@ -78,9 +81,9 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 				//width       : SPRITE_SIZE_WIDTH,
 				// minWidth	: SPRITE_SIZE_WIDTH*2,
 				// height      : SPRITE_SIZE_HEIGHT,
-				width       : '60vw',
+				width       : '35%',
 				minWidth	: '400',
-				height      : '50vh',
+				height      : '35%',
 
 				// width: '100%',
 				//     height: '100%',
@@ -89,7 +92,7 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 				alignContent: 'center',
 				positionType: 'absolute',
 				margin       : { left: '50%' },
-				position    : { left: '-10%', top: '30%'},
+				position    : { left: '-15%', top: '10%'},
 			}}
 			uiBackground = {{ 
 				textureMode  : 'stretch',

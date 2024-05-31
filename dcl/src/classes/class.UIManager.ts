@@ -34,14 +34,14 @@ export class UIManager {
 	timerRunning    : boolean = false
 
 	hitNotify: AnnouncemntUI = new AnnouncemntUI('hitNotify',false,1000)
-	matchStarted: AnnouncemntUI = new AnnouncemntUI('matchStarted',false,1000)
-	sooClose: AnnouncemntUI = new AnnouncemntUI('sooClose',false,1000)
-	matchInProgress: AnnouncemntUI = new AnnouncemntUI('matchInProgress',false,1000)
+	matchStarted: AnnouncemntUI = new AnnouncemntUI('matchStarted',false,2000)
+	sooClose: AnnouncemntUI = new AnnouncemntUI('sooClose',false,5000)
+	matchInProgress: AnnouncemntUI = new AnnouncemntUI('matchInProgress',false,4000)
 
-	looser: AnnouncemntUI = new AnnouncemntUI('looser',false,1000)
-	winner: AnnouncemntUI = new AnnouncemntUI('winner',false,1000)
-	matchFinished: AnnouncemntUI = new AnnouncemntUI('matchFinished',false,1000)
-	matchAboutToStart: AnnouncemntUI = new AnnouncemntUI('matchAboutToStart',false,1000)
+	looser: AnnouncemntUI = new AnnouncemntUI('looser',false,5000)
+	winner: AnnouncemntUI = new AnnouncemntUI('winner',false,5000)
+	matchFinished: AnnouncemntUI = new AnnouncemntUI('matchFinished',false,3000)
+	matchAboutToStart: AnnouncemntUI = new AnnouncemntUI('matchAboutToStart',false,3000)
 
 	speedValue      : number  = 0
 	scoreValue      : number  = 0

@@ -15,6 +15,8 @@ import { Quaternion, Vector3 } 		from '@dcl/sdk/math'
 import { getPlayer } 				from '@dcl/sdk/src/players'
 import { VEHICLE_MANAGER } 			from '../arena/setupVehicleManager'
 import { AudioManager } 			from '../arena/audio-manager'
+import { GameState } from '../game-state'
+import { UI_MANAGER, UIManager } from './class.UIManager'
 
 
 //interfaces for colyseus
@@ -114,6 +116,13 @@ export class LobbyLabel {
 
 		const playerData = getPlayer()
 		if (!playerData) return
+
+		const gameState = GameState.CurGameState.GetValue()
+
+		if(gameState == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+			UI_MANAGER.matchInProgress.show();
+			return;
+		}
 		
 		if (vehicle.isClaimed && vehicle.isLocalPlayer) {
 			//VEHICLE_MANAGER.userUnclaimVehicle(this.labelIndex);
@@ -135,6 +144,7 @@ export class LobbyLabel {
 		this.ownerName     = ownerName
 		this.isLocalPlayer = isLocalPlayer
 		
+		console.log("LOBBYLABEL","updateState","isClaimed",isClaimed)
 		if (!isClaimed) {
 			// UNclaimed vehicle
 			this.setPointerHoverText("Claim " + modelName)
@@ -170,6 +180,7 @@ export class LobbyLabel {
 	setText(
 		text: string = "Claim     "
 	): void {
+		console.log("LOBBYLABEL","setText","isClaimed",text)
 		const textShape = TextShape.getMutable(this.entityText)
 		textShape.text  = text
 	}
