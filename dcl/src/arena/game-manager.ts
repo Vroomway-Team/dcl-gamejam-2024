@@ -126,7 +126,7 @@ export module GameManager {
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
-                UI_MANAGER.matchAboutToStart.show();
+                //UI_MANAGER.matchAboutToStart.show();
             break;
             case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
                 //set music to playing
@@ -139,7 +139,7 @@ export module GameManager {
 
     //gamestate display
     //  create display for displaying gamestate
-    const entityGameState:Entity = engine.addEntity();
+    /*const entityGameState:Entity = engine.addEntity();
     Transform.create(entityGameState, {position:{x:32,y:2.4,z:32}});
     TextShape.create(entityGameState, {text:"<GAME_STATE>",fontSize:4});
     Billboard.create(entityGameState);
@@ -163,7 +163,7 @@ export module GameManager {
             if(value >= 0) TextShape.getMutable(entityCountdown).text = Math.floor(value+1).toString();
             else TextShape.getMutable(entityCountdown).text = "";
         }
-    );
+    );*/
 
     //debugging controllers
     /** sends game start command to server */ 
