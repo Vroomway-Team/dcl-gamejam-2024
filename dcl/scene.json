@@ -41,7 +41,7 @@
 	],
 	"featureToggles": {
 		"voiceChat": "enabled",
-		"portableExperiences": "false"
+		"portableExperiences": "disabled"
 	},
 	"requiredPermissions": [
 		"ALLOW_MEDIA_HOSTNAMES"
