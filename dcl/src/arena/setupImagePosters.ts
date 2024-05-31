@@ -151,8 +151,8 @@ export function setupImagePosters(){
     //Promos
     const promo1 = engine.addEntity()
     Transform.create(promo1, {
-        position: Vector3.create(59.5, 4.15, 21.5),
-        scale: Vector3.create(10,5,5),
+        position: Vector3.create(59.5, 4.15, 21.42),
+        scale: Vector3.create(11,5,5),
         rotation: Quaternion.fromEulerDegrees(0,-90,0)
     })
     MeshRenderer.setPlane(promo1)
@@ -169,8 +169,8 @@ export function setupImagePosters(){
     })
     const promo2 = engine.addEntity()
     Transform.create(promo2, {
-        position: Vector3.create(4.5, 4.15, 42.5),
-        scale: Vector3.create(10,5,5),
+        position: Vector3.create(4.5, 4.15, 42.60),
+        scale: Vector3.create(11,5,5),
         rotation: Quaternion.fromEulerDegrees(0,90,0)
     })
     MeshRenderer.setPlane(promo2)
