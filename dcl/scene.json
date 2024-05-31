@@ -48,5 +48,10 @@
 	],
 	"allowedMediaHostnames": [
 		"decentraland.org"
-	]
+	],
+	
+	"worldConfiguration": {
+		"name": "ivroom.dcl.eth"
+	}
+	
 }
