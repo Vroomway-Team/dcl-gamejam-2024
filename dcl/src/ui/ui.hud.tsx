@@ -7,42 +7,127 @@ import { Color4 } from '@dcl/sdk/math'
 const uiRoundTime   = 'images/ui.RoundTime.png'
 const uiSpeedometer = 'images/ui.Speedometer.png'
 const uiTicketCount = 'images/ui.TicketCount.png'
+const spriteSheet  = 'images/ui-spritesheet.2048.png'//'https://i.imgur.com/80twxbD.png'
 const uiYouGothit   = 'images/ui.YouGotHit.png'
 const uiBumperzLogo = 'images/ui.BumperzLogo.png'
 
-import { UI_MANAGER } 			from '../classes/class.UIManager'
+import { AnnouncemntUI, UI_MANAGER } 			from '../classes/class.UIManager'
+import { Announcement } from 'dcl-ui-toolkit'
 
 const showHitNotify = false
 const speedValue = 0
 const scoreValue = 0
 const roundTime = 0
 
-export function hudYouGotIt() {
+const ATLAS_SIZE_HEIGHT=2048
+const ATLAS_SIZE_WIDTH=2048
+
+const MATCH_IN_PROGRESS=[0,3]
+const MATCH_STARTED=[0,2]
+const YOU_GOT_HIT_INDEX=[0,1]
+const SOO_CLOSE_INDEX=[0,0]
+
+const LOOSER_INDEX=[1,0]
+const WINNER_INDEX=[1,1]
+const MATCH_FINISHED_INDEX=[1,2]
+const MATCH_ABOUT_TO_START_INDEX=[1,3]
+
+
+const SPRITE_SIZE_HEIGHT=(ATLAS_SIZE_HEIGHT/2)
+const SPRITE_SIZE_WIDTH=(ATLAS_SIZE_WIDTH/4)
+
+const SPRITE_SIZE_HEIGHT_UV=(ATLAS_SIZE_HEIGHT/2)/ATLAS_SIZE_HEIGHT
+const SPRITE_SIZE_WIDTH_UV=(ATLAS_SIZE_WIDTH/4)/ATLAS_SIZE_WIDTH
+ 
+function getUVsFor(idx:number[]){
+	// const goodUvs = [
+	// 	0,0,
+	// 	0,.25,
+	// 	.5,.25,
+	// 	.5,0
+	// ]
+	const row = idx[0]
+	const column = idx[1]
+	const uv = [
+		SPRITE_SIZE_HEIGHT_UV*(row), SPRITE_SIZE_WIDTH_UV*(column),
+		SPRITE_SIZE_HEIGHT_UV*(row), SPRITE_SIZE_WIDTH_UV*(column+1), 
+		SPRITE_SIZE_HEIGHT_UV*(row+1), SPRITE_SIZE_WIDTH_UV*(column+1),
+		SPRITE_SIZE_HEIGHT_UV*(row+1), SPRITE_SIZE_WIDTH_UV*(column)
+		// 0,0,
+		// 0,.25,
+		// .5,.25,
+		// .5,0
+		// props.left, props.bottom,
+		// props.left, props.top,
+		// props.right, props.top,
+		// props.right, props.bottom
+ 
+	]
+	
+	//debugger 
+	//console.log("getUVsFor", uv) 
+	return uv
+}
+
+function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 	return (
-		
-			// Yougothit!
-			<UiEntity
-				key         = 'uiHud_hitNotify'
-				uiTransform = {{
-					width       : '50vw',
-					minWidth	: '300',
-					height      : '200',
-					alignSelf   : 'center',
-					alignContent: 'center',
-					positionType: 'absolute',
-					margin       : { left: '50%' },
-					position    : { left: '-15%', top: '35vh'},
-				}}
-				uiBackground = {{ 
-					textureMode  : 'nine-slices',
-					texture      : { src: uiYouGothit },
-					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-					color: UI_MANAGER.hitNotifyVisible ? Color4.White() : Color4.Clear()
-				}}
-			/>
-			
+		// Yougothit!
+		<UiEntity
+			key         = {announcement.key}
+			uiTransform = {{
+				//width       : SPRITE_SIZE_WIDTH,
+				// minWidth	: SPRITE_SIZE_WIDTH*2,
+				// height      : SPRITE_SIZE_HEIGHT,
+				width       : '50vw',
+				minWidth	: '300',
+				height      : '50vh',
+
+				// width: '100%',
+				//     height: '100%',
+
+				alignSelf   : 'center',
+				alignContent: 'center',
+				positionType: 'absolute',
+				margin       : { left: '50%' },
+				position    : { left: '-15%', top: '35vh'},
+			}}
+			uiBackground = {{ 
+				textureMode  : 'stretch',
+				texture      : { src: spriteSheet },
+				//textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
+				uvs: getUVsFor(IDX),
+				color: announcement.visible ? Color4.White() : Color4.Clear()
+			}}
+		/>
 	)
 }
+export function hudCenterMsgs() {
+	return [
+		createCenterMsg(YOU_GOT_HIT_INDEX, UI_MANAGER.hitNotify),
+		createCenterMsg(MATCH_STARTED,UI_MANAGER.matchStarted),
+		createCenterMsg(SOO_CLOSE_INDEX,UI_MANAGER.sooClose),
+		createCenterMsg(MATCH_IN_PROGRESS,UI_MANAGER.matchInProgress),
+		
+		createCenterMsg(LOOSER_INDEX,UI_MANAGER.looser),
+		createCenterMsg(WINNER_INDEX,UI_MANAGER.winner),
+		createCenterMsg(MATCH_FINISHED_INDEX,UI_MANAGER.matchFinished),
+		createCenterMsg(MATCH_ABOUT_TO_START_INDEX,UI_MANAGER.matchAboutToStart),
+
+	];
+}
+// export function hudMatchStarted() {
+// 	const key = 'uiHud_matchStarted'
+// 	const IDX = MATCH_STARTED
+// 	return createCenterMsg(key,IDX,()=>{return UI_MANAGER.hitNotifyVisible})
+// }
+// export function hudYouGotHit() {
+// 	const key = 'uiHud_youGotHit'
+// 	const IDX = YOU_GOT_HIT_INDEX
+// 	return createCenterMsg(key,IDX,()=>{return UI_MANAGER.hitNotifyVisible})
+// }
+// export function hudSooClose() {
+// 	return createCenterMsg('uiHud_sooClose',SOO_CLOSE_INDEX,()=>{return UI_MANAGER.hitNotifyVisible})
+// }
 export function hudTimer() {
 	return (	
 			// Round Timer
