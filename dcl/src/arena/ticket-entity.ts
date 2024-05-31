@@ -16,7 +16,7 @@ export module TicketEntity {
     function addLog(log:string) { if(isDebugging) console.log("Ticket Entity: "+log); }
 
     /** ticket display model */
-    const DISPLAY_MODEL_SRC:string = "models/bumper-cars/ticket-entity.glb";
+    const DISPLAY_MODEL_SRC:string = "assets/gltf/ticket.gltf";
 
     /** display model scale */
     const MODEL_SCALE:Vector3 = { x:0.5, y:0.5, z:0.5 };

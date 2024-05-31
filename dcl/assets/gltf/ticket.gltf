@@ -14,36 +14,86 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				1
+				0,
+				3
 			]
 		}
 	],
 	"nodes":[
 		{
+			"name":"origin.ticket"
+		},
+		{
 			"mesh":0,
 			"name":"Cube",
 			"rotation":[
-				0,
-				0,
-				-0.7071068286895752,
-				0.7071068286895752
+				1.3510586319685509e-15,
+				1.3510586319685509e-15,
+				-0.7071067690849304,
+				0.7071067690849304
 			],
 			"scale":[
-				0.4283348321914673,
-				0.4283348321914673,
-				0.4283348321914673
-			],
-			"translation":[
-				0,
-				1.6150442361831665,
-				0
+				0.7252737879753113,
+				0.7252737879753113,
+				0.7252737879753113
 			]
 		},
 		{
 			"children":[
-				0
+				1
 			],
-			"name":"origin.ticket"
+			"name":"Bone"
+		},
+		{
+			"children":[
+				2
+			],
+			"name":"Armature.002"
+		}
+	],
+	"animations":[
+		{
+			"channels":[
+				{
+					"sampler":0,
+					"target":{
+						"node":2,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":1,
+					"target":{
+						"node":2,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":2,
+					"target":{
+						"node":2,
+						"path":"scale"
+					}
+				}
+			],
+			"name":"Action",
+			"samplers":[
+				{
+					"input":8,
+					"interpolation":"STEP",
+					"output":9
+				},
+				{
+					"input":10,
+					"interpolation":"LINEAR",
+					"output":11
+				},
+				{
+					"input":8,
+					"interpolation":"STEP",
+					"output":12
+				}
+			]
 		}
 	],
 	"materials":[
@@ -142,8 +192,17 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"bumperzTextAtlas",
-			"uri":"tex/bumperzTextAtlas.png"
+			"name":"texture-atlas-bumperz",
+			"uri":"tex/texture-atlas-bumperz.png"
+		}
+	],
+	"skins":[
+		{
+			"inverseBindMatrices":13,
+			"joints":[
+				2
+			],
+			"name":"Armature.002"
 		}
 	],
 	"accessors":[
@@ -206,6 +265,54 @@
 			"componentType":5123,
 			"count":534,
 			"type":"SCALAR"
+		},
+		{
+			"bufferView":2,
+			"componentType":5126,
+			"count":2,
+			"max":[
+				3
+			],
+			"min":[
+				0
+			],
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":3,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":4,
+			"componentType":5126,
+			"count":181,
+			"max":[
+				3
+			],
+			"min":[
+				0
+			],
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":5,
+			"componentType":5126,
+			"count":181,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":6,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":7,
+			"componentType":5126,
+			"count":1,
+			"type":"MAT4"
 		}
 	],
 	"bufferViews":[
@@ -218,6 +325,36 @@
 			"buffer":0,
 			"byteLength":1522,
 			"byteOffset":896
+		},
+		{
+			"buffer":0,
+			"byteLength":8,
+			"byteOffset":2420
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":2428
+		},
+		{
+			"buffer":0,
+			"byteLength":724,
+			"byteOffset":2452
+		},
+		{
+			"buffer":0,
+			"byteLength":2896,
+			"byteOffset":3176
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":6072
+		},
+		{
+			"buffer":0,
+			"byteLength":64,
+			"byteOffset":6096
 		}
 	],
 	"samplers":[
@@ -228,7 +365,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":2420,
+			"byteLength":6160,
 			"uri":"ticket.bin"
 		}
 	]
