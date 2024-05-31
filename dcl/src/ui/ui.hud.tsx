@@ -70,10 +70,10 @@ function getUVsFor(idx:number[]){
 }
 
 function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
-	return (
+	const val = (
 		// Yougothit!
 		<UiEntity
-			key         = {announcement.key}
+			key         = {`${announcement.key}`}
 			uiTransform = {{
 				//width       : SPRITE_SIZE_WIDTH,
 				// minWidth	: SPRITE_SIZE_WIDTH*2,
@@ -100,6 +100,8 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 			}}
 		/>
 	)
+	
+	return val
 }
 export function hudCenterMsgs() {
 	return [
