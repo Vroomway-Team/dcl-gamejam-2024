@@ -84,7 +84,7 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 
 				// width: '100%',
 				//     height: '100%',
-
+				display: announcement.visible ?'flex' : 'none',
 				alignSelf   : 'center',
 				alignContent: 'center',
 				positionType: 'absolute',
@@ -96,7 +96,7 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 				texture      : { src: spriteSheet },
 				//textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
 				uvs: getUVsFor(IDX),
-				color: announcement.visible ? Color4.White() : Color4.Clear()
+				//color: announcement.visible ? Color4.White() : Color4.Clear()
 			}}
 		/>
 	)
