@@ -35,12 +35,12 @@ export function setupGltfShapes() {
 	// Light bars
 	const lightBar1 = new GltfObject("assets/gltf/sign.thisTallToRide.gltf", {
 		position: Vector3.create(61.2, 0.025, 36.5),
-		rotation: Quaternion.fromEulerDegrees(0, -60, 0),
+		rotation: Quaternion.fromEulerDegrees(0, 120, 0),
 		scale   : Vector3.create(1.25,1,1)
 	})
 	const lightBar2 = new GltfObject("assets/gltf/sign.thisTallToRide.gltf", {
 		position: Vector3.create(2.75, 0.025, 27.5),
-		rotation: Quaternion.fromEulerDegrees(0, 120, 0),
+		rotation: Quaternion.fromEulerDegrees(0, -60, 0),
 		scale   : Vector3.create(1.25,1,1)
 	})
 
@@ -86,22 +86,41 @@ export function setupGltfShapes() {
 		rotation: Quaternion.fromEulerDegrees(-45, 0, -90),
 		scale   : Vector3.create(1,1,1)
 	})
-	//Blue Spotlights
 	const spotlightYellow2 = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
 		position: Vector3.create(60, 6, 28),
 		rotation: Quaternion.fromEulerDegrees(-135, 0, -90),
 		scale   : Vector3.create(1,1,1)
 	})
-	//Blue Spotlights
 	const spotlightYellow3 = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
 		position: Vector3.create(4, 6, 28),
 		rotation: Quaternion.fromEulerDegrees(-135, 0, 90),
 		scale   : Vector3.create(1,1,1)
 	})
-	//Yellow Spotlights
 	const spotlightYellow4 = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
 		position: Vector3.create(4, 6, 36),
 		rotation: Quaternion.fromEulerDegrees(-45, 0, 90),
 		scale   : Vector3.create(1,1,1)
+	})
+
+	//Pink Spotlights
+	const spotlightPink = new GltfObject("assets/gltf/spotlight.Pink.gltf", {
+		position: Vector3.create(18, 20, 58),
+		rotation: Quaternion.fromEulerDegrees(225, 90, 0),
+		scale   : Vector3.create(2,2,2)
+	})
+	const spotlightPink2 = new GltfObject("assets/gltf/spotlight.Pink.gltf", {
+		position: Vector3.create(46, 20, 58),
+		rotation: Quaternion.fromEulerDegrees(225, -90, 0),
+		scale   : Vector3.create(2,2,2)
+	})
+	const spotlightPink3 = new GltfObject("assets/gltf/spotlight.Pink.gltf", {
+		position: Vector3.create(18, 20, 7),
+		rotation: Quaternion.fromEulerDegrees(225, 90, 0),
+		scale   : Vector3.create(2,2,2)
+	})
+	const spotlightPink4 = new GltfObject("assets/gltf/spotlight.Pink.gltf", {
+		position: Vector3.create(46, 20, 7),
+		rotation: Quaternion.fromEulerDegrees(225, -90, 0),
+		scale   : Vector3.create(2,2,2)
 	})
 }
