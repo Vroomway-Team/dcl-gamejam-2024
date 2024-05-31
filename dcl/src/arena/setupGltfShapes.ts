@@ -58,9 +58,50 @@ export function setupGltfShapes() {
 		scale   : Vector3.create(1.25,1.25,1.25)
 	})
 
+	//Blue Spotlights
 	const spotlightBlue = new GltfObject("assets/gltf/spotlight.blue.gltf", {
-		position: Vector3.create(25, 7, 32),
+		position: Vector3.create(25, 7, 30.75),
 		rotation: Quaternion.fromEulerDegrees(-175, 90, 0),
+		scale   : Vector3.create(1,1,1)
+	})
+	const spotlightBlue2 = new GltfObject("assets/gltf/spotlight.blue.gltf", {
+		position: Vector3.create(25, 7, 33.25),
+		rotation: Quaternion.fromEulerDegrees(-175, 90, 0),
+		scale   : Vector3.create(1,1,1)
+	})
+	const spotlightBlue3 = new GltfObject("assets/gltf/spotlight.blue.gltf", {
+		position: Vector3.create(39, 7, 30.75),
+		rotation: Quaternion.fromEulerDegrees(-175, -90, 0),
+		scale   : Vector3.create(1,1,1)
+	})
+	const spotlightBlue4 = new GltfObject("assets/gltf/spotlight.blue.gltf", {
+		position: Vector3.create(39, 7, 33.25),
+		rotation: Quaternion.fromEulerDegrees(-175, -90, 0),
+		scale   : Vector3.create(1,1,1)
+	})
+
+	//Yellow Spotlights
+	const spotlightYellow = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
+		position: Vector3.create(60, 6, 36),
+		rotation: Quaternion.fromEulerDegrees(-45, 0, -90),
+		scale   : Vector3.create(1,1,1)
+	})
+	//Blue Spotlights
+	const spotlightYellow2 = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
+		position: Vector3.create(60, 6, 28),
+		rotation: Quaternion.fromEulerDegrees(-135, 0, -90),
+		scale   : Vector3.create(1,1,1)
+	})
+	//Blue Spotlights
+	const spotlightYellow3 = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
+		position: Vector3.create(4, 6, 28),
+		rotation: Quaternion.fromEulerDegrees(-135, 0, 90),
+		scale   : Vector3.create(1,1,1)
+	})
+	//Yellow Spotlights
+	const spotlightYellow4 = new GltfObject("assets/gltf/spotlight.Yellow.gltf", {
+		position: Vector3.create(4, 6, 36),
+		rotation: Quaternion.fromEulerDegrees(-45, 0, 90),
 		scale   : Vector3.create(1,1,1)
 	})
 }
