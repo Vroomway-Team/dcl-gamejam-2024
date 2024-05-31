@@ -14,7 +14,7 @@ export class ScoreboardManager {
 	}
 	
 	updateState(state?: ScoreboardState) {
-		console.log("ScoreboardManager: updateState()")
+		//console.log("ScoreboardManager: updateState()")
 		
 		// If a new state was provided, store it
 		if (state) {
