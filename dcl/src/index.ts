@@ -87,7 +87,7 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.LOCAL);
+	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.REMOTE);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
@@ -176,6 +176,7 @@ async function PlayerSetup() {
 			//console.log(`GameRoundTimer is now ${currentValue}, previous value was: ${previousValue}`);
 			//update timer
 			GameState.GameEndCountdown.SetValue(currentValue);
+			UI_MANAGER.setTimerValue(currentValue);
 		});
  
 		//#		PLAYER DETAILS
@@ -189,6 +190,10 @@ async function PlayerSetup() {
 
 				//add a listener to the new player's racing data (automates race updates)
 				player.listen("score", (score:number) => {
+					//if player is local
+					if(player.playerID == Networking.GetUserID()) {
+						UI_MANAGER.setScoreValue(score);
+					}
 					//get all scores
 					var scores:ScoreboardEntry[] = [];
 					room.state.lobbyPlayersByID.forEach((value:clientStateSpec.PlayerState, key:string) => {

@@ -47,11 +47,10 @@ export function uiDebug() {
 					variant     = 'primary'
 					fontSize    = {14}
 					onMouseDown = {() => {
-						GameManager.PlayerVehicleCollisionCallback();
-						/*movePlayerTo({
+						movePlayerTo({
 							newRelativePosition: Vector3.create(32, 10, 32),
 							cameraTarget       : Vector3.create(8, 1, 8),
-						})*/
+						})
 					}}
 				/>
 				 
