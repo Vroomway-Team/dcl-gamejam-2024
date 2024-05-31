@@ -31,7 +31,10 @@ export function collidersFromJSON(
 			cannonObj.mass = 0
 			cannonObj.type = CANNON.Body.STATIC
 		}
-
+		
+		// Set the collisionFilterGroup - all JSON colliders are terrain
+		cannonObj.collisionFilterGroup = 1; // We'll use 1 for terrain, 2 for vehicles
+		cannonObj.collisionFilterMask = 1 | 2
 		
 		// ███╗   ███╗ █████╗ ████████╗███████╗██████╗ ██╗ █████╗ ██╗     
 		// ████╗ ████║██╔══██╗╚══██╔══╝██╔════╝██╔══██╗██║██╔══██╗██║     

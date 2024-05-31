@@ -5,7 +5,7 @@ import {
 	ColliderLayer
 } 										from '@dcl/sdk/ecs'
 import { getPlayer } 					from '@dcl/sdk/src/players'
-import { Quaternion, Vector3 } 			from '@dcl/sdk/math'
+import { Quaternion, RAD2DEG, Vector3 } 			from '@dcl/sdk/math'
 import * as utils 						from '@dcl-sdk/utils'
 import * as CANNON 						from 'cannon'
 	
@@ -165,8 +165,20 @@ export class Vehicle {
 			linearDamping : 0.8,
 			angularDamping: 0.4
 		})
+		this.cannonBody.fixedRotation = true
+		
+		// Add the collision event listener
+		this.cannonBody.collisionFilterGroup = 2; // We'll use 2 for vehicles
+		this.cannonBody.collisionFilterMask = 1 | 2;
+		const collideEventListener = (event: CANNON.ICollisionEvent) => {
+			this.onCollideWithBody(event)
+		};		
+		this.cannonBody.addEventListener("collide", collideEventListener);
+		
+		// Suspend the cannonBody
 		this.cannonBody.sleep()
 		
+		// Add it to the world
 		world.addBody(this.cannonBody)
 	}
 	
@@ -184,6 +196,40 @@ export class Vehicle {
 	onExitTrigger(): void {		
 		// Attempt to claim the vehicle for the player via the VehicleManager instance
 		/* this.manager.userUnclaimVehicle(this.vehicleID) */
+	}
+	
+	onCollideWithBody(event: CANNON.ICollisionEvent) {
+		if (event.body.collisionFilterGroup == 2) {
+			
+			// Work out the dot products of the ways the vehicles are facing, and how they are positioned
+			const yourPos = this.cannonBody.position.clone()
+			const theirPos = event.body.position.clone()
+			
+			const theirRot = new CANNON.Vec3()
+			event.body.quaternion.toEuler(theirRot)
+			
+			// Get the vectors representing the directions both bodies are facing, and the direction between them
+			const dirToThem = Vector3.subtract(theirPos, yourPos)
+			Vector3.normalize(dirToThem)
+			
+			const dirYoureFacing = getForwardDirectionFromRotation(this.currentHeading)
+			const dirTheyreFacing = getForwardDirectionFromRotation(theirRot.y * RAD2DEG)
+			
+			const dot1 = Vector3.dot(dirYoureFacing, Vector3.normalize(dirToThem))
+			const dot2 = Vector3.dot(dirYoureFacing, dirTheyreFacing)
+			
+			// Check if the dot products meet the required criteria, see here for logic: https://i.imgur.com/CtrEKVR.png
+			if (dot1 > 0.8 && dot2 > 0.8) { 
+				// We hit them in the rear
+				// TRIGGER: they should drop tickets
+				console.log("vehicle.class: onCollideWithBody(): We HIT someone!", event.body.id)
+			}
+			if (dot1 < -0.8 && dot2 > 0.8) {
+				// They hit us in the rear
+				// TRIGGER: we should drop tickets
+				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
+			} 
+		}
 	}
 	
 	// Enable the vehicle - checked by CannonMovementSystem
@@ -265,6 +311,7 @@ export class Vehicle {
 			this.cannonBody.position.copy(Vector3ToVec3(state.position))
 			this.cannonBody.velocity.copy(state.velocity)
 			this.targetHeading = state.heading
+			this.cannonBody.quaternion.setFromEuler(0, state.heading, 0)
 		}
 	
 		// Update the current vehicle state to sync it with the colyseus server
@@ -499,7 +546,9 @@ export class Vehicle {
 			const maxTurn        = (this.maxTurn * (this.tweenRotDuration / 1000))
 			const endRotation    = Quaternion.rotateTowards(startRotation, targetRotation, maxTurn)
 			
+			// Update the current heading, and the cannon body rotation
 			this.currentHeading = Quaternion.toEulerAngles(endRotation).y
+			this.cannonBody.quaternion.setFromEuler(0, endRotation.y, 0)
 			
 			// Use the built in Tween component 
 			Tween.createOrReplace(this.entityRot, {

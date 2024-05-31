@@ -47,5 +47,9 @@ function addGround(world: CANNON.World) {
 		material: groundPhysicsMaterial,
 	})
 	groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2) // Reorient ground plane to be in the y-axis
+	
+	groundBody.collisionFilterGroup = 1; // We'll use 1 for terrain, 2 for vehicles
+	groundBody.collisionFilterMask = 1 | 2
+	
 	WORLD.addBody(groundBody)	
 }
