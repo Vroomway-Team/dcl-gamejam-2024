@@ -33,13 +33,13 @@ export function setupGltfShapes() {
 	
 
 	// Light bars
-	const lightBar1 = new GltfObject("assets/gltf/sign.lightbar.gltf", {
-		position: Vector3.create(60.95, 0.025, 35.95),
+	const lightBar1 = new GltfObject("assets/gltf/sign.thisTallToRide.gltf", {
+		position: Vector3.create(61.2, 0.025, 36.5),
 		rotation: Quaternion.fromEulerDegrees(0, -60, 0),
 		scale   : Vector3.create(1.25,1,1)
 	})
-	const lightBar2 = new GltfObject("assets/gltf/sign.lightbar.gltf", {
-		position: Vector3.create(3, 0.025, 28),
+	const lightBar2 = new GltfObject("assets/gltf/sign.thisTallToRide.gltf", {
+		position: Vector3.create(2.75, 0.025, 27.5),
 		rotation: Quaternion.fromEulerDegrees(0, 120, 0),
 		scale   : Vector3.create(1.25,1,1)
 	})
