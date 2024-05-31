@@ -1,9 +1,10 @@
-import { engine, Entity, GltfContainer, Rotate, TextAlignMode, TextShape, Transform, TransformType 
-	
-} 					from "@dcl/sdk/ecs";
+import { engine, Entity, GltfContainer, 
+		 Rotate, TextAlignMode, TextShape, 
+		 Transform, TransformType 
+} 											from "@dcl/sdk/ecs";
 import { ScoreboardEntry, ScoreboardState } from "../interfaces/interface.Scoreboard";
-import { Color4, Vector3, Quaternion } from "@dcl/sdk/math";
-import { Vector3ToVec3 } from "../utilities/func.Vectors";
+import { Color4, Vector3, Quaternion } 		from "@dcl/sdk/math";
+import { Networking } 						from "../networking";
 
 export class Scoreboard {
 	
@@ -78,14 +79,8 @@ export class Scoreboard {
 			})
 		}
 		
-		
-	}	
-	
-	// Clears all current scoreboard rows
-	clearRows() {
-		for (const row of this.elements) {
-			row.destroy()
-		}
+		// Add all the elements required for the board
+		this.createElements()		
 	}
 	
 	setTimer(amount: number) {
@@ -109,11 +104,7 @@ export class Scoreboard {
 		// Ensure we have a state
 		if (!this.state) { return }
 		
-		// Remove the existing Scoreboard Rows
-		this.clearRows()
-		
-		// Update the timer
-		
+		// Update the timer		
 		if (this.entityTimer && this.state.roundTimer != undefined) {
 			const timer = TextShape.getMutable(this.entityTimer)
 			timer.text = parseTime(this.state.roundTimer)		
@@ -124,10 +115,15 @@ export class Scoreboard {
 			const status = TextShape.getMutable(this.entityStatus)
 			status.text = this.state.roundInProgress ? "Match in progress" : "Waiting to start..."
 		}
-			
+		
+		// Get the current username
+		const player = Networking.GetUserName()
+		
+		// Start a counter (can't use index because of rankOffset)
 		let rowCount = 0
-		// Create the replacement scoreboard rows
-		for (const [index, score] of this.state.scores.entries()) {
+		
+		// Loop through each of our score entries and upate the corresponding elements
+		for (const [index, entry] of this.state.scores.entries()) {
 			
 			// Check we've not exceeded the display limit
 			if (rowCount >= this.maxScores) { 
@@ -139,9 +135,25 @@ export class Scoreboard {
 				continue
 			}
 			
+			const rank  = this.hideRanks ? "" : (index + 1).toString()
+			const score = this.hideScores ? "": entry.score.toString()
+			const name  = entry.userName == player ? entry.userName+"(You)": entry.userName
+			
+			const element = this.elements[rowCount]
+			element.update(name, rank, score) 
+			
+			rowCount++
+		}
+			
+	}
+	
+	
+	createElements() {		
+		// Create the replacement scoreboard rows
+		for (let index = 0; index < this.maxScores; index++) {
 			// Create the row transform
 			const transform: TransformType = {
-				position: Vector3.create(0, (-this.rowHeight * rowCount), 0),
+				position: Vector3.create(0, (-this.rowHeight * index), 0),
 				rotation: Quaternion.create(),
 				scale   : Vector3.One()
 			}
@@ -151,27 +163,25 @@ export class Scoreboard {
 				this.entityRoot, 
 				transform, 
 				this.textSize,
-				this.rowWidth,
-				score.userName, 
-				this.hideScores ? undefined:score.score, 
-				this.hideRanks ? undefined:index + 1
+				this.rowWidth
 			)
 			this.elements.push(row)
-			
-			// Increment the row counter
-			rowCount++
 		}
-			
 	}
-	
 
 	
 	// Sort the current state.scores array
 	sortScores() {
         if (!this.state) return
 
-        // Sort the scores array by score value in descending order
-        this.state.scores.sort((a: ScoreboardEntry, b: ScoreboardEntry) => b.score - a.score)
+		// Check if we need to sort the scores to avoid repeat work
+		if(!this.state.storesSorted){
+			// Sort the scores array by score value in descending order
+			this.state.scores.sort((a: ScoreboardEntry, b: ScoreboardEntry) => b.score - a.score)
+			this.state.storesSorted = true
+		} else {
+			console.log("scores already sorted")
+		}
     }
 	
 }
@@ -189,12 +199,14 @@ class ScoreboardRow {
 		transform   : TransformType,
 		textSize    : number,
 		rowWidth    : number,
-		userName    : string,
-		score?      : number,
-		rank?       : number,
+		userName    : string = "",
+		score       : string = "",
+		rank        : string = "",
 	) {
 		this.rootEntity  = engine.addEntity()
 		this.nameEntity  = engine.addEntity()
+		this.rankEntity  = engine.addEntity()	
+		this.scoreEntity = engine.addEntity()
 		
 		// Root transform
 		Transform.create(this.rootEntity, {
@@ -205,7 +217,6 @@ class ScoreboardRow {
 		//  Player's name
 		Transform.create(this.nameEntity, {
 			parent  : this.rootEntity,
-			position: {x: 0, y: 0, z: 0},
 			scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
 		});
 		TextShape.create(this.nameEntity,{
@@ -216,37 +227,55 @@ class ScoreboardRow {
 		});
 		
 		//  Rank
-		if (rank) {
-			this.rankEntity  = engine.addEntity()	
-			Transform.create(this.rankEntity, {
-				parent  : this.rootEntity,
-				position: {x: -rowWidth, y: 0, z: 0},
-				scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
-			});
-			TextShape.create(this.rankEntity,{
-				text     : rank.toString(),
-				fontSize : textSize,
-				textAlign: TextAlignMode.TAM_MIDDLE_LEFT,
-				textColor: Color4.White(),
-			});
-			
-		}
+		Transform.create(this.rankEntity, {
+			parent  : this.rootEntity,
+			position: {x: -rowWidth, y: 0, z: 0},
+			scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
+		});
+		TextShape.create(this.rankEntity,{
+			text     : rank.toString(),
+			fontSize : textSize,
+			textAlign: TextAlignMode.TAM_MIDDLE_LEFT,
+			textColor: getColorForRank(parseInt(rank)),
+		});
 		
 		//  Score
-		if (score) {
-			this.scoreEntity = engine.addEntity()
-			Transform.create(this.scoreEntity, {
-				parent  : this.rootEntity,
-				position: {x: rowWidth, y: 0, z: 0},
-				scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
-			});
-			TextShape.create(this.scoreEntity,{
-				text     : score.toString(),
-				fontSize : textSize,
-				textAlign: TextAlignMode.TAM_MIDDLE_RIGHT,
-				textColor: Color4.White(),
-			});
-				
+		Transform.create(this.scoreEntity, {
+			parent  : this.rootEntity,
+			position: {x: rowWidth, y: 0, z: 0},
+			scale   : {x: this.textScale, y: this.textScale, z:this.textScale}
+		});
+		TextShape.create(this.scoreEntity,{
+			text     : score.toString(),
+			fontSize : textSize,
+			textAlign: TextAlignMode.TAM_MIDDLE_RIGHT,
+			textColor: Color4.fromHexString("#A253DA"),
+		});
+	}
+	
+	update(
+		userName: string = "",
+		rank    : string = "",
+		score   : string = "",
+	) {
+		
+		// Update the rank
+		if (this.nameEntity) {
+			const nameText = TextShape.getMutable(this.nameEntity)
+			nameText.text = userName
+		}
+		
+		// Update the rank
+		if (this.scoreEntity) {
+			const scoreText = TextShape.getMutable(this.scoreEntity)
+			scoreText.text = score
+		}
+		
+		// Update the rank
+		if (this.rankEntity) {
+			const rankText = TextShape.getMutable(this.rankEntity)
+			rankText.text = rank
+			rankText.textColor = getColorForRank(parseInt(rank))
 		}
 	}
 	
@@ -263,4 +292,21 @@ export function parseTime(time: number) {
 	const minutes = Math.floor(time / 60).toString();
 	const seconds = Math.floor(time % 60).toString().padStart(2, '0');
 	return `${minutes}:${seconds}`;
+}
+
+function getColorForRank(rank: number) {
+	if (rank == 1) {
+		return Color4.fromHexString("#FFCC00")
+	} else if(rank == 2) {
+		return Color4.fromHexString("#B4B4B4")
+		
+	} else if(rank == 3) {
+		return Color4.fromHexString("#FFAE4E")
+	} else {
+		const color    = Color4.fromHexString("#cccccc")
+		const val      = rank * 6
+		const rankgrey = Color4.fromInts(1, val, val, 0)
+		
+		return Color4.subtract(Color4.White(), rankgrey)
+	}
 }

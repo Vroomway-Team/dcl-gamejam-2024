@@ -18,6 +18,7 @@ import { CustomIndexComponent, FunctionCallbackIndex } from '../utilities/escent
 import { GameManager } from '../arena/game-manager'
 import { Networking } from '../networking'
 import { NPCManager } from '../arena/npc-manager'
+import { UI_MANAGER } from './class.UIManager'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')

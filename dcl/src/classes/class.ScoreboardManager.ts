@@ -61,6 +61,7 @@ export class ScoreboardManager {
 	 
 	debugTestFunc() {
 		const state: ScoreboardState = {
+			storesSorted: false,
 			"roundInProgress": true,
 			"roundTimer":      120,
 			"scores":          [

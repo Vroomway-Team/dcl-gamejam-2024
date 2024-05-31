@@ -33,8 +33,9 @@ export function updateScores(room:Room){
 		scores.push({userName:value.playerName, score:value.score});
 	});
 	//sort scores
-	scores.sort((a:ScoreboardEntry, b:ScoreboardEntry) =>  a.score - b.score );
+	//updateState still sort for us
+	//scores.sort((a:ScoreboardEntry, b:ScoreboardEntry) =>  a.score - b.score );
 	//update scores
-	SCOREBOARD_MANAGER.updateState({ scores:scores });
-	//console.log("updated scoreboard: ",JSON.stringify(scores));
+	SCOREBOARD_MANAGER.updateState({ scores:scores,storesSorted:false });
+	console.log("updated scoreboard: ",JSON.stringify(scores));
 }

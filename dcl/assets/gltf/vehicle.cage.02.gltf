@@ -25,7 +25,7 @@
 			"name":"cageCart2",
 			"rotation":[
 				0,
-				-0.15643441677093506,
+				-0.15643440186977386,
 				0,
 				0.987688422203064
 			],
@@ -202,7 +202,7 @@
 		},
 		{
 			"componentType":5126,
-			"count":920,
+			"count":850,
 			"max":[
 				1.0254344940185547,
 				1.623627781867981,
@@ -217,17 +217,17 @@
 		},
 		{
 			"componentType":5126,
-			"count":920,
+			"count":850,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":920,
+			"count":850,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5123,
-			"count":1656,
+			"count":1482,
 			"type":"SCALAR"
 		},
 		{
@@ -274,13 +274,13 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":5619,
+			"byteLength":5015,
 			"byteOffset":16092
 		},
 		{
 			"buffer":0,
 			"byteLength":438,
-			"byteOffset":21712
+			"byteOffset":21108
 		}
 	],
 	"samplers":[
@@ -291,7 +291,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":22152,
+			"byteLength":21548,
 			"uri":"vehicle.cage.02.bin"
 		}
 	]

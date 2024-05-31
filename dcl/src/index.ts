@@ -12,6 +12,7 @@ import { setupImagePosters } 					from './arena/setupImagePosters'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
 import { SCOREBOARD_MANAGER, setupScoreboards } from './arena/setupScoreboards'
+import { PARTICLE_MANAGER } 					from './arena/setupParticleManager'
 
 import { Room } 								from 'colyseus.js'
 import { Networking } 							from './networking'
@@ -27,7 +28,6 @@ import * as CANNON from 'cannon'
 import { updateScores } from './utilities/game-play-utils'
 import { NPCManager } from './arena/npc-manager'
 
- 
 // Config options for colyseus and debug features are in _config.ts
 
 export function main() {
@@ -165,7 +165,17 @@ async function PlayerSetup() {
 		room.state.listen("GameState", (currentValue:number, previousValue:number) => {
 			console.log(`GameState is now ${currentValue}, previous value was: ${previousValue}`);
 			//set game state
+			const currentState = GameState.CurGameState.GetValue()
+			// if(currentState != currentValue){
+			// 	if(currentState)
+			// }
+			
 			GameManager.SetGameState(currentValue);
+
+			//make scoreboard update
+			if(currentValue == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+				updateScores(room);
+			}
 		});
 		//called when game state changes
 		room.state.listen("GameStartTimer", (currentValue:number, previousValue:number) => {
@@ -196,7 +206,12 @@ async function PlayerSetup() {
 					if(player.playerID == Networking.GetUserID()) {
 						UI_MANAGER.setScoreValue(score);
 					}
-					updateScores(room)
+					const gameState = GameState.CurGameState.GetValue();
+					//need to update when player leaves to remove their name from scoreboard
+					//BUT it also erases the results from the last round :(
+					if(gameState == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+						updateScores(room);
+					}
 				});
  
 				//add a listener to the new player's racing data (automates race updates)
@@ -208,7 +223,10 @@ async function PlayerSetup() {
 					if(vehicle == undefined) {
 						console.log("server call: player.racingData.update","could not find vehicle!!!",raceData)
 						return;
-					} 
+					}
+
+					//dont halt here, vehicle internally knowns and will ignore if needed (<- not anymore >_>)
+
 					//halt if vehicle owner is operated by local player (client has authority)
 					if(player.playerID == Networking.GetUserID()) return;
 					//halt if vehicle is an npc operated by local player (delegated operator has authority)
@@ -244,8 +262,14 @@ async function PlayerSetup() {
 
 				//release vehicle
 				VEHICLE_MANAGER.userUnclaimVehicle(player.vehicleID);
-
-				updateScores(room);
+				//FIXME
+				//only when game is live
+				const gameState = GameState.CurGameState.GetValue();
+				//need to update when player leaves to remove their name from scoreboard
+				//BUT it also erases the results from the last round :(
+				if(gameState == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+					updateScores(room);
+				}
 		});
 
 		//# 	NPC DETAILS

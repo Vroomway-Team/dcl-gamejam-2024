@@ -7,6 +7,7 @@ import { LobbyLabel, PlayerUnclaimCallbackType } from "../classes/class.LobbyLab
 import { AudioManager } from "./audio-manager";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
 import { UI_MANAGER } from "../classes/class.UIManager";
+import { CONFIG } from "../_config";
 
 /*      BUMPER CARS - GAME MANAGER
     acts as the main controller for the game of bumper cars
@@ -164,21 +165,25 @@ export module GameManager {
 
     //debugging controllers
     /** sends game start command to server */ 
-    const buttonGameStart = new DynamicButton_Simple(0, {x:32,y:1.5,z:32}, "FORCE: START");
-    /** sends game end command to server */ 
-    const buttonGameEnd = new DynamicButton_Simple(1, {x:32,y:9.5,z:32}, "FORCE: END");
+    if(CONFIG.SHOW_DEBUG_3D_BUTTONS){
+        const buttonGameStart = new DynamicButton_Simple(0, {x:32,y:1.5,z:32}, "FORCE: START");
+        /** sends game end command to server */ 
+        const buttonGameEnd = new DynamicButton_Simple(1, {x:32,y:9.5,z:32}, "FORCE: END");
     
-    /** processes all buttons, executing interactions */
-    export function processInteractions() {
-        if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameStart.FrameEntity)) {
-            if(Networking.ClientRoom == undefined) return;
-            Networking.ClientRoom.send("game-start", {});
+    
+        /** processes all buttons, executing interactions */
+        function processInteractions() {
+            if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameStart.FrameEntity)) {
+                if(Networking.ClientRoom == undefined) return;
+                Networking.ClientRoom.send("game-start", {});
+            }
+            if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameEnd.FrameEntity)) {
+                if(Networking.ClientRoom == undefined) return;
+                Networking.ClientRoom.send("game-end", {});
+            } 
         }
-        if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameEnd.FrameEntity)) {
-            if(Networking.ClientRoom == undefined) return;
-            Networking.ClientRoom.send("game-end", {});
-        } 
+        //add system to engine
+        engine.addSystem(processInteractions);
+        
     }
-    //add system to engine
-    engine.addSystem(processInteractions);
 }
