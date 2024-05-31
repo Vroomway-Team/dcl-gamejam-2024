@@ -10,6 +10,7 @@ import { VehicleState } 		from "../interfaces/interface.VehicleState";
 import { getPlayer } 			from "@dcl/sdk/src/players";
 import * as utils 				from '@dcl-sdk/utils'
 import { Networking } from "../networking";
+import { GameManager } from "../arena/game-manager";
 
 const playerData = getPlayer()
 
@@ -92,11 +93,16 @@ export class VehicleManager {
 	onRoundEnd(): void {
 		console.log("onRoundEnd")
 		
+		const playerInAreana = GameManager.isPlayerInAreana(Networking.GetUserID())
 		this.roundInProgress = false
 		this.disableVehicles()
 		
 		this.moveVehiclesToLobby(2000) 
-		this.movePlayerToLobby()
+		if(playerInAreana){
+			this.movePlayerToLobby()
+		}else{
+			console.log("onRoundEnd", "player not in arena leave them where they are")
+		}
 	}
 	
 	// Enables all vehicles, allowing them to respond to user input and be moved 

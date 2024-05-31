@@ -121,7 +121,7 @@ export function uiDebug() {
 						variant     = 'primary'
 						fontSize    = {14}
 						onMouseDown = {() => {
-							UI_MANAGER.showHitNotify()
+							UI_MANAGER.hitNotify.show()
 						}}
 					/>
 					

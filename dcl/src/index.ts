@@ -24,8 +24,9 @@ import * as serverStateSpec 					from './rooms/spec/server-state-spec'
 import * as clientStateSpec 					from './rooms/spec/client-state-spec'
 import { VehicleState } from './interfaces/interface.VehicleState'
 import * as CANNON from 'cannon'
+import { updateScores } from './utilities/game-play-utils'
 
-
+ 
 // Config options for colyseus and debug features are in _config.ts
 
 export function main() {
@@ -87,7 +88,7 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.REMOTE);
+	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER); 
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
@@ -194,16 +195,7 @@ async function PlayerSetup() {
 					if(player.playerID == Networking.GetUserID()) {
 						UI_MANAGER.setScoreValue(score);
 					}
-					//get all scores
-					var scores:ScoreboardEntry[] = [];
-					room.state.lobbyPlayersByID.forEach((value:clientStateSpec.PlayerState, key:string) => {
-						scores.push({userName:value.playerName, score:value.score});
-					});
-					//sort scores
-					scores.sort((a:ScoreboardEntry, b:ScoreboardEntry) =>  a.score - b.score );
-					//update scores
-					SCOREBOARD_MANAGER.updateState({ scores:scores });
-					console.log("updated scoreboard: "+JSON.stringify(scores));
+					updateScores(room)
 				});
  
 				//add a listener to the new player's racing data (automates race updates)
@@ -249,6 +241,8 @@ async function PlayerSetup() {
 
 				//release vehicle
 				VEHICLE_MANAGER.userUnclaimVehicle(player.vehicleID);
+
+				updateScores(room);
 		});
 
 		//#		TICKET DETAILS
