@@ -34,7 +34,6 @@ export function main() {
 	//turn on trigger debug mode (draws )
 	utils.triggers.enableDebugDraw(CONFIG.SHOW_DEBUG_TRIGGERS);
 
-
 	/* /ticket creation test
 	const t0 = TicketEntity.Create({ id:0, transform:{ position:{x:24,y:2,z:30} } });
 	const t1 = TicketEntity.Create({ id:1, transform:{ position:{x:24,y:2,z:32} } });
@@ -89,8 +88,7 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	//Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
-	Networking.InitializeClientConnection(0);
+	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
