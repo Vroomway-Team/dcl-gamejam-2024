@@ -10,7 +10,7 @@ export class AnnouncemntUI{
 	visible:boolean = false
 	duration:number = 1000
 	constructor(key:string,visible:boolean, duration:number){
-		this.key = ''
+		this.key = key
 		this.visible = visible
 		this.duration = duration
 	}
