@@ -123,7 +123,7 @@ export class Scoreboard {
 		let rowCount = 0
 		
 		// Loop through each of our score entries and upate the corresponding elements
-		for (const [index, score] of this.state.scores.entries()) {
+		for (const [index, entry] of this.state.scores.entries()) {
 			
 			// Check we've not exceeded the display limit
 			if (rowCount >= this.maxScores) { 
@@ -135,11 +135,12 @@ export class Scoreboard {
 				continue
 			}
 			
-			const rank = (index + 1).toString()
-			const name = score.userName == player ? score.userName+"(You)": score.userName
+			const rank  = this.hideRanks ? "" : (index + 1).toString()
+			const score = this.hideScores ? "": entry.score.toString()
+			const name  = entry.userName == player ? entry.userName+"(You)": entry.userName
 			
 			const element = this.elements[rowCount]
-			element.update(name, rank.toString(), score.score.toString()) 
+			element.update(name, rank, score) 
 			
 			rowCount++
 		}
@@ -248,7 +249,7 @@ class ScoreboardRow {
 			text     : score.toString(),
 			fontSize : textSize,
 			textAlign: TextAlignMode.TAM_MIDDLE_RIGHT,
-			textColor: Color4.White(),
+			textColor: Color4.fromHexString("#A253DA"),
 		});
 	}
 	
@@ -295,13 +296,17 @@ export function parseTime(time: number) {
 
 function getColorForRank(rank: number) {
 	if (rank == 1) {
-		return Color4.fromHexString("#F1C100FF")
+		return Color4.fromHexString("#FFCC00")
 	} else if(rank == 2) {
 		return Color4.fromHexString("#B4B4B4")
 		
 	} else if(rank == 3) {
-		return Color4.fromHexString("#E09A47")
+		return Color4.fromHexString("#FFAE4E")
 	} else {
-		return Color4.White()
+		const color    = Color4.fromHexString("#cccccc")
+		const val      = rank * 6
+		const rankgrey = Color4.fromInts(1, val, val, 0)
+		
+		return Color4.subtract(Color4.White(), rankgrey)
 	}
 }
