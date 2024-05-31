@@ -78,8 +78,8 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 				//width       : SPRITE_SIZE_WIDTH,
 				// minWidth	: SPRITE_SIZE_WIDTH*2,
 				// height      : SPRITE_SIZE_HEIGHT,
-				width       : '50vw',
-				minWidth	: '300',
+				width       : '60vw',
+				minWidth	: '400',
 				height      : '50vh',
 
 				// width: '100%',
@@ -89,7 +89,7 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 				alignContent: 'center',
 				positionType: 'absolute',
 				margin       : { left: '50%' },
-				position    : { left: '-15%', top: '35vh'},
+				position    : { left: '-10%', top: '30%'},
 			}}
 			uiBackground = {{ 
 				textureMode  : 'stretch',
