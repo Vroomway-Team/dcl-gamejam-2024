@@ -25,6 +25,9 @@ export interface PlayerVehicleControllerData {
     moveForce?:Vector3;
     /** mass */
     mass?:number;
+
+    lastKnownClientTime?:number
+    lastKnownServerTime?:number
 }
 
 //### COMMON VECTORS ###
