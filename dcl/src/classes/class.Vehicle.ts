@@ -1,24 +1,27 @@
 import { 
 	engine, EasingFunction, Entity, 
 	GltfContainer, Transform, 
-	TransformType, Tween 
+	TransformType, Tween, 
+	ColliderLayer
 } 										from '@dcl/sdk/ecs'
 import { getPlayer } 					from '@dcl/sdk/src/players'
-import { Quaternion, Vector3 } 			from '@dcl/sdk/math'
+import { Quaternion, RAD2DEG, Vector3 } 			from '@dcl/sdk/math'
 import * as utils 						from '@dcl-sdk/utils'
 import * as CANNON 						from 'cannon'
 	
 import { LobbyLabel } 					from './class.LobbyLabel'
 import { VehicleManager } 				from './class.VehicleManager'
 import { VehicleState } 				from '../interfaces/interface.VehicleState'
-import { getEntityPosition } 			from '../utilities/func.entityData'
+import { getEntityPosition, getForwardDirectionFromRotation } 			from '../utilities/func.entityData'
 import { Vec3ToVector3, Vector3ToVec3 } from '../utilities/func.Vectors'
-import { FunctionCallbackIndex, PlayerVehicleControllerData } from '../utilities/escentials'
+import { FunctionCallbackIndex } from '../utilities/escentials'
+import { GameManager } from '../arena/game-manager'
+import { Networking } from '../networking'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
-	vehiclePhysicsMaterial.friction    = 0.01
-	vehiclePhysicsMaterial.restitution = 0.5
+	vehiclePhysicsMaterial.friction    = 0.5
+	vehiclePhysicsMaterial.restitution = 0.9
 
 
 // Define the Vehicle class
@@ -52,8 +55,8 @@ export class Vehicle {
 	entityCrown          : Entity 			// Entity used to attach the current crown model to
 	lobbyLabel           : LobbyLabel       // LobbyLabel instance, used for claiming a vehicle
 	cannonBody           : CANNON.Body 		// Cannon physics body
-	entityOffset         : Vector3 = Vector3.create(0, -1.250, 0)  // Vector offset for vehicle gltf component
-	playerMaxDistance    : number = 10      // Max distance away a player should be before we tp them back to their vehicle
+	entityOffset         : Vector3 = Vector3.create(0, -0.05, 0)  // Vector offset for vehicle gltf component
+	playerMaxDistance    : number  = 10      // Max distance away a player should be before we tp them back to their vehicle
 	
 	isActive             : boolean = false	// Is the vehicle currently being controlled by the player?
 	isAccelerating       : boolean = false  // Toggled by user pressing/releasing W. Referenced by VehicleInputSystem
@@ -120,7 +123,10 @@ export class Vehicle {
 		
 		// Add the gltf shape to the child 
 		GltfContainer.create(this.entityRot, {
-			src: modelSrc
+			src: modelSrc,
+			visibleMeshesCollisionMask  : ColliderLayer.CL_NONE,
+			invisibleMeshesCollisionMask: ColliderLayer.CL_PHYSICS,
+			
 		})
 		
 		// Add the crown entity
@@ -158,11 +164,23 @@ export class Vehicle {
 			quaternion    : new CANNON.Quaternion(),
 			shape         : new CANNON.Sphere(1.25),
 			material      : vehiclePhysicsMaterial,
-			linearDamping : 0.2,
+			linearDamping : 0.8,
 			angularDamping: 0.4
 		})
+		this.cannonBody.fixedRotation = true
+		
+		// Add the collision event listener
+		this.cannonBody.collisionFilterGroup = 2; // We'll use 2 for vehicles
+		this.cannonBody.collisionFilterMask = 1 | 2;
+		const collideEventListener = (event: CANNON.ICollisionEvent) => {
+			this.onCollideWithBody(event)
+		};		
+		this.cannonBody.addEventListener("collide", collideEventListener);
+		
+		// Suspend the cannonBody
 		this.cannonBody.sleep()
 		
+		// Add it to the world
 		world.addBody(this.cannonBody)
 	}
 	
@@ -180,6 +198,43 @@ export class Vehicle {
 	onExitTrigger(): void {		
 		// Attempt to claim the vehicle for the player via the VehicleManager instance
 		/* this.manager.userUnclaimVehicle(this.vehicleID) */
+	}
+	
+	onCollideWithBody(event: CANNON.ICollisionEvent) {
+		if (event.body.collisionFilterGroup == 2) {
+			// Work out the dot products of the ways the vehicles are facing, and how they are positioned
+			const yourPos = this.cannonBody.position.clone()
+			const theirPos = event.body.position.clone()
+			
+			const theirRot = new CANNON.Vec3()
+			event.body.quaternion.toEuler(theirRot)
+			
+			// Get the vectors representing the directions both bodies are facing, and the direction between them
+			const dirToThem = Vector3.subtract(theirPos, yourPos)
+			Vector3.normalize(dirToThem)
+			
+			const dirYoureFacing = getForwardDirectionFromRotation(this.currentHeading)
+			const dirTheyreFacing = getForwardDirectionFromRotation(theirRot.y * RAD2DEG)
+			
+			const dot1 = Vector3.dot(dirYoureFacing, Vector3.normalize(dirToThem))
+			const dot2 = Vector3.dot(dirYoureFacing, dirTheyreFacing)
+			
+			// Check if the dot products meet the required criteria, see here for logic: https://i.imgur.com/CtrEKVR.png
+			if (dot1 > 0.707 && dot2 > 0.707) { 
+				// We hit them in the rear
+				// TRIGGER: they should drop tickets
+				console.log("vehicle.class: onCollideWithBody(): We HIT someone!", event.body.id)
+			}
+			if (dot1 < -0.707 && dot2 > 0.707) {
+				// They hit us in the rear
+				// TRIGGER: we should drop tickets
+				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
+				//if vehicle is owned by the local player, drop tickets
+				if(this.ownerID == Networking.GetUserID()) {
+					GameManager.PlayerVehicleCollisionCallback();
+				}
+			}
+		}
 	}
 	
 	// Enable the vehicle - checked by CannonMovementSystem
@@ -258,9 +313,11 @@ export class Vehicle {
 		// as the source of truth properties
 		// TODO: add some kind of flag or check ot ignore this for locally controlled vehicles
 		if (!this.isLocalPlayer) {
-			this.cannonBody.position.copy(Vector3ToVec3(state.position))
+			const pos = new CANNON.Vec3(state.position.x,state.position.y,state.position.z);
+			this.cannonBody.position.copy(pos)
 			this.cannonBody.velocity.copy(state.velocity)
 			this.targetHeading = state.heading
+			this.cannonBody.quaternion.setFromEuler(0, state.heading, 0)
 		}
 	
 		// Update the current vehicle state to sync it with the colyseus server
@@ -271,20 +328,22 @@ export class Vehicle {
 	}
 	
 	getPosition(): Vector3 {
-		const transform = Transform.get(this.entityPos)
-		return transform.position
+		//const transform = Transform.get(this.entityPos)
+		//return transform.position
+		
+		return this.cannonBody.position
 	}
 	
 	// Triggered when the user presses W to set flag used by this.updateSpeed
 	accelerate(): void {
-		console.log("Accelerating")
+		//console.log("Accelerating")
 		
 		this.isAccelerating = true
     }
 
 	// Triggered when the user releases W to set flag used by this.updateSpeed
     decelerate(): void {
-		console.log("Decelerating")
+		//console.log("Decelerating")
 		
 		this.isAccelerating = false
     }
@@ -340,6 +399,25 @@ export class Vehicle {
 				this.currentSpeed -= (this.acceleration * dt);
 				this.currentSpeed = Math.max(this.currentSpeed, 0)
 			}			
+		}
+		
+		//console.log("class:Vehicle: currentSpeed =", this.currentSpeed)
+	}
+	
+	applyMoveForce() {
+		// Velocity direction
+		// Apply a force to the cannon body in the direction the vehicle is currently facing
+		const targetDirection = getForwardDirectionFromRotation(this.currentHeading)
+		const targetVelocity  = targetDirection.scale(this.currentSpeed * 2)
+		
+		this.cannonBody.applyForce(targetVelocity, this.cannonBody.position)
+		
+		// Clamp the velocity to the max speed		
+		if (Vector3.lengthSquared(this.cannonBody.velocity) > (this.maxSpeed * this.maxSpeed)) {
+			const velocityNorm = this.cannonBody.velocity.clone()
+				  velocityNorm.normalize()
+				  velocityNorm.mult(this.maxSpeed)
+			this.cannonBody.velocity.copy(velocityNorm)
 		}
 	}
 	
@@ -473,6 +551,10 @@ export class Vehicle {
 			const targetRotation = Quaternion.fromEulerDegrees(0, heading, 0)
 			const maxTurn        = (this.maxTurn * (this.tweenRotDuration / 1000))
 			const endRotation    = Quaternion.rotateTowards(startRotation, targetRotation, maxTurn)
+			
+			// Update the current heading, and the cannon body rotation
+			this.currentHeading = Quaternion.toEulerAngles(endRotation).y
+			this.cannonBody.quaternion.setFromEuler(0, endRotation.y, 0)
 			
 			// Use the built in Tween component 
 			Tween.createOrReplace(this.entityRot, {

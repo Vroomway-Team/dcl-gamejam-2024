@@ -68,7 +68,7 @@
 			],
 			"scale":[
 				1.9415886402130127,
-				1.9415874481201172,
+				1.941587209701538,
 				1.9415886402130127
 			],
 			"translation":[
@@ -104,7 +104,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -118,7 +118,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -132,7 +132,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -146,7 +146,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -160,7 +160,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -174,7 +174,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -188,7 +188,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -202,7 +202,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -216,7 +216,7 @@
 			],
 			"translation":[
 				0,
-				0.19415903091430664,
+				0.19415904581546783,
 				0.5980178117752075
 			]
 		},
@@ -252,8 +252,8 @@
 			"name":"turtle1_collider",
 			"translation":[
 				0,
-				0.402952641248703,
-				-0.055950187146663666
+				0,
+				-0.04999998211860657
 			]
 		}
 	],
@@ -402,11 +402,6 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Hidden.011",
-			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -752,7 +747,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.033",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -773,7 +768,6 @@
 						}
 					},
 					"indices":69,
-					"material":2,
 					"mode":4
 				}
 			]
@@ -1258,32 +1252,32 @@
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"max":[
-				0.5965178608894348,
-				1.2510534524917603,
-				0.9761571884155273
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC4"
 		},
 		{
@@ -1438,63 +1432,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":467,
+			"byteLength":438,
 			"byteOffset":32824
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":33292
+			"byteOffset":33264
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":33300
+			"byteOffset":33272
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":33324
+			"byteOffset":33296
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":33356
+			"byteOffset":33328
 		},
 		{
 			"buffer":0,
 			"byteLength":484,
-			"byteOffset":33380
+			"byteOffset":33352
 		},
 		{
 			"buffer":0,
 			"byteLength":1452,
-			"byteOffset":33864
+			"byteOffset":33836
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":35316
+			"byteOffset":35288
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35348
+			"byteOffset":35320
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35372
+			"byteOffset":35344
 		},
 		{
 			"buffer":0,
 			"byteLength":1936,
-			"byteOffset":35396
+			"byteOffset":35368
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":37332
+			"byteOffset":37304
 		}
 	],
 	"samplers":[
@@ -1505,7 +1499,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":37356,
+			"byteLength":37328,
 			"uri":"vehicle.turtle.01.bin"
 		}
 	]

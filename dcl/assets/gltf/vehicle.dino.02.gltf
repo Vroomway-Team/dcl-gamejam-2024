@@ -60,8 +60,8 @@
 			"name":"dino2_collider",
 			"translation":[
 				0,
-				0.5,
-				0.08935938030481339
+				0,
+				-0.20000000298023224
 			]
 		}
 	],
@@ -210,11 +210,6 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Hidden.006",
-			"pbrMetallicRoughness":{}
 		}
 	],
 	"meshes":[
@@ -248,7 +243,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.025",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -257,8 +252,7 @@
 						"TEXCOORD_0":17,
 						"TANGENT":18
 					},
-					"indices":19,
-					"material":2
+					"indices":19
 				}
 			]
 		}
@@ -409,35 +403,35 @@
 		{
 			"bufferView":15,
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"max":[
-				0.5965178608894348,
-				1.2510534524917603,
-				0.9761571884155273
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":16,
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":17,
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":18,
 			"componentType":5126,
-			"count":26,
+			"count":24,
 			"type":"VEC4"
 		},
 		{
@@ -617,88 +611,88 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":312,
+			"byteLength":288,
 			"byteOffset":129148,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":312,
-			"byteOffset":129460,
+			"byteLength":288,
+			"byteOffset":129436,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":208,
-			"byteOffset":129772,
+			"byteLength":192,
+			"byteOffset":129724,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":416,
-			"byteOffset":129980,
+			"byteLength":384,
+			"byteOffset":129916,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":72,
-			"byteOffset":130396,
+			"byteOffset":130300,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":130468
+			"byteOffset":130372
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":130476
+			"byteOffset":130380
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":130500
+			"byteOffset":130404
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":130532
+			"byteOffset":130436
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":130556
+			"byteOffset":130460
 		},
 		{
 			"buffer":0,
 			"byteLength":484,
-			"byteOffset":130580
+			"byteOffset":130484
 		},
 		{
 			"buffer":0,
 			"byteLength":1936,
-			"byteOffset":131064
+			"byteOffset":130968
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":133000
+			"byteOffset":132904
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":133024
+			"byteOffset":132928
 		},
 		{
 			"buffer":0,
 			"byteLength":1936,
-			"byteOffset":133048
+			"byteOffset":132952
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":134984
+			"byteOffset":134888
 		}
 	],
 	"samplers":[
@@ -709,7 +703,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":135008,
+			"byteLength":134912,
 			"uri":"vehicle.dino.02.bin"
 		}
 	]

@@ -242,8 +242,8 @@
 			"name":"hoverboat.01._collider",
 			"translation":[
 				0,
-				0.5,
-				-0.10002145171165466
+				0,
+				-0.30000001192092896
 			]
 		},
 		{
@@ -660,7 +660,7 @@
 			]
 		},
 		{
-			"name":"Cylinder.033",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -777,7 +777,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.png"
+			"uri":"tex/AvatarWearables_TX-1.png"
 		},
 		{
 			"mimeType":"image/png",
@@ -1135,14 +1135,14 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.5965614318847656,
-				1.2510534524917603,
-				0.976115882396698
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
@@ -1356,63 +1356,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":441,
+			"byteLength":438,
 			"byteOffset":32888
 		},
 		{
 			"buffer":0,
 			"byteLength":1412,
-			"byteOffset":33332
+			"byteOffset":33328
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":34744
+			"byteOffset":34740
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":35196
+			"byteOffset":35192
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35204
+			"byteOffset":35200
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":35228
+			"byteOffset":35224
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35260
+			"byteOffset":35256
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35284
+			"byteOffset":35280
 		},
 		{
 			"buffer":0,
 			"byteLength":1200,
-			"byteOffset":35308
+			"byteOffset":35304
 		},
 		{
 			"buffer":0,
 			"byteLength":4800,
-			"byteOffset":36508
+			"byteOffset":36504
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":41308
+			"byteOffset":41304
 		},
 		{
 			"buffer":0,
 			"byteLength":128,
-			"byteOffset":41332
+			"byteOffset":41328
 		}
 	],
 	"samplers":[
@@ -1423,7 +1423,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":41460,
+			"byteLength":41456,
 			"uri":"vehicle.hoverboat.01.bin"
 		}
 	]

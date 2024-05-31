@@ -35,8 +35,8 @@
 			"name":"speedster.02._collider",
 			"translation":[
 				0,
-				0.5,
-				-0.10002145171165466
+				0,
+				-0.20000000298023224
 			]
 		},
 		{
@@ -220,7 +220,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.070",
+			"name":"Cylinder.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -639,7 +639,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
-			"uri":"tex/AvatarWearables_TX.png"
+			"uri":"tex/AvatarWearables_TX-1.png"
 		},
 		{
 			"mimeType":"image/png",
@@ -652,14 +652,14 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.5965614318847656,
-				1.2510534524917603,
-				0.976115882396698
+				0.3675413131713867,
+				1.1999999284744263,
+				0.7011935114860535
 			],
 			"min":[
-				-0.5970367789268494,
-				-0.4915724992752075,
-				-0.28579196333885193
+				-0.3675413131713867,
+				-0.6000000238418579,
+				-0.11408743262290955
 			],
 			"type":"VEC3"
 		},
@@ -1172,78 +1172,78 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":441,
+			"byteLength":438,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":2071,
-			"byteOffset":444
+			"byteOffset":440
 		},
 		{
 			"buffer":0,
 			"byteLength":670,
-			"byteOffset":2516
+			"byteOffset":2512
 		},
 		{
 			"buffer":0,
 			"byteLength":6513,
-			"byteOffset":3188
+			"byteOffset":3184
 		},
 		{
 			"buffer":0,
 			"byteLength":8320,
-			"byteOffset":9704
+			"byteOffset":9700
 		},
 		{
 			"buffer":0,
 			"byteLength":1586,
-			"byteOffset":18024
+			"byteOffset":18020
 		},
 		{
 			"buffer":0,
 			"byteLength":1595,
-			"byteOffset":19612
+			"byteOffset":19608
 		},
 		{
 			"buffer":0,
 			"byteLength":1601,
-			"byteOffset":21208
+			"byteOffset":21204
 		},
 		{
 			"buffer":0,
 			"byteLength":1768,
-			"byteOffset":22812
+			"byteOffset":22808
 		},
 		{
 			"buffer":0,
 			"byteLength":713,
-			"byteOffset":24580
+			"byteOffset":24576
 		},
 		{
 			"buffer":0,
 			"byteLength":1203,
-			"byteOffset":25296
+			"byteOffset":25292
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":26500
+			"byteOffset":26496
 		},
 		{
 			"buffer":0,
 			"byteLength":871,
-			"byteOffset":26952
+			"byteOffset":26948
 		},
 		{
 			"buffer":0,
 			"byteLength":1178,
-			"byteOffset":27824
+			"byteOffset":27820
 		},
 		{
 			"buffer":0,
 			"byteLength":1128,
-			"byteOffset":29004
+			"byteOffset":29000
 		}
 	],
 	"samplers":[
@@ -1254,7 +1254,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":30132,
+			"byteLength":30128,
 			"uri":"vehicle.speedster.02.bin"
 		}
 	]
