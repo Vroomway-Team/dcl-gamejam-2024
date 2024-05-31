@@ -24,7 +24,7 @@ export class ParticleManager {
 	private idleTransform: TransformType = {
 		position: Vector3.create(10, -10, 10),
 		rotation: Quaternion.Zero(),
-		scale   : Vector3.create(0.2, 0.2, 0.2)
+		scale   : Vector3.create(0.3, 0.3, 0.3)
 	}
 	
 	private currentIndex: { 
@@ -90,7 +90,7 @@ export class ParticleManager {
 	
 	debugTestFunc() {
 		//this.triggerParticleAtPosition("ticket", Vector3.create(30, 1, 28))
-		this.triggerParticleAtPosition("bump", Vector3.create(21, 2, 35))
-		this.triggerParticleAtPosition("ticket", Vector3.create(21, 2, 29))
+		this.triggerParticleAtPosition("bump", Vector3.create(21, 1, 35))
+		this.triggerParticleAtPosition("ticket", Vector3.create(21, 1, 29))
 	}
 }
