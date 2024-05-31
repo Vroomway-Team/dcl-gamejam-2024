@@ -17,6 +17,7 @@ import { Vec3ToVector3, Vector3ToVec3 } from '../utilities/func.Vectors'
 import { FunctionCallbackIndex } from '../utilities/escentials'
 import { GameManager } from '../arena/game-manager'
 import { Networking } from '../networking'
+import { UI_MANAGER } from './class.UIManager'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
@@ -231,6 +232,7 @@ export class Vehicle {
 				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
 				//if vehicle is owned by the local player, drop tickets
 				if(this.ownerID == Networking.GetUserID()) {
+					UI_MANAGER.hitNotify.show()
 					GameManager.PlayerVehicleCollisionCallback();
 				}
 			}
