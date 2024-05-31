@@ -10,17 +10,17 @@ import { Networking } from '../networking'
 import { SCOREBOARD_MANAGER } 	from '../arena/setupScoreboards'
 import { UI_MANAGER } from '../classes/class.UIManager'
 import { GameManager } from '../arena/game-manager'
+import { CONFIG } from '../_config'
 
-const ENABLE_DEBUG_UI = true
 
 export function uiDebug() {
-	if (ENABLE_DEBUG_UI) {
+	if (CONFIG.SHOW_DEBUG_PANEL) {
 		return (
 			<UiEntity
 				key         = "foo1"
 				uiTransform = {{
 					width       : 260,
-					height      : 320,
+					height      : 420,
 					margin      : '16px 20px 0 0',
 					padding     : 4,
 					position    : {left: 0, top: 300},
@@ -29,6 +29,8 @@ export function uiDebug() {
 				uiBackground = {{ color: Color4.create(0.5, 0.8, 0.1, 0.6) }}
 				
 			>
+
+
 				<UiEntity
 					key         = "foo2"
 					uiTransform = {{
@@ -40,6 +42,21 @@ export function uiDebug() {
 					}}
 					uiBackground = {{ color: Color4.fromHexString("#70ac76ff") }} 
 				>
+
+				<Label
+						key         = "warning!"
+						uiTransform = {{
+							 width: 240, height: 40, margin: 8, 
+							 flexDirection : 'column',
+							 alignItems    : 'flex-start',
+							 justifyContent: 'space-between'
+						}}
+						value       = 'IF YOU ARE SEEING THIS \nWE FORGOT TO TURN OFF LOCAL DEV MODE.\n PLEASE REPORT THIS TO THE DEVELOPER.'
+						color={Color4.White()}
+						fontSize    = {14}
+						textAlign   = "middle-left"
+					/>
+
 				<Button
 					key         = "bar1"
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
@@ -54,7 +71,7 @@ export function uiDebug() {
 					}}
 				/>
 				 
-				<Button
+				<Button 
 					key         = "bar1a"
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
 					value       = 'Teleport to lobby'
