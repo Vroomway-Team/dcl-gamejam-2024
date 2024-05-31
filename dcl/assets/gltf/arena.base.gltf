@@ -408,9 +408,9 @@
 			"name":"Plane.001",
 			"rotation":[
 				0,
-				0.7071067094802856,
+				0.7071066498756409,
 				0,
-				0.7071068286895752
+				0.70710688829422
 			],
 			"scale":[
 				4.200712203979492,
@@ -2619,13 +2619,13 @@
 			"componentType":5126,
 			"count":166,
 			"max":[
-				6.329566478729248,
-				0.1537199467420578,
+				6.111565113067627,
+				0.15371952950954437,
 				9.198668479919434
 			],
 			"min":[
-				-1.1787785291671753,
-				0.15371239185333252,
+				-0.9607771039009094,
+				0.15371280908584595,
 				-7.30562686920166
 			],
 			"type":"VEC3"
@@ -3089,53 +3089,53 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":1008,
+			"byteLength":998,
 			"byteOffset":99492
 		},
 		{
 			"buffer":0,
 			"byteLength":2435,
-			"byteOffset":100500
+			"byteOffset":100492
 		},
 		{
 			"buffer":0,
 			"byteLength":1916,
-			"byteOffset":102936
+			"byteOffset":102928
 		},
 		{
 			"buffer":0,
 			"byteLength":1040,
-			"byteOffset":104852
+			"byteOffset":104844
 		},
 		{
 			"buffer":0,
 			"byteLength":1147,
-			"byteOffset":105892
+			"byteOffset":105884
 		},
 		{
 			"buffer":0,
 			"byteLength":2894,
-			"byteOffset":107040
+			"byteOffset":107032
 		},
 		{
 			"buffer":0,
 			"byteLength":218,
-			"byteOffset":109936
+			"byteOffset":109928
 		},
 		{
 			"buffer":0,
 			"byteLength":218,
-			"byteOffset":110156
+			"byteOffset":110148
 		},
 		{
 			"buffer":0,
 			"byteLength":923,
-			"byteOffset":110376
+			"byteOffset":110368
 		},
 		{
 			"buffer":0,
 			"byteLength":2247,
-			"byteOffset":111300
+			"byteOffset":111292
 		}
 	],
 	"samplers":[
@@ -3146,7 +3146,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":113548,
+			"byteLength":113540,
 			"uri":"arena.base.bin"
 		}
 	]
