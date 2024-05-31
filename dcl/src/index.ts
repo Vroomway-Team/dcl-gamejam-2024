@@ -22,6 +22,9 @@ import { ScoreboardEntry } 						from './interfaces/interface.Scoreboard'
 import { TicketEntity } 						from './arena/ticket-entity'
 import * as serverStateSpec 					from './rooms/spec/server-state-spec'
 import * as clientStateSpec 					from './rooms/spec/client-state-spec'
+import { VehicleState } from './interfaces/interface.VehicleState'
+import * as CANNON from 'cannon'
+
 
 // Config options for colyseus and debug features are in _config.ts
 
@@ -84,13 +87,13 @@ async function PlayerSetup() {
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
+	Networking.InitializeClientConnection(Networking.CONNECTION_TYPE.REMOTE);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
 
 	Networking.connectedState = {status:"connecting",msg:"connecting to " + "my_room"};
-
+ 
 	await Networking.GetClientConnection().joinOrCreate("my_room", { 
 		userData: { id:Networking.GetUserID(), displayName:Networking.GetUserName() } 
 	}).then((room: Room) => {
@@ -173,6 +176,7 @@ async function PlayerSetup() {
 			//console.log(`GameRoundTimer is now ${currentValue}, previous value was: ${previousValue}`);
 			//update timer
 			GameState.GameEndCountdown.SetValue(currentValue);
+			UI_MANAGER.setTimerValue(currentValue);
 		});
  
 		//#		PLAYER DETAILS
@@ -185,7 +189,11 @@ async function PlayerSetup() {
 				VEHICLE_MANAGER.userClaimVehicle(player.vehicleID, player.playerID, player.playerName);
 
 				//add a listener to the new player's racing data (automates race updates)
-				player.listen("score", (score: clientStateSpec.PlayerRaceDataState) => {
+				player.listen("score", (score:number) => {
+					//if player is local
+					if(player.playerID == Networking.GetUserID()) {
+						UI_MANAGER.setScoreValue(score);
+					}
 					//get all scores
 					var scores:ScoreboardEntry[] = [];
 					room.state.lobbyPlayersByID.forEach((value:clientStateSpec.PlayerState, key:string) => {
@@ -199,26 +207,38 @@ async function PlayerSetup() {
 				});
  
 				//add a listener to the new player's racing data (automates race updates)
-				player.listen("racingData", (raceData: clientStateSpec.PlayerRaceDataState) => {
+				player.listen("racingData", (raceData: clientStateSpec.VehicleStateSyncData) => {
+					//halt if game is not in session
+					if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
 					//get vehicle from manager
 					const vehicle = VEHICLE_MANAGER.getVehicle(player.vehicleID);
-					if(!vehicle) {
-						console.log("server call: player.racingData.update","could not find vehicle!!!",raceData.carModelId,raceData)
+					if(vehicle == undefined) {
+						console.log("server call: player.racingData.update","could not find vehicle!!!",raceData)
 						return; 
 					} 
+					//halt if vehicle owner is operated by local player (client has authority)
+					if(player.playerID == Networking.GetUserID()) return;
+					//console.log("updating vehicle: "+player.vehicleID+", "+JSON.stringify(raceData));
+ 
 					//pass patched data to vehicle controller
-					/*Networking.lastKnownServerTime = raceData.serverTime
-					vehicle.setVehicleState({
-						isClaimed   : true,//   : boolean,      // taken from Vehicle instance
-						ownerID        : player.id,       // taken from PlayerData
-						ownerName      : player.name,       // taken from PlayerData
-						position       : raceData.worldPosition,      // taken from DCL entity, applied to cannonBody
-						heading   : Quaternion.toEulerAngles(quaternionCreate(raceData.worldMoveDirection)).y,//     : number,      // taken from DCL entity, applied to DCL entity
-						velocity       : raceData.velocity ? new CANNON.Vec3(raceData.velocity.x,raceData.velocity.y,raceData.velocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
-						angularVelocity: raceData.angularVelocity ? new CANNON.Vec3(raceData.angularVelocity.x,raceData.angularVelocity.y,raceData.angularVelocity.z) : undefined as any,  // taken from cannonBody, applied to cannonBody
-						score  : raceData ? raceData.score : -1,//         : number,       // player score, num tickets/tokens, etc
-						rank   : raceData.racePosition,//        : number        // current ranking for this vehicle. lower is better, starts at 1
-					});*/
+					const velocity = new CANNON.Vec3(raceData.velocity.x,raceData.velocity.y,raceData.velocity.z);
+					const angularVelocity = new CANNON.Vec3(raceData.angularVelocity.x,raceData.angularVelocity.y,raceData.angularVelocity.z);
+					//Networking.lastKnownServerTime = raceData.serverTime
+					const vehicleState:VehicleState = {
+						//state
+						isClaimed:true,
+						//player
+						ownerID:player.playerID,
+						ownerName:player.playerName,
+						score:player.score,
+						rank:raceData.rank,
+						//vehicle (taken from cannonBody, applied to cannonBody)
+						position:{ x:raceData.position.x, y:raceData.position.y, z:raceData.position.z },
+						heading:raceData.heading,
+						velocity:velocity,
+						angularVelocity:angularVelocity,
+					};
+					vehicle.setVehicleState(vehicleState);
 				}); 
 	  	});
 
@@ -229,9 +249,6 @@ async function PlayerSetup() {
 
 				//release vehicle
 				VEHICLE_MANAGER.userUnclaimVehicle(player.vehicleID);
-
-				//update the scoreboard
-
 		});
 
 		//#		TICKET DETAILS

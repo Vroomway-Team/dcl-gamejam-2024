@@ -14,7 +14,7 @@ import { VehicleManager } 				from './class.VehicleManager'
 import { VehicleState } 				from '../interfaces/interface.VehicleState'
 import { getEntityPosition, getForwardDirectionFromRotation } 			from '../utilities/func.entityData'
 import { Vec3ToVector3, Vector3ToVec3 } from '../utilities/func.Vectors'
-import { FunctionCallbackIndex, PlayerVehicleControllerData } from '../utilities/escentials'
+import { FunctionCallbackIndex } from '../utilities/escentials'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
@@ -308,7 +308,8 @@ export class Vehicle {
 		// as the source of truth properties
 		// TODO: add some kind of flag or check ot ignore this for locally controlled vehicles
 		if (!this.isLocalPlayer) {
-			this.cannonBody.position.copy(Vector3ToVec3(state.position))
+			const pos = new CANNON.Vec3(state.position.x,state.position.y,state.position.z);
+			this.cannonBody.position.copy(pos)
 			this.cannonBody.velocity.copy(state.velocity)
 			this.targetHeading = state.heading
 			this.cannonBody.quaternion.setFromEuler(0, state.heading, 0)
@@ -330,14 +331,14 @@ export class Vehicle {
 	
 	// Triggered when the user presses W to set flag used by this.updateSpeed
 	accelerate(): void {
-		console.log("Accelerating")
+		//console.log("Accelerating")
 		
 		this.isAccelerating = true
     }
 
 	// Triggered when the user releases W to set flag used by this.updateSpeed
     decelerate(): void {
-		console.log("Decelerating")
+		//console.log("Decelerating")
 		
 		this.isAccelerating = false
     }
@@ -395,7 +396,7 @@ export class Vehicle {
 			}			
 		}
 		
-		console.log("class:Vehicle: currentSpeed =", this.currentSpeed)
+		//console.log("class:Vehicle: currentSpeed =", this.currentSpeed)
 	}
 	
 	applyMoveForce() {

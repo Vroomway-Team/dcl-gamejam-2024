@@ -8,25 +8,6 @@ import { Color4, Quaternion, Vector3 } from "@dcl/sdk/math";
     Contact: TheCryptoTrader69@gmail.com
 */
 
-
-/** object representing a player's vehicle controller data */
-export interface PlayerVehicleControllerData {
-    /** target vehicle */
-    vehicleID:number;
-    /** world position */
-    worldPosition?:Vector3;
-    /** move speed */
-    moveSpeed?:number;
-    /** move direction */
-    moveDirection?:Quaternion;
-    /** move velocity */
-    moveVelocity?:Vector3;
-    /** move force */
-    moveForce?:Vector3;
-    /** mass */
-    mass?:number;
-}
-
 //### COMMON VECTORS ###
 //common transform positions
 export const TRANSFORM_POSITION_ON:Vector3 = {x:0,y:0,z:0};

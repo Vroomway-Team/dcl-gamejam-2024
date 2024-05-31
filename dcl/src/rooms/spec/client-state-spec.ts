@@ -40,7 +40,7 @@ export type PlayerState = ColyseusCallbacksReferences<serverStateSpec.PlayerStat
         score: number;
         vehicleID: number;
       
-        racingData: PlayerRaceDataState;
+        racingData: VehicleStateSyncData;
     };
 
 export type VehicleState = ColyseusCallbacksReferences<serverStateSpec.VehicleState> &
@@ -55,8 +55,14 @@ export type TicketState = ColyseusCallbacksReferences<serverStateSpec.TicketStat
         PositionCurrent:Vector3State;
     };
 
-export type PlayerRaceDataState = ColyseusCallbacksReferences<serverStateSpec.PlayerRaceDataState> &
-    serverStateSpec.PlayerRaceDataState & {};
+export type VehicleStateSyncData = ColyseusCallbacksReferences<serverStateSpec.VehicleStateSyncData> &
+    serverStateSpec.VehicleStateSyncData & {
+        heading: number;
+        rank: number;
+        position: Vector3State;
+        velocity: Vector3State;
+        angularVelocity: Vector3State;
+    };
 
 
 export type PlayerButtonState = ColyseusCallbacksReferences<serverStateSpec.PlayerButtonState> &
