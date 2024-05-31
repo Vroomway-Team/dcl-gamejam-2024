@@ -232,6 +232,10 @@ export class Vehicle {
 				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
 				//if vehicle is owned by the local player, drop tickets
 				if(this.ownerID == Networking.GetUserID()) {
+					//clear it
+					UI_MANAGER.hitNotify.text = ''
+					//IF KNOWN - put
+					//UI_MANAGER.hitNotify.text = 'PERSON WHO HIT YOUR '
 					UI_MANAGER.hitNotify.show()
 					GameManager.PlayerVehicleCollisionCallback();
 				}
