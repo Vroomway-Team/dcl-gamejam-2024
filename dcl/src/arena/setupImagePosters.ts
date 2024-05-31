@@ -78,9 +78,9 @@ export function setupImagePosters(){
     })
     const howToPoster = engine.addEntity()
     Transform.create(howToPoster, {
-        position: Vector3.create(31, 3, 32),
+        position: Vector3.create(31.5, 3.75, 32),
         scale: Vector3.create(2,2,2),
-        rotation: Quaternion.fromEulerDegrees(0,90,0)
+        rotation: Quaternion.fromEulerDegrees(-20,90,0)
     })
     MeshRenderer.setPlane(howToPoster)
     Material.setPbrMaterial(howToPoster, {
@@ -96,9 +96,9 @@ export function setupImagePosters(){
     })
     const howToPoster2 = engine.addEntity()
     Transform.create(howToPoster2, {
-        position: Vector3.create(33, 3, 32),
+        position: Vector3.create(32.60, 3.75, 32),
         scale: Vector3.create(2,2,2),
-        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+        rotation: Quaternion.fromEulerDegrees(-20,-90,0)
     })
     MeshRenderer.setPlane(howToPoster2)
     Material.setPbrMaterial(howToPoster2, {
