@@ -19,6 +19,7 @@ export module AudioManager {
         INTERACTION_CART_BUMP = "assets/sfx/cart_bump.mp3",
         INTERACTION_TICKET_COLLECT = "assets/sfx/ticket_collect.mp3",
         INTERACTION_TICKET_DROP = "assets/sfx/ticket_drop.mp3",
+        INTERACTION_MATCH_STARTING = "assets/sfx/voice_game_start.mp3",
         //results
         RESULT_WIN = "assets/sfx/voice_winner.mp3",
         RESULT_LOSE = "assets/sfx/voice_loser.mp3",
