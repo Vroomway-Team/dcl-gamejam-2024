@@ -1,6 +1,8 @@
-import { ColliderLayer } 		from "@dcl/sdk/ecs";
+import { ColliderLayer, GltfContainer, Transform, engine } 		from "@dcl/sdk/ecs";
 import { Vector3, Quaternion }	from "@dcl/sdk/math";
 import { GltfObject } 			from "../classes/class.GltfObject";
+import * as utils from '@dcl-sdk/utils'
+import { movePlayerTo } from "~system/RestrictedActions";
 
 export function setupGltfShapes() {
 	
@@ -123,4 +125,32 @@ export function setupGltfShapes() {
 		rotation: Quaternion.fromEulerDegrees(225, -90, 0),
 		scale   : Vector3.create(2,2,2)
 	})
+	//Spectator Pods
+
+	const spectatorPod1 = engine.addEntity()
+  	Transform.create(spectatorPod1, {
+    	position: {x:34.5, y:0.1, z:39},
+    	scale: {x:1, y:1, z:1},
+    	rotation: Quaternion.fromEulerDegrees(0,-165,0)
+  	})
+ 	GltfContainer.create(spectatorPod1, {
+    	src: 'assets/gltf/spectate.pod.gltf'
+  	})
+  	utils.triggers.addTrigger(
+    	spectatorPod1,
+    	utils.NO_LAYERS,
+    	utils.PLAYER_LAYER_ID,
+    	[
+      	{
+      	  type: 'sphere',
+      	  radius:1
+      	}
+    	],
+    	() => { movePlayerTo({
+    	    newRelativePosition: Vector3.create(4,25,32),
+    	    cameraTarget: Vector3.create(32, 20, 50),
+    	  })
+    	  
+    	}
+  	)
 }
