@@ -1,5 +1,5 @@
 import { engine, Entity, Transform } 	from "@dcl/sdk/ecs"
-import { Quaternion, Vector3 } 			from "@dcl/sdk/math"
+import { DEG2RAD, Quaternion, Vector3 } 			from "@dcl/sdk/math"
 import * as CANNON 						from 'cannon'
 
 
@@ -44,7 +44,7 @@ export function getCameraRotation(): Quaternion {
 // Typically takes the current camera yaw value
 export function getForwardDirectionFromRotation(yRot: number): CANNON.Vec3 {
 	// Convert to rads
-	yRot = yRot * (Math.PI / 180)
+	yRot = yRot * DEG2RAD
 	
 	// Workout forwards
     const forward = new CANNON.Vec3(Math.sin(yRot), 0, Math.cos(yRot));
