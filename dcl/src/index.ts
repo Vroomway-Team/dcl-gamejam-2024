@@ -1,35 +1,33 @@
-import { Transform } from '@dcl/sdk/ecs'
-import { setupUi } from './ui/setupUI'
-import { setupCannonWorld } from './arena/setupCannonWorld'
-import { setupGltfShapes } from './arena/setupGltfShapes'
-//importing even if not used to ensure gets loaded early
+import { CONFIG } 								from './_config'
+
+import * as utils 								from '@dcl-sdk/utils'
+import { Transform } 							from '@dcl/sdk/ecs'
+import { Quaternion } 							from '@dcl/sdk/math'
+
+import { setupUi } 								from './ui/setupUI'
+import { setupCannonWorld } 					from './arena/setupCannonWorld'
+import { setupGltfShapes } 						from './arena/setupGltfShapes'
+import { setupNPCAvatars } 						from './arena/setupNPCAvatars'
+import { setupImagePosters } 					from './arena/setupImagePosters'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
-import { SCOREBOARD_MANAGER, setupScoreboards } 					from './arena/setupScoreboards'
-import * as utils from '@dcl-sdk/utils'
-//import { ScoreDisplay } from './classes/class.ScoreDisplay'
-import { Networking } from './networking'
-import { GameManager } from './arena/game-manager'
-import { Room } from 'colyseus.js'
-import { initSendPlayerInputToServerSystem } from './systems/playerPositionSystem'
-import * as serverStateSpec from './rooms/spec/server-state-spec'
-import * as clientStateSpec from './rooms/spec/client-state-spec'
-//import { ReactEcsRenderer } from '@dcl/sdk/react-ecs'
-import { Quaternion } from '@dcl/sdk/math'
-import { setupNPCAvatars } from './arena/setupNPCAvatars'
-import { setupImagePosters } from './arena/setupImagePosters'
-import { GameState } from './game-state'
-import { ScoreboardEntry } from './interfaces/interface.Scoreboard'
-import { TicketEntity } from './arena/ticket-entity'
+import { SCOREBOARD_MANAGER, setupScoreboards } from './arena/setupScoreboards'
 
+import { Room } 								from 'colyseus.js'
+import { Networking } 							from './networking'
+import { GameManager } 							from './arena/game-manager'
+import { initSendPlayerInputToServerSystem } 	from './systems/playerPositionSystem'
+import { GameState } 							from './game-state'
+import { ScoreboardEntry } 						from './interfaces/interface.Scoreboard'
+import { TicketEntity } 						from './arena/ticket-entity'
+import * as serverStateSpec 					from './rooms/spec/server-state-spec'
+import * as clientStateSpec 					from './rooms/spec/client-state-spec'
 
-// CONFIG
-const COLYSEUS_SERVER     = Networking.CONNECTION_TYPE.LOCAL
-const SHOW_DEBUG_TRIGGERS = true
+// Config options for colyseus and debug features are in _config.ts
 
 export function main() {
 	//turn on trigger debug mode (draws )
-	utils.triggers.enableDebugDraw(SHOW_DEBUG_TRIGGERS);
+	utils.triggers.enableDebugDraw(CONFIG.SHOW_DEBUG_TRIGGERS);
 
 
 	/* /ticket creation test
@@ -79,13 +77,14 @@ async function PlayerSetup() {
 	//get DCL details
 	console.log("getting player details...");
 	await Networking.LoadPlayerData();
+	
 	console.log("got player details!");
 
 	//initialize game manager (ensures all sub-modules are ready)
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(COLYSEUS_SERVER);
+	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
