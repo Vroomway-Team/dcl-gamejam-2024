@@ -1,4 +1,4 @@
-import { Transform, TransformType } 		from "@dcl/sdk/ecs"
+import { Animator, Transform, TransformType } 		from "@dcl/sdk/ecs"
 import { Quaternion, Vector3 } 	from "@dcl/sdk/math"
 import { GltfObjectAnimated } 	from "./class.GltfObjectAnimated"
 import * as utils 				from '@dcl-sdk/utils'
@@ -7,7 +7,7 @@ type ParticleType = "ticket" | "bump"
 
 interface Particle {
 	type  : ParticleType
-	entity: GltfObjectAnimated
+	gltf: GltfObjectAnimated
 }
 
 export class ParticleManager {
@@ -24,7 +24,7 @@ export class ParticleManager {
 	private idleTransform: TransformType = {
 		position: Vector3.create(10, -10, 10),
 		rotation: Quaternion.Zero(),
-		scale   : Vector3.One()
+		scale   : Vector3.create(0.2, 0.2, 0.2)
 	}
 	
 	private currentIndex: { 
@@ -44,8 +44,8 @@ export class ParticleManager {
 		count: number
 	) {		
 		for (let i = 0; i < count; i++) {
-			const entity = this.createEntity(type)
-			this.particles.push({ type, entity })
+			const gltf = this.createEntity(type)
+			this.particles.push({ type, gltf })
 		}
 	}
 
@@ -53,10 +53,7 @@ export class ParticleManager {
 		const src      = type == "ticket" ? this.ticketSrc      : this.bumpSrc
 		const clipName = type == "ticket" ? this.ticketClipName : this.bumpClipName
 		const gltf     = new GltfObjectAnimated(src, this.idleTransform, clipName)
-		return {
-			"type"  : type,
-			"entity": gltf
-		}
+		return gltf
 	}
 
 	triggerParticleAtPosition(
@@ -70,15 +67,17 @@ export class ParticleManager {
 			const particle = particlesOfType[index]
 
 			if (particle) { 
-				const trans = Transform.getMutable(particle.entity.entity)
+				const trans = Transform.getMutable(particle.gltf.entity)
 				trans.position = position
 				
-				particle.entity.animateOnce()
+				particle.gltf.animateOnce()
 				console.log("ParticleManager() playing animation")
 				
 				utils.timers.setTimeout(() => {
 					trans.position = this.idleTransform.position
 					console.log("ParticleManager() returning to pos")
+					Animator.stopAllAnimations(particle.gltf.entity)
+
 				}, 1000)
 				
 				this.currentIndex[type] = (index + 1) % 10
@@ -90,7 +89,8 @@ export class ParticleManager {
 	}
 	
 	debugTestFunc() {
-		this.triggerParticleAtPosition("ticket", Vector3.create(30, 1, 28))
-		this.triggerParticleAtPosition("bump", Vector3.create(32, 1, 32))
+		//this.triggerParticleAtPosition("ticket", Vector3.create(30, 1, 28))
+		this.triggerParticleAtPosition("bump", Vector3.create(21, 2, 35))
+		this.triggerParticleAtPosition("ticket", Vector3.create(21, 2, 29))
 	}
 }

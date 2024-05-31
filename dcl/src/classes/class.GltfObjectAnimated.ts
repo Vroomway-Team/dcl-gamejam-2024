@@ -27,14 +27,15 @@ export class GltfObjectAnimated {
 			states: [
 				{
 					clip   : this.clipName,
-					playing: false,
+					playing: true,
 					loop   : false,
 				},
 			],
 		})
+		Animator.stopAllAnimations(this.entity, true)
 	}
 	
 	animateOnce() {
-		Animator.playSingleAnimation(this.entity, this.clipName)
+		Animator.playSingleAnimation(this.entity, this.clipName, true)
 	}
 }
