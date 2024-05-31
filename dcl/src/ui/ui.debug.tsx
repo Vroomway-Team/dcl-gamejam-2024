@@ -11,6 +11,7 @@ import { SCOREBOARD_MANAGER } 	from '../arena/setupScoreboards'
 import { UI_MANAGER } from '../classes/class.UIManager'
 import { GameManager } from '../arena/game-manager'
 import { CONFIG } from '../_config'
+import { PARTICLE_MANAGER } from '../arena/setupParticleManager'
 
 
 export function uiDebug() {
@@ -142,8 +143,19 @@ export function uiDebug() {
 						}}
 					/>
 					
-					<Label
+					<Button
 						key         = "bar7"
+						uiTransform = {{ width: 240, height: 40, margin: 8 }}
+						value       = 'Particle test'
+						variant     = 'primary'
+						fontSize    = {14}
+						onMouseDown = {() => {
+							PARTICLE_MANAGER.debugTestFunc()
+						}}
+					/>
+					
+					<Label
+						key         = "bar8"
 						uiTransform = {{ width: 240, height: 40, margin: 8 }}
 						value       = {`${JSON.stringify(Networking.connectedState)}`}
 						fontSize    = {14}

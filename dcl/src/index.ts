@@ -12,6 +12,7 @@ import { setupImagePosters } 					from './arena/setupImagePosters'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
 import { SCOREBOARD_MANAGER, setupScoreboards } from './arena/setupScoreboards'
+import { PARTICLE_MANAGER } 					from './arena/setupParticleManager'
 
 import { Room } 								from 'colyseus.js'
 import { Networking } 							from './networking'
@@ -26,7 +27,6 @@ import { VehicleState } from './interfaces/interface.VehicleState'
 import * as CANNON from 'cannon'
 import { updateScores } from './utilities/game-play-utils'
 
- 
 // Config options for colyseus and debug features are in _config.ts
 
 export function main() {
