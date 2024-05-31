@@ -26,6 +26,7 @@ import * as clientStateSpec 					from './rooms/spec/client-state-spec'
 import { VehicleState } from './interfaces/interface.VehicleState'
 import * as CANNON from 'cannon'
 import { updateScores } from './utilities/game-play-utils'
+import { NPCManager } from './arena/npc-manager'
 
 // Config options for colyseus and debug features are in _config.ts
 
@@ -81,14 +82,14 @@ async function PlayerSetup() {
 	//get DCL details
 	console.log("getting player details...");
 	await Networking.LoadPlayerData();
-	
+	 
 	console.log("got player details!");
 
 	//initialize game manager (ensures all sub-modules are ready)
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER); 
+	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
@@ -222,13 +223,14 @@ async function PlayerSetup() {
 					if(vehicle == undefined) {
 						console.log("server call: player.racingData.update","could not find vehicle!!!",raceData)
 						return;
-					} 
+					}
+
+					//dont halt here, vehicle internally knowns and will ignore if needed (<- not anymore >_>)
+
 					//halt if vehicle owner is operated by local player (client has authority)
-					//dont halt here, vehicle internally knowns and will ignore if needed
-					// if(player.playerID == Networking.GetUserID()){
-					// 	vehicle.updateCrown(raceData.rank)
-					// 	return;
-					// } 
+					if(player.playerID == Networking.GetUserID()) return;
+					//halt if vehicle is an npc operated by local player (delegated operator has authority)
+					if(NPCManager.NPC_DELEGATE_REG.containsKey(player.playerID)) return;
 					//console.log("updating vehicle: "+player.vehicleID+", "+JSON.stringify(raceData));
  
 					//pass patched data to vehicle controller
@@ -270,11 +272,36 @@ async function PlayerSetup() {
 				}
 		});
 
+		//# 	NPC DETAILS
+		//called when an NPC control delegate is added to the game
+		room.state.lobbyNPCs.onAdd(
+		function (npcController: clientStateSpec.NPCControllerState, sessionId: string) {
+			console.log("server call: npc added to lobby, "+JSON.stringify(npcController));
+
+			//halt if npc owner is not local player
+			if(npcController.ownerID != Networking.GetUserID()) return;
+
+			//create new npc controller
+			console.log("creating npc controller for local player to manage npc");
+			NPCManager.Create(npcController.npcID);
+		});
+		room.state.lobbyNPCs.onRemove(
+		function (npcController: clientStateSpec.NPCControllerState, sessionId: string) {
+			console.log("server call: npc removed from lobby, "+JSON.stringify(npcController));
+ 
+			//halt if npc owner is not local player
+			if(npcController.ownerID != Networking.GetUserID()) return;
+
+			//remove npc controller
+			console.log("removing npc controller");
+			NPCManager.Destroy(npcController.npcID);
+		}); 
+
 		//#		TICKET DETAILS
 		//called when a ticket is added to the game
 		room.state.gameTickets.onAdd(
 		function (ticket: clientStateSpec.TicketState, sessionId: string) {
-			console.log("server call: ticket added to lobby, "+JSON.stringify(ticket));
+			//console.log("server call: ticket added to lobby, "+JSON.stringify(ticket));
 
 			//spawn ticket
             TicketEntity.Create({ id:ticket.ticketID, transform:{ position:ticket.PositionCurrent } });
@@ -283,11 +310,14 @@ async function PlayerSetup() {
 		room.state.gameTickets.onRemove(
 		function (ticket: clientStateSpec.TicketState, sessionId: string) {
 			console.log("server call: ticket removed from lobby, "+JSON.stringify(ticket));
- 
+
 			//remove ticket
 			const tmp = TicketEntity.GetByKey(ticket.ticketID.toString());
 			if(tmp != undefined) TicketEntity.Disable(tmp);
-		});
+ 
+			//send update to npc manager
+			NPCManager.TicketClaimed(ticket.ticketID);
+		}); 
 
 	}).catch((e) => {
 	  console.log("error entering room: ", e);
