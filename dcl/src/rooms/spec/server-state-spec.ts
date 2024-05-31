@@ -22,29 +22,31 @@ export interface Vector3State {
   }
   
   export interface PlayerRaceDataState extends ClockState {
-    worldPosition: Vector3State;
+    /** player world position */
+    playerWorldPosition:Vector3State;
+    /** player look direction */
+    playerCameraDirection:Quaternion3State; //turn angle
     
-    currentSpeed: number;
-    worldMoveDirection: Quaternion3State; //world moving direction
-    velocity: Vector3State
-    angularVelocity: Vector3State
-    force: Vector3State
-    mass: number
-    shootDirection: Quaternion3State; //car forward direction
-    cameraDirection: Quaternion3State; //turn angle
-    endTime: number; //move this as wont change till the end
-    carModelId: number; //move this as wont change much if at all?
-    
-    racePosition: number;
-    score: number
+    /** vehicle's current move speed */
+    moveSpeed:number;
+    /** vehicle's current move direction */
+    moveDirection:Quaternion3State;
+    /** vehicle's current velocity */
+    velocity:Vector3State
+    /** move angular velocity */
+    angularVelocity:Vector3State
+    /** move force */
+    force:Vector3State
+    /** mass */
+    mass:number;
+    /** vehicle's forward */
+    shootDirection:Quaternion3State;
+    /** move this as wont change till the end */
+    endTime:number;
   
-    lastKnownServerTime: number;
-    lastKnownClientTime: number;
-  
-    //isDrifting: boolean
-    //currentSpeed : number
+    lastKnownServerTime:number;
+    lastKnownClientTime:number;
   }
-  
   
   // export type EventStatus = "unknown" | "open" | 'starting' | "started" | "closed";
   // export type RaceStatus = "unknown" | "not-started" | "starting" | "started" | "ended";
@@ -71,13 +73,22 @@ export interface Vector3State {
 
     connStatus: PlayerConnectionStatus;
   
-    racingData: PlayerRaceDataState;
+    racingData: VehicleStateSyncData;
   }
 
   /** represents a vehicle in the game */
   export interface VehicleState {
     vehicleID: number;
     ownerID: string;
+  }
+
+  /** interface for data in-transit, allows for info-gaps */
+  export interface VehicleStateSyncData {
+    heading: number;
+    rank: number;
+    position: Vector3State;
+    velocity: Vector3State;
+    angularVelocity: Vector3State;
   }
 
   /** represents a ticket in the game */

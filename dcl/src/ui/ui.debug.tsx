@@ -9,6 +9,7 @@ import { VEHICLE_MANAGER } 		from '../arena/setupVehicleManager'
 import { Networking } from '../networking'
 import { SCOREBOARD_MANAGER } 	from '../arena/setupScoreboards'
 import { UI_MANAGER } from '../classes/class.UIManager'
+import { GameManager } from '../arena/game-manager'
 
 const ENABLE_DEBUG_UI = true
 
@@ -46,13 +47,14 @@ export function uiDebug() {
 					variant     = 'primary'
 					fontSize    = {14}
 					onMouseDown = {() => {
-						movePlayerTo({
+						GameManager.PlayerVehicleCollisionCallback();
+						/*movePlayerTo({
 							newRelativePosition: Vector3.create(32, 10, 32),
 							cameraTarget       : Vector3.create(8, 1, 8),
-						})
+						})*/
 					}}
 				/>
-				
+				 
 				<Button
 					key         = "bar1a"
 					uiTransform = {{ width: 240, height: 40, margin: 8 }}
@@ -131,6 +133,7 @@ export function uiDebug() {
 						fontSize    = {14}
 						textAlign   = "middle-left"
 					/>
+
 				</UiEntity>
 			</UiEntity>
 		)

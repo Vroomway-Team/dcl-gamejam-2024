@@ -3,7 +3,7 @@ import { TicketEntity } from "./ticket-entity";
 import { Networking } from "../networking";
 import { DynamicButton_Simple } from "../utilities/escentials";
 import { GameState } from "../game-state";
-import { LobbyLabel } from "../classes/class.LobbyLabel";
+import { LobbyLabel, PlayerUnclaimCallbackType } from "../classes/class.LobbyLabel";
 import { AudioManager } from "./audio-manager";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
 
@@ -17,6 +17,8 @@ export module GameManager {
     /** wrapper for debugging logs */
     function addLog(log:string) { if(isDebugging) console.log("GAME MANAGER: "+log); }
     
+    export var PlayerVehicleCollisionCallback:PlayerUnclaimCallbackType;
+
     /** initializes the game manager, setting the default entry state */
     export function Initialize() {
         addLog("initializing...");
@@ -28,13 +30,21 @@ export module GameManager {
             if(Networking.ClientRoom == undefined) return;
             //send claim request  
             Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), vehicle:vehicle});
-        } 
+        }
         //  player attempts to unclaim a vehicle
         LobbyLabel.PlayerUnclaimCallback = function() {
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send claim request
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
+        }
+        //  player attempts to claim a vehicle  
+        PlayerVehicleCollisionCallback = function() {
+            console.log("dropping tickets");
+            //halt if player is not part of a room
+            if(Networking.ClientRoom == undefined) return;
+            //send claim request
+            Networking.ClientRoom.send("ticket-drop", {});
         }
         //  ticket collides with ticket (pickup logic)
         TicketEntity.CallbackTicketCollision = function(index:number) {

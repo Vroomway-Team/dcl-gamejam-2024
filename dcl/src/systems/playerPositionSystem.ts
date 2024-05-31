@@ -1,30 +1,9 @@
-
-//import { connect, disconnect, showConnectingEnded, showConnectingStarted } from './connection'
-//import { onConnect } from './onConnect'
-//import { Room } from 'colyseus.js'
-
-// import { log } from '../back-ports/backPorts'
-// import { getRealm } from '~system/Runtime'
-// import { IntervalUtil } from '../utilities/interval-util'
-// import { isNull } from '../utils'
-// import { GAME_STATE } from '../state'
-// import { CONFIG } from '../config'
-// import { REGISTRY } from '../registry'
-// import { Transform, engine } from '@dcl/sdk/ecs'
-// import { Vector3 } from '@dcl/sdk/math'
-
 import * as serverStateSpec from '../rooms/spec/server-state-spec'
-//
-//import { cannonVehicle } from '../cannonWorld'
 import { IntervalUtil } from '../utilities/interval-util'
 import { Transform, engine } from '@dcl/sdk/ecs'
 import { Networking } from '../networking'
 import { VEHICLE_MANAGER } from '../arena/setupVehicleManager'
 import { GameState } from '../game-state'
-import { PlayerVehicleControllerData } from '../utilities/escentials'
-import { Vector3 } from '@dcl/sdk/math'
-
-const CLASS_NAME = "PlayerTransformSystem"
 
 /*const dataToSend: serverStateSpec.PlayerTransformState = {
   position: {x:0,y:0,z:0},
@@ -32,31 +11,24 @@ const CLASS_NAME = "PlayerTransformSystem"
   rotation: { x:0,y:0,z:0,w:0 }
 }*/
 
-const racingDataToSend: serverStateSpec.PlayerRaceDataState = {
-  //carScenePosition: { x: 0, y: 0, z: 0 },
-  //closestProjectedPoint: { x: 0, y: 0, z: 0 },
-  endTime: 0,
-  //closestPointID: 0,
-  // closestSegmentID: 0,
-  // closestSegmentPercent: 0,
-  // closestSegmentDistance: 0,
-  currentSpeed: 0,
-  shootDirection: { x: 0, y: 0, z: 0, w: 0 },
-  cameraDirection: { x: 0, y: 0, z: 0, w: 0 },
-  worldPosition: { x: 0, y: 0, z: 0 },
+/*const racingDataToSend: serverStateSpec.PlayerRaceDataState = {
+  //player
+  playerWorldPosition: { x: 0, y: 0, z: 0 },
+  playerCameraDirection: { x: 0, y: 0, z: 0, w: 0 },
+  //vehicle
+  moveSpeed: 0,
+  moveDirection: { x: 0, y: 0, z: 0, w: 0 },
+  velocity: { x: 0, y: 0, z: 0 },
   angularVelocity: { x: 0, y: 0, z: 0 },
-  carModelId: 0,
+  force: { x: 0, y: 0, z: 0 },
+  mass: 0,
+  shootDirection: { x: 0, y: 0, z: 0, w: 0 },
+  //meta
+  endTime: 0,
   serverTime: -1,
-  racePosition: -1,
-  score: -1,
-  //lap: -1,
-  worldMoveDirection: { x: 0, y: 0, z: 0, w: 0 },
   lastKnownServerTime: -1,
   lastKnownClientTime: -1,
-  force: { x: 0, y: 0, z: 0 },
-  velocity: { x: 0, y: 0, z: 0,},
-  mass: 0
-};
+};*/
 
 
 // function updatePlayerRacingData() {
@@ -122,57 +94,18 @@ export class PlayerPositionSystem  {
     //get player vehicle
     const vehicle = VEHICLE_MANAGER.getPlayerVehicle(Networking.GetUserID())
     if(!vehicle) return;
-    
-    //undocumented not working
-    //const METHOD_NAME = "update" 
-    // if((room.connection.transport as any).isOpen 
-    //   //&& (room.connection.transport as any).isOpen()
-    // ){
-    //   log(CLASS_NAME, METHOD_NAME, "not open!",(room.connection.transport as any).isOpen)
-    //   return
-    // }
-    //const player = anGAME_STATE.playerState
  
-    racingDataToSend.lastKnownServerTime = Networking.lastKnownServerTime
-     
-    racingDataToSend.worldPosition = playerPos.position 
-    racingDataToSend.cameraDirection = playerPos.rotation
-       
-    //send them to server
-    racingDataToSend.worldMoveDirection = vehicle.cannonBody.quaternion
-    racingDataToSend.force = vehicle.cannonBody.force
-    racingDataToSend.velocity = vehicle.cannonBody.velocity
-    racingDataToSend.mass = vehicle.cannonBody.mass
-    racingDataToSend.currentSpeed = vehicle.currentSpeed
+    const vehicleState = vehicle.getVehicleState();
 
-    const now = Date.now();
-    //const lastKnowPos = new Vector3(racingData.worldPosition.x, racingData.worldPosition.y, racingData.worldPosition.z);
-    //const delta = now - racingData.lastKnownClientTime;
- 
-    //TODO bring this back!!!
-    //racingDataToSend.lastKnownServerTime = player.lastKnowServerTime;
-    racingDataToSend.lastKnownClientTime = now; //snaphot for when sent
-
-    //sending both for now, would be good to sync them though
-    //Networking.ClientRoom.send("player.racingData.update", racingDataToSend);
-
-    /*Networking.ClientRoom.send("player-vehicle-controller-record", {
-      vehicleID:vehicle.vehicleID,
-      worldPosition:playerPos.position,
-      moveSpeed:vehicle.currentSpeed,
-      moveDirection:vehicle.cannonBody.quaternion,
-      moveVelocity:vehicle.cannonBody.velocity,
-      moveAngularVelocity:vehicle.cannonBody.angularVelocity,
-      moveForce:vehicle.cannonBody.force,
-      mass:vehicle.cannonBody.mass,
-      lastKnownClientTime:now,
-      lastKnownServerTime:Networking.lastKnownServerTime,
-    } as PlayerVehicleControllerData);*/
+    Networking.ClientRoom.send("player-vehicle-controller-record", {
+      heading:vehicleState.heading,
+      rank:vehicleState.rank,
+      position:vehicleState.position,
+      velocity:vehicleState.velocity,
+      angularVelocity:vehicleState.angularVelocity,
+    } as serverStateSpec.VehicleStateSyncData);
   }
 }
-  
-
-//if(CONFIG.GAME_COIN_AUTO_START &&  myConnectSystem) engine.addSystem(myConnectSystem)
 
 export function initSendPlayerInputToServerSystem(){
   const playerPosSys = new PlayerPositionSystem()
