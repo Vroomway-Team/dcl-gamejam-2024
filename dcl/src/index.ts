@@ -168,7 +168,13 @@ async function PlayerSetup() {
 			// if(currentState != currentValue){
 			// 	if(currentState)
 			// }
+			
 			GameManager.SetGameState(currentValue);
+
+			//make scoreboard update
+			if(currentValue == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+				updateScores(room);
+			}
 		});
 		//called when game state changes
 		room.state.listen("GameStartTimer", (currentValue:number, previousValue:number) => {
