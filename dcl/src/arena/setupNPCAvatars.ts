@@ -29,6 +29,28 @@ export function setupNPCAvatars(){
         scale: Vector3.create(1,1,1),
     })
 
+    const myAvatar1b = engine.addEntity()
+    AvatarShape.create(myAvatar1b, {
+		id: 'Manequin',
+		emotes: [],
+		wearables: [`urn:decentraland:matic:collections-v2:0x023a73d1cf10ed196f39700312a498b27c36e88e:1`,`urn:decentraland:matic:collections-v2:0x16ad175bafdf45cb618dd8b1e0bc0301d886e507:1`,
+        `urn:decentraland:matic:collections-v2:0x849c6b0e3858381ae5134ceefea6628f7296d33c:2`,
+        `urn:decentraland:matic:collections-v2:0x64c730a81e60c40abf6ef0dbf28bfce797380ef2:3`,
+        
+        ],
+        //expressionTriggerId: 'clap',
+        name: 'Nikki Fuego',
+        bodyShape: `urn:decentraland:off-chain:base-avatars:BaseFemale`,
+        hairColor: red
+
+	})
+    
+    Transform.create(myAvatar1b, {
+        position: Vector3.create(2.38, .1, 37.15),
+        rotation: Quaternion.fromEulerDegrees(0,-125,0),
+        scale: Vector3.create(1,1,1),
+    })
+
     const myAvatar2 = engine.addEntity()
     AvatarShape.create(myAvatar2, {
 		id: 'Manequin',
