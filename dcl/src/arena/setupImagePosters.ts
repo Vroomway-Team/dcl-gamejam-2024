@@ -1,4 +1,4 @@
-import { Material, MaterialTransparencyMode, MeshRenderer, TextureFilterMode, TextureWrapMode, Transform, engine } from "@dcl/sdk/ecs";
+import { Material, MaterialTransparencyMode, MeshRenderer, TextureFilterMode, TextureWrapMode, Transform, VideoPlayer, engine } from "@dcl/sdk/ecs";
 import { Vector3, Quaternion, Color4, Color3 }	from "@dcl/sdk/math";
 
 export function setupImagePosters(){
@@ -147,5 +147,63 @@ export function setupImagePosters(){
         transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
         emissiveColor: Color3.White(),
         emissiveIntensity: 1
+    })
+    //Promos
+    const promo1 = engine.addEntity()
+    Transform.create(promo1, {
+        position: Vector3.create(59.5, 4.25, 23),
+        scale: Vector3.create(7,4,4),
+        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+    })
+    MeshRenderer.setPlane(promo1)
+    Material.setPbrMaterial(promo1, {
+        texture: Material.Texture.Common({
+          src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    const promo2 = engine.addEntity()
+    Transform.create(promo2, {
+        position: Vector3.create(4.5, 4.25, 41),
+        scale: Vector3.create(7,4,4),
+        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+    })
+    MeshRenderer.setPlane(promo2)
+    Material.setPbrMaterial(promo2, {
+        texture: Material.Texture.Common({
+          src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        emissiveTexture: Material.Texture.Common({
+            src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+        }),
+        transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+        emissiveColor: Color3.White(),
+        emissiveIntensity: 1
+    })
+    
+    const screen = engine.addEntity()
+        MeshRenderer.setPlane(screen)
+        Transform.create(screen, { 
+            position: { x: 4.5, y: 4.25, z: 23 },
+            scale: {x: 6.5, y: 4, z:4},
+            rotation: Quaternion.fromEulerDegrees(0,90,0)
+        }
+    )
+    VideoPlayer.create(screen, {
+      src: 'videos/promo1.mp4',
+      playing: true,
+      loop: true
+    })
+    const videoTexture = Material.Texture.Video({ videoPlayerEntity: screen })
+    Material.setPbrMaterial(screen, {
+      texture: videoTexture,
+      roughness: 1.0,
+      specularIntensity: 0,
+      metallic: 0,
     })
 }
