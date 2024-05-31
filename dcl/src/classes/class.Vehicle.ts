@@ -257,7 +257,6 @@ export class Vehicle {
 				} 
 				//if vehicle is owned by the local player, drop tickets
 				GameManager.PlayerVehicleCollisionCallback(this.ownerID);
-				UI_MANAGER.hitNotify.show();
 			} else {
 				PARTICLE_MANAGER.triggerParticleAtPosition("bump", midPoint)
 			}

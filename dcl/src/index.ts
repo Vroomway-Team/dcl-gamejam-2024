@@ -259,7 +259,12 @@ async function PlayerSetup() {
 		room.state.lobbyPlayersByID.onRemove(
 			function (player: clientStateSpec.PlayerState, sessionId: string) {
 				console.log("server call: player removed from lobby, "+JSON.stringify(player));
-
+				//get vehicle from manager
+				const vehicle = VEHICLE_MANAGER.getVehicle(player.vehicleID);
+				if(vehicle != undefined) {
+					vehicle.disable();
+					vehicle.moveToLobby();
+				}
 				//release vehicle
 				VEHICLE_MANAGER.userUnclaimVehicle(player.vehicleID);
 				//FIXME

@@ -46,6 +46,8 @@ export module GameManager {
             console.log("dropping tickets");
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
+            //notify player of hit
+            UI_MANAGER.hitNotify.show();
             //send claim request 
             Networking.ClientRoom.send("ticket-drop", { playerID:playerID });
         } 
