@@ -668,6 +668,16 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
+		},
+		{
+			"name":"DCL.AvatarWearables",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":14
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
 		}
 	],
 	"meshes":[
@@ -1742,8 +1752,7 @@
 					"attributes":{
 						"POSITION":196,
 						"NORMAL":197,
-						"TEXCOORD_0":198,
-						"TANGENT":199
+						"TEXCOORD_0":198
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
@@ -1751,13 +1760,32 @@
 							"attributes":{
 								"POSITION":0,
 								"NORMAL":1,
-								"TEXCOORD_0":2,
-								"TANGENT":3
+								"TEXCOORD_0":2
 							}
 						}
 					},
-					"indices":200,
-					"material":5,
+					"indices":199,
+					"material":9,
+					"mode":4
+				},
+				{
+					"attributes":{
+						"POSITION":200,
+						"NORMAL":201,
+						"TEXCOORD_0":202
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":43,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2
+							}
+						}
+					},
+					"indices":203,
+					"material":3,
 					"mode":4
 				}
 			]
@@ -1767,37 +1795,10 @@
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":201,
-						"NORMAL":202,
-						"TEXCOORD_0":203,
-						"TANGENT":204
-					},
-					"extensions":{
-						"KHR_draco_mesh_compression":{
-							"bufferView":43,
-							"attributes":{
-								"POSITION":0,
-								"NORMAL":1,
-								"TEXCOORD_0":2,
-								"TANGENT":3
-							}
-						}
-					},
-					"indices":205,
-					"material":7,
-					"mode":4
-				}
-			]
-		},
-		{
-			"name":"Plane.005",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":206,
-						"NORMAL":207,
-						"TEXCOORD_0":208,
-						"TANGENT":209
+						"POSITION":204,
+						"NORMAL":205,
+						"TEXCOORD_0":206,
+						"TANGENT":207
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
@@ -1810,21 +1811,21 @@
 							}
 						}
 					},
-					"indices":205,
+					"indices":208,
 					"material":7,
 					"mode":4
 				}
 			]
 		},
 		{
-			"name":"Cube.005",
+			"name":"Plane.005",
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":210,
-						"NORMAL":211,
-						"TEXCOORD_0":212,
-						"TANGENT":213
+						"POSITION":209,
+						"NORMAL":210,
+						"TEXCOORD_0":211,
+						"TANGENT":212
 					},
 					"extensions":{
 						"KHR_draco_mesh_compression":{
@@ -1837,7 +1838,34 @@
 							}
 						}
 					},
-					"indices":214,
+					"indices":208,
+					"material":7,
+					"mode":4
+				}
+			]
+		},
+		{
+			"name":"Cube.005",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":213,
+						"NORMAL":214,
+						"TEXCOORD_0":215,
+						"TANGENT":216
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":46,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":217,
 					"mode":4
 				}
 			]
@@ -1895,6 +1923,10 @@
 		{
 			"sampler":0,
 			"source":6
+		},
+		{
+			"sampler":0,
+			"source":1
 		},
 		{
 			"sampler":0,
@@ -3341,7 +3373,7 @@
 		},
 		{
 			"componentType":5126,
-			"count":68,
+			"count":366,
 			"max":[
 				2,
 				1.25,
@@ -3356,22 +3388,47 @@
 		},
 		{
 			"componentType":5126,
-			"count":68,
+			"count":366,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":68,
+			"count":366,
 			"type":"VEC2"
 		},
 		{
+			"componentType":5123,
+			"count":732,
+			"type":"SCALAR"
+		},
+		{
 			"componentType":5126,
-			"count":68,
-			"type":"VEC4"
+			"count":136,
+			"max":[
+				2,
+				1.1666667461395264,
+				4
+			],
+			"min":[
+				-2,
+				-1.1666667461395264,
+				-4
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":136,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":136,
+			"type":"VEC2"
 		},
 		{
 			"componentType":5123,
-			"count":126,
+			"count":288,
 			"type":"SCALAR"
 		},
 		{
@@ -3688,23 +3745,28 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":923,
+			"byteLength":2443,
 			"byteOffset":126360
 		},
 		{
 			"buffer":0,
+			"byteLength":1042,
+			"byteOffset":128804
+		},
+		{
+			"buffer":0,
 			"byteLength":410,
-			"byteOffset":127284
+			"byteOffset":129848
 		},
 		{
 			"buffer":0,
 			"byteLength":435,
-			"byteOffset":127696
+			"byteOffset":130260
 		},
 		{
 			"buffer":0,
 			"byteLength":2247,
-			"byteOffset":128132
+			"byteOffset":130696
 		}
 	],
 	"samplers":[
@@ -3715,7 +3777,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":130380,
+			"byteLength":132944,
 			"uri":"arena.base.bin"
 		}
 	]
