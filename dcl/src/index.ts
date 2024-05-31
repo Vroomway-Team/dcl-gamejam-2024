@@ -214,7 +214,7 @@ async function PlayerSetup() {
 					const vehicle = VEHICLE_MANAGER.getVehicle(player.vehicleID);
 					if(vehicle == undefined) {
 						console.log("server call: player.racingData.update","could not find vehicle!!!",raceData)
-						return; 
+						return;
 					} 
 					//halt if vehicle owner is operated by local player (client has authority)
 					if(player.playerID == Networking.GetUserID()) return;

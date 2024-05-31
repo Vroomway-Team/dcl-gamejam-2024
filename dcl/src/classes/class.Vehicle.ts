@@ -15,6 +15,8 @@ import { VehicleState } 				from '../interfaces/interface.VehicleState'
 import { getEntityPosition, getForwardDirectionFromRotation } 			from '../utilities/func.entityData'
 import { Vec3ToVector3, Vector3ToVec3 } from '../utilities/func.Vectors'
 import { FunctionCallbackIndex } from '../utilities/escentials'
+import { GameManager } from '../arena/game-manager'
+import { Networking } from '../networking'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
@@ -200,7 +202,6 @@ export class Vehicle {
 	
 	onCollideWithBody(event: CANNON.ICollisionEvent) {
 		if (event.body.collisionFilterGroup == 2) {
-			
 			// Work out the dot products of the ways the vehicles are facing, and how they are positioned
 			const yourPos = this.cannonBody.position.clone()
 			const theirPos = event.body.position.clone()
@@ -228,7 +229,11 @@ export class Vehicle {
 				// They hit us in the rear
 				// TRIGGER: we should drop tickets
 				console.log("vehicle.class: onCollideWithBody(): We GOT HIT!", event.body.id)
-			} 
+				//if vehicle is owned by the local player, drop tickets
+				if(this.ownerID == Networking.GetUserID()) {
+					GameManager.PlayerVehicleCollisionCallback();
+				}
+			}
 		}
 	}
 	

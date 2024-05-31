@@ -108,7 +108,7 @@ export module TicketEntity {
             transform.scale = MODEL_SCALE;
             //  toggle animations
             Animator.getClip(this.EntityModel, "Action").playing = false;
-            Animator.getClip(this.EntityModel, "Action").playing = true; /**/
+            Animator.getClip(this.EntityModel, "Action").playing = true;
             //  collection trigger
             const ticketID = data.id;
             utils.triggers.addTrigger(
