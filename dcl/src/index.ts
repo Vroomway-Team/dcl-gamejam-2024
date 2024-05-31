@@ -215,6 +215,8 @@ async function PlayerSetup() {
  
 				//add a listener to the new player's racing data (automates race updates)
 				player.listen("racingData", (raceData: clientStateSpec.VehicleStateSyncData) => {
+					if(raceData == undefined) return;
+
 					//halt if game is not in session
 					if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
 					//get vehicle from manager
@@ -225,7 +227,9 @@ async function PlayerSetup() {
 					}
 
 					//dont halt here, vehicle internally knowns and will ignore if needed (<- not anymore >_>)
-
+					//pre-push for local players (ik, it is messy)
+					vehicle.score = player.score;
+					vehicle.setRank(raceData.rank);
 					//halt if vehicle owner is operated by local player (client has authority)
 					if(player.playerID == Networking.GetUserID()) return;
 					//halt if vehicle is an npc operated by local player (delegated operator has authority)

@@ -349,6 +349,15 @@ export class Vehicle {
 		return data
 	}
 	
+	setRank(
+		value:number
+	): void { 
+		if(this.score == 0) this.rank = 4;
+		else this.rank = value;
+
+		this.updateCrown(this.rank)
+	}
+
 	setVehicleState(
 		state: VehicleState
 	): void {
@@ -362,9 +371,7 @@ export class Vehicle {
 	
 		// Update the current vehicle state to sync it with the colyseus server
 		this.score = state.score
-		this.rank  = state.rank
-		
-		this.updateCrown(this.rank)
+		this.setRank(state.rank);
 	}
 	
 	getPosition(): Vector3 {
