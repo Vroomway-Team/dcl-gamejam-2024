@@ -164,6 +164,10 @@ async function PlayerSetup() {
 		room.state.listen("GameState", (currentValue:number, previousValue:number) => {
 			console.log(`GameState is now ${currentValue}, previous value was: ${previousValue}`);
 			//set game state
+			const currentState = GameState.CurGameState.GetValue()
+			// if(currentState != currentValue){
+			// 	if(currentState)
+			// }
 			GameManager.SetGameState(currentValue);
 		});
 		//called when game state changes
@@ -195,7 +199,12 @@ async function PlayerSetup() {
 					if(player.playerID == Networking.GetUserID()) {
 						UI_MANAGER.setScoreValue(score);
 					}
-					updateScores(room)
+					const gameState = GameState.CurGameState.GetValue();
+					//need to update when player leaves to remove their name from scoreboard
+					//BUT it also erases the results from the last round :(
+					if(gameState == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+						updateScores(room);
+					}
 				});
  
 				//add a listener to the new player's racing data (automates race updates)
@@ -209,7 +218,11 @@ async function PlayerSetup() {
 						return;
 					} 
 					//halt if vehicle owner is operated by local player (client has authority)
-					if(player.playerID == Networking.GetUserID()) return;
+					//dont halt here, vehicle internally knowns and will ignore if needed
+					// if(player.playerID == Networking.GetUserID()){
+					// 	vehicle.updateCrown(raceData.rank)
+					// 	return;
+					// } 
 					//console.log("updating vehicle: "+player.vehicleID+", "+JSON.stringify(raceData));
  
 					//pass patched data to vehicle controller
@@ -241,8 +254,14 @@ async function PlayerSetup() {
 
 				//release vehicle
 				VEHICLE_MANAGER.userUnclaimVehicle(player.vehicleID);
-
-				updateScores(room);
+				//FIXME
+				//only when game is live
+				const gameState = GameState.CurGameState.GetValue();
+				//need to update when player leaves to remove their name from scoreboard
+				//BUT it also erases the results from the last round :(
+				if(gameState == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION){
+					updateScores(room);
+				}
 		});
 
 		//#		TICKET DETAILS
