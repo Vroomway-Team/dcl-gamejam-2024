@@ -84,12 +84,13 @@ async function PlayerSetup() {
 	await Networking.LoadPlayerData();
 	 
 	console.log("got player details!");
-
+ 
 	//initialize game manager (ensures all sub-modules are ready)
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
+	//Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
+	Networking.InitializeClientConnection(0);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
