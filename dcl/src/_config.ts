@@ -1,6 +1,6 @@
 import { Networking } from "./networking";
 
-const ENV = 'prod'
+const ENV = 'local'
 
 export const SHOW_DEBUG_TRIGGERS: Record<string, boolean> = {
 	local: true,
