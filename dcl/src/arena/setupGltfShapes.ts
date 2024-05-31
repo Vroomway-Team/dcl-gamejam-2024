@@ -166,4 +166,9 @@ export function setupGltfShapes() {
     	    cameraTarget       : Vector3.create(32, 5, 32),
 		})}
   	)
+	  const spotlightRing = new GltfObject("assets/gltf/spotlight.ring.gltf", {
+		position: Vector3.create(32, 15, 32),
+		rotation: Quaternion.fromEulerDegrees(0, 0, 0),
+		scale   : Vector3.create(2,2,2)
+	})
 }
