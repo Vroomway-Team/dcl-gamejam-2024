@@ -21,6 +21,7 @@ import { NPCManager } from '../arena/npc-manager'
 import { UI_MANAGER } from './class.UIManager'
 import { PARTICLE_MANAGER } from '../arena/setupParticleManager'
 import { AudioManager } from '../arena/audio-manager'
+import { VEHICLE_MANAGER } from '../arena/setupVehicleManager'
 
 // Setup the physics material used for the vehicles
 const vehiclePhysicsMaterial: CANNON.Material = new CANNON.Material('vehicleMaterial')
@@ -69,10 +70,12 @@ export class Vehicle {
 	maxTurn              : number  = 180    // Max turn rate for vehicle in degrees per second
 	acceleration         : number  = 12     // Acceleration for vehicle
 	
-	tweenPosDuration     : number  = 200 	// In ms, eg 1 second = 1000
-	tweenRotDuration     : number  = 132 	// In ms, eg 1 second = 1000
+	tweenPosDuration     : number  = 250 	// In ms, eg 1 second = 1000
+	tweenRotDuration     : number  = 200 	// In ms, eg 1 second = 1000
 	timeSinceLastTweenPos: number  = 0		// Timer for last position tween
 	timeSinceLastTweenRot: number  = 0		// Timer for last rotation tween
+	timeToNextTweenPos   : number  = 0		// Timer for last position tween
+	timeToNextTweenRot   : number  = 0		// Timer for last rotation tween
 	
 	arenaTransform       : TransformType 	// Store the intitial arena spawn transform
 	lobbyTransform       : TransformType 	// Store the lobby transform
@@ -81,6 +84,9 @@ export class Vehicle {
 	
 	score                : number  = 0
 	rank                 : number  = 0
+	
+	private bumpTimeStamp:number = 0;
+	private dropTimeStamp:number = 0;
 		
 	constructor(
 		manager       : VehicleManager,
@@ -139,22 +145,6 @@ export class Vehicle {
 		
 		// Add the lobby Label
 		this.lobbyLabel = new LobbyLabel(vehicleID, this.lobbyTransform, this.modelName)
-		
-		/* / Add the trigger to toggle player authority
-		utils.triggers.addTrigger(
-			this.entityPos,
-			utils.NO_LAYERS,
-			utils.PLAYER_LAYER_ID,
-			[{ 
-				type    : 'box',	
-				position: { x: 0, y: 1, z: 0.5 },
-				scale   : { x: 2, y: 3, z: 2 },
-				
-			}],
-			(otherEntity) => { this.onEnterTrigger()  }, //OnEnterTrigger
-			(otherEntity) => { this.onExitTrigger() }, //OnExitTrigger
-		)*/
-		//utils.triggers.enableDebugDraw(true)
 
 		//trigger for ticket collection
 		utils.triggers.addTrigger(
@@ -202,23 +192,6 @@ export class Vehicle {
 		world.addBody(this.cannonBody)
 	}
 	
-	// Triggered when an entity enters the vehicle trigger box, enables control
-	// These are disabled in favour of the VehicleManager controlling ownership.
-	onEnterTrigger(): void {		
-		/* const playerData = getPlayer()
-		if (playerData) {
-			// Attempt to claim the vehicle for the player via the VehicleManager instance
-			this.manager.userClaimVehicle(this.vehicleID, playerData.userId, playerData.name, true)
-		} */
-	}
-	
-	onExitTrigger(): void {		
-		// Attempt to claim the vehicle for the player via the VehicleManager instance
-		/* this.manager.userUnclaimVehicle(this.vehicleID) */
-	}
-	
-	private bumpTimeStamp:number = 0;
-	private dropTimeStamp:number = 0;
 	onCollideWithBody(event: CANNON.ICollisionEvent) {
 		if (event.body.collisionFilterGroup == 2) {
 			// Work out the dot products of the ways the vehicles are facing, and how they are positioned
@@ -234,6 +207,8 @@ export class Vehicle {
 			
 			const dirYoureFacing = getForwardDirectionFromRotation(this.currentHeading)
 			const dirTheyreFacing = getForwardDirectionFromRotation(theirRot.y * RAD2DEG)
+			const dirTheyreFacing2 = Vector3.create(event.body.velocity.x, 0, event.body.velocity.z)
+			Vector3.normalize(dirTheyreFacing2)
 			
 			const dot1 = Vector3.dot(dirYoureFacing, Vector3.normalize(dirToThem))
 			const dot2 = Vector3.dot(dirYoureFacing, dirTheyreFacing)
@@ -267,7 +242,7 @@ export class Vehicle {
 			} else {
 				//bump cooldown
 				if(this.bumpTimeStamp >= Date.now()) return;
-				this.bumpTimeStamp = Date.now()+100;
+				this.bumpTimeStamp = Date.now()+1000;
 				//play bump fx
 				PARTICLE_MANAGER.triggerParticleAtPosition("bump", midPoint)
 				AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_CART_BUMP)
@@ -455,7 +430,7 @@ export class Vehicle {
 		// Velocity direction
 		// Apply a force to the cannon body in the direction the vehicle is currently facing
 		const targetDirection = getForwardDirectionFromRotation(this.currentHeading)
-		const targetVelocity  = targetDirection.scale(this.currentSpeed * 2)
+		const targetVelocity  = targetDirection.scale(this.currentSpeed * 2.5)
 		
 		this.cannonBody.applyForce(targetVelocity, this.cannonBody.position)
 		
@@ -555,6 +530,7 @@ export class Vehicle {
 		
 		// Reset timer
 		this.timeSinceLastTweenPos = 0
+		this.timeToNextTweenPos    = duration - VEHICLE_MANAGER.getAverageDeltaTime()
 		
 		// Define the start and end Positions
 		const startPos = getEntityPosition(this.entityPos)
@@ -590,6 +566,7 @@ export class Vehicle {
 			
 			// Reset timer 
 			this.timeSinceLastTweenRot = 0	
+			this.timeToNextTweenRot    = duration - VEHICLE_MANAGER.getAverageDeltaTime()
 			
 			// Get the start and end rots (limited by turn rate)
 			const startRotation  = transformRot.rotation
