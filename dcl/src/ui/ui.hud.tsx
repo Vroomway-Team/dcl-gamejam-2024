@@ -12,7 +12,9 @@ import { CONFIG } from '../_config'
 const uiRoundTime   = 'images/ui.RoundTime.png'
 const uiSpeedometer = 'images/ui.Speedometer.png'
 const uiTicketCount = 'images/ui.TicketCount.png'
-const spriteSheet  = CONFIG.USE_IMGUR_ASSETS ? 'https://i.imgur.com/80twxbD.png' : 'images/ui-spritesheet.2048.png'//''
+// const spriteSheet  = CONFIG.USE_IMGUR_ASSETS ? 'https://i.imgur.com/80twxbD.png' : 'images/ui-spritesheet.2048.png'//''
+
+const spriteSheet  = 'images/ui-spritesheet.2048.png'
 const uiYouGothit   = 'images/ui.YouGotHit.png'
 const uiBumperzLogo = 'images/ui.BumperzLogo.png'
 
@@ -30,10 +32,10 @@ const MATCH_STARTED=[0,2]
 const YOU_GOT_HIT_INDEX=[0,1]
 const SOO_CLOSE_INDEX=[0,0]
 
-const LOOSER_INDEX=[1,0]
+const MATCH_ABOUT_TO_START_CHOOSE_VEHICLE_INDEX=[1,3]
 const WINNER_INDEX=[1,1]
 const MATCH_FINISHED_INDEX=[1,2]
-const MATCH_ABOUT_TO_START_INDEX=[1,3]
+const MATCH_ABOUT_TO_START_INDEX=[1,0]
 
 
 const SPRITE_SIZE_HEIGHT=(ATLAS_SIZE_HEIGHT/2)
@@ -113,7 +115,7 @@ export function hudCenterMsgs() {
 		createCenterMsg(SOO_CLOSE_INDEX,UI_MANAGER.sooClose),
 		createCenterMsg(MATCH_IN_PROGRESS,UI_MANAGER.matchInProgress),
 		
-		createCenterMsg(LOOSER_INDEX,UI_MANAGER.looser),
+		createCenterMsg(MATCH_ABOUT_TO_START_CHOOSE_VEHICLE_INDEX,UI_MANAGER.matchAboutToStartChooseVehicle),
 		createCenterMsg(WINNER_INDEX,UI_MANAGER.winner),
 		createCenterMsg(MATCH_FINISHED_INDEX,UI_MANAGER.matchFinished),
 		createCenterMsg(MATCH_ABOUT_TO_START_INDEX,UI_MANAGER.matchAboutToStart),

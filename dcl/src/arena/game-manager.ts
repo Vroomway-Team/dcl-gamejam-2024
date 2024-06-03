@@ -8,6 +8,7 @@ import { AudioManager } from "./audio-manager";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
 import { UI_MANAGER } from "../classes/class.UIManager";
 import { CONFIG } from "../_config";
+import { RacingRoomState } from "../rooms/spec/server-state-spec";
 
 /*      BUMPER CARS - GAME MANAGER
     acts as the main controller for the game of bumper cars
@@ -126,7 +127,17 @@ export module GameManager {
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
-                //UI_MANAGER.matchAboutToStart.show();
+				
+				// Show the approriate "match about to start" message
+				if(Networking.ClientRoom == undefined) return;
+				const room = Networking.ClientRoom.state as RacingRoomState;
+				
+				if (room.lobbyPlayersByID.has(Networking.GetUserID())) {
+					UI_MANAGER.matchAboutToStart.show();						
+				} else {
+					UI_MANAGER.matchAboutToStartChooseVehicle.show()	
+				}
+				
             break;
             case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
                 //set music to playing
