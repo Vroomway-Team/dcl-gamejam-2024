@@ -1,6 +1,7 @@
 import { engine } 		from "@dcl/sdk/ecs"
 import { parseTime } 	from "./class.Scoreboard"
 import * as utils 		from '@dcl-sdk/utils'
+import { GameState } from "../game-state"
 
 
 const timerIdRecords = new Map<string, number>()
@@ -56,8 +57,13 @@ export class UIManager {
 	// Timer funcs
 	
 	getTimerValueString(): string {
-		if(this.roundTime != -1) return parseTime(this.roundTime);
-		else return "0:00";
+		switch(GameState.CurGameState.GetValue()) {
+			case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
+				return parseTime(GameState.GameStartCountdown.GetValue())
+			case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
+				return parseTime(GameState.GameEndCountdown.GetValue())
+		}
+		return "0:00";
 	}
 	
 	setTimerValue(time: number): void {
