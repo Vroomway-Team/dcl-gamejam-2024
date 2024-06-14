@@ -28,8 +28,8 @@ export const USE_IMGUR_ASSETS: Record<string, boolean> = {
 };
 
 export const PLAYFAB_TITLEID: Record<string, string> = {
-	local: "AA567",
-  	prod: "AA567"
+	local: "78E14",
+  	prod: "78E14"
 };
 
 const AUTH_URL: Record<string, string> = {
