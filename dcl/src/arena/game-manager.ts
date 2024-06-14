@@ -100,6 +100,8 @@ export module GameManager {
                 switch(rank){
                     case 1:
                         UI_MANAGER.winner.show();
+
+                        // win condition - this line will give the ticket to the player
                         break;
                     case 2:
                         UI_MANAGER.sooClose.show();
