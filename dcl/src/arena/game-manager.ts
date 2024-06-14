@@ -32,7 +32,7 @@ export module GameManager {
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send claim request  
-            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), vehicle:vehicle});
+            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), playFabData: Networking.getPlayerPlayFabData(), vehicle:vehicle});
         }
         //  player attempts to unclaim a vehicle
         LobbyLabel.PlayerUnclaimCallback = function() {

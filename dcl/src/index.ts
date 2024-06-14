@@ -1,5 +1,7 @@
 import { CONFIG } 								from './_config'
 
+import "./polyfill/delcares";
+
 import * as utils 								from '@dcl-sdk/utils'
 import { Transform } 							from '@dcl/sdk/ecs'
 import { Quaternion } 							from '@dcl/sdk/math'
@@ -27,7 +29,9 @@ import { VehicleState } from './interfaces/interface.VehicleState'
 import * as CANNON from 'cannon'
 import { updateScores } from './utilities/game-play-utils'
 import { NPCManager } from './arena/npc-manager'
-
+import { getAndSetRealmDataIfNull, getAndSetUserDataIfNull, getRealmDataFromLocal, getUserDataFromLocal } from './userData'
+import { doLoginFlow, registerLoginFlowListener } from './connect/login-flow'
+ 
 // Config options for colyseus and debug features are in _config.ts
 
 export function main() {
@@ -42,10 +46,18 @@ export function main() {
 	console.log("test 1: id="+JSON.stringify(Transform.getMutable(t1.EntityModel).position));
 	console.log("test 2: id="+JSON.stringify(Transform.getMutable(t2.EntityModel).position)); */
 
+	//call it so can cache it sooner
+	getAndSetRealmDataIfNull()
+	getAndSetUserDataIfNull()
+	 
+	registerLoginFlowListener()
+	
 	setupUiManager()
 	// Draw UI
 	setupUi()
 	//ReactEcsRenderer.setUiRenderer(ui.render)
+	
+
 	
 	// Setup Cannon World - adds the world, ground, arena colliders
 	setupCannonWorld()
@@ -70,10 +82,32 @@ export function main() {
 	//Transform.getMutable(ScoreDisplay.ScoreBoardParent).position = {x:35, y:2, z:32},
 	//ScoreDisplay.UpdateDisplays();
 
-	//set up player (server connection)
-	PlayerSetup();
+	const startGameFN = () => {
+		//fetch leaderboards
+		//initGamePlay() 
 
-	initSendPlayerInputToServerSystem()
+		//set up player (server connection)
+		PlayerSetup();
+
+		initSendPlayerInputToServerSystem()
+	}
+
+	doLoginFlow(
+		{  
+			onSuccess:()=>{
+				console.log("login success","connect to server")
+				
+				startGameFN()
+			},
+			onFailure:()=>{
+				//FIXME!!!
+				console.log("login FAILED","still connecting server")
+				
+				startGameFN()
+			}
+		}
+	)
+
 }
 
 /** handles the the initial player setup, getting their DCL details and connecting to the colyseus server */
@@ -95,8 +129,23 @@ async function PlayerSetup() {
 
 	Networking.connectedState = {status:"connecting",msg:"connecting to " + "my_room"};
  
+	let localUserDataCopy:any = {...getUserDataFromLocal()}
+    delete localUserDataCopy.avatar
+    delete localUserDataCopy.wearables
+    delete localUserDataCopy.emotes
+
 	await Networking.GetClientConnection().joinOrCreate("my_room", { 
-		userData: { id:Networking.GetUserID(), displayName:Networking.GetUserName() } 
+		userData: { ...localUserDataCopy, id:Networking.GetUserID(), displayName:Networking.GetUserName() },
+		clientSDK: "7.x.x",
+		//used for matching rooms
+		//for px prefixing with "px-scene:"
+		playerId: localUserDataCopy?.userId,
+
+		realmInfo: getRealmDataFromLocal(),
+		//still passed for room filterby
+		realm: getRealmDataFromLocal()?.realmName,
+
+		playFabData: Networking.getPlayerPlayFabData()
 	}).then((room: Room) => {
 		//set room instance
 		console.log("local player joined server room: ", room, room.state);

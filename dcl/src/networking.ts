@@ -1,6 +1,9 @@
 import "./utilities/polyfill";
 import { getUserData } from '~system/UserIdentity';
 import { Client, Room } from 'colyseus.js';
+import { GetPlayerCombinedInfoResultPayload, LoginResult } from "./connect/playfab_sdk/playfab.types";
+import * as serverStateSpec 					from './rooms/spec/server-state-spec'
+import { CONFIG } from "./_config";
 /*      NETWORKING
     contains all networking interfaces and settings
 
@@ -16,6 +19,14 @@ export type GameConnectedStateType =
   | "connecting"
   | "reconnecting"
   | "connected";
+
+export type PlayerLoginState =
+  | "undefined"
+  | "error"
+  | "wallet-success"
+  | "wallet-error"
+  | "playfab-error"
+  | "playfab-success";
 
 export module Networking {
     /** when true debug logs are generated (toggle off when you deploy) */
@@ -54,6 +65,57 @@ export module Networking {
         }
     ];
 
+    export var loginFlowState: PlayerLoginState = "undefined";
+
+    export var playFabUserInfo: GetPlayerCombinedInfoResultPayload | undefined;
+    export var playFabLoginResult: LoginResult | null;
+    export var loginSuccess: boolean = false
+    export var playerCustomID: string | null = null;
+    export var playerDclId: string = "not-set"; //player DCL address
+    export var playerPlayFabId: string = "not-set"; //player playfab address
+
+    export function getPlayerPlayFabData():serverStateSpec.PlayerPlayfabData {
+        return {
+            id: playerPlayFabId,
+            sessionTicket: playFabLoginResult?.SessionTicket ?? "not-set",
+            titleId: CONFIG.PLAYFAB_TITLEID
+        }
+    }
+
+    export function setLoginSuccess(
+        val: boolean
+      ) {
+        //const oldVal = this.loginSuccess;
+        loginSuccess = val;
+        //this.notifyOnChange("loginSuccess", val, oldVal);
+      }
+      
+    export function setPlayFabLoginResult(val: LoginResult | null) {
+        const oldVal = playFabLoginResult;
+        playFabLoginResult = val;
+        if(val) {
+            //setPlayerCustomID(val.CustomId);
+            playerPlayFabId = val.PlayFabId ? val.PlayFabId : "not-set";
+            //setPlayerPlayFabId(val.EntityToken.Entity.Id);
+        }else{
+            playerPlayFabId = 'not-set'
+        }
+        //this.notifyOnChange("playFabLoginResult", val, oldVal);
+    }
+    export function setPlayerCustomID(val: string | null) {
+        const oldVal = playerCustomID;
+        playerCustomID = val;
+        //this.notifyOnChange("playerCustomID", val, oldVal);
+      }
+    export function setPlayFabUserInfoData(
+        val: GetPlayerCombinedInfoResultPayload | undefined
+      ) {
+        const oldVal = playFabUserInfo;
+        //TODO parse it out and detect what changed
+        playFabUserInfo = val;
+        //this.playFabUserInfoHelper.update(val)
+        //this.notifyOnChange("playFabUserInfo", val, oldVal);
+      }
     /**  */
     export function InitializeClientConnection(type:CONNECTION_TYPE) {
         curConnectionType = type;

@@ -157,6 +157,13 @@ export function uiDebug() {
 					<Label
 						key         = "bar8"
 						uiTransform = {{ width: 240, height: 40, margin: 8 }}
+						value       = {`${JSON.stringify(Networking.loginFlowState)}`}
+						fontSize    = {14}
+						textAlign   = "middle-left"
+					/>
+					<Label
+						key         = "bar9"
+						uiTransform = {{ width: 240, height: 40, margin: 8 }}
 						value       = {`${JSON.stringify(Networking.connectedState)}`}
 						fontSize    = {14}
 						textAlign   = "middle-left"
