@@ -57,7 +57,8 @@ export class UIManager {
 	// Timer funcs
 	
 	getTimerValueString(): string {
-		return parseTime(this.roundTime)
+		if(this.roundTime != -1) return parseTime(this.roundTime);
+		else return "0:00";
 	}
 	
 	setTimerValue(time: number): void {

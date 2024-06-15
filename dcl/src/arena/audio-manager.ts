@@ -9,8 +9,8 @@ import { AudioSource, AvatarAnchorPointType, AvatarAttach, Entity, MeshCollider,
 */
 export module AudioManager {
     
-    const VOLUME_SFX:number = 0.5;
-    const VOLUME_BGM:number = 0.5;
+    const VOLUME_SFX:number = 0.75;
+    const VOLUME_BGM:number = 0.25;
         
     //### SOUND EFFECTS ###
     /** all sound effects */

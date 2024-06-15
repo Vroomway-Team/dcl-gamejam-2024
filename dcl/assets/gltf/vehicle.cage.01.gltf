@@ -15,7 +15,8 @@
 			"name":"Scene",
 			"nodes":[
 				0,
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -25,7 +26,7 @@
 			"name":"cageCart",
 			"rotation":[
 				0,
-				-0.15643441677093506,
+				-0.15643440186977386,
 				0,
 				0.987688422203064
 			],
@@ -42,6 +43,20 @@
 				0,
 				0,
 				-0.30000001192092896
+			]
+		},
+		{
+			"mesh":2,
+			"name":"hoverboat.02.display.002",
+			"scale":[
+				1.0778629779815674,
+				1.1737958192825317,
+				0.751579761505127
+			],
+			"translation":[
+				0,
+				0.007296524941921234,
+				0.16835904121398926
 			]
 		}
 	],
@@ -69,6 +84,18 @@
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"alphaCutoff":0.5,
+			"alphaMode":"MASK",
+			"name":"texture.atlas.02",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":3
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -146,6 +173,55 @@
 					"mode":4
 				}
 			]
+		},
+		{
+			"name":"Cube.009",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":13,
+						"NORMAL":14,
+						"TEXCOORD_0":15,
+						"TANGENT":16
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":3,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":17,
+					"material":0,
+					"mode":4
+				},
+				{
+					"attributes":{
+						"POSITION":18,
+						"NORMAL":19,
+						"TEXCOORD_0":20,
+						"TANGENT":21
+					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":4,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2,
+								"TANGENT":3
+							}
+						}
+					},
+					"indices":22,
+					"material":2,
+					"mode":4
+				}
+			]
 		}
 	],
 	"textures":[
@@ -160,6 +236,10 @@
 		{
 			"sampler":0,
 			"source":0
+		},
+		{
+			"sampler":0,
+			"source":1
 		}
 	],
 	"images":[
@@ -167,6 +247,11 @@
 			"mimeType":"image/png",
 			"name":"AvatarWearables_TX",
 			"uri":"tex/AvatarWearables_TX.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"texture-atlas-icons",
+			"uri":"tex/texture-atlas-icons.png"
 		}
 	],
 	"accessors":[
@@ -202,7 +287,7 @@
 		},
 		{
 			"componentType":5126,
-			"count":920,
+			"count":850,
 			"max":[
 				1.0254344940185547,
 				1.623627781867981,
@@ -217,17 +302,17 @@
 		},
 		{
 			"componentType":5126,
-			"count":920,
+			"count":850,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":920,
+			"count":850,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5123,
-			"count":1656,
+			"count":1482,
 			"type":"SCALAR"
 		},
 		{
@@ -264,6 +349,76 @@
 			"componentType":5123,
 			"count":36,
 			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":90,
+			"max":[
+				0.2616315484046936,
+				0.669396698474884,
+				0.9129104614257812
+			],
+			"min":[
+				-0.261631578207016,
+				0.5449928045272827,
+				0.7239412069320679
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":90,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":90,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":90,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":132,
+			"type":"SCALAR"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"max":[
+				0.23657841980457306,
+				0.6626479625701904,
+				0.8918785452842712
+			],
+			"min":[
+				-0.23657844960689545,
+				0.5632110238075256,
+				0.7432227730751038
+			],
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"type":"VEC3"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"type":"VEC2"
+		},
+		{
+			"componentType":5126,
+			"count":14,
+			"type":"VEC4"
+		},
+		{
+			"componentType":5123,
+			"count":24,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -274,13 +429,23 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":5701,
+			"byteLength":5211,
 			"byteOffset":16072
 		},
 		{
 			"buffer":0,
 			"byteLength":438,
-			"byteOffset":21776
+			"byteOffset":21284
+		},
+		{
+			"buffer":0,
+			"byteLength":1412,
+			"byteOffset":21724
+		},
+		{
+			"buffer":0,
+			"byteLength":451,
+			"byteOffset":23136
 		}
 	],
 	"samplers":[
@@ -291,7 +456,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":22216,
+			"byteLength":23588,
 			"uri":"vehicle.cage.01.bin"
 		}
 	]

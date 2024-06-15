@@ -2,14 +2,14 @@
 	"ecs7": true,
 	"runtimeVersion": "7",
 	"display": {
-		"title": "Bumperz Car Game",
-		"description": "Bumperz Car Game",
+		"title": "Bumperz",
+		"description": "Decentralands very first Bumper Car game!",
 		"navmapThumbnail": "images/scene-thumbnail.png",
 		"favicon": "favicon_asset"
 	},
-	"owner": "",
+	"owner": "Vroomway Team",
 	"contact": {
-		"name": "SDK",
+		"name": "Vroomway Team",
 		"email": ""
 	},
 	"main": "bin/index.js",
@@ -48,5 +48,10 @@
 	],
 	"allowedMediaHostnames": [
 		"decentraland.org"
-	]
+	],
+	
+	"worldConfiguration": {
+		"name": "ivroom.dcl.eth"
+	}
+	
 }

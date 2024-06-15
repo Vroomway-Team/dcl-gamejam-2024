@@ -78,9 +78,9 @@ export function setupImagePosters(){
     })
     const howToPoster = engine.addEntity()
     Transform.create(howToPoster, {
-        position: Vector3.create(31, 3, 32),
+        position: Vector3.create(31.5, 3.75, 32),
         scale: Vector3.create(2,2,2),
-        rotation: Quaternion.fromEulerDegrees(0,90,0)
+        rotation: Quaternion.fromEulerDegrees(-20,90,0)
     })
     MeshRenderer.setPlane(howToPoster)
     Material.setPbrMaterial(howToPoster, {
@@ -96,9 +96,9 @@ export function setupImagePosters(){
     })
     const howToPoster2 = engine.addEntity()
     Transform.create(howToPoster2, {
-        position: Vector3.create(33, 3, 32),
+        position: Vector3.create(32.60, 3.75, 32),
         scale: Vector3.create(2,2,2),
-        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+        rotation: Quaternion.fromEulerDegrees(-20,-90,0)
     })
     MeshRenderer.setPlane(howToPoster2)
     Material.setPbrMaterial(howToPoster2, {
@@ -151,17 +151,17 @@ export function setupImagePosters(){
     //Promos
     const promo1 = engine.addEntity()
     Transform.create(promo1, {
-        position: Vector3.create(59.5, 4.25, 23),
-        scale: Vector3.create(7,4,4),
+        position: Vector3.create(59.5, 4.15, 21.42),
+        scale: Vector3.create(11,5,5),
         rotation: Quaternion.fromEulerDegrees(0,-90,0)
     })
     MeshRenderer.setPlane(promo1)
     Material.setPbrMaterial(promo1, {
         texture: Material.Texture.Common({
-          src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+          src: 'images/header2.png',
         }),
         emissiveTexture: Material.Texture.Common({
-            src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+            src: 'images/header2.png',
         }),
         transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
         emissiveColor: Color3.White(),
@@ -169,17 +169,17 @@ export function setupImagePosters(){
     })
     const promo2 = engine.addEntity()
     Transform.create(promo2, {
-        position: Vector3.create(4.5, 4.25, 41),
-        scale: Vector3.create(7,4,4),
-        rotation: Quaternion.fromEulerDegrees(0,-90,0)
+        position: Vector3.create(4.5, 4.15, 42.60),
+        scale: Vector3.create(11,5,5),
+        rotation: Quaternion.fromEulerDegrees(0,90,0)
     })
     MeshRenderer.setPlane(promo2)
     Material.setPbrMaterial(promo2, {
         texture: Material.Texture.Common({
-          src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+          src: 'images/header2.png',
         }),
         emissiveTexture: Material.Texture.Common({
-            src: 'https://bafybeigflhjtsumli3muvnmt2oumcne3retvk6hdvxpe4y7gdefsw5wwqy.ipfs.nftstorage.link/',
+            src: 'images/header2.png',
         }),
         transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
         emissiveColor: Color3.White(),
@@ -201,6 +201,25 @@ export function setupImagePosters(){
     })
     const videoTexture = Material.Texture.Video({ videoPlayerEntity: screen })
     Material.setPbrMaterial(screen, {
+      texture: videoTexture,
+      roughness: 1.0,
+      specularIntensity: 0,
+      metallic: 0,
+    })
+    const screen2 = engine.addEntity()
+        MeshRenderer.setPlane(screen2)
+        Transform.create(screen2, { 
+            position: { x: 59.5, y: 4.25, z: 41.5 },
+            scale: {x: 6.5, y: 4, z:4},
+            rotation: Quaternion.fromEulerDegrees(0,-90,0)
+        }
+    )
+    VideoPlayer.create(screen2, {
+      src: 'videos/promo1.mp4',
+      playing: true,
+      loop: true
+    })
+    Material.setPbrMaterial(screen2, {
       texture: videoTexture,
       roughness: 1.0,
       specularIntensity: 0,

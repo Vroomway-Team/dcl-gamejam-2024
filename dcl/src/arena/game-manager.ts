@@ -7,6 +7,7 @@ import { LobbyLabel, PlayerUnclaimCallbackType } from "../classes/class.LobbyLab
 import { AudioManager } from "./audio-manager";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
 import { UI_MANAGER } from "../classes/class.UIManager";
+import { CONFIG } from "../_config";
 
 /*      BUMPER CARS - GAME MANAGER
     acts as the main controller for the game of bumper cars
@@ -18,7 +19,8 @@ export module GameManager {
     /** wrapper for debugging logs */
     function addLog(log:string) { if(isDebugging) console.log("GAME MANAGER: "+log); }
     
-    export var PlayerVehicleCollisionCallback:PlayerUnclaimCallbackType;
+    export type PlayerVehicleCollisionCallbackType = (playerID:string) => void;
+    export var PlayerVehicleCollisionCallback:PlayerVehicleCollisionCallbackType;
 
     /** initializes the game manager, setting the default entry state */
     export function Initialize() {
@@ -30,7 +32,7 @@ export module GameManager {
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send claim request  
-            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), vehicle:vehicle});
+            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), playFabData: Networking.getPlayerPlayFabData(), vehicle:vehicle});
         }
         //  player attempts to unclaim a vehicle
         LobbyLabel.PlayerUnclaimCallback = function() {
@@ -38,22 +40,24 @@ export module GameManager {
             if(Networking.ClientRoom == undefined) return;
             //send claim request
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
-        }
-        //  player attempts to claim a vehicle  
-        PlayerVehicleCollisionCallback = function() {
+        } 
+        //  player's vehicle getting hit by another (can be called by a delegated NPC)
+        PlayerVehicleCollisionCallback = function(playerID:string) {
             console.log("dropping tickets");
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
-            //send claim request
-            Networking.ClientRoom.send("ticket-drop", {});
-        }
-        //  ticket collides with ticket (pickup logic)
-        TicketEntity.CallbackTicketCollision = function(index:number) {
-            console.log("player collided with ticket id="+index);
+            //if local player notify player of hit
+            if(playerID == Networking.GetUserID()) UI_MANAGER.hitNotify.show();
+            //send claim request 
+            Networking.ClientRoom.send("ticket-drop", { playerID:playerID });
+        } 
+        //  ticket collides with ticket (pickup logic) (can be called by a delegated NPC)
+        TicketEntity.CallbackTicketCollision = function(ticketID:number, playerID:string) {
+            console.log("player=",playerID," collided with ticket id="+ticketID);
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send interaction request
-            Networking.ClientRoom.send("ticket-interact", { playerID:Networking.GetUserID(), ticketID:index });
+            Networking.ClientRoom.send("ticket-interact", { playerID:playerID, ticketID:ticketID });
         };
  
         addLog("initialized!");
@@ -79,8 +83,8 @@ export module GameManager {
         //if game is avtively starting
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
             UI_MANAGER.matchStarted.show();
-            VEHICLE_MANAGER.onRoundStart();
-        }
+            VEHICLE_MANAGER.onRoundStart(false);
+        } 
         //if game is actively ending
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
             //NOT THE RIGHT PLACE FOR THIS ANNOUNCMENT, NEED TO GET PLAYER SCORE somewhere
@@ -96,6 +100,8 @@ export module GameManager {
                 switch(rank){
                     case 1:
                         UI_MANAGER.winner.show();
+
+                        // win condition - this line will give the ticket to the player
                         break;
                     case 2:
                         UI_MANAGER.sooClose.show();
@@ -122,7 +128,7 @@ export module GameManager {
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
-                UI_MANAGER.matchAboutToStart.show();
+                //UI_MANAGER.matchAboutToStart.show();
             break;
             case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
                 //set music to playing
@@ -135,7 +141,7 @@ export module GameManager {
 
     //gamestate display
     //  create display for displaying gamestate
-    const entityGameState:Entity = engine.addEntity();
+    /*const entityGameState:Entity = engine.addEntity();
     Transform.create(entityGameState, {position:{x:32,y:2.4,z:32}});
     TextShape.create(entityGameState, {text:"<GAME_STATE>",fontSize:4});
     Billboard.create(entityGameState);
@@ -159,25 +165,29 @@ export module GameManager {
             if(value >= 0) TextShape.getMutable(entityCountdown).text = Math.floor(value+1).toString();
             else TextShape.getMutable(entityCountdown).text = "";
         }
-    );
+    );*/
 
     //debugging controllers
     /** sends game start command to server */ 
-    const buttonGameStart = new DynamicButton_Simple(0, {x:32,y:1.5,z:32}, "FORCE: START");
-    /** sends game end command to server */ 
-    const buttonGameEnd = new DynamicButton_Simple(1, {x:32,y:9.5,z:32}, "FORCE: END");
+    if(CONFIG.SHOW_DEBUG_3D_BUTTONS){
+        const buttonGameStart = new DynamicButton_Simple(0, {x:32,y:1.5,z:32}, "FORCE: START");
+        /** sends game end command to server */ 
+        const buttonGameEnd = new DynamicButton_Simple(1, {x:32,y:9.5,z:32}, "FORCE: END");
     
-    /** processes all buttons, executing interactions */
-    export function processInteractions() {
-        if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameStart.FrameEntity)) {
-            if(Networking.ClientRoom == undefined) return;
-            Networking.ClientRoom.send("game-start", {});
+    
+        /** processes all buttons, executing interactions */
+        function processInteractions() {
+            if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameStart.FrameEntity)) {
+                if(Networking.ClientRoom == undefined) return;
+                Networking.ClientRoom.send("game-start", {});
+            }
+            if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameEnd.FrameEntity)) {
+                if(Networking.ClientRoom == undefined) return;
+                Networking.ClientRoom.send("game-end", {});
+            } 
         }
-        if (inputSystem.isTriggered(InputAction.IA_POINTER, PointerEventType.PET_DOWN, buttonGameEnd.FrameEntity)) {
-            if(Networking.ClientRoom == undefined) return;
-            Networking.ClientRoom.send("game-end", {});
-        } 
+        //add system to engine
+        engine.addSystem(processInteractions);
+        
     }
-    //add system to engine
-    engine.addSystem(processInteractions);
 }
