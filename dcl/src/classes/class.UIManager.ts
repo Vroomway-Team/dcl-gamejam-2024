@@ -9,6 +9,7 @@ export class AnnouncemntUI{
 	key:string
 	visible:boolean = false
 	duration:number = 1000
+	text?:string
 	constructor(key:string,visible:boolean, duration:number){
 		this.key = key
 		this.visible = visible
@@ -56,7 +57,8 @@ export class UIManager {
 	// Timer funcs
 	
 	getTimerValueString(): string {
-		return parseTime(this.roundTime)
+		if(this.roundTime != -1) return parseTime(this.roundTime);
+		else return "0:00";
 	}
 	
 	setTimerValue(time: number): void {

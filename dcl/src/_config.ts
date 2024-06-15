@@ -27,6 +27,15 @@ export const USE_IMGUR_ASSETS: Record<string, boolean> = {
 	prod : true,
 };
 
+export const PLAYFAB_TITLEID: Record<string, string> = {
+	local: "78E14",
+  	prod: "78E14"
+};
+
+const AUTH_URL: Record<string, string> = {
+	local: "https://vroomway-auth-79f2ca20be45.herokuapp.com",//http://localhost:5001", //only used if PLAYFAB_ENABLED
+	prod: "https://vroomway-auth-79f2ca20be45.herokuapp.com"
+  };
 
 export class Config {
 	public SHOW_DEBUG_TRIGGERS: boolean = SHOW_DEBUG_TRIGGERS[ENV]
@@ -37,6 +46,15 @@ export class Config {
 	public USE_IMGUR_ASSETS   : boolean = USE_IMGUR_ASSETS[ENV]
 	
 	public COLYSEUS_SERVER    : Networking.CONNECTION_TYPE = COLYSEUS_SERVER[ENV]
+
+	public IN_PREVIEW : boolean = false
+	public SHOW_CONNECTION_DEBUG_INFO : boolean = false
+
+	public LOGIN_FLOW_TYPE: string = 'dclSignedFetch'
+	public LOGIN_ENDPOINT:string  = AUTH_URL[ENV] + "/player/auth?";
+	public PLAYFAB_ENABLED: boolean = true
+
+	public PLAYFAB_TITLEID: string = PLAYFAB_TITLEID[ENV]
 }
 
 export const CONFIG = new Config

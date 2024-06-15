@@ -19,7 +19,8 @@ export module GameManager {
     /** wrapper for debugging logs */
     function addLog(log:string) { if(isDebugging) console.log("GAME MANAGER: "+log); }
     
-    export var PlayerVehicleCollisionCallback:PlayerUnclaimCallbackType;
+    export type PlayerVehicleCollisionCallbackType = (playerID:string) => void;
+    export var PlayerVehicleCollisionCallback:PlayerVehicleCollisionCallbackType;
 
     /** initializes the game manager, setting the default entry state */
     export function Initialize() {
@@ -31,7 +32,7 @@ export module GameManager {
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send claim request  
-            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), vehicle:vehicle});
+            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), playFabData: Networking.getPlayerPlayFabData(), vehicle:vehicle});
         }
         //  player attempts to unclaim a vehicle
         LobbyLabel.PlayerUnclaimCallback = function() {
@@ -39,22 +40,24 @@ export module GameManager {
             if(Networking.ClientRoom == undefined) return;
             //send claim request
             Networking.ClientRoom.send("player-leave-request", {id:Networking.GetUserID()});
-        }
-        //  player attempts to claim a vehicle  
-        PlayerVehicleCollisionCallback = function() {
+        } 
+        //  player's vehicle getting hit by another (can be called by a delegated NPC)
+        PlayerVehicleCollisionCallback = function(playerID:string) {
             console.log("dropping tickets");
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
-            //send claim request
-            Networking.ClientRoom.send("ticket-drop", {});
-        }
-        //  ticket collides with ticket (pickup logic)
-        TicketEntity.CallbackTicketCollision = function(index:number) {
-            console.log("player collided with ticket id="+index);
+            //if local player notify player of hit
+            if(playerID == Networking.GetUserID()) UI_MANAGER.hitNotify.show();
+            //send claim request 
+            Networking.ClientRoom.send("ticket-drop", { playerID:playerID });
+        } 
+        //  ticket collides with ticket (pickup logic) (can be called by a delegated NPC)
+        TicketEntity.CallbackTicketCollision = function(ticketID:number, playerID:string) {
+            console.log("player=",playerID," collided with ticket id="+ticketID);
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send interaction request
-            Networking.ClientRoom.send("ticket-interact", { playerID:Networking.GetUserID(), ticketID:index });
+            Networking.ClientRoom.send("ticket-interact", { playerID:playerID, ticketID:ticketID });
         };
  
         addLog("initialized!");
@@ -82,7 +85,6 @@ export module GameManager {
             UI_MANAGER.matchStarted.show();
             VEHICLE_MANAGER.onRoundStart();
             AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_MATCH_STARTING);
-        }
         //if game is actively ending
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
             //NOT THE RIGHT PLACE FOR THIS ANNOUNCMENT, NEED TO GET PLAYER SCORE somewhere
@@ -99,6 +101,8 @@ export module GameManager {
                     case 1:
                         AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.RESULT_WIN);
                         UI_MANAGER.winner.show();
+
+                        // win condition - this line will give the ticket to the player
                         break;
                     case 2:
                         UI_MANAGER.sooClose.show();
@@ -125,7 +129,7 @@ export module GameManager {
                 AudioManager.PlayBackgroundMusic(AudioManager.BACKGROUND_MUSIC.SCENE_IDLE);
             break;
             case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
-                UI_MANAGER.matchAboutToStart.show();
+                //UI_MANAGER.matchAboutToStart.show();
             break;
             case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
                 //set music to playing
@@ -138,7 +142,7 @@ export module GameManager {
 
     //gamestate display
     //  create display for displaying gamestate
-    const entityGameState:Entity = engine.addEntity();
+    /*const entityGameState:Entity = engine.addEntity();
     Transform.create(entityGameState, {position:{x:32,y:2.4,z:32}});
     TextShape.create(entityGameState, {text:"<GAME_STATE>",fontSize:4});
     Billboard.create(entityGameState);
@@ -162,7 +166,7 @@ export module GameManager {
             if(value >= 0) TextShape.getMutable(entityCountdown).text = Math.floor(value+1).toString();
             else TextShape.getMutable(entityCountdown).text = "";
         }
-    );
+    );*/
 
     //debugging controllers
     /** sends game start command to server */ 

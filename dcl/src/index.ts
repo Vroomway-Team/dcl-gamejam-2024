@@ -1,5 +1,7 @@
 import { CONFIG } 								from './_config'
 
+import "./polyfill/delcares";
+
 import * as utils 								from '@dcl-sdk/utils'
 import { Transform } 							from '@dcl/sdk/ecs'
 import { Quaternion } 							from '@dcl/sdk/math'
@@ -12,6 +14,7 @@ import { setupImagePosters } 					from './arena/setupImagePosters'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
 import { SCOREBOARD_MANAGER, setupScoreboards } from './arena/setupScoreboards'
+import { PARTICLE_MANAGER } 					from './arena/setupParticleManager'
 
 import { Room } 								from 'colyseus.js'
 import { Networking } 							from './networking'
@@ -25,14 +28,15 @@ import * as clientStateSpec 					from './rooms/spec/client-state-spec'
 import { VehicleState } from './interfaces/interface.VehicleState'
 import * as CANNON from 'cannon'
 import { updateScores } from './utilities/game-play-utils'
-
+import { NPCManager } from './arena/npc-manager'
+import { getAndSetRealmDataIfNull, getAndSetUserDataIfNull, getRealmDataFromLocal, getUserDataFromLocal } from './userData'
+import { doLoginFlow, registerLoginFlowListener } from './connect/login-flow'
  
 // Config options for colyseus and debug features are in _config.ts
 
 export function main() {
 	//turn on trigger debug mode (draws )
 	utils.triggers.enableDebugDraw(CONFIG.SHOW_DEBUG_TRIGGERS);
-
 
 	/* /ticket creation test
 	const t0 = TicketEntity.Create({ id:0, transform:{ position:{x:24,y:2,z:30} } });
@@ -42,10 +46,18 @@ export function main() {
 	console.log("test 1: id="+JSON.stringify(Transform.getMutable(t1.EntityModel).position));
 	console.log("test 2: id="+JSON.stringify(Transform.getMutable(t2.EntityModel).position)); */
 
+	//call it so can cache it sooner
+	getAndSetRealmDataIfNull()
+	getAndSetUserDataIfNull()
+	 
+	registerLoginFlowListener()
+	
 	setupUiManager()
 	// Draw UI
 	setupUi()
 	//ReactEcsRenderer.setUiRenderer(ui.render)
+	
+
 	
 	// Setup Cannon World - adds the world, ground, arena colliders
 	setupCannonWorld()
@@ -70,10 +82,32 @@ export function main() {
 	//Transform.getMutable(ScoreDisplay.ScoreBoardParent).position = {x:35, y:2, z:32},
 	//ScoreDisplay.UpdateDisplays();
 
-	//set up player (server connection)
-	PlayerSetup();
+	const startGameFN = () => {
+		//fetch leaderboards
+		//initGamePlay() 
 
-	initSendPlayerInputToServerSystem()
+		//set up player (server connection)
+		PlayerSetup();
+
+		initSendPlayerInputToServerSystem()
+	}
+
+	doLoginFlow(
+		{  
+			onSuccess:()=>{
+				console.log("login success","connect to server")
+				
+				startGameFN()
+			},
+			onFailure:()=>{
+				//FIXME!!!
+				console.log("login FAILED","still connecting server")
+				
+				startGameFN()
+			}
+		}
+	)
+
 }
 
 /** handles the the initial player setup, getting their DCL details and connecting to the colyseus server */
@@ -81,22 +115,37 @@ async function PlayerSetup() {
 	//get DCL details
 	console.log("getting player details...");
 	await Networking.LoadPlayerData();
-	
+	 
 	console.log("got player details!");
-
+ 
 	//initialize game manager (ensures all sub-modules are ready)
 	GameManager.Initialize();
 
 	//initialize client's connection to server
-	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER); 
+	Networking.InitializeClientConnection(CONFIG.COLYSEUS_SERVER);
   
 	//attempt to access a room on server
 	console.log("joining room..."); 
 
 	Networking.connectedState = {status:"connecting",msg:"connecting to " + "my_room"};
  
+	let localUserDataCopy:any = {...getUserDataFromLocal()}
+    delete localUserDataCopy.avatar
+    delete localUserDataCopy.wearables
+    delete localUserDataCopy.emotes
+
 	await Networking.GetClientConnection().joinOrCreate("my_room", { 
-		userData: { id:Networking.GetUserID(), displayName:Networking.GetUserName() } 
+		userData: { ...localUserDataCopy, id:Networking.GetUserID(), displayName:Networking.GetUserName() },
+		clientSDK: "7.x.x",
+		//used for matching rooms
+		//for px prefixing with "px-scene:"
+		playerId: localUserDataCopy?.userId,
+
+		realmInfo: getRealmDataFromLocal(),
+		//still passed for room filterby
+		realm: getRealmDataFromLocal()?.realmName,
+
+		playFabData: Networking.getPlayerPlayFabData()
 	}).then((room: Room) => {
 		//set room instance
 		console.log("local player joined server room: ", room, room.state);
@@ -215,6 +264,8 @@ async function PlayerSetup() {
  
 				//add a listener to the new player's racing data (automates race updates)
 				player.listen("racingData", (raceData: clientStateSpec.VehicleStateSyncData) => {
+					if(raceData == undefined) return;
+
 					//halt if game is not in session
 					if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
 					//get vehicle from manager
@@ -222,13 +273,16 @@ async function PlayerSetup() {
 					if(vehicle == undefined) {
 						console.log("server call: player.racingData.update","could not find vehicle!!!",raceData)
 						return;
-					} 
+					}
+
+					//dont halt here, vehicle internally knowns and will ignore if needed (<- not anymore >_>)
+					//pre-push for local players (ik, it is messy)
+					vehicle.score = player.score;
+					vehicle.setRank(raceData.rank);
 					//halt if vehicle owner is operated by local player (client has authority)
-					//dont halt here, vehicle internally knowns and will ignore if needed
-					// if(player.playerID == Networking.GetUserID()){
-					// 	vehicle.updateCrown(raceData.rank)
-					// 	return;
-					// } 
+					if(player.playerID == Networking.GetUserID()) return;
+					//halt if vehicle is an npc operated by local player (delegated operator has authority)
+					if(NPCManager.NPC_DELEGATE_REG.containsKey(player.playerID)) return;
 					//console.log("updating vehicle: "+player.vehicleID+", "+JSON.stringify(raceData));
  
 					//pass patched data to vehicle controller
@@ -257,7 +311,12 @@ async function PlayerSetup() {
 		room.state.lobbyPlayersByID.onRemove(
 			function (player: clientStateSpec.PlayerState, sessionId: string) {
 				console.log("server call: player removed from lobby, "+JSON.stringify(player));
-
+				//get vehicle from manager
+				const vehicle = VEHICLE_MANAGER.getVehicle(player.vehicleID);
+				if(vehicle != undefined) {
+					vehicle.disable();
+					vehicle.moveToLobby();
+				}
 				//release vehicle
 				VEHICLE_MANAGER.userUnclaimVehicle(player.vehicleID);
 				//FIXME
@@ -270,11 +329,36 @@ async function PlayerSetup() {
 				}
 		});
 
+		//# 	NPC DETAILS
+		//called when an NPC control delegate is added to the game
+		room.state.lobbyNPCs.onAdd(
+		function (npcController: clientStateSpec.NPCControllerState, sessionId: string) {
+			console.log("server call: npc added to lobby, "+JSON.stringify(npcController));
+
+			//halt if npc owner is not local player
+			if(npcController.ownerID != Networking.GetUserID()) return;
+
+			//create new npc controller
+			console.log("creating npc controller for local player to manage npc");
+			NPCManager.Create(npcController.npcID);
+		});
+		room.state.lobbyNPCs.onRemove(
+		function (npcController: clientStateSpec.NPCControllerState, sessionId: string) {
+			console.log("server call: npc removed from lobby, "+JSON.stringify(npcController));
+ 
+			//halt if npc owner is not local player
+			if(npcController.ownerID != Networking.GetUserID()) return;
+
+			//remove npc controller
+			console.log("removing npc controller");
+			NPCManager.Destroy(npcController.npcID);
+		}); 
+
 		//#		TICKET DETAILS
 		//called when a ticket is added to the game
 		room.state.gameTickets.onAdd(
 		function (ticket: clientStateSpec.TicketState, sessionId: string) {
-			console.log("server call: ticket added to lobby, "+JSON.stringify(ticket));
+			//console.log("server call: ticket added to lobby, "+JSON.stringify(ticket));
 
 			//spawn ticket
             TicketEntity.Create({ id:ticket.ticketID, transform:{ position:ticket.PositionCurrent } });
@@ -283,11 +367,14 @@ async function PlayerSetup() {
 		room.state.gameTickets.onRemove(
 		function (ticket: clientStateSpec.TicketState, sessionId: string) {
 			console.log("server call: ticket removed from lobby, "+JSON.stringify(ticket));
- 
+
 			//remove ticket
 			const tmp = TicketEntity.GetByKey(ticket.ticketID.toString());
 			if(tmp != undefined) TicketEntity.Disable(tmp);
-		});
+ 
+			//send update to npc manager
+			NPCManager.TicketClaimed(ticket.ticketID);
+		}); 
 
 	}).catch((e) => {
 	  console.log("error entering room: ", e);

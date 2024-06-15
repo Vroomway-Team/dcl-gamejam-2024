@@ -1,7 +1,14 @@
-# Colyseus + Decentraland SDK7
+# Bumperz 
+## DCL SDK7 Scene
 
+---
+
+#### Running the scene:
+
+1. Open the repository folder in VSCode
+1. Open a terminal with: `Ctrl + '`
+1. Type in the terminal: 
 ```
-npm install --save colyseus.js
-npm install --save xmlhttprequest-polyfill
-npm install --save whatwg-url-without-unicode
+npm install
+npm run start
 ```

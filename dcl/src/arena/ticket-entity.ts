@@ -1,8 +1,11 @@
 import { Entity, engine, Transform, GltfContainer, ColliderLayer, Animator, MeshCollider, MeshRenderer } from "@dcl/sdk/ecs";
 import { Vector3 } from "@dcl/sdk/math";
 import * as utils from '@dcl-sdk/utils'
-import { Dictionary, FunctionCallbackIndex, List, TRANSFORM_POSITION_OFF, TRANSFORM_SCALE_OFF, TRANSFORM_SCALE_ON, TransformDataObject } from "../utilities/escentials";
+import { CustomIndexComponent, Dictionary, List, TRANSFORM_POSITION_OFF, TRANSFORM_SCALE_OFF, TRANSFORM_SCALE_ON, TransformDataObject } from "../utilities/escentials";
 import { AudioManager } from "./audio-manager";
+import { VEHICLE_MANAGER } from "./setupVehicleManager";
+import { Networking } from "../networking";
+import { NPCManager } from "./npc-manager";
 
 /*      BUMPER CAR - TICKET ENTITY
     system for handling ticket creation/instancing, pooling, and onTouch interactions
@@ -22,7 +25,8 @@ export module TicketEntity {
     const MODEL_SCALE:Vector3 = { x:0.5, y:0.5, z:0.5 };
 
     /** function called when the player collides with a ticket */
-    export var CallbackTicketCollision:undefined|FunctionCallbackIndex;
+    export interface FunctionCallbackTicketCollection { (ticketID:number, playerID:string):void }
+    export var CallbackTicketCollision:undefined|FunctionCallbackTicketCollection;
 
     /** pool of ALL existing objects */
     var pooledObjectsAll:List<TicketEntityObject> = new List<TicketEntityObject>();
@@ -42,6 +46,15 @@ export module TicketEntity {
         }
         //object does not exist, send undefined
         return undefined;
+    }
+    /** returns a random ticket */
+    export function GetRandom():undefined|TicketEntityObject {
+        //if no tickets active, give none
+        if(pooledObjectsActive.size() == 0) return undefined;
+        //provide a random ticket
+        const index:number = Math.round(Math.random()*(pooledObjectsActive.size()-1));
+        addLog("random ticket index="+index+", size="+pooledObjectsActive.size());
+        return pooledObjectsActive.getItem(index);
     }
     
 	/** object interface used to define all data required to create a new object */
@@ -112,20 +125,26 @@ export module TicketEntity {
             //  collection trigger
             const ticketID = data.id;
             utils.triggers.addTrigger(
-                //parental object
-                this.EntityModel,
-                //layer mask
-                utils.NO_LAYERS,
-                //triggered by mask
-                utils.ALL_LAYERS,
-                //area size
-                [{ type:'sphere', position:{x:0,y:0,z:0}, radius:1 }],
+                this.EntityModel,//parental object
+                utils.LAYER_8,//layer mask
+                utils.LAYER_7,//triggered by mask
+                [{ type:'sphere', position:{x:0,y:0,z:0}, radius:1 }],//area size 
                 //collision callback (send demand to server)
-                function() {
+                function(otherEntity) {
+                    //console.log("ticket hit by entity="+(otherEntity as Entity).toString());
+                    if(!CustomIndexComponent.has(otherEntity)) return;
+                    const comp = CustomIndexComponent.get(otherEntity as Entity);
+                    //get vehicle
+                    const vehicle = VEHICLE_MANAGER.getVehicle(comp.Index);
+                    //halt if vehicle is not owned by local player or a delegated ai controller
+                    if(vehicle.ownerID != Networking.GetUserID() && !NPCManager.NPC_DELEGATE_REG.containsKey(vehicle.ownerID)) {
+                        console.log("ticket collision ignored");
+                        return;
+                    } 
                     //play sound effect
                     AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_TICKET_COLLECT);
                     //attempt callback
-                    if(CallbackTicketCollision) CallbackTicketCollision(ticketID);
+                    if(CallbackTicketCollision) CallbackTicketCollision(ticketID, vehicle.ownerID);
                 },
                 //exit callback
                 undefined 

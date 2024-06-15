@@ -30,6 +30,7 @@ export function VehicleMovementSystem(dt: number): void {
 	for (const vehicle of VEHICLE_MANAGER.getVehicles()) {
 		
 		if (vehicle.isActive) {
+			//console.log("test: ",vehicle.vehicleID)
 			
 			// Increase Tween TimeSince
 			vehicle.timeSinceLastTweenPos += (dt * 1000)

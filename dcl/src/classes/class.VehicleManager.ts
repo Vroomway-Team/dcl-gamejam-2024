@@ -75,15 +75,15 @@ export class VehicleManager {
 	}
 	
 	// COLYSEUS: trigger this on round start
-	onRoundStart(): void {
+	onRoundStart(includeEmpty:boolean): void {
 		console.log("onRoundStart")
 		
-		const duration = 2000
-		this.moveVehiclesToArena(duration)
+		const duration = 3
+		this.moveVehiclesToArena(duration, includeEmpty)
 		
 		utils.timers.setTimeout(() => {
 			this.roundInProgress = true
-			this.enableVehicles()
+			this.enableVehicles(includeEmpty)
 			this.movePlayerToVehicle()
 		}, duration)
 		
@@ -106,17 +106,28 @@ export class VehicleManager {
 	}
 	
 	// Enables all vehicles, allowing them to respond to user input and be moved 
-	enableVehicles(): void {
-		console.log("enableVehicles")
+	enableVehicles(
+		includeEmpty: boolean=false
+	): void {
+		//console.log("enableVehicles")
 		
 		for (const vehicle of this.vehicles) {
 			vehicle.enable()
+			//if excluding empty vehicles & vehicle has no owner, disable vehicle
+			if(!includeEmpty && !vehicle.hasOwner()) {
+				vehicle.disable();
+			} 
+			//enable vehicle
+			else {
+				console.log("enabling vehicle: "+vehicle.vehicleID);
+				vehicle.enable();
+			}
 		}
 	}
 	
 	// Disable all vehicles, stopping them from being controlled
 	disableVehicles(): void {
-		console.log("disableVehicles")
+		//console.log("disableVehicles")
 		
 		for (const vehicle of this.vehicles) {
 			vehicle.disable()
@@ -163,14 +174,17 @@ export class VehicleManager {
 		duration: number,
 		includeEmpty: boolean=false
 	): void {
-		console.log("moveVehiclesToArena")
-		
+		//console.log("moveVehiclesToArena")
+		  
 		this.vehicles.forEach((vehicle, index) => {
-			//if vehicle has an owner, move to arena
-			if(!includeEmpty && vehicle.ownerID == "npc") {
-				//maybe add some stuff for idle vehicles here
-			} else {
-				vehicle.moveToArena(3);
+			//if excluding empty vehicles & vehicle has no owner, skip adding vehicle
+			if(!includeEmpty && !vehicle.hasOwner()) {
+				vehicle.moveToLobby(duration);
+			} 
+			//add vehicle to arena
+			else {
+				console.log("moving vehicle to lobby: "+vehicle.vehicleID);
+				vehicle.moveToArena(duration);
 			}
 		})		
 	}

@@ -1,4 +1,4 @@
-import { Entity, GltfContainer, InputAction, Material, MeshCollider, MeshRenderer, PointerEventType, PointerEvents, TextShape, Transform, engine } from "@dcl/sdk/ecs";
+import { Entity, GltfContainer, InputAction, Material, MeshCollider, MeshRenderer, PointerEventType, PointerEvents, Schemas, TextShape, Transform, engine } from "@dcl/sdk/ecs";
 import { Color4, Quaternion, Vector3 } from "@dcl/sdk/math";
 
 /**     ESCENTIALS LIB
@@ -7,6 +7,9 @@ import { Color4, Quaternion, Vector3 } from "@dcl/sdk/math";
     Author: TheCryptoTrader69 (Alex Pazder)
     Contact: TheCryptoTrader69@gmail.com
 */
+
+export const CustomIndexComponentData = { Index:Schemas.Number }
+export const CustomIndexComponent = engine.defineComponent("CustomIndexComponent", CustomIndexComponentData);
 
 //### COMMON VECTORS ###
 //common transform positions

@@ -49,16 +49,18 @@ export function setupGltfShapes() {
 
 	// How to play frames
 	const howtoFrame1 = new GltfObject("assets/gltf/howto.frame.gltf", {
-		position: Vector3.create(31.07, 3, 32),
-		rotation: Quaternion.fromEulerDegrees(0, -90, 0),
+		position: Vector3.create(31.60, 3.75, 32),
+		rotation: Quaternion.fromEulerDegrees(20, -90, 0),
 		scale   : Vector3.create(1.25,1.25,1.25)
 	})
 	
 	const howtoFrame2 = new GltfObject("assets/gltf/howto.frame.gltf", {
-		position: Vector3.create(32.93, 3, 32),
-		rotation: Quaternion.fromEulerDegrees(0, 90, 0),
+		position: Vector3.create(32.5, 3.75, 32),
+		rotation: Quaternion.fromEulerDegrees(20, 90, 0),
 		scale   : Vector3.create(1.25,1.25,1.25)
 	})
+	
+	
 
 	//Blue Spotlights
 	const spotlightBlue = new GltfObject("assets/gltf/spotlight.blue.gltf", {
@@ -125,57 +127,48 @@ export function setupGltfShapes() {
 		rotation: Quaternion.fromEulerDegrees(225, -90, 0),
 		scale   : Vector3.create(2,2,2)
 	})
+	
+	
 	//Spectator Pods
 	const spectatorPod1 = engine.addEntity()
   	Transform.create(spectatorPod1, {
-    	position: {x:34.5, y:0.1, z:39},
-    	scale: {x:1, y:1, z:1},
+    	position: Vector3.create(34.25, 0.1, 38.9),
+    	scale   : Vector3.create(1.6, 1.8, 1.6),
     	rotation: Quaternion.fromEulerDegrees(0,-165,0)
   	})
  	GltfContainer.create(spectatorPod1, {
     	src: 'assets/gltf/spectate.pod.gltf'
   	})
-  	utils.triggers.addTrigger(
-    	spectatorPod1,
-    	utils.NO_LAYERS,
-    	utils.PLAYER_LAYER_ID,
-    	[
-      	{
-      	  type: 'sphere',
-      	  radius:1
-      	}
-    	],
-    	() => { movePlayerTo({
-    	    newRelativePosition: Vector3.create(4,25,32),
-    	    cameraTarget: Vector3.create(32, 20, 50),
+  	utils.triggers.addTrigger(spectatorPod1, utils.NO_LAYERS, utils.PLAYER_LAYER_ID,
+    	[{
+			type  : 'sphere',
+			radius: 1
+		}], () => { movePlayerTo({
+    	    newRelativePosition: Vector3.create(4, 26, 32),
+    	    cameraTarget       : Vector3.create(32, 20, 50),
     	  })
-    	  
     	}
   	)
+	
 	const spectatorPod2 = engine.addEntity()
   	Transform.create(spectatorPod2, {
-    	position: {x:32, y:22, z:5},
-    	scale: {x:1, y:1, z:1},
-    	rotation: Quaternion.fromEulerDegrees(0,-165,0)
+    	position: Vector3.create(32, 22, 6),
+    	scale   : Vector3.create(1.6, 1.8, 1.6),
+    	rotation: Quaternion.fromEulerDegrees(0, -180, 0)
   	})
- 	GltfContainer.create(spectatorPod2, {
-    	src: 'assets/gltf/spectate.pod2.gltf'
-  	})
-  	utils.triggers.addTrigger(
-    	spectatorPod2,
-    	utils.NO_LAYERS,
-    	utils.PLAYER_LAYER_ID,
-    	[
-      	{
-      	  type: 'sphere',
-      	  radius:1
-      	}
-    	],
-    	() => { movePlayerTo({
-    	    newRelativePosition: Vector3.create(38,5,32),
-    	    cameraTarget: Vector3.create(32, 5, 32),
-    	  })
-    	  
-    	}
+ 	GltfContainer.create(spectatorPod2, { src: 'assets/gltf/spectate.pod2.gltf' })
+  	utils.triggers.addTrigger(spectatorPod2, utils.NO_LAYERS, utils.PLAYER_LAYER_ID,
+    	[{
+      	  type  : 'sphere',
+      	  radius: 1
+      	}], () => { movePlayerTo({
+    	    newRelativePosition: Vector3.create(38, 5, 32),
+    	    cameraTarget       : Vector3.create(32, 5, 32),
+		})}
   	)
+	  const spotlightRing = new GltfObject("assets/gltf/spotlight.ring.gltf", {
+		position: Vector3.create(32, 15, 32),
+		rotation: Quaternion.fromEulerDegrees(0, 0, 0),
+		scale   : Vector3.create(2,2,2)
+	})
 }
