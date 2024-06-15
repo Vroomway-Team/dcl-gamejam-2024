@@ -245,7 +245,8 @@ export class Vehicle {
 					//UI_MANAGER.hitNotify.text = 'PERSON WHO HIT YOUR '
 					UI_MANAGER.hitNotify.show()
 					//GameManager.PlayerVehicleCollisionCallback();
-				  GameManager.PlayerVehicleCollisionCallback(this.ownerID);
+				  	GameManager.PlayerVehicleCollisionCallback(this.ownerID);
+				}
 			} else {
 				//bump cooldown
 				if(this.bumpTimeStamp >= Date.now()) return;

@@ -84,8 +84,10 @@ export module GameManager {
         //if game is avtively starting
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
             UI_MANAGER.matchStarted.show();
-            VEHICLE_MANAGER.onRoundStart();
+            //start game, without empty vehicles
+            VEHICLE_MANAGER.onRoundStart(false);
             AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_MATCH_STARTING);
+        }
         //if game is actively ending
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
             //NOT THE RIGHT PLACE FOR THIS ANNOUNCMENT, NEED TO GET PLAYER SCORE somewhere
