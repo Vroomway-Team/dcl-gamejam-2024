@@ -7,12 +7,15 @@ import { Color4 } from '@dcl/sdk/math'
 import { AnnouncemntUI, UI_MANAGER } 			from '../classes/class.UIManager'
 import { Announcement } from 'dcl-ui-toolkit'
 import { CONFIG } from '../_config'
+import { GameState } from '../game-state'
 
 
 const uiRoundTime   = 'images/ui.RoundTime.png'
 const uiSpeedometer = 'images/ui.Speedometer.png'
 const uiTicketCount = 'images/ui.TicketCount.png'
-const spriteSheet  = CONFIG.USE_IMGUR_ASSETS ? 'https://i.imgur.com/80twxbD.png' : 'images/ui-spritesheet.2048.png'//''
+// const spriteSheet  = CONFIG.USE_IMGUR_ASSETS ? 'https://i.imgur.com/80twxbD.png' : 'images/ui-spritesheet.2048.png'//''
+
+const spriteSheet  = 'images/ui-spritesheet.2048.png'
 const uiYouGothit   = 'images/ui.YouGotHit.png'
 const uiBumperzLogo = 'images/ui.BumperzLogo.png'
 
@@ -30,10 +33,10 @@ const MATCH_STARTED=[0,2]
 const YOU_GOT_HIT_INDEX=[0,1]
 const SOO_CLOSE_INDEX=[0,0]
 
-const LOOSER_INDEX=[1,0]
+const MATCH_ABOUT_TO_START_CHOOSE_VEHICLE_INDEX=[1,3]
 const WINNER_INDEX=[1,1]
 const MATCH_FINISHED_INDEX=[1,2]
-const MATCH_ABOUT_TO_START_INDEX=[1,3]
+const MATCH_ABOUT_TO_START_INDEX=[1,0]
 
 
 const SPRITE_SIZE_HEIGHT=(ATLAS_SIZE_HEIGHT/2)
@@ -131,7 +134,7 @@ export function hudCenterMsgs() {
 		createCenterMsg(SOO_CLOSE_INDEX,UI_MANAGER.sooClose),
 		createCenterMsg(MATCH_IN_PROGRESS,UI_MANAGER.matchInProgress),
 		
-		createCenterMsg(LOOSER_INDEX,UI_MANAGER.looser),
+		createCenterMsg(MATCH_ABOUT_TO_START_CHOOSE_VEHICLE_INDEX,UI_MANAGER.matchAboutToStartChooseVehicle),
 		createCenterMsg(WINNER_INDEX,UI_MANAGER.winner),
 		createCenterMsg(MATCH_FINISHED_INDEX,UI_MANAGER.matchFinished),
 		createCenterMsg(MATCH_ABOUT_TO_START_INDEX,UI_MANAGER.matchAboutToStart),
@@ -152,111 +155,109 @@ export function hudCenterMsgs() {
 // 	return createCenterMsg('uiHud_sooClose',SOO_CLOSE_INDEX,()=>{return UI_MANAGER.hitNotifyVisible})
 // }
 export function hudTimer() {
-	return (	
-			// Round Timer
-			<UiEntity
-				key         = 'uiHud_timer'
-				uiTransform = {{
-					width  : 300,
-					height : 172,
-					margin : { top: '0', left: '0', right: 0 },
-					padding: 4,
-					//position: { top: '0%', right: '0%', bottom:'0%', left: '250'},//non 4k
-					position: { top: '0%', right: '0%', bottom:'0%', left: '25%'},//4k
-					justifyContent: 'center',
-					positionType: 'absolute'
-				}}
-				uiBackground = {{ 
-					textureMode  : 'nine-slices',
-					texture      : { src: uiRoundTime },
-					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-				}}
-				uiText = {{
-					value    : UI_MANAGER.getTimerValueString(),
-					fontSize : 48,
-					textAlign: "middle-center"
-				}}
-			/>
-			
-	)
-}
-export function hudTicketScore() {
+	//hide timer hud if game is idle
+	if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_IDLE) return;
+	//deliver timer hud
 	return (
-		
-			
-			// Score: Ticket count
-			<UiEntity
-				key         = 'uiHud_score'
-				uiTransform = {{
-					width  : 300,
-					height : 172,
-					margin : { top: '0', left: -350 },
-					padding: 4,
-					//position: { top: '0%', bottom:'0%', left: '90%'}, //non 2k
-					position: { top: '0%', bottom:'0%', left: '90%'}, //4k
-					justifyContent: 'center',
-					positionType: 'absolute',//,
-					alignItems: "flex-end"
-				}}
-				uiBackground = {{ 
-					textureMode  : 'nine-slices',
-					texture      : { src: uiTicketCount },
-					textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
-				}}
-			>
-			<UiEntity
-				key         = 'uiHud_score_text'
-				uiTransform = {{
-					width         : 300,
-					height        : 172,
-					margin : { top: '0', left: -150 },
-					justifyContent: 'flex-end',
-				}}
-				uiText = {{
-					value    : UI_MANAGER.getScoreValue().toString(),
-					fontSize : 48,
-					textAlign: "middle-right",
-					
-				}}
-			/>
-			</UiEntity>
-
-	)
-}
-
-
-//had to make it seperate to make it position center bottom
-export function hudSpeedometer(){
-	
-	return <UiEntity //parent / modal decoration
-			uiTransform={{
-			width: 175,
-			height: 175,
-			//display: 'flex',
-			positionType: 'absolute',
-			position: { bottom: '50px', left: '50%' } ,
-			//flexDirection:'column',
-			//flexWrap:'wrap',
-			//alignSelf:'flex-end'
+		// Round Timer
+		<UiEntity
+			key         = 'uiHud_timer'
+			uiTransform = {{
+				width  : 300,
+				height : 172,
+				margin : { top: '0', left: '0', right: 0 },
+				padding: 4,
+				//position: { top: '0%', right: '0%', bottom:'0%', left: '250'},//non 4k
+				position: { top: '0%', right: '0%', bottom:'0%', left: '25%'},//4k
+				justifyContent: 'center',
+				positionType: 'absolute'
 			}}
-			//uiBackground={{ texture: {src: "images/leaderboardbg.png"}, textureMode: 'stretch'}}
 			uiBackground = {{ 
 				textureMode  : 'nine-slices',
-				texture      : { src: uiSpeedometer },
+				texture      : { src: uiRoundTime },
 				textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
 			}}
 			uiText = {{
-				value    : (Math.round(UI_MANAGER.getSpeedValue()*10)/10).toString(),
+				value    : UI_MANAGER.getTimerValueString(),
 				fontSize : 48,
 				textAlign: "middle-center"
 			}}
+		/>
+	);
+}
+export function hudTicketScore() {
+	//hide ticket hud if game is not in session
+	if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
+	//deliver ticket hud
+	return (
+		// Score: Ticket count
+		<UiEntity
+			key         = 'uiHud_score'
+			uiTransform = {{
+				width  : 300,
+				height : 172,
+				margin : { top: '0', left: -350 },
+				padding: 4,
+				//position: { top: '0%', bottom:'0%', left: '90%'}, //non 2k
+				position: { top: '0%', bottom:'0%', left: '90%'}, //4k
+				justifyContent: 'center',
+				positionType: 'absolute',//,
+				alignItems: "flex-end"
+			}}
+			uiBackground = {{ 
+				textureMode  : 'nine-slices',
+				texture      : { src: uiTicketCount },
+				textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
+			}}
 		>
-			
+		<UiEntity
+			key         = 'uiHud_score_text'
+			uiTransform = {{
+				width         : 300,
+				height        : 172,
+				margin : { top: '0', left: -150 },
+				justifyContent: 'flex-end',
+			}}
+			uiText = {{
+				value    : UI_MANAGER.getScoreValue().toString(),
+				fontSize : 48,
+				textAlign: "middle-right",
+				
+			}}
+		/>
 		</UiEntity>
-	
+	);
+}
+ 
+//had to make it seperate to make it position center bottom
+export function hudSpeedometer(){
+	//hide ticket hud if game is not in session
+	if(GameState.CurGameState.GetValue() != GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) return;
+	//deliver speedometer hud
+	return <UiEntity //parent / modal decoration
+		uiTransform={{
+		width: 175,
+		height: 175,
+		//display: 'flex',
+		positionType: 'absolute',
+		position: { bottom: '50px', left: '50%' } ,
+		//flexDirection:'column',
+		//flexWrap:'wrap',
+		//alignSelf:'flex-end'
+		}}
+		//uiBackground={{ texture: {src: "images/leaderboardbg.png"}, textureMode: 'stretch'}}
+		uiBackground = {{ 
+			textureMode  : 'nine-slices',
+			texture      : { src: uiSpeedometer },
+			textureSlices: { top: 0, bottom: 0, left: 0, right: 0 }, 
+		}}
+		uiText = {{
+			value    : (Math.round(UI_MANAGER.getSpeedValue()*10)/10).toString(),
+			fontSize : 48,
+			textAlign: "middle-center"
+		}}
+	>
+		
+	</UiEntity>
 	
   }
-  
-
-
-  

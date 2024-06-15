@@ -1,6 +1,7 @@
 import { engine } 		from "@dcl/sdk/ecs"
 import { parseTime } 	from "./class.Scoreboard"
 import * as utils 		from '@dcl-sdk/utils'
+import { GameState } from "../game-state"
 
 
 const timerIdRecords = new Map<string, number>()
@@ -34,15 +35,15 @@ export class UIManager {
 
 	timerRunning    : boolean = false
 
-	hitNotify: AnnouncemntUI = new AnnouncemntUI('hitNotify',false,1000)
-	matchStarted: AnnouncemntUI = new AnnouncemntUI('matchStarted',false,2000)
-	sooClose: AnnouncemntUI = new AnnouncemntUI('sooClose',false,5000)
-	matchInProgress: AnnouncemntUI = new AnnouncemntUI('matchInProgress',false,4000)
+	hitNotify                     : AnnouncemntUI = new AnnouncemntUI('hitNotify',false,1000)
+	matchStarted                  : AnnouncemntUI = new AnnouncemntUI('matchStarted',false,2000)
+	sooClose                      : AnnouncemntUI = new AnnouncemntUI('sooClose',false,5000)
+	matchInProgress               : AnnouncemntUI = new AnnouncemntUI('matchInProgress',false,4000)
 
-	looser: AnnouncemntUI = new AnnouncemntUI('looser',false,5000)
-	winner: AnnouncemntUI = new AnnouncemntUI('winner',false,5000)
-	matchFinished: AnnouncemntUI = new AnnouncemntUI('matchFinished',false,3000)
-	matchAboutToStart: AnnouncemntUI = new AnnouncemntUI('matchAboutToStart',false,3000)
+	winner                        : AnnouncemntUI = new AnnouncemntUI('winner',false,5000)
+	matchFinished                 : AnnouncemntUI = new AnnouncemntUI('matchFinished',false,3000)
+	matchAboutToStart             : AnnouncemntUI = new AnnouncemntUI('matchAboutToStart',false,3000)
+	matchAboutToStartChooseVehicle: AnnouncemntUI = new AnnouncemntUI('matchAboutToStartChooseVehicle',false,4000)
 
 	speedValue      : number  = 0
 	scoreValue      : number  = 0
@@ -57,8 +58,13 @@ export class UIManager {
 	// Timer funcs
 	
 	getTimerValueString(): string {
-		if(this.roundTime != -1) return parseTime(this.roundTime);
-		else return "0:00";
+		switch(GameState.CurGameState.GetValue()) {
+			case GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN:
+				return parseTime(GameState.GameStartCountdown.GetValue())
+			case GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION:
+				return parseTime(GameState.GameEndCountdown.GetValue())
+		}
+		return "0:00";
 	}
 	
 	setTimerValue(time: number): void {

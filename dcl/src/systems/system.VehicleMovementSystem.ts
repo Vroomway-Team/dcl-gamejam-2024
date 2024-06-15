@@ -39,7 +39,7 @@ export function VehicleMovementSystem(dt: number): void {
 			// Handle POS tweens
 			// Check if PosTween has completed or if the timesincelasttween is excessive
 			const posTweenCompleted = tweenSystem.tweenCompleted(vehicle.entityPos)
-			if (posTweenCompleted || (vehicle.timeSinceLastTweenPos > vehicle.tweenPosDuration * 2)) {
+			if (posTweenCompleted || (vehicle.timeSinceLastTweenPos > vehicle.timeToNextTweenPos)) {
 				
 				//console.log(vehicle.modelName, vehicle.vehicleID, "posTw", vehicle.timeSinceLastTweenPos, "starting new tween")	
 				
@@ -49,7 +49,7 @@ export function VehicleMovementSystem(dt: number): void {
 			// Handle ROT tweens
 			// Check if RotTween has completed or if the timesincelasttween is excessive
 			const rotTweenCompleted = tweenSystem.tweenCompleted(vehicle.entityRot)
-			if (rotTweenCompleted || (vehicle.timeSinceLastTweenRot > vehicle.tweenRotDuration * 2)) {
+			if (rotTweenCompleted || (vehicle.timeSinceLastTweenRot > vehicle.timeToNextTweenRot)) {
 					
 				//console.log(vehicle.modelName, vehicle.vehicleID, "rotTw", vehicle.timeSinceLastTweenRot, "starting new tween")	
 				

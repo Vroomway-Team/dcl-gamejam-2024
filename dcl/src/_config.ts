@@ -38,15 +38,14 @@ const AUTH_URL: Record<string, string> = {
   };
 
 export class Config {
-	public SHOW_DEBUG_TRIGGERS: boolean = SHOW_DEBUG_TRIGGERS[ENV]
-	public SHOW_DEBUG_PANEL: boolean = SHOW_DEBUG_PANEL[ENV]
+	public SHOW_DEBUG_TRIGGERS  : boolean = SHOW_DEBUG_TRIGGERS[ENV]
+	public SHOW_DEBUG_PANEL     : boolean = SHOW_DEBUG_PANEL[ENV]
 
 	public SHOW_DEBUG_3D_BUTTONS: boolean = SHOW_DEBUG_3D_BUTTONS[ENV]
 	
-	public USE_IMGUR_ASSETS   : boolean = USE_IMGUR_ASSETS[ENV]
+	public USE_IMGUR_ASSETS     : boolean = USE_IMGUR_ASSETS[ENV]
 	
-	public COLYSEUS_SERVER    : Networking.CONNECTION_TYPE = COLYSEUS_SERVER[ENV]
-
+	public COLYSEUS_SERVER      : Networking.CONNECTION_TYPE = COLYSEUS_SERVER[ENV]
 	public IN_PREVIEW : boolean = false
 	public SHOW_CONNECTION_DEBUG_INFO : boolean = false
 
