@@ -238,7 +238,14 @@ export class Vehicle {
 					return;
 				} 
 				//if vehicle is owned by the local player, drop tickets
-				GameManager.PlayerVehicleCollisionCallback(this.ownerID);
+				if(this.ownerID == Networking.GetUserID()) {
+					//clear it
+					UI_MANAGER.hitNotify.text = ''
+					//IF KNOWN - put
+					//UI_MANAGER.hitNotify.text = 'PERSON WHO HIT YOUR '
+					UI_MANAGER.hitNotify.show()
+					//GameManager.PlayerVehicleCollisionCallback();
+				  GameManager.PlayerVehicleCollisionCallback(this.ownerID);
 			} else {
 				//bump cooldown
 				if(this.bumpTimeStamp >= Date.now()) return;

@@ -104,7 +104,25 @@ function createCenterMsg(IDX:number[],announcement:AnnouncemntUI){
 				uvs: getUVsFor(IDX),
 				//color: announcement.visible ? Color4.White() : Color4.Clear()
 			}}
-		/>
+			
+			// uiText = {{
+			// 	value    : "SFDSF",
+			// 	fontSize : 48,
+			// 	textAlign: "middle-right",
+				 
+			// }}
+		>
+			<Label
+						key         = "hit-by-name"
+						uiTransform = {{ 
+							position    : {  top: '-50',left: '50%'},
+							display: announcement.text ?'flex' : 'none',
+						}}
+						value       = {`${announcement.text}`}
+						fontSize    = {48}
+						textAlign   = 'bottom-center'
+					/>
+		</UiEntity> 
 	)
 	
 	return val

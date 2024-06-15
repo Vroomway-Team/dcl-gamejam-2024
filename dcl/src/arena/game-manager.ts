@@ -33,7 +33,7 @@ export module GameManager {
             //halt if player is not part of a room
             if(Networking.ClientRoom == undefined) return;
             //send claim request  
-            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), vehicle:vehicle});
+            Networking.ClientRoom.send("player-join-request", {id:Networking.GetUserID(), displayName:Networking.GetUserName(), playFabData: Networking.getPlayerPlayFabData(), vehicle:vehicle});
         }
         //  player attempts to unclaim a vehicle
         LobbyLabel.PlayerUnclaimCallback = function() {
@@ -84,8 +84,8 @@ export module GameManager {
         //if game is avtively starting
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.LOBBY_COUNTDOWN && state == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION) {
             UI_MANAGER.matchStarted.show();
-            VEHICLE_MANAGER.onRoundStart(false);
-        } 
+            VEHICLE_MANAGER.onRoundStart();
+            AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.INTERACTION_MATCH_STARTING);
         //if game is actively ending
         if(GameState.CurGameState.GetValue() == GameState.GAME_STATE_TYPES.PLAYING_IN_SESSION && state == GameState.GAME_STATE_TYPES.LOBBY_IDLE) {
             //NOT THE RIGHT PLACE FOR THIS ANNOUNCMENT, NEED TO GET PLAYER SCORE somewhere
@@ -97,10 +97,13 @@ export module GameManager {
                 UI_MANAGER.matchFinished.show();
             }else if(vehicle){
                 //determine players score and show display
-                const rank = vehicle.rank
+                const rank = vehicle.rank 
                 switch(rank){
                     case 1:
+                        AudioManager.PlaySoundEffect(AudioManager.AUDIO_SFX.RESULT_WIN);
                         UI_MANAGER.winner.show();
+
+                        // win condition - this line will give the ticket to the player
                         break;
                     case 2:
                         UI_MANAGER.sooClose.show();
