@@ -654,37 +654,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -1061,63 +1061,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":5940
 		},
 		{
 			"buffer":0,
 			"byteLength":1203,
-			"byteOffset":6380
+			"byteOffset":6948
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":7584
+			"byteOffset":8152
 		},
 		{
 			"buffer":0,
 			"byteLength":1636,
-			"byteOffset":8036
+			"byteOffset":8604
 		},
 		{
 			"buffer":0,
 			"byteLength":2175,
-			"byteOffset":9672
+			"byteOffset":10240
 		},
 		{
 			"buffer":0,
 			"byteLength":1714,
-			"byteOffset":11848
+			"byteOffset":12416
 		},
 		{
 			"buffer":0,
 			"byteLength":1001,
-			"byteOffset":13564
+			"byteOffset":14132
 		},
 		{
 			"buffer":0,
 			"byteLength":5944,
-			"byteOffset":14568
+			"byteOffset":15136
 		},
 		{
 			"buffer":0,
 			"byteLength":4410,
-			"byteOffset":20512
+			"byteOffset":21080
 		},
 		{
 			"buffer":0,
 			"byteLength":1635,
-			"byteOffset":24924
+			"byteOffset":25492
 		},
 		{
 			"buffer":0,
 			"byteLength":1082,
-			"byteOffset":26560
+			"byteOffset":27128
 		},
 		{
 			"buffer":0,
 			"byteLength":2505,
-			"byteOffset":27644
+			"byteOffset":28212
 		}
 	],
 	"samplers":[
@@ -1128,7 +1128,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":30152,
+			"byteLength":30720,
 			"uri":"vehicle.cat.02.bin"
 		}
 	]

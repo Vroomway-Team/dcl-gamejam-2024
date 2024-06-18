@@ -26,7 +26,7 @@
 			"name":"heartCart2.005",
 			"rotation":[
 				0,
-				-6.2297460620046666e-15,
+				-3.1148730310023333e-15,
 				0,
 				1
 			],
@@ -36,7 +36,7 @@
 				0.2851411700248718
 			],
 			"translation":[
-				-2.1164383654371892e-14,
+				-4.61093294622239e-14,
 				-1.693088173866272,
 				0.3740249276161194
 			]
@@ -681,37 +681,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011935591697693
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.8000000715255737,
+				-0.31408748030662537
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -789,7 +789,7 @@
 			"componentType":5126,
 			"count":2,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -823,9 +823,9 @@
 		{
 			"bufferView":12,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -835,7 +835,7 @@
 		{
 			"bufferView":13,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC4"
 		},
 		{
@@ -859,7 +859,7 @@
 		{
 			"bufferView":17,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC3"
 		}
 	],
@@ -886,73 +886,73 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":993,
 			"byteOffset":32360
 		},
 		{
 			"buffer":0,
 			"byteLength":1412,
-			"byteOffset":32800
+			"byteOffset":33356
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":34212
+			"byteOffset":34768
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":34664
+			"byteOffset":35220
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":34672
+			"byteOffset":35228
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":34696
+			"byteOffset":35252
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":34728
+			"byteOffset":35284
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":34752
+			"byteOffset":35308
 		},
 		{
 			"buffer":0,
-			"byteLength":484,
-			"byteOffset":34776
+			"byteLength":244,
+			"byteOffset":35332
 		},
 		{
 			"buffer":0,
-			"byteLength":1936,
-			"byteOffset":35260
-		},
-		{
-			"buffer":0,
-			"byteLength":24,
-			"byteOffset":37196
+			"byteLength":976,
+			"byteOffset":35576
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":37220
+			"byteOffset":36552
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":36576
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":37244
+			"byteOffset":36600
 		},
 		{
 			"buffer":0,
-			"byteLength":1452,
-			"byteOffset":37276
+			"byteLength":732,
+			"byteOffset":36632
 		}
 	],
 	"samplers":[
@@ -963,7 +963,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":38728,
+			"byteLength":37364,
 			"uri":"vehicle.heart.01.bin"
 		}
 	]

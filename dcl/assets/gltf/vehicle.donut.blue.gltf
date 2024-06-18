@@ -109,13 +109,13 @@
 			"rotation":[
 				0.5383031964302063,
 				-0.8187140822410583,
-				0.008525949902832508,
+				0.008525967597961426,
 				0.1996603012084961
 			],
 			"scale":[
 				0.304321825504303,
 				1.150534749031067,
-				0.3043217957019806
+				0.3043217658996582
 			],
 			"translation":[
 				0.11480558663606644,
@@ -538,37 +538,37 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -880,53 +880,53 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":2239,
-			"byteOffset":440
+			"byteOffset":1008
 		},
 		{
 			"buffer":0,
 			"byteLength":1595,
-			"byteOffset":2680
+			"byteOffset":3248
 		},
 		{
 			"buffer":0,
 			"byteLength":1601,
-			"byteOffset":4276
+			"byteOffset":4844
 		},
 		{
 			"buffer":0,
 			"byteLength":2545,
-			"byteOffset":5880
+			"byteOffset":6448
 		},
 		{
 			"buffer":0,
 			"byteLength":5545,
-			"byteOffset":8428
+			"byteOffset":8996
 		},
 		{
 			"buffer":0,
 			"byteLength":34079,
-			"byteOffset":13976
+			"byteOffset":14544
 		},
 		{
 			"buffer":0,
 			"byteLength":1410,
-			"byteOffset":48056
+			"byteOffset":48624
 		},
 		{
 			"buffer":0,
 			"byteLength":448,
-			"byteOffset":49468
+			"byteOffset":50036
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":49916
+			"byteOffset":50484
 		}
 	],
 	"samplers":[
@@ -937,7 +937,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":51096,
+			"byteLength":51664,
 			"uri":"vehicle.donut.blue.bin"
 		}
 	]

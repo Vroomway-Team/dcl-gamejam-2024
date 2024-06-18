@@ -26,9 +26,9 @@
 			"name":"cageCart",
 			"rotation":[
 				0,
-				-0.15643440186977386,
+				-0.15643435716629028,
 				0,
-				0.987688422203064
+				0.9876883625984192
 			],
 			"scale":[
 				1.0912452936172485,
@@ -317,37 +317,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011935591697693
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.8000000715255737,
+				-0.31408748030662537
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -434,18 +434,18 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":993,
 			"byteOffset":21284
 		},
 		{
 			"buffer":0,
 			"byteLength":1412,
-			"byteOffset":21724
+			"byteOffset":22280
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":23136
+			"byteOffset":23692
 		}
 	],
 	"samplers":[
@@ -456,7 +456,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":23588,
+			"byteLength":24144,
 			"uri":"vehicle.cage.01.bin"
 		}
 	]

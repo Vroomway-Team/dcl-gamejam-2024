@@ -696,37 +696,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -1138,68 +1138,68 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":5940
 		},
 		{
 			"buffer":0,
 			"byteLength":969,
-			"byteOffset":6380
+			"byteOffset":6948
 		},
 		{
 			"buffer":0,
 			"byteLength":1636,
-			"byteOffset":7352
+			"byteOffset":7920
 		},
 		{
 			"buffer":0,
 			"byteLength":2175,
-			"byteOffset":8988
+			"byteOffset":9556
 		},
 		{
 			"buffer":0,
 			"byteLength":1714,
-			"byteOffset":11164
+			"byteOffset":11732
 		},
 		{
 			"buffer":0,
 			"byteLength":986,
-			"byteOffset":12880
+			"byteOffset":13448
 		},
 		{
 			"buffer":0,
 			"byteLength":5884,
-			"byteOffset":13868
+			"byteOffset":14436
 		},
 		{
 			"buffer":0,
 			"byteLength":4410,
-			"byteOffset":19752
+			"byteOffset":20320
 		},
 		{
 			"buffer":0,
 			"byteLength":1635,
-			"byteOffset":24164
+			"byteOffset":24732
 		},
 		{
 			"buffer":0,
 			"byteLength":1082,
-			"byteOffset":25800
+			"byteOffset":26368
 		},
 		{
 			"buffer":0,
 			"byteLength":2505,
-			"byteOffset":26884
+			"byteOffset":27452
 		},
 		{
 			"buffer":0,
 			"byteLength":1203,
-			"byteOffset":29392
+			"byteOffset":29960
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":30596
+			"byteOffset":31164
 		}
 	],
 	"samplers":[
@@ -1210,7 +1210,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":31048,
+			"byteLength":31616,
 			"uri":"vehicle.cat.01.bin"
 		}
 	]
