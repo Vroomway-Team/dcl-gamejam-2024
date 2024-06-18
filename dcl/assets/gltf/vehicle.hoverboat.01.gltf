@@ -1133,37 +1133,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -1356,63 +1356,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":32888
 		},
 		{
 			"buffer":0,
 			"byteLength":1412,
-			"byteOffset":33328
+			"byteOffset":33896
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":34740
+			"byteOffset":35308
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":35192
+			"byteOffset":35760
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35200
+			"byteOffset":35768
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":35224
+			"byteOffset":35792
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35256
+			"byteOffset":35824
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35280
+			"byteOffset":35848
 		},
 		{
 			"buffer":0,
 			"byteLength":1200,
-			"byteOffset":35304
+			"byteOffset":35872
 		},
 		{
 			"buffer":0,
 			"byteLength":4800,
-			"byteOffset":36504
+			"byteOffset":37072
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":41304
+			"byteOffset":41872
 		},
 		{
 			"buffer":0,
 			"byteLength":128,
-			"byteOffset":41328
+			"byteOffset":41896
 		}
 	],
 	"samplers":[
@@ -1423,7 +1423,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":41456,
+			"byteLength":42024,
 			"uri":"vehicle.hoverboat.01.bin"
 		}
 	]

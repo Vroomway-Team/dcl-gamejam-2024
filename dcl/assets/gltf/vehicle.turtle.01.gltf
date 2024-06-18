@@ -68,7 +68,7 @@
 			],
 			"scale":[
 				1.9415886402130127,
-				1.9415870904922485,
+				1.9415868520736694,
 				1.9415886402130127
 			],
 			"translation":[
@@ -104,7 +104,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -118,7 +118,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -132,7 +132,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -146,7 +146,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -160,7 +160,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -174,7 +174,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -188,7 +188,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -202,7 +202,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -216,7 +216,7 @@
 			],
 			"translation":[
 				0,
-				0.19415906071662903,
+				0.19415909051895142,
 				0.5980178117752075
 			]
 		},
@@ -1252,37 +1252,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011935591697693
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.8000000715255737,
+				-0.31408748030662537
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -1290,7 +1290,7 @@
 			"componentType":5126,
 			"count":2,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -1318,9 +1318,9 @@
 		{
 			"bufferView":18,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -1330,7 +1330,7 @@
 		{
 			"bufferView":19,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC3"
 		},
 		{
@@ -1354,7 +1354,7 @@
 		{
 			"bufferView":23,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC4"
 		},
 		{
@@ -1432,63 +1432,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":993,
 			"byteOffset":32824
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":33264
+			"byteOffset":33820
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":33272
+			"byteOffset":33828
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":33296
+			"byteOffset":33852
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":33328
+			"byteOffset":33884
 		},
 		{
 			"buffer":0,
-			"byteLength":484,
-			"byteOffset":33352
+			"byteLength":244,
+			"byteOffset":33908
 		},
 		{
 			"buffer":0,
-			"byteLength":1452,
-			"byteOffset":33836
+			"byteLength":732,
+			"byteOffset":34152
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":35288
+			"byteOffset":34884
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35320
+			"byteOffset":34916
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":35344
+			"byteOffset":34940
 		},
 		{
 			"buffer":0,
-			"byteLength":1936,
-			"byteOffset":35368
+			"byteLength":976,
+			"byteOffset":34964
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":37304
+			"byteOffset":35940
 		}
 	],
 	"samplers":[
@@ -1499,7 +1499,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":37328,
+			"byteLength":35964,
 			"uri":"vehicle.turtle.01.bin"
 		}
 	]

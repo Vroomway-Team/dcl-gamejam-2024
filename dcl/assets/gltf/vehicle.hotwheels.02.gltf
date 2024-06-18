@@ -75,8 +75,8 @@
 			"mesh":4,
 			"name":"hotwheels.wheels.front.001",
 			"rotation":[
-				0.05986286699771881,
-				-0.0957770124077797,
+				0.05986287072300911,
+				-0.09577701985836029,
 				-0.5768978595733643,
 				0.8089699149131775
 			],
@@ -713,37 +713,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -880,23 +880,23 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":32716
 		},
 		{
 			"buffer":0,
 			"byteLength":1656,
-			"byteOffset":33156
+			"byteOffset":33724
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":34812
+			"byteOffset":35380
 		},
 		{
 			"buffer":0,
 			"byteLength":512,
-			"byteOffset":35992
+			"byteOffset":36560
 		}
 	],
 	"samplers":[
@@ -907,7 +907,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":36504,
+			"byteLength":37072,
 			"uri":"vehicle.hotwheels.02.bin"
 		}
 	]

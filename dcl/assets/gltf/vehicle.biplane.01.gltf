@@ -1194,37 +1194,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -1847,133 +1847,133 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":7888
 		},
 		{
 			"buffer":0,
 			"byteLength":454,
-			"byteOffset":8328
+			"byteOffset":8896
 		},
 		{
 			"buffer":0,
 			"byteLength":3195,
-			"byteOffset":8784
+			"byteOffset":9352
 		},
 		{
 			"buffer":0,
 			"byteLength":3704,
-			"byteOffset":11980
+			"byteOffset":12548
 		},
 		{
 			"buffer":0,
 			"byteLength":1129,
-			"byteOffset":15684
+			"byteOffset":16252
 		},
 		{
 			"buffer":0,
 			"byteLength":9186,
-			"byteOffset":16816
+			"byteOffset":17384
 		},
 		{
 			"buffer":0,
 			"byteLength":638,
-			"byteOffset":26004
+			"byteOffset":26572
 		},
 		{
 			"buffer":0,
 			"byteLength":3137,
-			"byteOffset":26644
+			"byteOffset":27212
 		},
 		{
 			"buffer":0,
 			"byteLength":4895,
-			"byteOffset":29784
+			"byteOffset":30352
 		},
 		{
 			"buffer":0,
 			"byteLength":1919,
-			"byteOffset":34680
+			"byteOffset":35248
 		},
 		{
 			"buffer":0,
 			"byteLength":855,
-			"byteOffset":36600
+			"byteOffset":37168
 		},
 		{
 			"buffer":0,
 			"byteLength":842,
-			"byteOffset":37456
+			"byteOffset":38024
 		},
 		{
 			"buffer":0,
 			"byteLength":762,
-			"byteOffset":38300
+			"byteOffset":38868
 		},
 		{
 			"buffer":0,
 			"byteLength":233,
-			"byteOffset":39064
+			"byteOffset":39632
 		},
 		{
 			"buffer":0,
 			"byteLength":257,
-			"byteOffset":39300
+			"byteOffset":39868
 		},
 		{
 			"buffer":0,
 			"byteLength":961,
-			"byteOffset":39560
+			"byteOffset":40128
 		},
 		{
 			"buffer":0,
 			"byteLength":2438,
-			"byteOffset":40524
+			"byteOffset":41092
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":42964
+			"byteOffset":43532
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":42972
+			"byteOffset":43540
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":42996
+			"byteOffset":43564
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":43028
+			"byteOffset":43596
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":43052
+			"byteOffset":43620
 		},
 		{
 			"buffer":0,
 			"byteLength":1200,
-			"byteOffset":43076
+			"byteOffset":43644
 		},
 		{
 			"buffer":0,
 			"byteLength":4800,
-			"byteOffset":44276
+			"byteOffset":44844
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":49076
+			"byteOffset":49644
 		},
 		{
 			"buffer":0,
 			"byteLength":128,
-			"byteOffset":49100
+			"byteOffset":49668
 		}
 	],
 	"samplers":[
@@ -1984,7 +1984,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":49228,
+			"byteLength":49796,
 			"uri":"vehicle.biplane.01.bin"
 		}
 	]

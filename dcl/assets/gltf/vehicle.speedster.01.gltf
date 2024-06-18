@@ -654,37 +654,37 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011934995651245
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.7000001668930054,
+				-0.3142159581184387
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -1176,78 +1176,78 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":1006,
 			"byteOffset":0
 		},
 		{
 			"buffer":0,
 			"byteLength":2022,
-			"byteOffset":440
+			"byteOffset":1008
 		},
 		{
 			"buffer":0,
 			"byteLength":670,
-			"byteOffset":2464
+			"byteOffset":3032
 		},
 		{
 			"buffer":0,
 			"byteLength":6763,
-			"byteOffset":3136
+			"byteOffset":3704
 		},
 		{
 			"buffer":0,
 			"byteLength":8473,
-			"byteOffset":9900
+			"byteOffset":10468
 		},
 		{
 			"buffer":0,
 			"byteLength":1562,
-			"byteOffset":18376
+			"byteOffset":18944
 		},
 		{
 			"buffer":0,
 			"byteLength":1595,
-			"byteOffset":19940
+			"byteOffset":20508
 		},
 		{
 			"buffer":0,
 			"byteLength":1601,
-			"byteOffset":21536
+			"byteOffset":22104
 		},
 		{
 			"buffer":0,
 			"byteLength":1768,
-			"byteOffset":23140
+			"byteOffset":23708
 		},
 		{
 			"buffer":0,
 			"byteLength":713,
-			"byteOffset":24908
+			"byteOffset":25476
 		},
 		{
 			"buffer":0,
 			"byteLength":1203,
-			"byteOffset":25624
+			"byteOffset":26192
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":26828
+			"byteOffset":27396
 		},
 		{
 			"buffer":0,
 			"byteLength":871,
-			"byteOffset":27280
+			"byteOffset":27848
 		},
 		{
 			"buffer":0,
 			"byteLength":1179,
-			"byteOffset":28152
+			"byteOffset":28720
 		},
 		{
 			"buffer":0,
 			"byteLength":1128,
-			"byteOffset":29332
+			"byteOffset":29900
 		}
 	],
 	"samplers":[
@@ -1258,7 +1258,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":30460,
+			"byteLength":31028,
 			"uri":"vehicle.speedster.01.bin"
 		}
 	]

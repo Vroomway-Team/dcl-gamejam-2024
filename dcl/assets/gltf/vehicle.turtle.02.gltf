@@ -35,9 +35,9 @@
 				1.9415886402130127
 			],
 			"translation":[
-				-3.126388037344441e-13,
+				-4.547473508864641e-13,
 				0.13805174827575684,
-				-4.1723239974089665e-07
+				-5.364416892916779e-07
 			]
 		},
 		{
@@ -68,13 +68,13 @@
 			],
 			"scale":[
 				1.9415886402130127,
-				1.9415875673294067,
+				1.9415873289108276,
 				1.9415886402130127
 			],
 			"translation":[
 				1.0311414655461704e-07,
 				-1.1920928955078125e-07,
-				-5.960464477539062e-07
+				-7.152557373046875e-07
 			]
 		},
 		{
@@ -636,37 +636,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011935591697693
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.8000000715255737,
+				-0.31408748030662537
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -674,7 +674,7 @@
 			"componentType":5126,
 			"count":2,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -702,9 +702,9 @@
 		{
 			"bufferView":10,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -714,7 +714,7 @@
 		{
 			"bufferView":11,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC3"
 		},
 		{
@@ -738,7 +738,7 @@
 		{
 			"bufferView":15,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC4"
 		},
 		{
@@ -776,63 +776,63 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":993,
 			"byteOffset":29348
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":29788
+			"byteOffset":30344
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":29796
+			"byteOffset":30352
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":29820
+			"byteOffset":30376
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":29852
+			"byteOffset":30408
 		},
 		{
 			"buffer":0,
-			"byteLength":484,
-			"byteOffset":29876
+			"byteLength":244,
+			"byteOffset":30432
 		},
 		{
 			"buffer":0,
-			"byteLength":1452,
-			"byteOffset":30360
+			"byteLength":732,
+			"byteOffset":30676
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":31812
+			"byteOffset":31408
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":31844
+			"byteOffset":31440
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":31868
+			"byteOffset":31464
 		},
 		{
 			"buffer":0,
-			"byteLength":1936,
-			"byteOffset":31892
+			"byteLength":976,
+			"byteOffset":31488
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":33828
+			"byteOffset":32464
 		}
 	],
 	"samplers":[
@@ -843,7 +843,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":33852,
+			"byteLength":32488,
 			"uri":"vehicle.turtle.02.bin"
 		}
 	]

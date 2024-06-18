@@ -27,13 +27,13 @@
 			"rotation":[
 				-0.7071067690849304,
 				2.2197239957222337e-07,
-				2.2197238536136865e-07,
+				2.2197235693965922e-07,
 				0.7071067690849304
 			],
 			"scale":[
 				0.9661568403244019,
-				0.9661567211151123,
-				0.9661567211151123
+				0.9661566019058228,
+				0.9661566019058228
 			],
 			"translation":[
 				3.3954032119254407e-07,
@@ -605,37 +605,37 @@
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"max":[
-				0.3675413131713867,
+				0.5675413608551025,
 				1.1999999284744263,
-				0.7011935114860535
+				0.9011935591697693
 			],
 			"min":[
-				-0.3675413131713867,
-				-0.6000000238418579,
-				-0.11408743262290955
+				-0.5675413608551025,
+				-0.8000000715255737,
+				-0.31408748030662537
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5126,
-			"count":24,
+			"count":118,
 			"type":"VEC4"
 		},
 		{
 			"componentType":5123,
-			"count":36,
+			"count":186,
 			"type":"SCALAR"
 		},
 		{
@@ -713,7 +713,7 @@
 			"componentType":5126,
 			"count":2,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -741,9 +741,9 @@
 		{
 			"bufferView":11,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"max":[
-				2
+				1
 			],
 			"min":[
 				0
@@ -753,7 +753,7 @@
 		{
 			"bufferView":12,
 			"componentType":5126,
-			"count":121,
+			"count":61,
 			"type":"VEC3"
 		},
 		{
@@ -792,58 +792,58 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":438,
+			"byteLength":993,
 			"byteOffset":18464
 		},
 		{
 			"buffer":0,
 			"byteLength":1412,
-			"byteOffset":18904
+			"byteOffset":19460
 		},
 		{
 			"buffer":0,
 			"byteLength":451,
-			"byteOffset":20316
+			"byteOffset":20872
 		},
 		{
 			"buffer":0,
 			"byteLength":8,
-			"byteOffset":20768
+			"byteOffset":21324
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":20776
+			"byteOffset":21332
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":20800
+			"byteOffset":21356
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":20832
+			"byteOffset":21388
 		},
 		{
 			"buffer":0,
-			"byteLength":484,
-			"byteOffset":20856
+			"byteLength":244,
+			"byteOffset":21412
 		},
 		{
 			"buffer":0,
-			"byteLength":1452,
-			"byteOffset":21340
+			"byteLength":732,
+			"byteOffset":21656
 		},
 		{
 			"buffer":0,
 			"byteLength":32,
-			"byteOffset":22792
+			"byteOffset":22388
 		},
 		{
 			"buffer":0,
 			"byteLength":24,
-			"byteOffset":22824
+			"byteOffset":22420
 		}
 	],
 	"samplers":[
@@ -854,7 +854,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":22848,
+			"byteLength":22444,
 			"uri":"vehicle.ladybug.02.bin"
 		}
 	]
