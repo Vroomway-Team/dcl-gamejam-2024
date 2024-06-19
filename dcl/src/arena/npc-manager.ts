@@ -1,8 +1,9 @@
 import { Transform, engine } from "@dcl/sdk/ecs";
-import { Dictionary, GetRotationFromPoints, List } from "../utilities/escentials";
+import { Dictionary, List } from "../utilities/escentials";
 import { Vehicle } from "../classes/class.Vehicle";
 import { VEHICLE_MANAGER } from "./setupVehicleManager";
 import { TicketEntity } from "./ticket-entity";
+import { RAD2DEG, Vector3 } from "@dcl/sdk/math";
 
 export module NPCManager {
     /** delay (in seconds) between each npc objective update */
@@ -32,19 +33,25 @@ export module NPCManager {
             this.Vehicle = vehicle;
         }
 
-        Move() {
+        Move(dt: number) {
             if(this.Ticket == undefined) {
                 this.Vehicle.decelerate();
             } else {
-                const ticketTrans = Transform.get(this.Ticket.EntityModel);
-                //console.log("id=",this.Ticket.Index,", pos=",JSON.stringify(ticketTrans.position));
-                //look towards target
-                const rot = GetRotationFromPoints(this.Vehicle.getPosition(), ticketTrans.position);
-                this.Vehicle.setTargetHeading(rot.y)
+				// Get direction to target and work out heading
+				const myPos      = this.Vehicle.getPosition()
+				const ticketPos  = Transform.get(this.Ticket.EntityModel).position
+				const dir        = Vector3.subtract(ticketPos, myPos)
+				const angle_rads = Math.atan2(dir.x, dir.z)
+				const yaw        = angle_rads * RAD2DEG
+				
+                this.Vehicle.setTargetHeading(yaw)
+				
                 //move towards direction
                 this.Vehicle.accelerate();
-                this.Vehicle.PushToWaypoint(ticketTrans.position, 28);
-            } 
+				
+            }
+			// Call to update speed on vehicle so that accelerate/decelerate is processed
+			this.Vehicle.updateSpeed(dt);
             this.Vehicle.applyMoveForce();
         }
     }  
@@ -133,7 +140,7 @@ export module NPCManager {
                 CalculateObjective(npc);
             }
 
-            npc.Move();
+            npc.Move(dt);
         }
     }
     engine.addSystem(ProcessingObjectiveRecalc);
