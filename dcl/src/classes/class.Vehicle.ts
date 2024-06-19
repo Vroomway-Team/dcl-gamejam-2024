@@ -598,7 +598,7 @@ export class Vehicle {
 		} 
 	}
 
-	PushToWaypoint(target:Vector3, speed:number) {
+/* 	PushToWaypoint(target:Vector3, speed:number) {
 		//target direction
         const direction = {
 			x: target.x -this.getPosition().x,
@@ -619,5 +619,5 @@ export class Vehicle {
 		);
         //apply force to cannon body
 		this.cannonBody.applyForce(vel, this.cannonBody.position)
-	}
+	} */
 }

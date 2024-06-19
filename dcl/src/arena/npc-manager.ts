@@ -43,7 +43,7 @@ export module NPCManager {
                 this.Vehicle.setTargetHeading(rot.y)
                 //move towards direction
                 this.Vehicle.accelerate();
-                this.Vehicle.PushToWaypoint(ticketTrans.position, 28);
+                //this.Vehicle.PushToWaypoint(ticketTrans.position, 28);
             } 
             this.Vehicle.applyMoveForce();
         }
