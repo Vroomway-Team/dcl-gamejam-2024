@@ -203,8 +203,7 @@ export class VehicleManager {
 		// Define the target as a position above the vehicle so the player drops into it
 		const targetPosition = Vector3.subtract(vehicle.getPosition(), vehicle.entityOffset)
 		movePlayerTo({
-			newRelativePosition: targetPosition,
-			cameraTarget       : Vector3.create(32, 1, 32),
+			newRelativePosition: targetPosition
 		})
 	}
 	
