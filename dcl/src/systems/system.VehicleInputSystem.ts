@@ -53,9 +53,12 @@ export function VehicleInputSystem(dt: number): void {
 		vehicle.setTargetHeading(cameraEulerRot.y)
 		
 		// Check player distance - if they're too far from the vehicle, move them back to it
-		const playerPos = Transform.get(engine.PlayerEntity).position
-		const distance = Vector3.distanceSquared(playerPos, vehicle.cannonBody.position)
-		if (distance > (vehicle.playerMaxDistance * vehicle.playerMaxDistance)) {
+		const playerPos   = Transform.get(engine.PlayerEntity).position
+		const vehiclePos  = Transform.get(vehicle.entityPos).position
+		const distance    = Vector3.distanceSquared(playerPos, vehiclePos)
+		const maxDistance = vehicle.playerMaxDistance * vehicle.playerMaxDistance
+		
+		if (distance > maxDistance) {
 			console.log("system.VehicleInputSystem: vehicle.playerMaxDistance exceeded")
 			VEHICLE_MANAGER.movePlayerToVehicle()
 		}
