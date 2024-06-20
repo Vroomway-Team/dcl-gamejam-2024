@@ -5,9 +5,9 @@ import {
 	ColliderLayer
 } 										from '@dcl/sdk/ecs'
 import { getPlayer } 					from '@dcl/sdk/src/players'
-import { Quaternion, RAD2DEG, Vector3 } 			from '@dcl/sdk/math'
+import { Quaternion, RAD2DEG, Vector3 } from '@dcl/sdk/math'
 import * as utils 						from '@dcl-sdk/utils'
-import * as CANNON 						from 'cannon'
+import * as CANNON 						from 'cannon-es'
 	
 import { LobbyLabel } 					from './class.LobbyLabel'
 import { VehicleManager } 				from './class.VehicleManager'
@@ -66,7 +66,7 @@ export class Vehicle {
 	isActive             : boolean = false	// Is the vehicle currently being controlled by the player?
 	isAccelerating       : boolean = false  // Toggled by user pressing/releasing W. Referenced by VehicleInputSystem
 	currentSpeed         : number  = 0  	// This gets lerped between 0 and maxSpeed depending on if W is pressed
-	maxSpeed             : number  = 20     // Max speed for vehicle
+	maxSpeed             : number  = 12     // Max speed for vehicle
 	maxTurn              : number  = 180    // Max turn rate for vehicle in degrees per second
 	acceleration         : number  = 12     // Acceleration for vehicle
 	
@@ -180,7 +180,8 @@ export class Vehicle {
 		// Add the collision event listener
 		this.cannonBody.collisionFilterGroup = 2; // We'll use 2 for vehicles
 		this.cannonBody.collisionFilterMask = 1 | 2;
-		const collideEventListener = (event: CANNON.ICollisionEvent) => {
+		
+		const collideEventListener = (event: any) => {
 			this.onCollideWithBody(event)
 		};		
 		this.cannonBody.addEventListener("collide", collideEventListener);
@@ -192,7 +193,7 @@ export class Vehicle {
 		world.addBody(this.cannonBody)
 	}
 	
-	onCollideWithBody(event: CANNON.ICollisionEvent) {
+	onCollideWithBody(event: any) {
 		if (event.body.collisionFilterGroup == 2) {
 			// Work out the dot products of the ways the vehicles are facing, and how they are positioned
 			const yourPos = this.cannonBody.position.clone()
@@ -438,7 +439,7 @@ export class Vehicle {
 		// Velocity direction
 		// Apply a force to the cannon body in the direction the vehicle is currently facing
 		const targetDirection = getForwardDirectionFromRotation(this.currentHeading)
-		const targetVelocity  = targetDirection.scale(this.currentSpeed * 2.5)
+		const targetVelocity  = targetDirection.scale(this.currentSpeed)
 		
 		this.cannonBody.applyForce(targetVelocity, this.cannonBody.position)
 		
@@ -446,7 +447,7 @@ export class Vehicle {
 		if (Vector3.lengthSquared(this.cannonBody.velocity) > (this.maxSpeed * this.maxSpeed)) {
 			const velocityNorm = this.cannonBody.velocity.clone()
 				  velocityNorm.normalize()
-				  velocityNorm.mult(this.maxSpeed)
+				  velocityNorm.scale(this.maxSpeed)
 			this.cannonBody.velocity.copy(velocityNorm)
 		}
 	}

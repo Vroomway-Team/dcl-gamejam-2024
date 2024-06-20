@@ -23,7 +23,7 @@ import { TicketEntity } 						from '../arena/ticket-entity'
 import * as serverStateSpec 					from '../rooms/spec/server-state-spec'
 import * as clientStateSpec 					from '../rooms/spec/client-state-spec'
 import { VehicleState } from '../interfaces/interface.VehicleState'
-import * as CANNON from 'cannon'
+import * as CANNON from 'cannon-es'
 
 
 export function updateScores(room:Room){

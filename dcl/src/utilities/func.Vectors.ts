@@ -1,4 +1,5 @@
 import { Vector3 } from "@dcl/sdk/math"
+import * as CANNON from 'cannon-es'
 
 export function Vec3ToVector3(v: CANNON.Vec3) {
 	return Vector3.create(v.x, v.y, v.z)

@@ -1,4 +1,5 @@
 import { Vector3 } from "@dcl/sdk/math";
+import * as CANNON from 'cannon-es'
 
 export interface VehicleState {
 	isClaimed      : boolean,      // taken from Vehicle instance

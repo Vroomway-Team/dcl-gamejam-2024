@@ -1,5 +1,5 @@
 import { engine } 					from '@dcl/sdk/ecs'
-import * as CANNON 					from 'cannon'
+import * as CANNON 					from 'cannon-es'
 import { collidersFromJSON } 		from '../utilities/func.collidersFromJSON'
 import { createCannonWorldSystem } 	from '../systems/system.CannonWorld'
 import arenaBaseCollidersJSON 		from './arena.colliders.json'

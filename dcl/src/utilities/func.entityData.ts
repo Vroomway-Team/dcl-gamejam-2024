@@ -1,6 +1,6 @@
 import { engine, Entity, Transform } 	from "@dcl/sdk/ecs"
 import { DEG2RAD, Quaternion, Vector3 } 			from "@dcl/sdk/math"
-import * as CANNON 						from 'cannon'
+import * as CANNON 						from 'cannon-es'
 
 
 

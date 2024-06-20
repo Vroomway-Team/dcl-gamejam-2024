@@ -8,7 +8,7 @@ import { getCameraRotation,
 } 								from "../utilities/func.entityData"
 import { getPlayer } 			from "@dcl/sdk/src/players"
 import { DEG2RAD, Quaternion, Vector3 } 	from "@dcl/sdk/math"
-import * as CANNON 				from 'cannon'
+//import * as CANNON 				from 'cannon-es'
 
 import { VEHICLE_MANAGER } 		from "../arena/setupVehicleManager"
 import { UI_MANAGER } 			from "../classes/class.UIManager"
@@ -34,19 +34,22 @@ export function VehicleInputSystem(dt: number): void {
 		return
 	}
 	
+	// Update the vehicle speed
+	vehicle.updateSpeed(dt)
+	
 	// Checks the vehicle is active, and owned by this player
 	if (vehicle.isActive) {
 		
 		// Handle acceleration/deceleration inputs
 		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_DOWN)) {
+			console.log("Accelerating!")
 			vehicle.accelerate()
 		} 
 		
 		if (inputSystem.isTriggered(InputAction.IA_FORWARD, PointerEventType.PET_UP)) {
+			console.log("Decelerating!")
 			vehicle.decelerate()
 		}
-		
-		vehicle.applyMoveForce()
 
 		// Set target heading based on camera		
 		const cameraEulerRot  = Quaternion.toEulerAngles(getCameraRotation())
@@ -65,8 +68,9 @@ export function VehicleInputSystem(dt: number): void {
 		
 		// Update the UI with the speed
 		UI_MANAGER.setSpeedValue(Vector3.length(vehicle.cannonBody.velocity)) 
+		
+		
+		vehicle.applyMoveForce()
 	}
 	
-	// Update the vehicle speed
-	vehicle.updateSpeed(dt)
 }

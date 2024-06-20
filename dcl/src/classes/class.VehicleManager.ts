@@ -8,9 +8,10 @@ import { VehicleProperties } 	from "../interfaces/interface.VehicleProperties";
 import { movePlayerTo } 		from "~system/RestrictedActions";
 import { VehicleState } 		from "../interfaces/interface.VehicleState";
 import { getPlayer } 			from "@dcl/sdk/src/players";
+import { Networking } 			from "../networking";
+import { GameManager } 			from "../arena/game-manager";
 import * as utils 				from '@dcl-sdk/utils'
-import { Networking } from "../networking";
-import { GameManager } from "../arena/game-manager";
+import * as CANNON 				from 'cannon-es'
 
 const playerData = getPlayer()
 

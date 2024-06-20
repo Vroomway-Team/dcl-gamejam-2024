@@ -1,6 +1,5 @@
-import CANNON from 'cannon';
-
-import { CannonCollider } from '../interfaces/interface.CannonCollider'
+import * as CANNON 			from 'cannon-es'
+import { CannonCollider } 	from '../interfaces/interface.CannonCollider'
 
 // Main JSON -> mesh parser
 export function collidersFromJSON(
