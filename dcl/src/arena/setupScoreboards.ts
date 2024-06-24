@@ -96,3 +96,37 @@ export function setupScoreboards() {
 	//server now handles timing, we can just reg a listen on the game end timer
 	//GameState.GameEndCountdown.RegisterCallback(SCOREBOARD_MANAGER.setRoundTimer);
 }
+
+
+export const LEADERBOARD_DAILY_MANAGER = new ScoreboardManager()
+
+export function setupLeaderboardsDaily() {
+	// Small wide Scoreboards, in lobby	
+	LEADERBOARD_DAILY_MANAGER.addScoreboard(new Scoreboard({
+		position: Vector3.create(32, 7, 28), // offset by 1.4 to match wide model offset
+		rotation: Quaternion.fromEulerDegrees(-25, 0, 0),
+		scale   : Vector3.One()
+	}, "assets/gltf/scoreboard.02.gltf", 10, 0, 16, 1.15, 0.2, true, true, false, false, {
+			position: Vector3.create(1.4, 0.565, 0),
+			rotation: Quaternion.Zero(),
+			scale   : Vector3.create(0.2, 0.2, 0.2)
+		}
+	))
+}
+
+
+export const LEADERBOARD_EPOCH_MANAGER = new ScoreboardManager()
+
+export function setupLeaderboardsEpoch() {
+	// Small wide Scoreboards, in lobby	
+	LEADERBOARD_EPOCH_MANAGER.addScoreboard(new Scoreboard({
+		position: Vector3.create(32, 7, 36), // offset by 1.4 to match wide model offset
+		rotation: Quaternion.fromEulerDegrees(-25, 180, 0),
+		scale   : Vector3.One()
+	}, "assets/gltf/scoreboard.03.gltf", 10, 0, 16, 1.15, 0.2, true, true, false, false, {
+			position: Vector3.create(1.4, 0.565, 0),
+			rotation: Quaternion.Zero(),
+			scale   : Vector3.create(0.2, 0.2, 0.2)
+		}
+	))
+}

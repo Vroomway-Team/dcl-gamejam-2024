@@ -39,6 +39,8 @@ import { signedFetch } from "~system/SignedFetch";
 import { Color4 } from "@dcl/sdk/math";
 import * as ui from 'dcl-ui-toolkit'
 import { Networking } from '../networking';
+import { LEADERBOARD_DAILY_MANAGER, LEADERBOARD_EPOCH_MANAGER } from '../arena/setupScoreboards';
+import { ScoreboardEntry, ScoreboardState } from '../interfaces/interface.Scoreboard';
 //import { leaderBoardsConfigs } from './leaderboard-utils';
 //import { setLeaderboardLoading } from './leaderboard';
 
@@ -613,6 +615,68 @@ export function loginUser(uuid: any):Promise<LoginResult>{
 
 export function fetchLeaderboardInfo(prefix: string = "") {
   log("fetchLeaderboardInfo called");
+  
+  
+  var getLeaderboardDailyData: PlayFabClientModels.GetLeaderboardRequest = {
+	StatisticName  : "tickets_best_daily",
+	StartPosition  : 0,
+	MaxResultsCount: 10,
+  };
+  
+  PlayFabSDK.GetLeaderboard(getLeaderboardDailyData).then(
+    (result: GetLeaderboardResult) => {
+		console.log(result)
+		const leaderboardEntries = result.Leaderboard || [];
+
+		// Map the leaderboard entries to ScoreboardEntry objects
+		const scores: ScoreboardEntry[] = leaderboardEntries.map(entry => ({
+		  userName: entry.DisplayName || "Unknown",
+		  score: entry.StatValue
+		}));
+	
+		// Create the new state
+		const newState: ScoreboardState = {
+		  roundInProgress: undefined,
+		  roundTimer     : undefined,
+		  scores         : scores,
+		  storesSorted   : false
+		};
+	
+		// Update the state using LEADERBOARD_MANAGER.updateState
+		LEADERBOARD_DAILY_MANAGER.updateState(newState);
+    }
+  );
+  
+  var getLeaderboardEpochData: PlayFabClientModels.GetLeaderboardRequest = {
+	StatisticName  : "tickets_best_epoch",
+	StartPosition  : 0,
+	MaxResultsCount: 10,
+  };
+  
+  PlayFabSDK.GetLeaderboard(getLeaderboardEpochData).then(
+    (result: GetLeaderboardResult) => {
+		console.log(result)
+		const leaderboardEntries = result.Leaderboard || [];
+
+		// Map the leaderboard entries to ScoreboardEntry objects
+		const scores: ScoreboardEntry[] = leaderboardEntries.map(entry => ({
+		  userName: entry.DisplayName || "Unknown",
+		  score: entry.StatValue
+		}));
+	
+		// Create the new state
+		const newState: ScoreboardState = {
+		  roundInProgress: undefined,
+		  roundTimer     : undefined,
+		  scores         : scores,
+		  storesSorted   : false
+		};
+	
+		// Update the state using LEADERBOARD_MANAGER.updateState
+		LEADERBOARD_EPOCH_MANAGER.updateState(newState);
+    }
+  );
+  
 //   if(prefix == "VB_"){
 //     log("fetchLeaderboardInfo DISABLED FOR ",prefix);
 //     return

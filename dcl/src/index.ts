@@ -13,7 +13,7 @@ import { setupNPCAvatars } 						from './arena/setupNPCAvatars'
 import { setupImagePosters } 					from './arena/setupImagePosters'
 import { setupVehicleManager, VEHICLE_MANAGER } from './arena/setupVehicleManager'
 import { setupUiManager, UI_MANAGER } 			from './classes/class.UIManager'
-import { SCOREBOARD_MANAGER, setupScoreboards } from './arena/setupScoreboards'
+import { SCOREBOARD_MANAGER, setupLeaderboardsDaily, setupLeaderboardsEpoch, setupScoreboards } from './arena/setupScoreboards'
 import { PARTICLE_MANAGER } 					from './arena/setupParticleManager'
 
 import { Room } 								from 'colyseus.js'
@@ -66,8 +66,10 @@ export function main() {
 	// Also add input listener system and controls vehicle movement
 	setupVehicleManager()
 	
-	// Setup the scoreboards
+	// Setup the scoreboards & leaderboards (glboal top-10)
 	setupScoreboards()
+	setupLeaderboardsDaily()
+	setupLeaderboardsEpoch()
 	 
 	// Setup the various gltf shapes
 	setupGltfShapes()
