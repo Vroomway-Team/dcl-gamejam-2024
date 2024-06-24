@@ -261,3 +261,29 @@ export function hudSpeedometer(){
 	</UiEntity>
 	
   }
+
+ 
+// Add the version number, which should show at all times
+export function hudVersion(){
+		return <UiEntity //parent / modal decoration
+		uiTransform = {{
+			width          : 175,
+			height         : 25,
+			//display      : 'flex',
+			positionType   : 'absolute',
+			position       : { bottom: '5px', right: '5px' } ,
+			//flexDirection: 'column',
+			//flexWrap     : 'wrap',
+			//alignSelf    : 'flex-end'
+		}}
+		uiText = {{
+			value    : CONFIG.CURRENT_VERSION,
+			fontSize : 8,
+			color    : Color4.fromHexString("#cccccc33"),
+			textAlign: "middle-right"
+		}}
+	>
+		
+	</UiEntity>
+	
+  }

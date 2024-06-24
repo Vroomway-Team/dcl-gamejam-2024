@@ -1,5 +1,5 @@
 import { ReactEcsRenderer } from "@dcl/sdk/react-ecs"
-import { hudCenterMsgs, hudSpeedometer, hudTicketScore, hudTimer } 			from "./ui.hud"
+import { hudCenterMsgs, hudSpeedometer, hudTicketScore, hudTimer, hudVersion } 			from "./ui.hud"
 import { uiDebug } 			from "./ui.debug"
 
 const uiComponents = () => [
@@ -8,6 +8,7 @@ const uiComponents = () => [
 	hudTimer(),	
 	hudTicketScore(),
 	...hudCenterMsgs(),
+	hudVersion(),
 	uiDebug()
 ]
   
