@@ -11,6 +11,7 @@ import { getPlayer } 			from "@dcl/sdk/src/players";
 import * as utils 				from '@dcl-sdk/utils'
 import { Networking } from "../networking";
 import { GameManager } from "../arena/game-manager";
+import { fetchLeaderboardInfo } from "../connect/login-flow";
 
 const playerData = getPlayer()
 
@@ -103,6 +104,11 @@ export class VehicleManager {
 		}else{
 			console.log("onRoundEnd", "player not in arena leave them where they are")
 		}
+		
+		// Update leaderboard scores after short delay
+		utils.timers.setInterval(function () {
+			fetchLeaderboardInfo()
+		}, 1000)
 	}
 	
 	// Enables all vehicles, allowing them to respond to user input and be moved 
