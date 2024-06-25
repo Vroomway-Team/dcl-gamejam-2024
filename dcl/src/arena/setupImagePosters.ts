@@ -234,4 +234,41 @@ export function setupImagePosters(){
 	  specularIntensity: 0,
 	  metallic: 0,
 	})
+	//Controls image
+	const controlsImage1 = engine.addEntity()
+	Transform.create(controlsImage1, {
+		position: Vector3.create(32.15, 1.85, 32),
+		scale: Vector3.create(3,1.2,1),
+		rotation: Quaternion.fromEulerDegrees(0,-90,0)
+	})
+	MeshRenderer.setPlane(controlsImage1)
+	Material.setPbrMaterial(controlsImage1, {
+		texture: Material.Texture.Common({
+		  src: 'images/itch-info-controls.png',
+		}),
+		emissiveTexture: Material.Texture.Common({
+			src: 'images/itch-info-controls.png',
+		}),
+		transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+		emissiveColor: Color3.White(),
+		emissiveIntensity: 1
+	})
+	const controlsImage2 = engine.addEntity()
+	Transform.create(controlsImage2, {
+		position: Vector3.create(31.95, 1.85, 32),
+		scale: Vector3.create(3,1.2,1),
+		rotation: Quaternion.fromEulerDegrees(0,90,0)
+	})
+	MeshRenderer.setPlane(controlsImage2)
+	Material.setPbrMaterial(controlsImage2, {
+		texture: Material.Texture.Common({
+		  src: 'images/itch-info-controls.png',
+		}),
+		emissiveTexture: Material.Texture.Common({
+			src: 'images/itch-info-controls.png',
+		}),
+		transparencyMode: MaterialTransparencyMode.MTM_ALPHA_TEST,
+		emissiveColor: Color3.White(),
+		emissiveIntensity: 1
+	})
 }
