@@ -38,7 +38,7 @@ const AUTH_URL: Record<string, string> = {
   };
 
 export class Config {
-	public CURRENT_VERSION      : string  = "20240624a" //Current data in YYYYMMDD format. Optional alphabetical suffix can be added for multiple deployments on the same date. Eg: 20240624b
+	public CURRENT_VERSION      : string  = "20240625b" //Current data in YYYYMMDD format. Optional alphabetical suffix can be added for multiple deployments on the same date. Eg: 20240624b
 	
 	public SHOW_DEBUG_TRIGGERS  : boolean = SHOW_DEBUG_TRIGGERS[ENV]
 	public SHOW_DEBUG_PANEL     : boolean = SHOW_DEBUG_PANEL[ENV]
